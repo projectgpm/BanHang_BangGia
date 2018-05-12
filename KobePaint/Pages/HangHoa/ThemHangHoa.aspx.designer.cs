@@ -40,6 +40,24 @@ namespace KobePaint.Pages.HangHoa {
         protected global::DevExpress.Web.ASPxTextBox txtTenHH;
         
         /// <summary>
+        /// ccbLoaiHangHoa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxComboBox ccbLoaiHangHoa;
+        
+        /// <summary>
+        /// dsLoaiHangHoa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource dsLoaiHangHoa;
+        
+        /// <summary>
         /// txtMaHH control.
         /// </summary>
         /// <remarks>

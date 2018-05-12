@@ -59,7 +59,7 @@
                     <Items>
                         <dx:LayoutGroup Caption="Thêm hàng hóa" GroupBoxDecoration="HeadingLine" HorizontalAlign="Center" ColCount="2">
                             <Items>
-                                <dx:LayoutItem Caption="Tên hàng hóa" ColSpan="2">
+                                <dx:LayoutItem Caption="Tên hàng hóa">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
                                             <dx:ASPxTextBox ID="txtTenHH" runat="server" Width="100%">
@@ -67,6 +67,15 @@
                                                     <RequiredField ErrorText="Vui lòng nhập tên hàng hóa" IsRequired="True" />
                                                 </ValidationSettings>
                                             </dx:ASPxTextBox>
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+                                <dx:LayoutItem Caption="Loại hàng hóa">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+                                            <dx:ASPxComboBox ID="ccbLoaiHangHoa" runat="server" DataSourceID="dsLoaiHangHoa" SelectedIndex="0" TextField="TenLoai" ValueField="IDLoaiHangHoa" Width="100%">
+                                            </dx:ASPxComboBox>
+                                            <asp:SqlDataSource ID="dsLoaiHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDLoaiHangHoa], [TenLoai] FROM [hhLoaiHangHoa]"></asp:SqlDataSource>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
