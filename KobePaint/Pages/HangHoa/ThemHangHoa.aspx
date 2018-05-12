@@ -50,6 +50,14 @@
                 ShowPopup(4000);
             }
         }
+        function onccbLoaiHangHoaChanged(s,e) {
+            if (s.GetSelectedIndex() == 1) {
+                spSoLuong.SetEnabled(false);
+            }
+            else {
+                spSoLuong.SetEnabled(true);
+            }
+        }
     </script>
  
     <dx:ASPxCallbackPanel ID="cbpThemHH" ClientInstanceName="cbpThemHH" runat="server" Width="100%" OnCallback="cbpThemHH_Callback">
@@ -73,7 +81,11 @@
                                 <dx:LayoutItem Caption="Loại hàng hóa">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                            <dx:ASPxComboBox ID="ccbLoaiHangHoa" runat="server" DataSourceID="dsLoaiHangHoa" SelectedIndex="0" TextField="TenLoai" ValueField="IDLoaiHangHoa" Width="100%">
+                                            <dx:ASPxComboBox ID="ccbLoaiHangHoa" ClientInstanceName="ccbLoaiHangHoa" runat="server" DataSourceID="dsLoaiHangHoa" SelectedIndex="0" TextField="TenLoai" ValueField="IDLoaiHangHoa" Width="100%">
+                                            <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="checkInput">
+                                                <RequiredField ErrorText="Vui lòng chọn loại hàng hóa" IsRequired="True" />
+                                            </ValidationSettings>
+                                                <ClientSideEvents SelectedIndexChanged="onccbLoaiHangHoaChanged" />
                                             </dx:ASPxComboBox>
                                             <asp:SqlDataSource ID="dsLoaiHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDLoaiHangHoa], [TenLoai] FROM [hhLoaiHangHoa]"></asp:SqlDataSource>
                                         </dx:LayoutItemNestedControlContainer>
@@ -90,7 +102,7 @@
                                 <dx:LayoutItem Caption="Số lượng">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                            <dx:ASPxSpinEdit ID="spSoLuong" runat="server" Number="0" Width="100%" >
+                                            <dx:ASPxSpinEdit ID="spSoLuong" ClientInstanceName="spSoLuong" runat="server" Number="0" Width="100%" >
                                                  <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="checkInput">
                                                     <RequiredField ErrorText="Vui lòng nhập số lượng" IsRequired="True" />
                                                 </ValidationSettings>

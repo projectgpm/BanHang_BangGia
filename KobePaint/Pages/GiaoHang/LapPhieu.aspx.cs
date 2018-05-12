@@ -231,7 +231,7 @@ namespace KobePaint.Pages.GiaoHang
                         DBDataProvider.DB.ghPhieuGiaoHangChiTiets.InsertOnSubmit(chitiet);
                         // trừ tạm tồn kho. không ghi công nợ, khi duyệt thì ghi thẻ kho + cộng công nợ khách hàng
                          var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                         if (TonKhoBanDau != null)
+                         if (TonKhoBanDau != null && TonKhoBanDau.LoaiHHID == 1)
                          {
                              TonKhoBanDau.TonKho -= prod.SoLuong;
                          }

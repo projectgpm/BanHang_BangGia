@@ -200,7 +200,7 @@ namespace KobePaint.Pages.Kho
 
         public void Insert_Hang(int ID)
         {
-            int tblHangHoa_Count = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == ID && x.DaXoa == 0).Count();
+            int tblHangHoa_Count = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == ID && x.DaXoa == 0 && x.LoaiHHID == 1).Count();
             if (tblHangHoa_Count > 0)
             {
                 var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == ID && x.DaXoa == 0).FirstOrDefault();
@@ -245,7 +245,7 @@ namespace KobePaint.Pages.Kho
             ASPxComboBox comboBox = (ASPxComboBox)source;
             dsHangHoa.SelectCommand = @"SELECT hhHangHoa.IDHangHoa, hhHangHoa.MaHang, hhHangHoa.TenHangHoa, hhHangHoa.GiaBan,hhHangHoa.GiaVon
                                         FROM hhHangHoa
-                                        WHERE (hhHangHoa.IDHangHoa = @IDHangHoa AND hhHangHoa.DaXoa = 0)";
+                                        WHERE (hhHangHoa.IDHangHoa = @IDHangHoa AND hhHangHoa.DaXoa = 0 AND hhHangHoa.LoaiHHID = 1)";
             dsHangHoa.SelectParameters.Clear();
             dsHangHoa.SelectParameters.Add("IDHangHoa", TypeCode.Int64, e.Value.ToString());
             comboBox.DataSource = dsHangHoa;
@@ -261,7 +261,7 @@ namespace KobePaint.Pages.Kho
 	                                        row_number()over(order by hhHangHoa.MaHang) as [rn] 
 	                                        FROM hhHangHoa 
                                                     
-	                                        WHERE ((hhHangHoa.MaHang LIKE @MaHang) OR hhHangHoa.TenHangHoa LIKE @TenHang) AND hhHangHoa.DaXoa = 0	
+	                                        WHERE ((hhHangHoa.MaHang LIKE @MaHang) OR hhHangHoa.TenHangHoa LIKE @TenHang) AND hhHangHoa.DaXoa = 0	 AND hhHangHoa.LoaiHHID = 1
 	                                        ) as st 
                                         where st.[rn] between @startIndex and @endIndex";
             dsHangHoa.SelectParameters.Clear();
@@ -396,7 +396,7 @@ namespace KobePaint.Pages.Kho
                             int tblHangHoa_Count = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0).Count();
                             if (tblHangHoa_Count > 0)
                             {
-                                var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0).FirstOrDefault();
+                                var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0 && x.LoaiHHID == 1).FirstOrDefault();
                                 var exitProdInList = listReceiptProducts.SingleOrDefault(r => r.MaHang == MaHang);
                                 if (exitProdInList == null)
                                 {

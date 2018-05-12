@@ -51,7 +51,7 @@
             if (ccbNhaCungCap.GetSelectedIndex() == -1) {
                 ccbBarcode.SetSelectedIndex(-1);
                 ccbNhaCungCap.Focus();
-                alert('Vui lòng chọn nhà cung cấp');
+                alert('Vui lòng chọn khách hàng');
                 return false;
             }
             if (spThanhToan.GetValue() == null) {

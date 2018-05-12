@@ -56,11 +56,7 @@ namespace KobePaint.Pages.HangHoa
                 hanghoa.NhomHHID = Convert.ToInt32(ccbNhomHH.Value);
                 hanghoa.DonViTinhID = Convert.ToInt32(ccbDVT.Value);
                 hanghoa.DaXoa = Convert.ToInt32(ccbLoaiHangHoa.Value);
-                //List<hhBarcode> r_barcode = DBDataProvider.DB.hhBarcodes.Where(x => x.IDHangHoa == HangHoaID).ToList();
-                //foreach (var bc in r_barcode)
-                //{
-                //    DBDataProvider.DB.hhBarcodes.DeleteOnSubmit(bc.IDBarcode);
-                //}
+                hanghoa.LoaiHHID = Convert.ToInt32(ccbTinhTrang.Value.ToString());
 
                 var remove_barcode = (from bc in DBDataProvider.DB.hhBarcodes
                                       where bc.IDHangHoa == HangHoaID
@@ -125,6 +121,7 @@ namespace KobePaint.Pages.HangHoa
                 spGiaVon.Text = hanghoa.GiaVon.ToString();
                 tkBarcode.Tokens = LoadListBarCode(HangHoaID);
                 ccbLoaiHangHoa.Value = hanghoa.DaXoa.ToString();
+                ccbTinhTrang.Value = hanghoa.LoaiHHID.ToString();
             }
             else
                 Response.Redirect("~/Pages/HangHoa/HangHoa.aspx");

@@ -27,7 +27,7 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
-                    <dx:LayoutItem Caption="Loại hàng hóa" Width="100%">
+                    <dx:LayoutItem Caption="Tình trạng hàng hóa" Width="100%">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
                                 <dx:ASPxComboBox ID="ccbLoaiHangHoa" runat="server" SelectedIndex="0">

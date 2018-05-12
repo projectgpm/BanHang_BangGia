@@ -59,7 +59,7 @@
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
-                                <dx:LayoutItem Caption="Loại hàng hóa">
+                                <dx:LayoutItem Caption="Tình trạng hàng hóa">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
                                             <dx:ASPxComboBox ID="ccbLoaiHangHoa" runat="server" Width="100%">
@@ -160,6 +160,18 @@
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
+                                <dx:LayoutItem Caption="Loại hàng hóa">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+                                            <dx:ASPxComboBox ID="ccbTinhTrang" runat="server" DataSourceID="dsLoaiHangHoa" TextField="TenLoai" ValueField="IDLoaiHangHoa" Width="100%">
+                                            <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="checkInput">
+                                                    <RequiredField ErrorText="Vui lòng chọn loại hàng hóa" IsRequired="True" />
+                                                </ValidationSettings>
+                                            </dx:ASPxComboBox>
+                                            <asp:SqlDataSource ID="dsLoaiHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDLoaiHangHoa], [TenLoai] FROM [hhLoaiHangHoa]"></asp:SqlDataSource>
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
                                 <dx:LayoutItem Caption="Barcode" ColSpan="2" RowSpan="5">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer9" runat="server">
@@ -173,19 +185,19 @@
                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer10" runat="server">
                                             <table >
                                                 <tr>
-                                                    <td style="padding-right:10px;width:110px;">
+                                                    <td >
                                                         <dx:ASPxButton ID="btnSave" runat="server" Text="Lưu lại" ValidationGroup="checkInput" AutoPostBack="false">
                                                             <ClientSideEvents Click="onSaveClick" />
                                                         </dx:ASPxButton>
                                                     </td>
                                                    
-                                                    <td style="padding-right:10px;width:110px;">
+                                                    <td style="padding-left:10px;">
                                                         <dx:ASPxButton ID="btnRenew" runat="server" Text="Lập mới" Width="100" BackColor="#d9534f" AutoPostBack="false">
                                                             <ClientSideEvents Click="onRenewClick" />
                                                         </dx:ASPxButton>
                                                         
                                                     </td>
-                                                     <td style="padding-right:10px;width:110px;">
+                                                     <td style="padding-left:10px;">
                                                         <dx:ASPxButton ID="btnTroVe" runat="server" Text="Trở về" AutoPostBack="true" PostBackUrl="~/Pages/HangHoa/HangHoa.aspx" >
                                                         </dx:ASPxButton>
                                                     </td>

@@ -69,7 +69,7 @@ namespace KobePaint.Pages.HangHoa
                         hanghoa.GiaVon = Convert.ToDouble(spGiaVon.Number);
                         hanghoa.DaXoa = 0;
                         hanghoa.NgayNhap = DateTime.Now;
-                        hanghoa.LoaiHHID = 1;
+                        hanghoa.LoaiHHID = Convert.ToInt32(ccbLoaiHangHoa.Value.ToString());
                         int SL = Convert.ToInt32(spSoLuong.Number);
 
                         hanghoa.TonKho = SL;
