@@ -156,109 +156,118 @@ namespace KobePaint.Pages.TraHang
             {
                 try
                 {
-                    double TongTien = 0;
-                    int TongSoLuong = 0;
-                    foreach (var prod in listReceiptProducts)
+                    if (listReceiptProducts.Count > 0)
                     {
-                        TongTien += prod.ThanhTien;
-                        TongSoLuong += prod.SoLuong;
-                    }
+                        double TongTien = 0;
+                        int TongSoLuong = 0;
+                        foreach (var prod in listReceiptProducts)
+                        {
+                            TongTien += prod.ThanhTien;
+                            TongSoLuong += prod.SoLuong;
+                        }
 
-                    string MaPhieu = null, strMaPhieu = "PN";
-                    string MAX = (DBDataProvider.DB.kPhieuTraHangs.Count() + 1).ToString();
-                    for (int i = 1; i < (7 - MAX.Length); i++)
+                        string MaPhieu = null, strMaPhieu = "PN";
+                        string MAX = (DBDataProvider.DB.kPhieuTraHangs.Count() + 1).ToString();
+                        for (int i = 1; i < (7 - MAX.Length); i++)
+                        {
+                            strMaPhieu += "0";
+                        }
+                        MaPhieu = strMaPhieu + MAX;
+                        int IDDaiLy = Int32.Parse(ccbNhaCungCap.Value.ToString());
+                        int IDSoPhieu = 0;
+                        if (ccbSoPhieu.Text != "")
+                            IDSoPhieu = Int32.Parse(ccbSoPhieu.Value.ToString());
+
+                        // insert kPhieuTraHang
+                        kPhieuTraHang phieutra = new kPhieuTraHang();
+                        phieutra.MaPhieu = MaPhieu;
+                        phieutra.DaiLyID = IDDaiLy;
+                        phieutra.SoPhieuTra = IDSoPhieu;
+                        phieutra.NgayTra = Convert.ToDateTime(dateNgayTra.Date);
+                        phieutra.NgayNhap = DateTime.Now;
+                        phieutra.NhanVienID = Formats.IDUser();
+                        phieutra.GhiChu = memoGhiChu.Text;
+                        phieutra.TongSoLuong = TongSoLuong;
+                        phieutra.TongTienHang = TongTien;
+                        phieutra.ThanhToan = ckGiamCongNo.Checked == true ? 0 : TongTien;
+                        phieutra.DuyetDonHang = 0; // 0 chưa duyệt , 1 đã duyệt
+                        phieutra.ConLai = ckGiamCongNo.Checked == true ? TongTien : 0;
+                        phieutra.HinhThucTT = ckGiamCongNo.Checked == true ? 1 : 0;
+                        DBDataProvider.DB.kPhieuTraHangs.InsertOnSubmit(phieutra);
+                        DBDataProvider.DB.SubmitChanges();
+                        int IDPhieuTraHang = phieutra.IDPhieuTraHang;
+                        foreach (var prod in listReceiptProducts)
+                        {
+                            // insert Chi tiet
+                            kPhieuTraHangChiTiet chitiet = new kPhieuTraHangChiTiet();
+                            chitiet.PhieuTraHangNCCID = IDPhieuTraHang;
+                            chitiet.HangHoaID = prod.IDHangHoa;
+                            chitiet.GiaVon = prod.GiaVon;
+                            chitiet.SoLuong = prod.SoLuong;
+                            chitiet.ThanhTien = prod.ThanhTien;
+                            chitiet.TonKho = prod.TonKho;
+                            chitiet.TienTra = prod.TienTra;
+                            DBDataProvider.DB.kPhieuTraHangChiTiets.InsertOnSubmit(chitiet);
+                            ////Cập nhật || trừ tồn kho
+                            //var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
+                            //if (TonKhoBanDau != null)
+                            //{
+                            //    TonKhoBanDau.TonKho += prod.SoLuong;
+                            //    #region ghi thẻ kho
+                            //    kTheKho thekho = new kTheKho();
+                            //    thekho.NgayNhap = DateTime.Now;
+                            //    thekho.DienGiai = "Đại lý trả hàng #" + MaPhieu;
+                            //    thekho.Nhap = prod.SoLuong;
+                            //    thekho.Xuat = 0;
+                            //    thekho.Ton = prod.TonKho +  prod.SoLuong;
+                            //    thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
+                            //    thekho.NhanVienID = Formats.IDUser();
+                            //    DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
+                            //    #endregion
+                            //}
+                        }
+                        //update công nợ
+                        khKhachHang Supplier = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDDaiLy).FirstOrDefault();
+                        if (Supplier != null)
+                        {
+
+                            //    #region ghi nhật ký nhập kho để xem báo cáo
+                            //    if (ckGiamCongNo.Checked == true)// giảm công nợ
+                            //    {
+                            //        khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                            //        nhatky.NgayNhap = DateTime.Now;
+                            //        nhatky.DienGiai = "Đại lý trả hàng ";
+                            //        nhatky.NoDau = Supplier.CongNo;
+                            //        nhatky.NhapHang = 0;
+                            //        nhatky.TraHang = ConLai;
+                            //        nhatky.NoCuoi = Supplier.CongNo - ConLai;
+                            //        nhatky.ThanhToan = 0;
+                            //        nhatky.NhanVienID = Formats.IDUser();
+                            //        nhatky.SoPhieu = MaPhieu;
+                            //        nhatky.IDKhachHang = IDDaiLy;
+                            //        DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                            //        DBDataProvider.DB.SubmitChanges();
+
+                            //        Supplier.CongNo -= ConLai;
+                            //        Supplier.LanCuoiMuaHang = DateTime.Now;
+                            //    }
+                            //    #endregion
+                            //    Supplier.TienTraHang += TongTien;
+                            phieutra.CongNoCu = Supplier.CongNo;
+                        }
+
+                        DBDataProvider.DB.SubmitChanges();
+                        scope.Complete();
+                        Reset();
+                        cbpInfoImport.JSProperties["cp_Reset"] = true;
+                    }
+                    else
                     {
-                        strMaPhieu += "0";
+                        throw new Exception("Danh sách hàng hóa trống !!");
+                        ccbBarcode.Text = "";
+                        ccbBarcode.Value = "";
+                        ccbBarcode.Focus();
                     }
-                    MaPhieu = strMaPhieu + MAX;
-                    int IDDaiLy = Int32.Parse(ccbNhaCungCap.Value.ToString());
-                    int IDSoPhieu = 0;
-                    if (ccbSoPhieu.Text != "")
-                        IDSoPhieu = Int32.Parse(ccbSoPhieu.Value.ToString());
-
-                    // insert kPhieuTraHang
-                    kPhieuTraHang phieutra = new kPhieuTraHang();
-                    phieutra.MaPhieu = MaPhieu;
-                    phieutra.DaiLyID = IDDaiLy;
-                    phieutra.SoPhieuTra = IDSoPhieu;
-                    phieutra.NgayTra = Convert.ToDateTime(dateNgayTra.Date);
-                    phieutra.NgayNhap = DateTime.Now;
-                    phieutra.NhanVienID = Formats.IDUser();
-                    phieutra.GhiChu = memoGhiChu.Text;
-                    phieutra.TongSoLuong = TongSoLuong;
-                    phieutra.TongTienHang = TongTien;
-                    phieutra.ThanhToan = ckGiamCongNo.Checked == true ? 0 : TongTien;
-                    phieutra.DuyetDonHang = 0; // 0 chưa duyệt , 1 đã duyệt
-                    phieutra.ConLai = ckGiamCongNo.Checked == true ? TongTien : 0;
-                    phieutra.HinhThucTT = ckGiamCongNo.Checked == true ? 1 : 0;
-                    DBDataProvider.DB.kPhieuTraHangs.InsertOnSubmit(phieutra);
-                    DBDataProvider.DB.SubmitChanges();
-                    int IDPhieuTraHang = phieutra.IDPhieuTraHang;
-                    foreach (var prod in listReceiptProducts)
-                    {
-                        // insert Chi tiet
-                        kPhieuTraHangChiTiet chitiet = new kPhieuTraHangChiTiet();
-                        chitiet.PhieuTraHangNCCID = IDPhieuTraHang;
-                        chitiet.HangHoaID = prod.IDHangHoa;
-                        chitiet.GiaVon = prod.GiaVon;
-                        chitiet.SoLuong = prod.SoLuong;
-                        chitiet.ThanhTien = prod.ThanhTien;
-                        chitiet.TonKho = prod.TonKho;
-                        chitiet.TienTra = prod.TienTra;
-                        DBDataProvider.DB.kPhieuTraHangChiTiets.InsertOnSubmit(chitiet);
-                        ////Cập nhật || trừ tồn kho
-                        //var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                        //if (TonKhoBanDau != null)
-                        //{
-                        //    TonKhoBanDau.TonKho += prod.SoLuong;
-                        //    #region ghi thẻ kho
-                        //    kTheKho thekho = new kTheKho();
-                        //    thekho.NgayNhap = DateTime.Now;
-                        //    thekho.DienGiai = "Đại lý trả hàng #" + MaPhieu;
-                        //    thekho.Nhap = prod.SoLuong;
-                        //    thekho.Xuat = 0;
-                        //    thekho.Ton = prod.TonKho +  prod.SoLuong;
-                        //    thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
-                        //    thekho.NhanVienID = Formats.IDUser();
-                        //    DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
-                        //    #endregion
-                        //}
-                    }
-                    //update công nợ
-                    khKhachHang Supplier = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDDaiLy).FirstOrDefault();
-                    if (Supplier != null)
-                    {
-
-                    //    #region ghi nhật ký nhập kho để xem báo cáo
-                    //    if (ckGiamCongNo.Checked == true)// giảm công nợ
-                    //    {
-                    //        khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                    //        nhatky.NgayNhap = DateTime.Now;
-                    //        nhatky.DienGiai = "Đại lý trả hàng ";
-                    //        nhatky.NoDau = Supplier.CongNo;
-                    //        nhatky.NhapHang = 0;
-                    //        nhatky.TraHang = ConLai;
-                    //        nhatky.NoCuoi = Supplier.CongNo - ConLai;
-                    //        nhatky.ThanhToan = 0;
-                    //        nhatky.NhanVienID = Formats.IDUser();
-                    //        nhatky.SoPhieu = MaPhieu;
-                    //        nhatky.IDKhachHang = IDDaiLy;
-                    //        DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                    //        DBDataProvider.DB.SubmitChanges();
-
-                    //        Supplier.CongNo -= ConLai;
-                    //        Supplier.LanCuoiMuaHang = DateTime.Now;
-                    //    }
-                    //    #endregion
-                    //    Supplier.TienTraHang += TongTien;
-                        phieutra.CongNoCu = Supplier.CongNo;
-                    }
-
-                    DBDataProvider.DB.SubmitChanges();
-                    scope.Complete();
-                    Reset();
-                    cbpInfoImport.JSProperties["cp_Reset"] = true;
-
                 }
                 catch (Exception ex)
                 {

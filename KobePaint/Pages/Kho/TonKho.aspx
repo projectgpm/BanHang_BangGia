@@ -22,11 +22,11 @@
 
                                                 </td>
                                                 <td style="padding-left:10px">
-                                                    <dx:ASPxComboBox Caption="Loại tồn kho" ID="ccbLoaiTonKho" runat="server" AutoPostBack="false" ClientInstanceName="ccbLoaiTonKho" SelectedIndex="0" >
+                                                    <dx:ASPxComboBox Caption="Loại tồn kho"  ID="ccbLoaiTonKho" runat="server" AutoPostBack="false" ClientInstanceName="ccbLoaiTonKho" SelectedIndex="2" >
                                                         <Items>
-                                                            <dx:ListEditItem Selected="True" Text="Chỉ lấy hàng tồn" Value="0" />
+                                                            <dx:ListEditItem  Text="Chỉ lấy hàng tồn" Value="0" />
                                                             <dx:ListEditItem Text="Hết hàng" Value="1" />
-                                                            <dx:ListEditItem Text="Tất cả" Value="2" />
+                                                            <dx:ListEditItem  Text="Tất cả" Value="2" />
                                                         </Items>
                                                         <ClientSideEvents SelectedIndexChanged="function(s,e){ LoadTonKho(); }" />
                                                     </dx:ASPxComboBox>    
@@ -74,30 +74,33 @@
                                                                 <SettingsText Title="THẺ KHO" EmptyDataRow="không có dữ liệu" />
                                                                 <Columns>
                               
-                                                                    <dx:GridViewDataTextColumn Caption="Diễn giải" FieldName="DienGiai" VisibleIndex="2">
+                                                                    <dx:GridViewDataTextColumn Caption="Diễn giải" FieldName="DienGiai" VisibleIndex="2" Width="100%">
+                                                                        <CellStyle HorizontalAlign="Left">
+                                                                        </CellStyle>
                                                                     </dx:GridViewDataTextColumn>
-                                                                    <dx:GridViewDataSpinEditColumn Caption="Tồn" FieldName="Ton" VisibleIndex="5">
+                                                                    <dx:GridViewDataSpinEditColumn Caption="Tồn" FieldName="Ton" VisibleIndex="5" Width="80px">
                                                                         <PropertiesSpinEdit DisplayFormatString="g">
                                                                         </PropertiesSpinEdit>
                                                                     </dx:GridViewDataSpinEditColumn>
-                                                                    <dx:GridViewDataSpinEditColumn Caption="Xuất" FieldName="Xuat" VisibleIndex="4">
+                                                                    <dx:GridViewDataSpinEditColumn Caption="Xuất" FieldName="Xuat" VisibleIndex="4" Width="80px">
                                                                         <PropertiesSpinEdit DisplayFormatString="g">
                                                                         </PropertiesSpinEdit>
                                                                     </dx:GridViewDataSpinEditColumn>
-                                                                    <dx:GridViewDataSpinEditColumn Caption="Nhập" FieldName="Nhap" VisibleIndex="3">
+                                                                    <dx:GridViewDataSpinEditColumn Caption="Nhập" FieldName="Nhap" VisibleIndex="3" Width="80px">
                                                                         <PropertiesSpinEdit DisplayFormatString="g">
                                                                         </PropertiesSpinEdit>
                                                                     </dx:GridViewDataSpinEditColumn>
-                                                                    <dx:GridViewDataDateColumn Caption="Ngày" FieldName="NgayNhap" VisibleIndex="1">
-                                                                        <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm:ss">
+                                                                    <dx:GridViewDataDateColumn Caption="Ngày" FieldName="NgayNhap" VisibleIndex="1" Width="150px">
+                                                                        <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm">
                                                                         </PropertiesDateEdit>
+                                                                        <CellStyle HorizontalAlign="Left">
+                                                                        </CellStyle>
                                                                     </dx:GridViewDataDateColumn>
                               
                                                                 </Columns>
                                                                 <TotalSummary>
                                                                     <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="Nhap" ShowInColumn="Nhập" ShowInGroupFooterColumn="Nhập" SummaryType="Sum" />
                                                                     <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="Xuat" ShowInColumn="Xuất" ShowInGroupFooterColumn="Xuất" SummaryType="Sum" />
-                                                                    <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="Ton" ShowInColumn="Tồn" ShowInGroupFooterColumn="Tồn" SummaryType="Sum" />
                                                                 </TotalSummary>
                                                                 <Styles>
                                                                     <Header HorizontalAlign="Center">

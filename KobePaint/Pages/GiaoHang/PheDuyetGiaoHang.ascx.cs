@@ -54,7 +54,7 @@ namespace KobePaint.Pages.GiaoHang
                             #region nhật ký công nợ
                                 khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                 nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Duyệt giao hàng đại lý";
+                                nhatky.DienGiai = "Duyệt phiếu giao hàng";
                                 nhatky.NoDau = KH.CongNo;
                                 nhatky.NhapHang = PhieuGH.ConLai;
                                 nhatky.TraHang = 0;
@@ -66,22 +66,6 @@ namespace KobePaint.Pages.GiaoHang
                                 DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
                                 DBDataProvider.DB.SubmitChanges();
                             #endregion
-                            foreach (var prod in PhieuGiaoHangCT)
-                            {
-                                var HH = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.HangHoaID).FirstOrDefault();
-                                //ghi thẻ kho
-                                #region thẻ kho
-                                kTheKho thekho = new kTheKho();
-                                thekho.NgayNhap = DateTime.Now;
-                                thekho.DienGiai = "Duyệt giao hàng #" + PhieuGH.MaPhieu;
-                                thekho.Nhap = 0;
-                                thekho.Xuat = prod.SoLuong;
-                                thekho.Ton = HH.TonKho - prod.SoLuong;
-                                thekho.HangHoaID = HH.IDHangHoa;
-                                thekho.NhanVienID = Formats.IDUser();
-                                DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
-                                #endregion
-                            }
                             KH.CongNo += PhieuGH.ConLai; // cộng công nợ
                             KH.TongTienHang += PhieuGH.ConLai;
                             KH.LanCuoiMuaHang = DateTime.Now;
@@ -101,6 +85,10 @@ namespace KobePaint.Pages.GiaoHang
                                 var HH = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.HangHoaID).FirstOrDefault();
                                 HH.TonKho += prod.SoLuong;
                             }
+                            var remove_TheKho = (from tk in DBDataProvider.DB.kTheKhos
+                                                 where tk.DienGiai == "Lập phiếu giao hàng#" + PhieuGH.MaPhieu
+                                                  select tk);
+                            DBDataProvider.DB.kTheKhos.DeleteAllOnSubmit(remove_TheKho);
                             PhieuGH.TrangThai = 2;// hủy đơn hàng
                             PhieuGH.STTDonHang = 0;
                             PhieuGH.SoDonHangTrongNam = 0;

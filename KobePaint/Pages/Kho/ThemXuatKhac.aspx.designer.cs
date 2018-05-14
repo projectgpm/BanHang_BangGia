@@ -49,6 +49,24 @@ namespace KobePaint.Pages.Kho {
         protected global::DevExpress.Web.SplitterContentControl SplitterContentControl1;
         
         /// <summary>
+        /// cbpInfo_left control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxCallbackPanel cbpInfo_left;
+        
+        /// <summary>
+        /// PanelContent2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.PanelContent PanelContent2;
+        
+        /// <summary>
         /// flayoutInfoNCC control.
         /// </summary>
         /// <remarks>

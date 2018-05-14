@@ -66,54 +66,56 @@ namespace KobePaint.Pages.Kho
             {
                 try
                 {
-                    int ChenhLech = 0;
-                    foreach (var prod in listReceiptProducts)
+                    if (listReceiptProducts.Count > 0)
                     {
-                        ChenhLech += prod.ChenhLech;
-                    }
-
-                    string MaPhieu = null, strMaPhieu = "KK";
-                    string MAX = (DBDataProvider.DB.kKiemKes.Count() + 1).ToString();
-                    for (int i = 1; i < (7 - MAX.Length); i++)
-                    {
-                        strMaPhieu += "0";
-                    }
-                    MaPhieu = strMaPhieu + MAX;
-
-
-                    //Insert vào bảng kiểm kê
-                    kKiemKe kk = new kKiemKe();
-                    kk.MaPhieu = MaPhieu;
-                    kk.IDNhanVien = Formats.IDUser();
-                    kk.NgayLap = Formats.ConvertToDateTime(dateNgayNhap.Text);
-                    kk.GhiChu = memoGhiChu.Text;
-                    kk.DaXoa = 0;
-                    kk.NgayTao = DateTime.Now;
-                    kk.ChenhLech = ChenhLech;
-                    //kk.TrangThai = 0;
-                    DBDataProvider.DB.kKiemKes.InsertOnSubmit(kk);
-                    DBDataProvider.DB.SubmitChanges();
-
-                    int IDPhieuKiemKe = kk.IDPhieuKiemKe;
-
-                    foreach (var prod in listReceiptProducts)
-                    {
-                        //Insert vào chi tiết kiểm kê
-                        kKiemKeChiTiet chitiet = new kKiemKeChiTiet();
-                        chitiet.PhieuKiemKeID = IDPhieuKiemKe;
-                        chitiet.HangHoaID = prod.IDHangHoa;
-                        chitiet.TonKhoHeThong = prod.TonKhoHeThong;
-                        chitiet.TonKhoThucTe = prod.TonKhoThucTe;
-                        chitiet.ChenhLech = prod.ChenhLech;
-                        chitiet.DienGiai = prod.DienGiai;
-                        DBDataProvider.DB.kKiemKeChiTiets.InsertOnSubmit(chitiet);
-
-                        //Ghi thẻ kho || Cập nhật tồn kho = thực tế
-                        var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                        if (TonKhoBanDau != null)
+                        int ChenhLech = 0;
+                        foreach (var prod in listReceiptProducts)
                         {
-                            TonKhoBanDau.TonKho = prod.TonKhoThucTe;
-                            #region ghi thẻ kho
+                            ChenhLech += prod.ChenhLech;
+                        }
+
+                        string MaPhieu = null, strMaPhieu = "KK";
+                        string MAX = (DBDataProvider.DB.kKiemKes.Count() + 1).ToString();
+                        for (int i = 1; i < (7 - MAX.Length); i++)
+                        {
+                            strMaPhieu += "0";
+                        }
+                        MaPhieu = strMaPhieu + MAX;
+
+
+                        //Insert vào bảng kiểm kê
+                        kKiemKe kk = new kKiemKe();
+                        kk.MaPhieu = MaPhieu;
+                        kk.IDNhanVien = Formats.IDUser();
+                        kk.NgayLap = Formats.ConvertToDateTime(dateNgayNhap.Text);
+                        kk.GhiChu = memoGhiChu.Text;
+                        kk.DaXoa = 0;
+                        kk.NgayTao = DateTime.Now;
+                        kk.ChenhLech = ChenhLech;
+                        //kk.TrangThai = 0;
+                        DBDataProvider.DB.kKiemKes.InsertOnSubmit(kk);
+                        DBDataProvider.DB.SubmitChanges();
+
+                        int IDPhieuKiemKe = kk.IDPhieuKiemKe;
+
+                        foreach (var prod in listReceiptProducts)
+                        {
+                            //Insert vào chi tiết kiểm kê
+                            kKiemKeChiTiet chitiet = new kKiemKeChiTiet();
+                            chitiet.PhieuKiemKeID = IDPhieuKiemKe;
+                            chitiet.HangHoaID = prod.IDHangHoa;
+                            chitiet.TonKhoHeThong = prod.TonKhoHeThong;
+                            chitiet.TonKhoThucTe = prod.TonKhoThucTe;
+                            chitiet.ChenhLech = prod.ChenhLech;
+                            chitiet.DienGiai = prod.DienGiai;
+                            DBDataProvider.DB.kKiemKeChiTiets.InsertOnSubmit(chitiet);
+
+                            //Ghi thẻ kho || Cập nhật tồn kho = thực tế
+                            var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
+                            if (TonKhoBanDau != null)
+                            {
+                                TonKhoBanDau.TonKho = prod.TonKhoThucTe;
+                                #region ghi thẻ kho
                                 kTheKho thekho = new kTheKho();
                                 thekho.NgayNhap = DateTime.Now;
                                 thekho.DienGiai = "Kiểm kho #" + MaPhieu;
@@ -125,19 +127,27 @@ namespace KobePaint.Pages.Kho
                                 else
                                 {
                                     thekho.Nhap = 0;
-                                    thekho.Xuat = prod.ChenhLech;
+                                    thekho.Xuat = (-1)*prod.ChenhLech;
                                 }
                                 thekho.Ton = prod.TonKhoThucTe;
                                 thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
                                 thekho.NhanVienID = Formats.IDUser();
                                 DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
-                            #endregion
+                                #endregion
+                            }
                         }
+                        DBDataProvider.DB.SubmitChanges();
+                        scope.Complete();
+                        Reset();
+                        cbpInfo.JSProperties["cp_Reset"] = true;
                     }
-                    DBDataProvider.DB.SubmitChanges();
-                    scope.Complete();
-                    Reset();
-                    cbpInfo.JSProperties["cp_Reset"] = true;
+                    else
+                    {
+                        throw new Exception("Danh sách kiểm kê trống !!");
+                        ccbBarcode.Text = "";
+                        ccbBarcode.Value = "";
+                        ccbBarcode.Focus();
+                    }
                 }
                 catch (Exception ex)
                 {

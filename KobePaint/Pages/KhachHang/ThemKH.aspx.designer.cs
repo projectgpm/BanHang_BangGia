@@ -13,6 +13,24 @@ namespace KobePaint.Pages.KH_NCC {
     public partial class ThemKH {
         
         /// <summary>
+        /// cbpInfo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxCallbackPanel cbpInfo;
+        
+        /// <summary>
+        /// PanelContent1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.PanelContent PanelContent1;
+        
+        /// <summary>
         /// formThemKH control.
         /// </summary>
         /// <remarks>
@@ -112,6 +130,15 @@ namespace KobePaint.Pages.KH_NCC {
         protected global::DevExpress.Web.ASPxButton btnLuu;
         
         /// <summary>
+        /// btnLuuTiepTuc control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton btnLuuTiepTuc;
+        
+        /// <summary>
         /// btnLapMoi control.
         /// </summary>
         /// <remarks>
@@ -128,14 +155,5 @@ namespace KobePaint.Pages.KH_NCC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxButton btnTroVe;
-        
-        /// <summary>
-        /// dsKhachHang control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource dsKhachHang;
     }
 }

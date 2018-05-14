@@ -11,14 +11,14 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
-                    <dx:LayoutItem Caption="">
+                   <%-- <dx:LayoutItem Caption="">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
                                 <dx:ASPxButton ID="btnInMaVach" runat="server" Text="In mã vạch">
                                 </dx:ASPxButton>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>
+                    </dx:LayoutItem>--%>
                     <dx:LayoutItem ShowCaption="False">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
@@ -60,7 +60,9 @@
             <DetailRow>
                 <div style="width: 100%; text-align:center;">
                     <div style="display:inline-block;">
-                        <dx:ASPxGridView ID="gridApGia" runat="server" AutoGenerateColumns="False" DataSourceID="dsTheKho" KeyFieldName="ID" Width="800px" OnBeforePerformDataSelect="gridApGia_BeforePerformDataSelect" OnRowValidating="gridApGia_RowValidating">
+                        <dx:ASPxGridView ID="gridApGia" runat="server" AutoGenerateColumns="False" DataSourceID="dsTheKho" KeyFieldName="IDTheKho" Width="800px" OnBeforePerformDataSelect="gridApGia_BeforePerformDataSelect" OnRowValidating="gridApGia_RowValidating">
+                            <SettingsPager Mode="EndlessPaging">
+                            </SettingsPager>
                             <Settings ShowTitlePanel="True" ShowFooter="True" />
                             <SettingsCommandButton>
                                 <ShowAdaptiveDetailButton ButtonType="Image">
@@ -85,30 +87,29 @@
                             <SettingsText Title="THẺ KHO" EmptyDataRow="không có dữ liệu" />
                             <Columns>
                               
-                                <dx:GridViewDataTextColumn Caption="Diễn giải" FieldName="DienGiai" VisibleIndex="2">
+                                <dx:GridViewDataTextColumn Caption="Diễn giải" FieldName="DienGiai" Width="100%" CellStyle-HorizontalAlign="Left" VisibleIndex="2">
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataSpinEditColumn Caption="Tồn" FieldName="Ton" VisibleIndex="5">
+                                <dx:GridViewDataSpinEditColumn Caption="Tồn" FieldName="Ton" VisibleIndex="5" Width="80px">
                                     <PropertiesSpinEdit DisplayFormatString="g">
                                     </PropertiesSpinEdit>
                                 </dx:GridViewDataSpinEditColumn>
-                                <dx:GridViewDataSpinEditColumn Caption="Xuất" FieldName="Xuat" VisibleIndex="4">
+                                <dx:GridViewDataSpinEditColumn Caption="Xuất" FieldName="Xuat" VisibleIndex="4" Width="80px">
                                     <PropertiesSpinEdit DisplayFormatString="g">
                                     </PropertiesSpinEdit>
                                 </dx:GridViewDataSpinEditColumn>
-                                <dx:GridViewDataSpinEditColumn Caption="Nhập" FieldName="Nhap" VisibleIndex="3">
+                                <dx:GridViewDataSpinEditColumn Caption="Nhập" FieldName="Nhap" VisibleIndex="3" Width="80px">
                                     <PropertiesSpinEdit DisplayFormatString="g">
                                     </PropertiesSpinEdit>
                                 </dx:GridViewDataSpinEditColumn>
-                                <dx:GridViewDataDateColumn Caption="Ngày" FieldName="NgayNhap" VisibleIndex="1">
-                                    <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm:ss">
+                                <dx:GridViewDataDateColumn Caption="Ngày" Width="150px" FieldName="NgayNhap" VisibleIndex="1" CellStyle-HorizontalAlign="Left">
+                                    <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm">
                                     </PropertiesDateEdit>
                                 </dx:GridViewDataDateColumn>
                               
                             </Columns>
                             <TotalSummary>
                                 <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="Nhap" ShowInColumn="Nhập" ShowInGroupFooterColumn="Nhập" SummaryType="Sum" />
-                                <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="Xuat" ShowInColumn="Xuất" ShowInGroupFooterColumn="Xuất" SummaryType="Sum" />
-                                <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="Ton" ShowInColumn="Tồn" ShowInGroupFooterColumn="Tồn" SummaryType="Sum" />
+                                <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="Xuat" ShowInColumn="Xuất" ShowInGroupFooterColumn="Xuất" SummaryType="Sum" />
                             </TotalSummary>
                             <Styles>
                                 <Header HorizontalAlign="Center">
@@ -117,7 +118,7 @@
                                 </TitlePanel>
                             </Styles>
                         </dx:ASPxGridView>
-                        <asp:SqlDataSource ID="dsTheKho" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [NgayNhap], [DienGiai], [Nhap], [Xuat], [Ton] FROM [kTheKho] WHERE ([HangHoaID] = @HangHoaID) ORDER BY [IDTheKho] DESC">
+                        <asp:SqlDataSource ID="dsTheKho" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [NgayNhap], [DienGiai], [Nhap], [Xuat], [Ton],[IDTheKho] FROM [kTheKho] WHERE ([HangHoaID] = @HangHoaID) ORDER BY [IDTheKho] DESC">
                               <SelectParameters>
                                 <asp:SessionParameter Name="HangHoaID" SessionField="IDHangHoa" Type="Int32" />
                             </SelectParameters>

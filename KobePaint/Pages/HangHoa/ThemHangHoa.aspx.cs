@@ -20,8 +20,11 @@ namespace KobePaint.Pages.HangHoa
         {
             if (!Context.User.Identity.IsAuthenticated)
             {
+               
                 Response.Redirect("~/Pages/TaiKhoan/DangNhap.aspx");
             }
+            if (!IsPostBack)
+                txtTenHH.Focus();
         }
 
         protected void cbpThemHH_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
@@ -126,7 +129,7 @@ namespace KobePaint.Pages.HangHoa
                     }
                     else
                     {
-                        throw new Exception("Tên hàng hóa đã tồn tại!!");
+                        throw new Exception("Tên hàng hóa đã tồn tại !!");
                     }
                 }
                 catch (Exception ex)
@@ -148,6 +151,7 @@ namespace KobePaint.Pages.HangHoa
         }
         protected void ResetAddProductPanel()
         {
+            txtTenHH.Focus();
             ccbDVT.Text = "";
             ccbDVT.DataBind();
             ccbNhomHH.Text = "";

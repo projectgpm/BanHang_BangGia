@@ -152,108 +152,117 @@ namespace KobePaint.Pages.TraHang
             {
                 try
                 {
-                    double TongTien = 0;
-                    int TongSoLuong = 0;
-                    foreach (var prod in listReceiptProducts)
+                    if (listReceiptProducts.Count > 0)
                     {
-                        TongTien += prod.ThanhTien;
-                        TongSoLuong += prod.SoLuong;
-                    }
-                    
-                    string MaPhieu = null, strMaPhieu = "PX";
-                    string MAX = (DBDataProvider.DB.kPhieuTraHangNCCs.Count() + 1).ToString();
-                    for (int i = 1; i < (7 - MAX.Length); i++)
-                    {
-                        strMaPhieu += "0";
-                    }
-                    MaPhieu = strMaPhieu + MAX;
-                    int IDNCC = Int32.Parse(ccbNhaCungCap.Value.ToString());
-                    int IDSoPhieu = 0;
-                    if (ccbSoPhieu.Text != "")
-                        IDSoPhieu = Int32.Parse(ccbSoPhieu.Value.ToString());
-
-                    // insert kPhieuTraHangNCC
-                    kPhieuTraHangNCC phieutra = new kPhieuTraHangNCC();
-                    phieutra.MaPhieu = MaPhieu;
-                    phieutra.NhaCungCapID = IDNCC;
-                    phieutra.SoPhieuTra = IDSoPhieu;
-                    phieutra.NgayTra = Convert.ToDateTime(dateNgayTra.Date);
-                    phieutra.NgayNhap = DateTime.Now;
-                    phieutra.NhanVienID = Formats.IDUser();
-                    phieutra.GhiChu = memoGhiChu.Text;
-                    phieutra.TongSoLuong = TongSoLuong;
-                    phieutra.TongTienHang = TongTien;
-                    phieutra.ThanhToan = ckGiamCongNo.Checked == true ? 0 : TongTien;
-                    phieutra.STTDonHang = DBDataProvider.STTPhieuTraHang_NCC(IDNCC);
-                    phieutra.ConLai = ckGiamCongNo.Checked == true ? TongTien : 0;
-                    phieutra.HinhThucTT = ckGiamCongNo.Checked == true ? 1 : 0;
-                    DBDataProvider.DB.kPhieuTraHangNCCs.InsertOnSubmit(phieutra);
-                    DBDataProvider.DB.SubmitChanges();
-                    int IDPhieuTraHang = phieutra.IDPhieuTraHang;
-                    foreach (var prod in listReceiptProducts)
-                    {
-                        // insert Chi tiet
-                        kPhieuTraHangNCCChiTiet chitiet = new kPhieuTraHangNCCChiTiet();
-                        chitiet.PhieuTraHangNCCID = IDPhieuTraHang;
-                        chitiet.HangHoaID = prod.IDHangHoa;
-                        chitiet.GiaVon = prod.GiaVon;
-                        chitiet.SoLuong = prod.SoLuong;
-                        chitiet.ThanhTien = prod.ThanhTien;
-                        chitiet.TonKho = prod.TonKho;
-                        chitiet.TienTra = prod.TienTra;
-                        DBDataProvider.DB.kPhieuTraHangNCCChiTiets.InsertOnSubmit(chitiet);
-                        //Cập nhật || trừ tồn kho
-                        var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                        if (TonKhoBanDau != null)
+                        double TongTien = 0;
+                        int TongSoLuong = 0;
+                        foreach (var prod in listReceiptProducts)
                         {
-                            TonKhoBanDau.TonKho -= prod.SoLuong;
-                            #region ghi thẻ kho
-                            kTheKho thekho = new kTheKho();
-                            thekho.NgayNhap = DateTime.Now;
-                            thekho.DienGiai = "Trả hàng NCC #" + MaPhieu;
-                            thekho.Nhap = 0;
-                            thekho.Xuat = prod.SoLuong;
-                            thekho.Ton = prod.TonKho - prod.SoLuong;
-                            thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
-                            thekho.NhanVienID = Formats.IDUser();
-                            DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
+                            TongTien += prod.ThanhTien;
+                            TongSoLuong += prod.SoLuong;
+                        }
+
+                        string MaPhieu = null, strMaPhieu = "PX";
+                        string MAX = (DBDataProvider.DB.kPhieuTraHangNCCs.Count() + 1).ToString();
+                        for (int i = 1; i < (7 - MAX.Length); i++)
+                        {
+                            strMaPhieu += "0";
+                        }
+                        MaPhieu = strMaPhieu + MAX;
+                        int IDNCC = Int32.Parse(ccbNhaCungCap.Value.ToString());
+                        int IDSoPhieu = 0;
+                        if (ccbSoPhieu.Text != "")
+                            IDSoPhieu = Int32.Parse(ccbSoPhieu.Value.ToString());
+
+                        // insert kPhieuTraHangNCC
+                        kPhieuTraHangNCC phieutra = new kPhieuTraHangNCC();
+                        phieutra.MaPhieu = MaPhieu;
+                        phieutra.NhaCungCapID = IDNCC;
+                        phieutra.SoPhieuTra = IDSoPhieu;
+                        phieutra.NgayTra = Convert.ToDateTime(dateNgayTra.Date);
+                        phieutra.NgayNhap = DateTime.Now;
+                        phieutra.NhanVienID = Formats.IDUser();
+                        phieutra.GhiChu = memoGhiChu.Text;
+                        phieutra.TongSoLuong = TongSoLuong;
+                        phieutra.TongTienHang = TongTien;
+                        phieutra.ThanhToan = ckGiamCongNo.Checked == true ? 0 : TongTien;
+                        phieutra.STTDonHang = DBDataProvider.STTPhieuTraHang_NCC(IDNCC);
+                        phieutra.ConLai = ckGiamCongNo.Checked == true ? TongTien : 0;
+                        phieutra.HinhThucTT = ckGiamCongNo.Checked == true ? 1 : 0;
+                        DBDataProvider.DB.kPhieuTraHangNCCs.InsertOnSubmit(phieutra);
+                        DBDataProvider.DB.SubmitChanges();
+                        int IDPhieuTraHang = phieutra.IDPhieuTraHang;
+                        foreach (var prod in listReceiptProducts)
+                        {
+                            // insert Chi tiet
+                            kPhieuTraHangNCCChiTiet chitiet = new kPhieuTraHangNCCChiTiet();
+                            chitiet.PhieuTraHangNCCID = IDPhieuTraHang;
+                            chitiet.HangHoaID = prod.IDHangHoa;
+                            chitiet.GiaVon = prod.GiaVon;
+                            chitiet.SoLuong = prod.SoLuong;
+                            chitiet.ThanhTien = prod.ThanhTien;
+                            chitiet.TonKho = prod.TonKho;
+                            chitiet.TienTra = prod.TienTra;
+                            DBDataProvider.DB.kPhieuTraHangNCCChiTiets.InsertOnSubmit(chitiet);
+                            //Cập nhật || trừ tồn kho
+                            var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
+                            if (TonKhoBanDau != null)
+                            {
+                                TonKhoBanDau.TonKho -= prod.SoLuong;
+                                #region ghi thẻ kho
+                                kTheKho thekho = new kTheKho();
+                                thekho.NgayNhap = DateTime.Now;
+                                thekho.DienGiai = "Trả hàng NCC #" + MaPhieu;
+                                thekho.Nhap = 0;
+                                thekho.Xuat = prod.SoLuong;
+                                thekho.Ton = prod.TonKho - prod.SoLuong;
+                                thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
+                                thekho.NhanVienID = Formats.IDUser();
+                                DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
+                                #endregion
+                            }
+                        }
+                        //update công nợ
+                        khKhachHang Supplier = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDNCC).FirstOrDefault();
+                        if (Supplier != null)
+                        {
+
+                            #region ghi nhật ký nhập kho để xem báo cáo
+                            if (ckGiamCongNo.Checked == true)// giảm công nợ
+                            {
+                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                                nhatky.NgayNhap = DateTime.Now;
+                                nhatky.DienGiai = "Trả hàng NCC ";
+                                nhatky.NoDau = Supplier.CongNo;
+                                nhatky.NhapHang = 0;
+                                nhatky.TraHang = ckGiamCongNo.Checked == true ? TongTien : 0;
+                                nhatky.NoCuoi = Supplier.CongNo - (ckGiamCongNo.Checked == true ? TongTien : 0);
+                                nhatky.ThanhToan = 0;
+                                nhatky.NhanVienID = Formats.IDUser();
+                                nhatky.SoPhieu = MaPhieu;
+                                nhatky.IDKhachHang = IDNCC;
+                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                                DBDataProvider.DB.SubmitChanges();
+                                Supplier.CongNo -= ckGiamCongNo.Checked == true ? TongTien : 0;
+                                Supplier.LanCuoiMuaHang = DateTime.Now;
+                            }
+                            Supplier.TienTraHang += TongTien;
                             #endregion
+                            phieutra.CongNoCu = Supplier.CongNo;
                         }
-                    }
-                    //update công nợ
-                    khKhachHang Supplier = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDNCC).FirstOrDefault();
-                    if (Supplier != null)
-                    {
 
-                        #region ghi nhật ký nhập kho để xem báo cáo
-                        if (ckGiamCongNo.Checked  == true)// giảm công nợ
-                        {
-                            khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                            nhatky.NgayNhap = DateTime.Now;
-                            nhatky.DienGiai = "Trả hàng NCC ";
-                            nhatky.NoDau = Supplier.CongNo;
-                            nhatky.NhapHang = 0;
-                            nhatky.TraHang = ckGiamCongNo.Checked == true ? TongTien : 0;
-                            nhatky.NoCuoi = Supplier.CongNo - (ckGiamCongNo.Checked == true ? TongTien : 0);
-                            nhatky.ThanhToan = 0;
-                            nhatky.NhanVienID = Formats.IDUser();
-                            nhatky.SoPhieu = MaPhieu;
-                            nhatky.IDKhachHang = IDNCC;
-                            DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                            DBDataProvider.DB.SubmitChanges();
-                            Supplier.CongNo -= ckGiamCongNo.Checked == true ? TongTien : 0;
-                            Supplier.LanCuoiMuaHang = DateTime.Now;
-                        }
-                        Supplier.TienTraHang += TongTien;
-                        #endregion
-                        phieutra.CongNoCu = Supplier.CongNo;
+                        DBDataProvider.DB.SubmitChanges();
+                        scope.Complete();
+                        Reset();
+                        cbpInfoImport.JSProperties["cp_Reset"] = true;
                     }
-                   
-                    DBDataProvider.DB.SubmitChanges();
-                    scope.Complete();
-                    Reset();
-                    cbpInfoImport.JSProperties["cp_Reset"] = true;
-                    
+                    else
+                    {
+                        throw new Exception("Danh sách hàng hóa trống !!");
+                        ccbBarcode.Text = "";
+                        ccbBarcode.Value = "";
+                        ccbBarcode.Focus();
+                    }
                 }
                 catch (Exception ex)
                 {

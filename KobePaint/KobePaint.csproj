@@ -102,6 +102,7 @@
     <Content Include="App_Data\MenuToanQuyen.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Content\DragAndDrop.css" />
     <Content Include="Content\Images\AquaHeader.jpg" />
     <Content Include="Content\Images\BlackGlassHeader.jpg" />
     <Content Include="Content\Images\GlassHeader.jpg" />
@@ -143,6 +144,8 @@
     <Content Include="Pages\HangHoa\HangHoa.aspx" />
     <Content Include="Pages\HangHoa\NhomHang.aspx" />
     <Content Include="Pages\HangHoa\ThemHangHoa.aspx" />
+    <Content Include="Pages\HeThong\LyDoXuat.aspx" />
+    <Content Include="Pages\HeThong\ThongTinCuaHang.aspx" />
     <Content Include="Pages\KhachHang\DanhSachDaiLy.aspx" />
     <Content Include="Pages\KhachHang\DanhSachKH.aspx" />
     <Content Include="Pages\KhachHang\DanhSachNCC.aspx" />
@@ -394,6 +397,20 @@
     </Compile>
     <Compile Include="Pages\HangHoa\ThemHangHoa.aspx.designer.cs">
       <DependentUpon>ThemHangHoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HeThong\LyDoXuat.aspx.cs">
+      <DependentUpon>LyDoXuat.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\HeThong\LyDoXuat.aspx.designer.cs">
+      <DependentUpon>LyDoXuat.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HeThong\ThongTinCuaHang.aspx.cs">
+      <DependentUpon>ThongTinCuaHang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\HeThong\ThongTinCuaHang.aspx.designer.cs">
+      <DependentUpon>ThongTinCuaHang.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\KhachHang\DanhSachDaiLy.aspx.cs">
       <DependentUpon>DanhSachDaiLy.aspx</DependentUpon>

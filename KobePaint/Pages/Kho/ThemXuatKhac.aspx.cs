@@ -55,7 +55,13 @@ namespace KobePaint.Pages.Kho
                 default: InsertIntoGrid(); BindGrid(); break;
             }
         }
-
+        protected void cbpInfo_left_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            switch (e.Parameter)
+            {
+                case "Reset": Reset();  break;
+            }
+        }
 
         protected void Reset()
         {
@@ -350,57 +356,59 @@ namespace KobePaint.Pages.Kho
             {
                 try
                 {
-                    double TongTien = 0;
-                    int TongSoLuong = 0;
-                    foreach (var prod in listReceiptProducts)
+                    if (listReceiptProducts.Count > 0)
                     {
-                        TongTien += prod.ThanhTien;
-                        TongSoLuong += prod.SoLuong;
-                    }
-               
-                    string MaPhieu = null, strMaPhieu = "PX";
-                    string MAX = (DBDataProvider.DB.kPhieuXuatKhacs.Count() + 1).ToString();
-                    for (int i = 1; i < (7 - MAX.Length); i++)
-                    {
-                        strMaPhieu += "0";
-                    }
-                    MaPhieu = strMaPhieu + MAX;
-
-
-                    //Insert vào bảng phiếu xuất khác
-                    kPhieuXuatKhac xuatkho = new kPhieuXuatKhac();
-                    xuatkho.IDNhanVien = Formats.IDUser();
-                    xuatkho.MaPhieuXuat = MaPhieu;
-                    xuatkho.NgayLap = Formats.ConvertToDateTime(dateNgayNhap.Text);
-                    xuatkho.GhiChu = memoGhiChu.Text;
-                    xuatkho.DaXoa = 0;
-                    xuatkho.NgayTao = DateTime.Now;
-                    xuatkho.TongTien = TongTien;
-                    xuatkho.SoLuong = TongSoLuong;
-                    DBDataProvider.DB.kPhieuXuatKhacs.InsertOnSubmit(xuatkho);
-                    DBDataProvider.DB.SubmitChanges();
-
-                    int IDXuat = xuatkho.IDPhieuXuat;
-
-                    foreach (var prod in listReceiptProducts)
-                    {
-                        //Insert vào chi tiết xuất kho
-                        kPhieuXuatKhacChiTiet detailXuatKho = new kPhieuXuatKhacChiTiet();
-                        detailXuatKho.PhieuXuatID = IDXuat;
-                        detailXuatKho.HangHoaID = prod.IDHangHoa;
-                        detailXuatKho.TonKho = prod.TonKho;
-                        detailXuatKho.SoLuong = prod.SoLuong;
-                        detailXuatKho.LyDoXuatID = prod.LyDoXuatID;
-                        detailXuatKho.GiaVon = prod.GiaVon;
-                        detailXuatKho.ThanhTien = prod.ThanhTien;
-                        DBDataProvider.DB.kPhieuXuatKhacChiTiets.InsertOnSubmit(detailXuatKho);
-
-                        //Ghi thẻ kho || Trừ tồn kho
-                        var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                        if (TonKhoBanDau != null)
+                        double TongTien = 0;
+                        int TongSoLuong = 0;
+                        foreach (var prod in listReceiptProducts)
                         {
-                            TonKhoBanDau.TonKho -= prod.SoLuong;
-                            #region ghi thẻ kho
+                            TongTien += prod.ThanhTien;
+                            TongSoLuong += prod.SoLuong;
+                        }
+
+                        string MaPhieu = null, strMaPhieu = "PX";
+                        string MAX = (DBDataProvider.DB.kPhieuXuatKhacs.Count() + 1).ToString();
+                        for (int i = 1; i < (7 - MAX.Length); i++)
+                        {
+                            strMaPhieu += "0";
+                        }
+                        MaPhieu = strMaPhieu + MAX;
+
+
+                        //Insert vào bảng phiếu xuất khác
+                        kPhieuXuatKhac xuatkho = new kPhieuXuatKhac();
+                        xuatkho.IDNhanVien = Formats.IDUser();
+                        xuatkho.MaPhieuXuat = MaPhieu;
+                        xuatkho.NgayLap = Formats.ConvertToDateTime(dateNgayNhap.Text);
+                        xuatkho.GhiChu = memoGhiChu.Text;
+                        xuatkho.DaXoa = 0;
+                        xuatkho.NgayTao = DateTime.Now;
+                        xuatkho.TongTien = TongTien;
+                        xuatkho.SoLuong = TongSoLuong;
+                        DBDataProvider.DB.kPhieuXuatKhacs.InsertOnSubmit(xuatkho);
+                        DBDataProvider.DB.SubmitChanges();
+
+                        int IDXuat = xuatkho.IDPhieuXuat;
+
+                        foreach (var prod in listReceiptProducts)
+                        {
+                            //Insert vào chi tiết xuất kho
+                            kPhieuXuatKhacChiTiet detailXuatKho = new kPhieuXuatKhacChiTiet();
+                            detailXuatKho.PhieuXuatID = IDXuat;
+                            detailXuatKho.HangHoaID = prod.IDHangHoa;
+                            detailXuatKho.TonKho = prod.TonKho;
+                            detailXuatKho.SoLuong = prod.SoLuong;
+                            detailXuatKho.LyDoXuatID = prod.LyDoXuatID;
+                            detailXuatKho.GiaVon = prod.GiaVon;
+                            detailXuatKho.ThanhTien = prod.ThanhTien;
+                            DBDataProvider.DB.kPhieuXuatKhacChiTiets.InsertOnSubmit(detailXuatKho);
+
+                            //Ghi thẻ kho || Trừ tồn kho
+                            var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
+                            if (TonKhoBanDau != null)
+                            {
+                                TonKhoBanDau.TonKho -= prod.SoLuong;
+                                #region ghi thẻ kho
                                 kTheKho thekho = new kTheKho();
                                 thekho.NgayNhap = DateTime.Now;
                                 thekho.DienGiai = "Xuất khác #" + MaPhieu;
@@ -410,13 +418,22 @@ namespace KobePaint.Pages.Kho
                                 thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
                                 thekho.NhanVienID = Formats.IDUser();
                                 DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
-                            #endregion
+                                #endregion
+                            }
+
                         }
+                        DBDataProvider.DB.SubmitChanges();
+                        scope.Complete();
+                        Reset();
+                        cbpInfo.JSProperties["cp_Reset"] = true;
                     }
-                    DBDataProvider.DB.SubmitChanges();
-                    scope.Complete();
-                    Reset();
-                    cbpInfo.JSProperties["cp_Reset"] = true;
+                    else
+                    {
+                        throw new Exception("Danh sách xuất kho trống !!");
+                        ccbBarcode.Text = "";
+                        ccbBarcode.Value = "";
+                        ccbBarcode.Focus();
+                    }
                 }
                 catch (Exception ex)
                 {

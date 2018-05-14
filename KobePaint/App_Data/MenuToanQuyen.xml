@@ -39,17 +39,17 @@
     <item Text="Danh sách thanh toán NCC" NavigateUrl="~/Pages/ThanhToan/DanhSachThanhToanNCC.aspx" />
   </item>
   
-  <item Text="Thu chi" >
+  <!--<item Text="Thu chi" >
     <item Text="Lập phiếu thu chi" NavigateUrl="~/Pages/ThuChi/LapPhieuThuChi.aspx" />
     <item Text="Danh sách phiếu thu chi" NavigateUrl="~/Pages/ThuChi/DanhSachThuChi.aspx" />
-    <!--<item Text="Lập phiếu tạm ứng" NavigateUrl="" />
-    <item Text="Danh sách tạm ứng" NavigateUrl="" />-->
-  </item>
+    --><!--<item Text="Lập phiếu tạm ứng" NavigateUrl="" />
+    <item Text="Danh sách tạm ứng" NavigateUrl="" />--><!--
+  </item>-->
   
   <item Text="Báo cáo" >
     <item Text="Báo cáo bán hàng" >
       <item Text="Báo cáo doanh thu" NavigateUrl="~/Pages/BaoCao/DoanhThuDaiLy.aspx" />
-      <item Text="Báo cáo doanh thu theo hàng hóa(chưa)" NavigateUrl="" />
+      <!--<item Text="Báo cáo doanh thu theo hàng hóa(chưa)" NavigateUrl="" />-->
       <item Text="Báo cáo công nợ" NavigateUrl="~/Pages/BaoCao/CongNo.aspx" />
       <item Text="Báo cáo công nợ chi tiết theo ngày" NavigateUrl="~/Pages/BaoCao/CongNoDLTheoNgay.aspx" />
       <item Text="Báo cáo công nợ chi tiết theo khách hàng" NavigateUrl="~/Pages/BaoCao/CongNoDLChiTiet.aspx" />
@@ -61,16 +61,18 @@
     <item Text="Danh sách khách hàng" NavigateUrl="~/Pages/BaoCao/DanhSachKhachHang.aspx" />
     <item Text="Báo cáo công nợ NCC" NavigateUrl="~/Pages/BaoCao/CongNoNCC.aspx" />
     <item Text="Báo cáo thanh toán cho NCC" NavigateUrl="~/Pages/BaoCao/ThanhToanNCC.aspx" />
-    <item Text="Báo cáo Nhập-Xuất-Tồn(chưa)" NavigateUrl="" />
+    <!--<item Text="Báo cáo Nhập-Xuất-Tồn(chưa)" NavigateUrl="" />
     <item Text="Báo cáo tồn kho(chưa)" NavigateUrl="" />
     <item Text="Báo cáo nhập kho chi tiết(chưa)" NavigateUrl="" />
     <item Text="Báo cáo xuất kho chi tiết(chưa)" NavigateUrl="" />
-    <item Text="Báo cáo doanh thu tổng hợp(chưa)" NavigateUrl="" />
+    <item Text="Báo cáo doanh thu tổng hợp(chưa)" NavigateUrl="" />-->
    
   </item>
   <item Text="Hệ thống" >
     <item Text="Thông tin tài khoản" NavigateUrl="~/Pages/TaiKhoan/ThongTinTaiKhoan.aspx" />
     <item Text="Danh sách tài khoản" NavigateUrl="~/Pages/TaiKhoan/DanhSachTaiKhoan.aspx" />
+    <item Text="Lý do xuất khác" NavigateUrl="~/Pages/HeThong/LyDoXuat.aspx" />
+    <item Text="Thông tin cửa hàng" NavigateUrl="~/Pages/HeThong/ThongTinCuaHang.aspx" />
     <item Text="Đăng xuất"  NavigateUrl="~/Pages/TaiKhoan/DangXuat.aspx" />
   </item>
 </items>

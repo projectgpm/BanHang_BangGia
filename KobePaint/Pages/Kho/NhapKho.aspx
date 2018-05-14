@@ -32,12 +32,13 @@
             if (checkInput() && confirm('Xác nhận tao tác ?')) {
                 cbpInfoImport.PerformCallback('Save');
                 cbpInfoImport.PerformCallback('redirect');
+                cbpInfo.PerformCallback('resetinfo');
             }
         }
         function onSaveNextClick() {
             if (checkInput() && confirm('Xác nhận tao tác ?')) {
                 cbpInfoImport.PerformCallback('Save');
-                cbpInfo.PerformCallback('refresh');
+                cbpInfo.PerformCallback('resetinfo');
             }
         }
         function onSaveTempClick() {
@@ -129,7 +130,7 @@
                     <Panes>
                         <dx:SplitterPane Name="splpInfo">
                             <Panes>
-                                <dx:SplitterPane MaxSize="300px" Name="splpInfoNCC"  >
+                                <dx:SplitterPane MaxSize="350px" Name="splpInfoNCC"  >
                                     <ContentCollection>
                                         <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
                                              <dx:ASPxCallbackPanel ID="cbpInfo" ClientInstanceName="cbpInfo" runat="server" Width="100%" OnCallback="cbpInfo_Callback">
@@ -160,20 +161,24 @@
                                                                                     <table>
                                                                                         <tr>
                                                                                             <td style="width: 90%">
-                                                                                                <dx:ASPxComboBox ID="ccbNhaCungCap" ClientInstanceName="ccbNhaCungCap" runat="server" NullText="Chọn nhà cung cấp" Width="100%" DataSourceID="dsNhaCungCap" TextField="HoTen" ValueField="IDKhachHang" OnCallback="ccbNhaCungCap_Callback">
+                                                                                                <dx:ASPxComboBox ID="ccbNhaCungCap" TextFormatString="{0};{1}" ClientInstanceName="ccbNhaCungCap" runat="server" NullText="Chọn nhà cung cấp" Width="100%" DataSourceID="dsNhaCungCap" TextField="HoTen" ValueField="IDKhachHang" OnCallback="ccbNhaCungCap_Callback">
                                                                                                     <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="InfosInput">
                                                                                                         <RequiredField ErrorText="Chọn nhà cung cấp" IsRequired="True" />
                                                                                                     </ValidationSettings>
                                                                                                     <ClientSideEvents DropDown="function(s,e){ LoadNhacCungCap(); }" SelectedIndexChanged="GetPrice"></ClientSideEvents>
+                                                                                                    <Columns>
+                                                                                                        <dx:ListBoxColumn FieldName="MaKhachHang" Width="90px" Caption="Mã khách hàng" />
+                                                                                                        <dx:ListBoxColumn FieldName="HoTen" Width="150px" Caption="Tên khách hàng" />
+                                                                                                    </Columns>
                                                                                                 </dx:ASPxComboBox>
-                                                                                                <asp:SqlDataSource ID="dsNhaCungCap" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] WHERE ([LoaiKhachHangID] = @LoaiKhachHangID)">
+                                                                                                <asp:SqlDataSource ID="dsNhaCungCap" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang],[MaKhachHang], [HoTen] FROM [khKhachHang] WHERE ([LoaiKhachHangID] = @LoaiKhachHangID) AND DaXoa = 0">
                                                                                                     <SelectParameters>
                                                                                                         <asp:Parameter DefaultValue="2" Name="LoaiKhachHangID" Type="Int32" />
                                                                                                     </SelectParameters>
                                                                                                 </asp:SqlDataSource>
                                                                                             </td>
                                                                                             <td style="width: 10%; padding-left: 10px;">
-                                                                                                <dx:ASPxHyperLink ID="hpThemNCC" Target="_blank" runat="server" Text="Thêm" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx">
+                                                                                                <dx:ASPxHyperLink ID="hpThemNCC" Target="_blank" runat="server" Text="Thêm" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx" ImageHeight="30px" ImageUrl="~/images/add.png" ImageWidth="30px" ToolTip="Thêm mới">
                                                                                                 </dx:ASPxHyperLink>
 
                                                                                             </td>
@@ -185,7 +190,7 @@
                                                                         <dx:LayoutItem Caption="Ngày nhập">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer3" runat="server">
-                                                                                    <dx:ASPxDateEdit ID="dateNgayNhap" runat="server" OnInit="dateEditControl_Init" Width="100%">
+                                                                                    <dx:ASPxDateEdit ID="dateNgayNhap" ClientInstanceName="dateNgayNhap" runat="server" OnInit="dateEditControl_Init" Width="100%">
                                                                                         <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom">
                                                                                             <RequiredField ErrorText="Không được để trống" IsRequired="True" />
                                                                                         </ValidationSettings>
@@ -197,7 +202,7 @@
                                                                         <dx:LayoutItem Caption="Số hóa đơn">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer4" runat="server">
-                                                                                    <dx:ASPxTextBox ID="txtSoHoaDon" runat="server" Width="100%">
+                                                                                    <dx:ASPxTextBox ID="txtSoHoaDon" ClientInstanceName="txtSoHoaDon" runat="server" Width="100%">
                                                                                     </dx:ASPxTextBox>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
@@ -206,7 +211,7 @@
                                                                         <dx:LayoutItem Caption="Người nhập">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer5" runat="server">
-                                                                                    <dx:ASPxTextBox ID="txtNguoiNhap" runat="server" Enabled="False" Width="100%">
+                                                                                    <dx:ASPxTextBox ID="txtNguoiNhap" ClientInstanceName="txtNguoiNhap" runat="server" Enabled="False" Width="100%">
                                                                                     </dx:ASPxTextBox>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
@@ -236,7 +241,7 @@
                                                                         <dx:LayoutItem Caption="Thông tin khác">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer7" runat="server">
-                                                                                    <dx:ASPxMemo ID="memoGhiChu" runat="server" Rows="5" Width="100%">
+                                                                                    <dx:ASPxMemo ID="memoGhiChu"  ClientInstanceName="memoGhiChu" runat="server" Rows="5" Width="100%">
                                                                                     </dx:ASPxMemo>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>

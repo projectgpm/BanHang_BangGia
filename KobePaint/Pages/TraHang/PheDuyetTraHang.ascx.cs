@@ -80,6 +80,18 @@ namespace KobePaint.Pages.TraHang
                             {
                                 var HH = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.HangHoaID).FirstOrDefault();
                                 HH.TonKho += prod.SoLuong;
+                                // ghi thẻ kho
+                                #region ghi thẻ kho
+                                kTheKho thekho = new kTheKho();
+                                thekho.NgayNhap = DateTime.Now;
+                                thekho.DienGiai = "Trả hàng #" + PhieuTraHang.MaPhieu;
+                                thekho.Nhap = prod.SoLuong;
+                                thekho.Xuat = 0;
+                                thekho.Ton = prod.SoLuong + prod.TonKho;
+                                thekho.HangHoaID = HH.IDHangHoa;
+                                thekho.NhanVienID = Formats.IDUser();
+                                DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
+                                #endregion
                             }
                         }
                     }

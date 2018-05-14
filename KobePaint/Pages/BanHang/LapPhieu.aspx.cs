@@ -77,13 +77,27 @@ namespace KobePaint.Pages.BanHang
             {
                 case "price": GetPrice();  break;
                 case "UnitChange": Unitchange(para[1]); BindGrid(); break;
-                case "Save": Save(); Reset(); CreateReportReview_Save(Convert.ToInt32(hiddenFields["IDPhieuMoi"].ToString())); Reset(); break;
+                case "Save": Save(); DeleteListProducts(); CreateReportReview_Save(Convert.ToInt32(hiddenFields["IDPhieuMoi"].ToString())); Reset(); break;
                 case "Review": CreateReportReview(); break;
                 case "importexcel": BindGrid(); break;
                 default: InsertIntoGrid(); BindGrid(); break;
             }
         }
 
+       
+        protected void cbpInfo_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
+        {
+            switch (e.Parameter)
+            {
+                case "refresh": BindInfo(); break;
+                case "giamgia": GiamGia(); break;
+                case "renew": spTienGiamGia.Number = 0; break;
+                case "khachhang": CongNo(); break;
+                case "khachthanhtoan": KhachThanhToan(); break;
+                case "lammoi": Reset(); break;
+                default: break;
+            }
+        }
         private void CreateReportReview_Save(int IDPhieu)
         {
             hdfViewReport["view"] = 1;
@@ -138,19 +152,6 @@ namespace KobePaint.Pages.BanHang
                 oCusExport.listProduct.Add(prod);
             }
             cbpInfoImport.JSProperties["cp_rpView"] = true;
-        }
-        protected void cbpInfo_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
-        {
-            switch (e.Parameter)
-            {
-                case "refresh": BindGrid(); break;
-                case "giamgia": GiamGia(); break;
-                case "renew": spTienGiamGia.Number = 0; break;
-                case "khachhang": CongNo(); break;
-                case "khachthanhtoan": KhachThanhToan(); break;
-                case "lammoi": Reset(); break;
-                default: break;
-            }
         }
 
         private void KhachThanhToan()
@@ -229,107 +230,119 @@ namespace KobePaint.Pages.BanHang
             {
                 try
                 {
-                    double TongTien = 0;
-                    int TongSoLuong = 0;
-                    foreach (var prod in listReceiptProducts)
+                    if (listReceiptProducts.Count > 0)
                     {
-                        TongTien += prod.ThanhTien;
-                        TongSoLuong += prod.SoLuong;
-                    }
-                    string MaPhieu = null, strMaPhieu = "PX";
-                    string MAX = (DBDataProvider.DB.ghPhieuGiaoHangs.Count() + 1).ToString();
-                    for (int i = 1; i < (7 - MAX.Length); i++)
-                    {
-                        strMaPhieu += "0";
-                    }
-                    MaPhieu = strMaPhieu + MAX;
-
-                    int IDkhachHang = Int32.Parse(ccbNhaCungCap.Value.ToString());
-                    var KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDkhachHang).FirstOrDefault();
-                    ghPhieuGiaoHang giaohang = new ghPhieuGiaoHang();
-                    giaohang.NgayTao = DateTime.Now;
-                    giaohang.MaPhieu = MaPhieu;
-                    giaohang.NhanVienID = Formats.IDUser();
-                    giaohang.GhiChuGiaoHang = memoGhiChu.Text;
-                    giaohang.KhachHangID = IDkhachHang;
-                    giaohang.NgayGiao = Formats.ConvertToDateTime(dateNgayNhap.Text);
-                    giaohang.NguoiGiao = "";
-                    giaohang.DiaChiGiaoHang = KH.DiaChi;
-                    giaohang.DaXoa = 0;
-                    giaohang.TTThanhToan = 0; //0 chưa thanh toán. 1 đã thanh toán
-                    giaohang.TrangThai = 3;// chưa duyệt, 1 đã duyệt, 3 bán hàng
-                    giaohang.TongSoLuong = TongSoLuong;
-                    giaohang.DienThoai = KH.DienThoai;
-                    giaohang.TongTien = TongTien;
-                    giaohang.NgayDuyet = DateTime.Now;
-                    giaohang.GiamGia = Convert.ToDouble(spGiamGia.Number);
-                    giaohang.ThanhToan = Convert.ToDouble(spKhachHangThoan.Number);// khách thanh toán
-                    giaohang.ConLai = (-1)*Convert.ToDouble(spTienTraKhach.Number);
-                    giaohang.STTDonHang = DBDataProvider.STTPhieuGiaoHang_DaiLy(IDkhachHang);
-                    giaohang.SoDonHangTrongNam = DBDataProvider.SoDonHangTrongNam_GiaoHang();
-                    giaohang.CongNoHienTai = KH.CongNo;
-                    DBDataProvider.DB.ghPhieuGiaoHangs.InsertOnSubmit(giaohang);
-                    DBDataProvider.DB.SubmitChanges();
-                    int IDPhieuGiaoHang = giaohang.IDPhieuGiaoHang;
-                    hiddenFields["IDPhieuMoi"] = IDPhieuGiaoHang;
-                    foreach (var prod in listReceiptProducts)
-                    {
-                        // insert phiếu giao hàng chi tiết
-                        ghPhieuGiaoHangChiTiet chitiet = new ghPhieuGiaoHangChiTiet();
-                        chitiet.PhieuGiaoHangID = IDPhieuGiaoHang;
-                        chitiet.HangHoaID = prod.IDHangHoa;
-                        chitiet.TonKho = prod.TonKho;
-                        chitiet.SoLuong = prod.SoLuong;
-                        chitiet.GiaBan = prod.GiaBan;
-                        chitiet.GiaVon = prod.GiaVon;
-                        chitiet.ThanhTien = prod.ThanhTien;
-                        DBDataProvider.DB.ghPhieuGiaoHangChiTiets.InsertOnSubmit(chitiet);
-                        // trừ tạm tồn kho.
-                        var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                        if (TonKhoBanDau != null)
+                        double TongTien = 0;
+                        int TongSoLuong = 0;
+                        foreach (var prod in listReceiptProducts)
                         {
-                            TonKhoBanDau.TonKho -= prod.SoLuong;
-                            var HH = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                            //ghi thẻ kho
-                            #region thẻ kho
+                            TongTien += prod.ThanhTien;
+                            TongSoLuong += prod.SoLuong;
+                        }
+                        string MaPhieu = null, strMaPhieu = "PX";
+                        string MAX = (DBDataProvider.DB.ghPhieuGiaoHangs.Count() + 1).ToString();
+                        for (int i = 1; i < (7 - MAX.Length); i++)
+                        {
+                            strMaPhieu += "0";
+                        }
+                        MaPhieu = strMaPhieu + MAX;
+
+                        int IDkhachHang = Int32.Parse(ccbNhaCungCap.Value.ToString());
+                        var KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDkhachHang).FirstOrDefault();
+                        ghPhieuGiaoHang giaohang = new ghPhieuGiaoHang();
+                        giaohang.NgayTao = DateTime.Now;
+                        giaohang.MaPhieu = MaPhieu;
+                        giaohang.NhanVienID = Formats.IDUser();
+                        giaohang.GhiChuGiaoHang = memoGhiChu.Text;
+                        giaohang.KhachHangID = IDkhachHang;
+                        giaohang.NgayGiao = Formats.ConvertToDateTime(dateNgayNhap.Text);
+                        giaohang.NguoiGiao = "";
+                        giaohang.DiaChiGiaoHang = KH.DiaChi;
+                        giaohang.DaXoa = 0;
+                        giaohang.TTThanhToan = 0; //0 chưa thanh toán. 1 đã thanh toán
+                        giaohang.TrangThai = 3;// chưa duyệt, 1 đã duyệt, 3 bán hàng
+                        giaohang.TongSoLuong = TongSoLuong;
+                        giaohang.DienThoai = KH.DienThoai;
+                        giaohang.TongTien = TongTien;
+                        giaohang.NgayDuyet = DateTime.Now;
+                        giaohang.GiamGia = Convert.ToDouble(spGiamGia.Number);
+                        giaohang.ThanhToan = Convert.ToDouble(spKhachHangThoan.Number);// khách thanh toán
+                        giaohang.ConLai = TongTien - (Convert.ToDouble(spGiamGia.Number) + Convert.ToDouble(spKhachHangThoan.Number)); // (-1)*Convert.ToDouble(spTienTraKhach.Number);
+                        giaohang.STTDonHang = DBDataProvider.STTPhieuGiaoHang_DaiLy(IDkhachHang);
+                        giaohang.SoDonHangTrongNam = DBDataProvider.SoDonHangTrongNam_GiaoHang();
+                        giaohang.CongNoHienTai = KH.CongNo;
+                        DBDataProvider.DB.ghPhieuGiaoHangs.InsertOnSubmit(giaohang);
+                        DBDataProvider.DB.SubmitChanges();
+                        int IDPhieuGiaoHang = giaohang.IDPhieuGiaoHang;
+                        hiddenFields["IDPhieuMoi"] = IDPhieuGiaoHang;
+                        foreach (var prod in listReceiptProducts)
+                        {
+                            // insert phiếu giao hàng chi tiết
+                            ghPhieuGiaoHangChiTiet chitiet = new ghPhieuGiaoHangChiTiet();
+                            chitiet.PhieuGiaoHangID = IDPhieuGiaoHang;
+                            chitiet.HangHoaID = prod.IDHangHoa;
+                            chitiet.TonKho = prod.TonKho;
+                            chitiet.SoLuong = prod.SoLuong;
+                            chitiet.GiaBan = prod.GiaBan;
+                            chitiet.GiaVon = prod.GiaVon;
+                            chitiet.ThanhTien = prod.ThanhTien;
+                            DBDataProvider.DB.ghPhieuGiaoHangChiTiets.InsertOnSubmit(chitiet);
+                            // trừ tạm tồn kho.
+                            var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
+                            if (TonKhoBanDau != null)
+                            {
+                                TonKhoBanDau.TonKho -= prod.SoLuong;
+                                var HH = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
+                                //ghi thẻ kho
+                                #region thẻ kho
                                 kTheKho thekho = new kTheKho();
                                 thekho.NgayNhap = DateTime.Now;
                                 thekho.DienGiai = "Bán hàng #" + giaohang.MaPhieu;
                                 thekho.Nhap = 0;
                                 thekho.Xuat = prod.SoLuong;
-                                thekho.Ton = HH.TonKho - prod.SoLuong;
+                                thekho.Ton = HH.TonKho;
                                 thekho.HangHoaID = HH.IDHangHoa;
                                 thekho.NhanVienID = Formats.IDUser();
                                 DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
-                            #endregion
+                                #endregion
+                            }
                         }
-                    }
-                    if (Convert.ToDouble(spTienTraKhach.Number) < 0)
-                    {
-                        // cập nhật công nợ
-                        #region nhật ký công nợ
-                        khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                        nhatky.NgayNhap = DateTime.Now;
-                        nhatky.DienGiai = "Bán hàng";
-                        nhatky.NoDau = KH.CongNo;
-                        nhatky.NhapHang = Convert.ToDouble(spTienTraKhach.Number);
-                        nhatky.TraHang = 0;
-                        nhatky.NoCuoi = KH.CongNo + Convert.ToDouble(spTienTraKhach.Number);
-                        nhatky.ThanhToan = 0;
-                        nhatky.NhanVienID = Formats.IDUser();
-                        nhatky.SoPhieu = giaohang.MaPhieu;
-                        nhatky.IDKhachHang = IDkhachHang;
-                        DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                        DBDataProvider.DB.SubmitChanges();
-                        #endregion
-                        KH.CongNo += (-1)*Convert.ToDouble(spTienTraKhach.Number); // cộng công nợ
+                        if (Convert.ToDouble(spTienTraKhach.Number) < 0)
+                        {
+                            // cập nhật công nợ
+                            #region nhật ký công nợ
+                            khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                            nhatky.NgayNhap = DateTime.Now;
+                            nhatky.DienGiai = "Bán hàng";
+                            nhatky.NoDau = KH.CongNo;
+                            nhatky.NhapHang = Convert.ToDouble(spTienTraKhach.Number);
+                            nhatky.TraHang = 0;
+                            nhatky.NoCuoi = KH.CongNo + Convert.ToDouble(spTienTraKhach.Number);
+                            nhatky.ThanhToan = 0;
+                            nhatky.NhanVienID = Formats.IDUser();
+                            nhatky.SoPhieu = giaohang.MaPhieu;
+                            nhatky.IDKhachHang = IDkhachHang;
+                            DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                            DBDataProvider.DB.SubmitChanges();
+                            #endregion
+                            KH.CongNo += (-1) * Convert.ToDouble(spTienTraKhach.Number); // cộng công nợ
+                        }
+
                         KH.TongTienHang += TongTien;
                         KH.LanCuoiMuaHang = DateTime.Now;
+
+                        DBDataProvider.DB.SubmitChanges();
+                        scope.Complete();
+                        Reset();
+                        cbpInfoImport.JSProperties["cp_Reset"] = true;
                     }
-                    DBDataProvider.DB.SubmitChanges();
-                    scope.Complete();
-                    Reset();
-                    cbpInfoImport.JSProperties["cp_Reset"] = true;
+                    else
+                    {
+                        throw new Exception("Danh sách hàng hóa trống !!");
+                        ccbBarcode.Text = "";
+                        ccbBarcode.Value = "";
+                        ccbBarcode.Focus();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -381,7 +394,8 @@ namespace KobePaint.Pages.BanHang
             comboBox.DataBind();
         }
         #endregion
-        private void BindGrid()
+
+        private void BindInfo()
         {
             double TongTien = 0;
             foreach (var prod in listReceiptProducts)
@@ -391,17 +405,23 @@ namespace KobePaint.Pages.BanHang
             spTongTien.Text = TongTien.ToString();
             spThanhToan.Text = TongTien.ToString();
             spKhachHangThoan.Text = TongTien.ToString();
+            spTienTraKhach.Number = 0;
+        }
+        private void BindGrid()
+        {
+            gridImportPro.DataSource = listReceiptProducts;
+            gridImportPro.DataBind();
+        }
+        private void DeleteListProducts()
+        {
+            listReceiptProducts = new List<oChiTietHoaDon>();
             gridImportPro.DataSource = listReceiptProducts;
             gridImportPro.DataBind();
         }
         protected void Reset()
         {
-            listReceiptProducts = new List<oChiTietHoaDon>();
-            gridImportPro.DataSource = listReceiptProducts;
-            gridImportPro.DataBind();
             ccbNhaCungCap.SelectedIndex = -1;
             ccbNhaCungCap.Text = "";
-           
             spThanhToan.Number = 0;
             spTongTien.Number = 0;
             dateNgayNhap.Date = DateTime.Now;

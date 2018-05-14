@@ -15,7 +15,7 @@
             <Summary EmptyText="Không có dữ liệu" Text="Trang {0}/{1}" />
         </SettingsPager>
         <SettingsSearchPanel Visible="True" />
-        <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin khách hàng cần tìm..." Title="DANH SÁCH KHÁCH HÀNG" />
+        <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin khách hàng cần tìm..." Title="DANH SÁCH KHÁCH HÀNG" ConfirmDelete="Xác nhận xóa !!" />
         <FormatConditions>
             <dx:GridViewFormatConditionHighlight Expression="[TienTTConLai] &gt;= [HanMucCongNo] And [HanMucCongNo] &lt;&gt; 0" FieldName="TienTTConLai" Format="Custom">
                 <CellStyle BackColor="LightPink" ForeColor="DarkRed">
@@ -44,7 +44,7 @@
         <Paddings Padding="0px" />
         <Border BorderWidth="0px" />
         <BorderBottom BorderWidth="1px" />
-        <SettingsBehavior AllowSelectByRowClick="True" />
+        <SettingsBehavior AllowSelectByRowClick="True" ConfirmDelete="True" />
         <SettingsCommandButton>
             <ShowAdaptiveDetailButton ButtonType="Image">
             </ShowAdaptiveDetailButton>
@@ -59,9 +59,13 @@
                 </Image>
             </CancelButton>
             <EditButton ButtonType="Image" RenderMode="Image">
-                <Image IconID="mail_editcontact_32x32">
+                <Image IconID="mail_editcontact_16x16office2013" ToolTip="Cập nhật">
                 </Image>
             </EditButton>
+            <DeleteButton ButtonType="Image" RenderMode="Image">
+                <Image IconID="edit_delete_16x16" ToolTip="Xóa">
+                </Image>
+            </DeleteButton>
         </SettingsCommandButton>
         <Columns>
             <dx:GridViewDataTextColumn Caption="STT" FieldName="IDKhachHang" ReadOnly="True" VisibleIndex="0" Width="40px">
@@ -80,9 +84,9 @@
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn Caption="Điện thoại" FieldName="DienThoai" VisibleIndex="4">
             </dx:GridViewDataTextColumn>
-            <dx:GridViewCommandColumn Caption=" " ShowEditButton="True" VisibleIndex="15" Width="60px">
+            <dx:GridViewCommandColumn Caption=" " ShowEditButton="True" VisibleIndex="15" Width="80px" ShowDeleteButton="True">
             </dx:GridViewCommandColumn>
-            <dx:GridViewDataDateColumn Caption="Lần cuối mua hàng" FieldName="LanCuoiMuaHang" VisibleIndex="6">
+            <dx:GridViewDataDateColumn Caption="Lần cuối mua hàng" FieldName="LanCuoiMuaHang" VisibleIndex="6" Width="150px">
                 <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm:ss" EditFormat="Custom" EditFormatString="dd/MM/yy H:mm:ss">
                 </PropertiesDateEdit>
                 <EditFormSettings Visible="False" />
@@ -122,13 +126,13 @@
     </asp:SqlDataSource>
     <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
         SelectCommand="SELECT * FROM [khKhachHang] WHERE [DaXoa] = 0 AND [LoaiKhachHangID] <> 2;" 
-        DeleteCommand="DELETE FROM [khKhachHang] WHERE [IDKhachHang] = @IDKhachHang" 
+        DeleteCommand="UPDATE [khKhachHang] SET DAXOA = 1 WHERE [IDKhachHang] = @IDKhachHang" 
         UpdateCommand="UPDATE [khKhachHang] SET [HoTen] = @HoTen, [DiaChi] = @DiaChi,[Email] = @Email, [DienThoai] = @DienThoai, [GhiChu] = @GhiChu WHERE [IDKhachHang] = @IDKhachHang">
         <SelectParameters>
             <%--<asp:Parameter Name="DaXoa" Type="Int32" />--%>
         </SelectParameters>
         <DeleteParameters>
-           <%-- <asp:Parameter Name="IDKhachHang" Type="Int32" />--%>
+            <asp:Parameter Name="IDKhachHang" Type="Int32" />
         </DeleteParameters>
         <UpdateParameters>
             <asp:Parameter Name="HoTen" Type="String" />
