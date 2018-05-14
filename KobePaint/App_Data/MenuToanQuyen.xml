@@ -4,8 +4,8 @@
   <item text="Hàng hóa">
     <item Text="Thêm hàng hóa" NavigateUrl="~/Pages/HangHoa/ThemHangHoa.aspx" ></item>
     <item Text="Danh sách hàng hóa" NavigateUrl="~/Pages/HangHoa/HangHoa.aspx" ></item>
-    <item Text="Bảng giá" NavigateUrl="#" ></item>
-    <item Text="Liên kết bảng giá" NavigateUrl="#" ></item>
+    <item Text="Bảng giá" NavigateUrl="~/Pages/HangHoa/BangGia.aspx" ></item>
+    <item Text="Liên kết bảng giá" NavigateUrl="~/Pages/HangHoa/LienKetBangGia.aspx" ></item>
   </item>
   <item Text="Đối tác">
     <item Text="Thêm khách hàng - NCC" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx" />

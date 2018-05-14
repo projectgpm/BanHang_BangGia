@@ -140,8 +140,10 @@
     <Content Include="Pages\GiaoHang\DanhSachGiaoHang.aspx" />
     <Content Include="Pages\GiaoHang\LapPhieu.aspx" />
     <Content Include="Pages\GiaoHang\PheDuyetGiaoHang.ascx" />
+    <Content Include="Pages\HangHoa\BangGia.aspx" />
     <Content Include="Pages\HangHoa\CapNhat.aspx" />
     <Content Include="Pages\HangHoa\HangHoa.aspx" />
+    <Content Include="Pages\HangHoa\LienKetBangGia.aspx" />
     <Content Include="Pages\HangHoa\NhomHang.aspx" />
     <Content Include="Pages\HangHoa\ThemHangHoa.aspx" />
     <Content Include="Pages\HeThong\LyDoXuat.aspx" />
@@ -370,6 +372,13 @@
     <Compile Include="Pages\GiaoHang\PheDuyetGiaoHang.ascx.designer.cs">
       <DependentUpon>PheDuyetGiaoHang.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HangHoa\BangGia.aspx.cs">
+      <DependentUpon>BangGia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\HangHoa\BangGia.aspx.designer.cs">
+      <DependentUpon>BangGia.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HangHoa\CapNhat.aspx.cs">
       <DependentUpon>CapNhat.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -383,6 +392,13 @@
     </Compile>
     <Compile Include="Pages\HangHoa\HangHoa.aspx.designer.cs">
       <DependentUpon>HangHoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HangHoa\LienKetBangGia.aspx.cs">
+      <DependentUpon>LienKetBangGia.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\HangHoa\LienKetBangGia.aspx.designer.cs">
+      <DependentUpon>LienKetBangGia.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\HangHoa\NhomHang.aspx.cs">
       <DependentUpon>NhomHang.aspx</DependentUpon>
