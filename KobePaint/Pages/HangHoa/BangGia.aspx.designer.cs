@@ -94,6 +94,15 @@ namespace KobePaint.Pages.HangHoa {
         protected global::DevExpress.Web.ASPxComboBox ccbBangGia;
         
         /// <summary>
+        /// hiddenfile control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxHiddenField hiddenfile;
+        
+        /// <summary>
         /// dsBangGia control.
         /// </summary>
         /// <remarks>

@@ -191,6 +191,7 @@
     <Content Include="BieuMau\kiemke.xls" />
     <Content Include="BieuMau\phieugiaohang.xls" />
     <Content Include="BieuMau\xuatkho.xls" />
+    <Content Include="BieuMau\banggia.xls" />
     <None Include="Properties\PublishProfiles\KobePaint.pubxml" />
     <Content Include="Uploads\42018\0b40c227-2b49-43b3-9c58-3d3d0be2117d.xls" />
     <Content Include="Uploads\42018\4af1af0d-7e6e-446d-9183-62ff69dbd0d2.xls" />

@@ -92,4 +92,3 @@ D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.csproj.GenerateResou
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.dll.licenses
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.dll
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.pdb
-D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.csprojResolveAssemblyReference.cache

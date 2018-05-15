@@ -35,8 +35,9 @@ namespace KobePaint.Pages.HangHoa
             string[] para = e.Parameter.Split('|');
             switch (para[0])
             {
-                case "ccbBangGiaSelectChange": ChiTietBangGia(); BindGrid(); ccbBarcode.Focus(); break;
-                case "import": InsertIntoGrid(); BindGrid(); break;
+                case "ccbBangGiaSelectChange": hiddenfile["IDBangGia"] = ccbBangGia.Value.ToString(); ChiTietBangGia(); ChiTietBangGia(); ccbBarcode.Focus(); break;
+                case "import": InsertIntoGrid(); ChiTietBangGia(); break;
+                case "importexcel": ChiTietBangGia(); break;
                 default: break;
             }
         }
@@ -47,7 +48,7 @@ namespace KobePaint.Pages.HangHoa
             string[] para = e.Parameter.Split('|');
             switch (para[0])
             {
-                case "ccbBangGiaSelectChange": ThongTinBangGia(); break;
+                case "ccbBangGiaSelectChange": hiddenfile["IDBangGia"] = ccbBangGia.Value.ToString();  ThongTinBangGia(); break;
                 default: break;
             }
         }
@@ -64,7 +65,7 @@ namespace KobePaint.Pages.HangHoa
         }
         private void ChiTietBangGia()
         {
-            int IDBangGia = Convert.ToInt32(ccbBangGia.Value.ToString());
+            int IDBangGia = Convert.ToInt32(hiddenfile["IDBangGia"].ToString());
             dsChiTietBangGia.SelectCommand = "SELECT hhHangHoa.MaHang, hhHangHoa.TenHangHoa, hhDonViTinh.TenDonViTinh, bgChiTietBangGia.ID, " +
                                                            " bgChiTietBangGia.GiaVon, bgChiTietBangGia.DonGia, bgChiTietBangGia.GiaMoi " +
                                                            " FROM bgChiTietBangGia INNER JOIN hhHangHoa ON bgChiTietBangGia.HangHoaID = hhHangHoa.IDHangHoa " +
@@ -196,26 +197,20 @@ namespace KobePaint.Pages.HangHoa
         #endregion
 
 
-        private void BindGrid()
-        {
-            gridImportPro.DataBind();
-        }
 
-        //#region nhập excel
+        #region nhập excel
         public string strFileExcel { get; set; }
         protected void UploadControl_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
         {
             string folder = null;
             string filein = null;
             string ThangNam = null;
-
             ThangNam = string.Concat(System.DateTime.Now.Month.ToString(), System.DateTime.Now.Year.ToString());
             if (!Directory.Exists(Server.MapPath("~/Uploads/") + ThangNam))
             {
                 Directory.CreateDirectory(Server.MapPath("~/Uploads/") + ThangNam);
             }
             folder = Server.MapPath("~/Uploads/" + ThangNam + "/");
-
             if (UploadControl.HasFile)
             {
                 strFileExcel = Guid.NewGuid().ToString();
@@ -224,11 +219,7 @@ namespace KobePaint.Pages.HangHoa
                 filein = folder + strFileExcel;
                 e.UploadedFile.SaveAs(filein);
                 strFileExcel = ThangNam + "/" + strFileExcel;
-
             }
-
-        //    //UploadingUtils.RemoveFileWithDelay(uploadedFile.FileName, resFileName, 5);
-
             string Excel = Server.MapPath("~/Uploads/") + strFileExcel;
             string excelConnectionString = string.Empty;
             excelConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + Excel + ";Extended Properties=Excel 8.0;";
@@ -241,13 +232,12 @@ namespace KobePaint.Pages.HangHoa
             dataTable.Load(dReader);
             int r = dataTable.Rows.Count;
             Import_Temp(dataTable);
-            LamMoi();
-            ChiTietBangGia();
+           
         }
         private void Import_Temp(DataTable datatable)
         {
             int intRow = datatable.Rows.Count;
-            if (datatable.Columns.Contains("Mã hàng hóa") && datatable.Columns.Contains("Giá vốn") && datatable.Columns.Contains("Đơn giá nhập cuối")&& datatable.Columns.Contains("Giá thiết lập"))
+            if (datatable.Columns.Contains("Mã hàng hóa") && datatable.Columns.Contains("Giá vốn") && datatable.Columns.Contains("Đơn giá nhập cuối") && datatable.Columns.Contains("Giá thiết lập"))
             {
                 if (intRow != 0)
                 {
@@ -255,42 +245,39 @@ namespace KobePaint.Pages.HangHoa
                     {
                         DataRow dr = datatable.Rows[i];
                         string MaHang = dr["Mã hàng hóa"].ToString().Trim();
-                        if (MaHang != "")
+                        int tblHangHoa_Count = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0).Count();
+                        if (MaHang != "" && tblHangHoa_Count > 0)
                         {
                             double GiaVon = Convert.ToDouble(dr["Giá vốn"] == "" ? "0" : dr["Giá vốn"].ToString().Trim());
                             double DonGia = Convert.ToDouble(dr["Đơn giá nhập cuối"] == "" ? "0" : dr["Đơn giá nhập cuối"].ToString().Trim());
                             double GiaMoi = Convert.ToDouble(dr["Giá thiết lập"] == "" ? "0" : dr["Giá thiết lập"].ToString().Trim());
-                            int tblHangHoa_Count = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0).Count();
-                            if (tblHangHoa_Count > 0)
-                            {                 
-                                int IDBangGia = Convert.ToInt32(ccbBangGia.Value.ToString());
-                                var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0 && x.LoaiHHID == 1).FirstOrDefault();
-                                var exitProdInList = DBDataProvider.DB.bgChiTietBangGias.Where(x => x.HangHoaID == tblHangHoa.IDHangHoa && x.BangGiaID == IDBangGia).SingleOrDefault();
-                                if (exitProdInList == null)
-                                {
-                                    // insert
-                                    bgChiTietBangGia BG = new bgChiTietBangGia();
-                                    BG.HangHoaID = tblHangHoa.IDHangHoa;
-                                    BG.BangGiaID = IDBangGia;
-                                    BG.GiaVon = GiaVon;
-                                    BG.DonGia = DonGia;
-                                    BG.GiaMoi = GiaMoi;
-                                    DBDataProvider.DB.bgChiTietBangGias.InsertOnSubmit(BG);
-                                    DBDataProvider.DB.SubmitChanges();
-                                }
-                                else
-                                {
-                                    // update
-                                    exitProdInList.GiaVon = GiaVon;
-                                    exitProdInList.DonGia = DonGia;
-                                    exitProdInList.GiaMoi =  GiaMoi;
-                                    DBDataProvider.DB.SubmitChanges();
-                                }
-
+                            int IDBangGia = Convert.ToInt32(hiddenfile["IDBangGia"].ToString());
+                            var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0 && x.LoaiHHID == 1).FirstOrDefault();
+                            var exitProdInList = DBDataProvider.DB.bgChiTietBangGias.Where(x => x.HangHoaID == tblHangHoa.IDHangHoa && x.BangGiaID == IDBangGia).SingleOrDefault();
+                            if (exitProdInList == null)
+                            {
+                                // insert
+                                bgChiTietBangGia BG = new bgChiTietBangGia();
+                                BG.HangHoaID = tblHangHoa.IDHangHoa;
+                                BG.BangGiaID = IDBangGia;
+                                BG.GiaVon = GiaVon;
+                                BG.DonGia = DonGia;
+                                BG.GiaMoi = GiaMoi;
+                                DBDataProvider.DB.bgChiTietBangGias.InsertOnSubmit(BG);
+                                DBDataProvider.DB.SubmitChanges();
                             }
-
+                            else
+                            {
+                                // update
+                                exitProdInList.GiaVon = GiaVon;
+                                exitProdInList.DonGia = DonGia;
+                                exitProdInList.GiaMoi = GiaMoi;
+                                DBDataProvider.DB.SubmitChanges();
+                            }
+                            
                         }
                     }
+                  
                 }
             }
             else

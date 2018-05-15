@@ -21,7 +21,14 @@
         }
     
         function onExcelClick() {
-            popupViewExcel.Show();
+            if (ccbBangGia.GetSelectedIndex() == -1) {
+                alert('Vui lòng chọn bảng giá');
+                ccbBarcode.SetSelectedIndex(-1);
+                ccbBangGia.Focus();
+            }
+            else {
+                popupViewExcel.Show();
+            }
         }
 
         function checkInput() {
@@ -103,6 +110,7 @@
                                                                                     </ValidationSettings>
                                                                                     <ClientSideEvents DropDown="function(s,e){ LoadBangGia() }" SelectedIndexChanged="ccbBangGiaSelectChange" ></ClientSideEvents>
                                                                                 </dx:ASPxComboBox>
+                                                                                <dx:ASPxHiddenField ID="hiddenfile" ClientInstanceName="hiddenfile" runat="server"></dx:ASPxHiddenField>
                                                                                 <asp:SqlDataSource ID="dsBangGia" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDBangGia, TenBangGia FROM bgBangGia WHERE (DaXoa = 0)">
                                                                                 </asp:SqlDataSource>
                                                                             </td>
@@ -441,7 +449,7 @@
                             <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="Tải file mẫu:"></dx:ASPxLabel>
                         </td>
                         <td style="float: left; padding-left: 3px;">
-                            <dx:ASPxHyperLink ID="linkNhapKho" runat="server" Text="xuatkho.xls" NavigateUrl="~/BieuMau/banggia.xls">
+                            <dx:ASPxHyperLink ID="linkNhapKho" runat="server" Text="BangGia.xls" NavigateUrl="~/BieuMau/banggia.xls">
                             </dx:ASPxHyperLink>
                         </td>
                     </tr>
