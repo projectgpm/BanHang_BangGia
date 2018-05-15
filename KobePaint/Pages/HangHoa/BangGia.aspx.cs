@@ -126,13 +126,14 @@ namespace KobePaint.Pages.HangHoa
                 var exitProdInList = DBDataProvider.DB.bgChiTietBangGias.Where(x => x.HangHoaID == ID && x.BangGiaID == IDBangGia).SingleOrDefault();
                 if (exitProdInList == null)
                 {
+                    var GiaNhapCuoi = DBDataProvider.DB.kNhapKhoChiTiets.Where(x => x.HangHoaID == tblHangHoa.IDHangHoa).OrderByDescending(x => x.ID).FirstOrDefault();
                     // thêm trực tiếp vào chi tiết bảng giá
                     bgChiTietBangGia BG = new bgChiTietBangGia();
                     BG.HangHoaID = tblHangHoa.IDHangHoa;
                     BG.BangGiaID = IDBangGia;
                     BG.GiaVon = Convert.ToDouble(tblHangHoa.GiaVon);
-                    BG.DonGia = 0;
-                    BG.GiaMoi = 0;
+                    BG.DonGia = GiaNhapCuoi.GiaVon;
+                    BG.GiaMoi = tblHangHoa.GiaBan;
                     DBDataProvider.DB.bgChiTietBangGias.InsertOnSubmit(BG);
                     DBDataProvider.DB.SubmitChanges();
                 }

@@ -104,14 +104,20 @@
                                                                     <table>
                                                                         <tr>
                                                                             <td style="width: 90%">
-                                                                                <dx:ASPxComboBox ID="ccbBangGia" ClientInstanceName="ccbBangGia" runat="server" NullText="Chọn bảng giá" Width="100%" DataSourceID="dsBangGia" TextField="TenBangGia" ValueField="IDBangGia" EnableCallbackMode="True" OnCallback="ccbBangGia_Callback">
+                                                                                <dx:ASPxComboBox ID="ccbBangGia" ClientInstanceName="ccbBangGia" runat="server" TextFormatString="{0};{1}" NullText="Chọn bảng giá" Width="100%" DataSourceID="dsBangGia" TextField="TenBangGia" ValueField="IDBangGia" EnableCallbackMode="True" OnCallback="ccbBangGia_Callback">
                                                                                     <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="InfosInput">
                                                                                         <RequiredField ErrorText="Chọn bảng giá" IsRequired="True" />
                                                                                     </ValidationSettings>
                                                                                     <ClientSideEvents DropDown="function(s,e){ LoadBangGia() }" SelectedIndexChanged="ccbBangGiaSelectChange" ></ClientSideEvents>
+                                                                                 <Columns>
+                                                                                    <dx:ListBoxColumn FieldName="MaBangGia" Width="50px" Caption="Mã BG" />
+                                                                                    <dx:ListBoxColumn FieldName="TenBangGia" Width="250px" Caption="Tên Bảng Giá" />
+                                                                                </Columns>
                                                                                 </dx:ASPxComboBox>
                                                                                 <dx:ASPxHiddenField ID="hiddenfile" ClientInstanceName="hiddenfile" runat="server"></dx:ASPxHiddenField>
-                                                                                <asp:SqlDataSource ID="dsBangGia" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDBangGia, TenBangGia FROM bgBangGia WHERE (DaXoa = 0)">
+                                                                                <asp:SqlDataSource ID="dsBangGia" runat="server" 
+                                                                                    ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>"
+                                                                                     SelectCommand="SELECT IDBangGia,MaBangGia, TenBangGia FROM bgBangGia WHERE (DaXoa = 0)">
                                                                                 </asp:SqlDataSource>
                                                                             </td>
                                                                             <td style="width: 10%; padding-left: 10px;">
@@ -270,6 +276,10 @@
                                                                 <dx:GridViewDataTextColumn Caption="ĐVT" ReadOnly="true" FieldName="TenDonViTinh" ShowInCustomizationForm="True" VisibleIndex="3" Width="100px">
                                                                 </dx:GridViewDataTextColumn>                     
                                                             </Columns>
+                                                            <%--<FormatConditions>
+                                                                <dx:GridViewFormatConditionHighlight FieldName="DonGia" Expression="[GiaMoi] < [DonGia]" Format="LightRedFillWithDarkRedText" />
+                                                                <dx:GridViewFormatConditionHighlight FieldName="DonGia" Expression="[GiaMoi] > [DonGia]" Format="GreenFillWithDarkGreenText" />
+                                                            </FormatConditions>--%>
                                                         </dx:ASPxGridView>    
                                                         <asp:SqlDataSource ID="dsChiTietBangGia" runat="server" 
                                                             ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" DeleteCommand="DELETE FROM bgChiTietBangGia WHERE (ID = @ID)" UpdateCommand="UPDATE bgChiTietBangGia SET GiaMoi = @GiaMoi WHERE (ID = @ID)" >
@@ -375,7 +385,7 @@
                                                     </DeleteButton>
                                                 </SettingsCommandButton>
                                                 <Columns>
-                                                    <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="4" Width="200px" ShowClearFilterButton="True">
+                                                    <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="5" Width="200px" ShowClearFilterButton="True">
                                                     </dx:GridViewCommandColumn>
                                                     <dx:GridViewDataTextColumn FieldName="IDBangGia" ReadOnly="True" VisibleIndex="0" Caption="STT" Width="60px">
                                                         <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
@@ -384,7 +394,7 @@
                                                         <CellStyle HorizontalAlign="Center">
                                                         </CellStyle>
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn FieldName="TenBangGia" VisibleIndex="1" Caption="Tên bảng giá">
+                                                    <dx:GridViewDataTextColumn FieldName="TenBangGia" VisibleIndex="2" Caption="Tên bảng giá">
                                                         <PropertiesTextEdit>
                                                             <ValidationSettings SetFocusOnError="True">
                                                                 <RequiredField ErrorText="Nhập thông tin" IsRequired="True" />
@@ -392,16 +402,18 @@
                                                         </PropertiesTextEdit>
                                                         <Settings AutoFilterCondition="Contains" />
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn Caption="Phạm vi áp dụng" FieldName="PhamViApDung" ShowInCustomizationForm="True" VisibleIndex="2">
+                                                    <dx:GridViewDataTextColumn Caption="Phạm vi áp dụng" FieldName="PhamViApDung" ShowInCustomizationForm="True" VisibleIndex="3">
                                                     </dx:GridViewDataTextColumn>
-                                                    <dx:GridViewDataTextColumn Caption="Ghi chú" FieldName="GhiChu" ShowInCustomizationForm="True" VisibleIndex="3">
+                                                    <dx:GridViewDataTextColumn Caption="Ghi chú" FieldName="GhiChu" ShowInCustomizationForm="True" VisibleIndex="4">
+                                                    </dx:GridViewDataTextColumn>
+                                                    <dx:GridViewDataTextColumn Caption="Mã bảng giá" FieldName="MaBangGia" ShowInCustomizationForm="True" VisibleIndex="1">
                                                     </dx:GridViewDataTextColumn>
                                                 </Columns>
                                             </dx:ASPxGridView>
                                             <asp:SqlDataSource ID="dsachBangGia" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>"
-                                                 SelectCommand="SELECT IDBangGia, TenBangGia, GhiChu, PhamViApDung FROM bgBangGia WHERE (DaXoa = 0)" 
-                                                 InsertCommand="INSERT INTO bgBangGia(TenBangGia, GhiChu, PhamViApDung, DaXoa) VALUES (@TenBangGia, @GhiChu, @PhamViApDung, 0)"
-                                                 UpdateCommand="UPDATE bgBangGia SET TenBangGia = @TenBangGia, GhiChu = @GhiChu, PhamViApDung = @PhamViApDung WHERE (IDBangGia = @IDBangGia)"
+                                                 SelectCommand="SELECT IDBangGia, MaBangGia,TenBangGia, GhiChu, PhamViApDung FROM bgBangGia WHERE (DaXoa = 0)" 
+                                                 InsertCommand="INSERT INTO bgBangGia(MaBangGia,TenBangGia, GhiChu, PhamViApDung, DaXoa) VALUES (@MaBangGia,@TenBangGia, @GhiChu, @PhamViApDung, 0)"
+                                                 UpdateCommand="UPDATE bgBangGia SET MaBangGia =@MaBangGia, TenBangGia = @TenBangGia, GhiChu = @GhiChu, PhamViApDung = @PhamViApDung WHERE (IDBangGia = @IDBangGia)"
                                                  DeleteCommand="UPDATE bgBangGia SET DaXoa = 1 WHERE (IDBangGia = @IDBangGia)" 
                                                 >
                                                 <DeleteParameters>
@@ -411,12 +423,14 @@
                                                     <asp:Parameter Name="TenBangGia" />
                                                     <asp:Parameter Name="GhiChu" />
                                                     <asp:Parameter  Name="PhamViApDung" />
+                                                    <asp:Parameter DefaultValue="MaBangGia" Name="MaBangGia" />
                                                 </InsertParameters>
                                                 <UpdateParameters>
                                                     <asp:Parameter Name="TenBangGia" />
                                                     <asp:Parameter Name="GhiChu"  />
                                                     <asp:Parameter Name="PhamViApDung" />
                                                     <asp:Parameter  Name="IDBangGia" />
+                                                    <asp:Parameter DefaultValue="MaBangGia" Name="MaBangGia" />
                                                 </UpdateParameters>
                                             </asp:SqlDataSource>
                                             <dx:ASPxGlobalEvents ID="ASPxGlobalEvents1" runat="server">

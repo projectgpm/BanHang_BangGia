@@ -123,12 +123,12 @@ namespace KobePaint
     partial void InsertkhKhachHang(khKhachHang instance);
     partial void UpdatekhKhachHang(khKhachHang instance);
     partial void DeletekhKhachHang(khKhachHang instance);
-    partial void InsertbgBangGia(bgBangGia instance);
-    partial void UpdatebgBangGia(bgBangGia instance);
-    partial void DeletebgBangGia(bgBangGia instance);
     partial void InsertbgChiTietBangGia(bgChiTietBangGia instance);
     partial void UpdatebgChiTietBangGia(bgChiTietBangGia instance);
     partial void DeletebgChiTietBangGia(bgChiTietBangGia instance);
+    partial void InsertbgBangGia(bgBangGia instance);
+    partial void UpdatebgBangGia(bgBangGia instance);
+    partial void DeletebgBangGia(bgBangGia instance);
     #endregion
 		
 		public KobePaintDBDataContext() : 
@@ -409,19 +409,19 @@ namespace KobePaint
 			}
 		}
 		
-		public System.Data.Linq.Table<bgBangGia> bgBangGias
-		{
-			get
-			{
-				return this.GetTable<bgBangGia>();
-			}
-		}
-		
 		public System.Data.Linq.Table<bgChiTietBangGia> bgChiTietBangGias
 		{
 			get
 			{
 				return this.GetTable<bgChiTietBangGia>();
+			}
+		}
+		
+		public System.Data.Linq.Table<bgBangGia> bgBangGias
+		{
+			get
+			{
+				return this.GetTable<bgBangGia>();
 			}
 		}
 		
@@ -9859,192 +9859,6 @@ namespace KobePaint
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bgBangGia")]
-	public partial class bgBangGia : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _IDBangGia;
-		
-		private string _TenBangGia;
-		
-		private string _GhiChu;
-		
-		private System.Nullable<int> _DaXoa;
-		
-		private string _PhamViApDung;
-		
-		private EntitySet<bgChiTietBangGia> _bgChiTietBangGias;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIDBangGiaChanging(int value);
-    partial void OnIDBangGiaChanged();
-    partial void OnTenBangGiaChanging(string value);
-    partial void OnTenBangGiaChanged();
-    partial void OnGhiChuChanging(string value);
-    partial void OnGhiChuChanged();
-    partial void OnDaXoaChanging(System.Nullable<int> value);
-    partial void OnDaXoaChanged();
-    partial void OnPhamViApDungChanging(string value);
-    partial void OnPhamViApDungChanged();
-    #endregion
-		
-		public bgBangGia()
-		{
-			this._bgChiTietBangGias = new EntitySet<bgChiTietBangGia>(new Action<bgChiTietBangGia>(this.attach_bgChiTietBangGias), new Action<bgChiTietBangGia>(this.detach_bgChiTietBangGias));
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBangGia", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int IDBangGia
-		{
-			get
-			{
-				return this._IDBangGia;
-			}
-			set
-			{
-				if ((this._IDBangGia != value))
-				{
-					this.OnIDBangGiaChanging(value);
-					this.SendPropertyChanging();
-					this._IDBangGia = value;
-					this.SendPropertyChanged("IDBangGia");
-					this.OnIDBangGiaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenBangGia", DbType="NVarChar(150)")]
-		public string TenBangGia
-		{
-			get
-			{
-				return this._TenBangGia;
-			}
-			set
-			{
-				if ((this._TenBangGia != value))
-				{
-					this.OnTenBangGiaChanging(value);
-					this.SendPropertyChanging();
-					this._TenBangGia = value;
-					this.SendPropertyChanged("TenBangGia");
-					this.OnTenBangGiaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GhiChu", DbType="NVarChar(250)")]
-		public string GhiChu
-		{
-			get
-			{
-				return this._GhiChu;
-			}
-			set
-			{
-				if ((this._GhiChu != value))
-				{
-					this.OnGhiChuChanging(value);
-					this.SendPropertyChanging();
-					this._GhiChu = value;
-					this.SendPropertyChanged("GhiChu");
-					this.OnGhiChuChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DaXoa", DbType="Int")]
-		public System.Nullable<int> DaXoa
-		{
-			get
-			{
-				return this._DaXoa;
-			}
-			set
-			{
-				if ((this._DaXoa != value))
-				{
-					this.OnDaXoaChanging(value);
-					this.SendPropertyChanging();
-					this._DaXoa = value;
-					this.SendPropertyChanged("DaXoa");
-					this.OnDaXoaChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhamViApDung", DbType="NVarChar(250)")]
-		public string PhamViApDung
-		{
-			get
-			{
-				return this._PhamViApDung;
-			}
-			set
-			{
-				if ((this._PhamViApDung != value))
-				{
-					this.OnPhamViApDungChanging(value);
-					this.SendPropertyChanging();
-					this._PhamViApDung = value;
-					this.SendPropertyChanged("PhamViApDung");
-					this.OnPhamViApDungChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="bgBangGia_bgChiTietBangGia", Storage="_bgChiTietBangGias", ThisKey="IDBangGia", OtherKey="BangGiaID")]
-		public EntitySet<bgChiTietBangGia> bgChiTietBangGias
-		{
-			get
-			{
-				return this._bgChiTietBangGias;
-			}
-			set
-			{
-				this._bgChiTietBangGias.Assign(value);
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-		
-		private void attach_bgChiTietBangGias(bgChiTietBangGia entity)
-		{
-			this.SendPropertyChanging();
-			entity.bgBangGia = this;
-		}
-		
-		private void detach_bgChiTietBangGias(bgChiTietBangGia entity)
-		{
-			this.SendPropertyChanging();
-			entity.bgBangGia = null;
-		}
-	}
-	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bgChiTietBangGia")]
 	public partial class bgChiTietBangGia : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -10063,9 +9877,9 @@ namespace KobePaint
 		
 		private System.Nullable<double> _GiaMoi;
 		
-		private EntityRef<bgBangGia> _bgBangGia;
-		
 		private EntityRef<hhHangHoa> _hhHangHoa;
+		
+		private EntityRef<bgBangGia> _bgBangGia;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -10087,8 +9901,8 @@ namespace KobePaint
 		
 		public bgChiTietBangGia()
 		{
-			this._bgBangGia = default(EntityRef<bgBangGia>);
 			this._hhHangHoa = default(EntityRef<hhHangHoa>);
+			this._bgBangGia = default(EntityRef<bgBangGia>);
 			OnCreated();
 		}
 		
@@ -10220,40 +10034,6 @@ namespace KobePaint
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="bgBangGia_bgChiTietBangGia", Storage="_bgBangGia", ThisKey="BangGiaID", OtherKey="IDBangGia", IsForeignKey=true)]
-		public bgBangGia bgBangGia
-		{
-			get
-			{
-				return this._bgBangGia.Entity;
-			}
-			set
-			{
-				bgBangGia previousValue = this._bgBangGia.Entity;
-				if (((previousValue != value) 
-							|| (this._bgBangGia.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._bgBangGia.Entity = null;
-						previousValue.bgChiTietBangGias.Remove(this);
-					}
-					this._bgBangGia.Entity = value;
-					if ((value != null))
-					{
-						value.bgChiTietBangGias.Add(this);
-						this._BangGiaID = value.IDBangGia;
-					}
-					else
-					{
-						this._BangGiaID = default(Nullable<int>);
-					}
-					this.SendPropertyChanged("bgBangGia");
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="hhHangHoa_bgChiTietBangGia", Storage="_hhHangHoa", ThisKey="HangHoaID", OtherKey="IDHangHoa", IsForeignKey=true)]
 		public hhHangHoa hhHangHoa
 		{
@@ -10288,6 +10068,40 @@ namespace KobePaint
 			}
 		}
 		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="bgBangGia_bgChiTietBangGia", Storage="_bgBangGia", ThisKey="BangGiaID", OtherKey="IDBangGia", IsForeignKey=true)]
+		public bgBangGia bgBangGia
+		{
+			get
+			{
+				return this._bgBangGia.Entity;
+			}
+			set
+			{
+				bgBangGia previousValue = this._bgBangGia.Entity;
+				if (((previousValue != value) 
+							|| (this._bgBangGia.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._bgBangGia.Entity = null;
+						previousValue.bgChiTietBangGias.Remove(this);
+					}
+					this._bgBangGia.Entity = value;
+					if ((value != null))
+					{
+						value.bgChiTietBangGias.Add(this);
+						this._BangGiaID = value.IDBangGia;
+					}
+					else
+					{
+						this._BangGiaID = default(Nullable<int>);
+					}
+					this.SendPropertyChanged("bgBangGia");
+				}
+			}
+		}
+		
 		public event PropertyChangingEventHandler PropertyChanging;
 		
 		public event PropertyChangedEventHandler PropertyChanged;
@@ -10306,6 +10120,216 @@ namespace KobePaint
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.bgBangGia")]
+	public partial class bgBangGia : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _IDBangGia;
+		
+		private string _MaBangGia;
+		
+		private string _TenBangGia;
+		
+		private string _GhiChu;
+		
+		private System.Nullable<int> _DaXoa;
+		
+		private string _PhamViApDung;
+		
+		private EntitySet<bgChiTietBangGia> _bgChiTietBangGias;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIDBangGiaChanging(int value);
+    partial void OnIDBangGiaChanged();
+    partial void OnMaBangGiaChanging(string value);
+    partial void OnMaBangGiaChanged();
+    partial void OnTenBangGiaChanging(string value);
+    partial void OnTenBangGiaChanged();
+    partial void OnGhiChuChanging(string value);
+    partial void OnGhiChuChanged();
+    partial void OnDaXoaChanging(System.Nullable<int> value);
+    partial void OnDaXoaChanged();
+    partial void OnPhamViApDungChanging(string value);
+    partial void OnPhamViApDungChanged();
+    #endregion
+		
+		public bgBangGia()
+		{
+			this._bgChiTietBangGias = new EntitySet<bgChiTietBangGia>(new Action<bgChiTietBangGia>(this.attach_bgChiTietBangGias), new Action<bgChiTietBangGia>(this.detach_bgChiTietBangGias));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IDBangGia", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int IDBangGia
+		{
+			get
+			{
+				return this._IDBangGia;
+			}
+			set
+			{
+				if ((this._IDBangGia != value))
+				{
+					this.OnIDBangGiaChanging(value);
+					this.SendPropertyChanging();
+					this._IDBangGia = value;
+					this.SendPropertyChanged("IDBangGia");
+					this.OnIDBangGiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_MaBangGia", DbType="NVarChar(50)")]
+		public string MaBangGia
+		{
+			get
+			{
+				return this._MaBangGia;
+			}
+			set
+			{
+				if ((this._MaBangGia != value))
+				{
+					this.OnMaBangGiaChanging(value);
+					this.SendPropertyChanging();
+					this._MaBangGia = value;
+					this.SendPropertyChanged("MaBangGia");
+					this.OnMaBangGiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TenBangGia", DbType="NVarChar(150)")]
+		public string TenBangGia
+		{
+			get
+			{
+				return this._TenBangGia;
+			}
+			set
+			{
+				if ((this._TenBangGia != value))
+				{
+					this.OnTenBangGiaChanging(value);
+					this.SendPropertyChanging();
+					this._TenBangGia = value;
+					this.SendPropertyChanged("TenBangGia");
+					this.OnTenBangGiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_GhiChu", DbType="NVarChar(250)")]
+		public string GhiChu
+		{
+			get
+			{
+				return this._GhiChu;
+			}
+			set
+			{
+				if ((this._GhiChu != value))
+				{
+					this.OnGhiChuChanging(value);
+					this.SendPropertyChanging();
+					this._GhiChu = value;
+					this.SendPropertyChanged("GhiChu");
+					this.OnGhiChuChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DaXoa", DbType="Int")]
+		public System.Nullable<int> DaXoa
+		{
+			get
+			{
+				return this._DaXoa;
+			}
+			set
+			{
+				if ((this._DaXoa != value))
+				{
+					this.OnDaXoaChanging(value);
+					this.SendPropertyChanging();
+					this._DaXoa = value;
+					this.SendPropertyChanged("DaXoa");
+					this.OnDaXoaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_PhamViApDung", DbType="NVarChar(250)")]
+		public string PhamViApDung
+		{
+			get
+			{
+				return this._PhamViApDung;
+			}
+			set
+			{
+				if ((this._PhamViApDung != value))
+				{
+					this.OnPhamViApDungChanging(value);
+					this.SendPropertyChanging();
+					this._PhamViApDung = value;
+					this.SendPropertyChanged("PhamViApDung");
+					this.OnPhamViApDungChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="bgBangGia_bgChiTietBangGia", Storage="_bgChiTietBangGias", ThisKey="IDBangGia", OtherKey="BangGiaID")]
+		public EntitySet<bgChiTietBangGia> bgChiTietBangGias
+		{
+			get
+			{
+				return this._bgChiTietBangGias;
+			}
+			set
+			{
+				this._bgChiTietBangGias.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_bgChiTietBangGias(bgChiTietBangGia entity)
+		{
+			this.SendPropertyChanging();
+			entity.bgBangGia = this;
+		}
+		
+		private void detach_bgChiTietBangGias(bgChiTietBangGia entity)
+		{
+			this.SendPropertyChanging();
+			entity.bgBangGia = null;
 		}
 	}
 	

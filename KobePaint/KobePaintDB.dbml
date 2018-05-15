@@ -450,16 +450,6 @@
       <Association Name="khLoaiKhachHang_khKhachHang" Member="khLoaiKhachHang" ThisKey="LoaiKhachHangID" OtherKey="IDLoaiKhachHang" Type="khLoaiKhachHang" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.bgBangGia" Member="bgBangGias">
-    <Type Name="bgBangGia">
-      <Column Name="IDBangGia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="TenBangGia" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="DaXoa" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="PhamViApDung" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Association Name="bgBangGia_bgChiTietBangGia" Member="bgChiTietBangGias" ThisKey="IDBangGia" OtherKey="BangGiaID" Type="bgChiTietBangGia" />
-    </Type>
-  </Table>
   <Table Name="dbo.bgChiTietBangGia" Member="bgChiTietBangGias">
     <Type Name="bgChiTietBangGia">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -468,8 +458,19 @@
       <Column Name="GiaVon" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="DonGia" Type="System.Double" DbType="Float" CanBeNull="true" />
       <Column Name="GiaMoi" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="bgBangGia_bgChiTietBangGia" Member="bgBangGia" ThisKey="BangGiaID" OtherKey="IDBangGia" Type="bgBangGia" IsForeignKey="true" />
       <Association Name="hhHangHoa_bgChiTietBangGia" Member="hhHangHoa" ThisKey="HangHoaID" OtherKey="IDHangHoa" Type="hhHangHoa" IsForeignKey="true" />
+      <Association Name="bgBangGia_bgChiTietBangGia" Member="bgBangGia" ThisKey="BangGiaID" OtherKey="IDBangGia" Type="bgBangGia" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.bgBangGia" Member="bgBangGias">
+    <Type Name="bgBangGia">
+      <Column Name="IDBangGia" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="MaBangGia" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TenBangGia" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="DaXoa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="PhamViApDung" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Association Name="bgBangGia_bgChiTietBangGia" Member="bgChiTietBangGias" ThisKey="IDBangGia" OtherKey="BangGiaID" Type="bgChiTietBangGia" />
     </Type>
   </Table>
   <Function Name="dbo.spAVG_IDHangHoa" Method="spAVG_IDHangHoa">
