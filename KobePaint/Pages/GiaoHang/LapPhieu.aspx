@@ -9,14 +9,14 @@
         }
         function onKhachHangSelect() {
             cbpInfo.PerformCallback('khachhang');
-
+           
         }
         function onGiamGiaClick() {
             popGiamGia.Show();
         }
         function GetPrice() {
             if (ccbNhaCungCap.GetSelectedIndex() == -1) {
-                alert('Vui lòng chọn nhà cung cấp trước');
+                alert('Vui lòng chọn khách hàng');
                 ccbBarcode.SetSelectedIndex(-1);
                 ccbNhaCungCap.Focus();
             }
@@ -27,8 +27,16 @@
             }
         }
         function ImportProduct() {
-            cbpInfoImport.PerformCallback("import");
-            cbpInfo.PerformCallback('refresh');
+            if (ccbNhaCungCap.GetSelectedIndex() == -1) {
+                alert('Vui lòng chọn khách hàng');
+                ccbBarcode.SetSelectedIndex(-1);
+                ccbNhaCungCap.Focus();
+            }
+            else {
+                cbpInfoImport.PerformCallback("import");
+                cbpInfo.PerformCallback('refresh');
+            }
+            
         }
 
         function LoadNhacCungCap() {

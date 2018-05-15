@@ -11,14 +11,15 @@
             cbpInfo.PerformCallback("import");
         }
         function onSaveClick() {
-            if (checkInput()) {
+            if (checkInput() && confirm('Xác nhận thao tác ?')) {
                 cbpInfo.PerformCallback('Save');
                 cbpInfo.PerformCallback('redirect');
             }
         }
         function onSaveNextClick() {
-            if (checkInput()) {
+            if (checkInput() && confirm('Xác nhận thao tác ?')) {
                 cbpInfo.PerformCallback('Save');
+                cbpInfo_left.PerformCallback('Reset');
             }
         }
         
@@ -74,7 +75,11 @@
                                 <dx:SplitterPane MaxSize="300px" Name="splpInfoNCC"  >
                                     <ContentCollection>
                                         <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
+                                             <dx:ASPxCallbackPanel ID="cbpInfo_left" ClientInstanceName="cbpInfo_left" runat="server" Width="100%" OnCallback="cbpInfo_left_Callback">
+                                                <PanelCollection>
+                                                    <dx:PanelContent ID="PanelContent2" runat="server">
                                                 <dx:ASPxFormLayout ID="flayoutInfoNCC" runat="server" Width="100%">
+
                                             <Items>
                                                 <dx:LayoutGroup Caption="Thông tin phiếu xuất khác" GroupBoxDecoration="HeadingLine">
                                                     <CellStyle>
@@ -124,7 +129,9 @@
                                             </Items>
                                             <SettingsItemCaptions Location="Top" />
                                         </dx:ASPxFormLayout>
-
+                                                        </dx:PanelContent>
+                                                        </PanelCollection>
+                                            </dx:ASPxCallbackPanel>
                                         </dx:SplitterContentControl>
                                         </ContentCollection>
                                     </dx:SplitterPane>
@@ -288,7 +295,7 @@
                                     <div style="align-items: center; text-align: center; padding-top: 5px;">
                                         <table style="margin: 0 auto;">
                                             <tr>
-                                                <td style="padding-left: 10px">
+                                                <td>
                                                     <dx:ASPxButton ID="btnLuuVaIn" runat="server" Text="Lưu" AutoPostBack="false" UseSubmitBehavior="false">
                                                         <ClientSideEvents Click="onSaveClick" />
                                                     </dx:ASPxButton>
@@ -299,7 +306,8 @@
                                                     </dx:ASPxButton>
                                                 </td>
                                                 <td style="padding-left: 10px;">
-                                                    <dx:ASPxButton ID="btnRenew" runat="server" Text="Trở về" BackColor="#d9534f" AutoPostBack="true" PostBackUrl="~/Pages/Kho/DanhSachXuatKhac.aspx" UseSubmitBehavior="false">
+                                                    <dx:ASPxButton ID="btnTroVe" ClientInstanceName="btnTroVe" runat="server" Text="Trở về" BackColor="#d9534f" AutoPostBack="false" UseSubmitBehavior="false">
+                                                    <ClientSideEvents Click="function(){if(confirm('Xác nhận thao tác ?')){ cbpInfo.PerformCallback('redirect'); }}" />
                                                     </dx:ASPxButton>
                                                 </td>
                                             </tr>

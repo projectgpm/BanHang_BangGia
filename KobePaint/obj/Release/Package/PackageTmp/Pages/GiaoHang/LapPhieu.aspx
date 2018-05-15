@@ -9,14 +9,14 @@
         }
         function onKhachHangSelect() {
             cbpInfo.PerformCallback('khachhang');
-
+           
         }
         function onGiamGiaClick() {
             popGiamGia.Show();
         }
         function GetPrice() {
             if (ccbNhaCungCap.GetSelectedIndex() == -1) {
-                alert('Vui lòng chọn nhà cung cấp trước');
+                alert('Vui lòng chọn khách hàng');
                 ccbBarcode.SetSelectedIndex(-1);
                 ccbNhaCungCap.Focus();
             }
@@ -27,15 +27,23 @@
             }
         }
         function ImportProduct() {
-            cbpInfoImport.PerformCallback("import");
-            cbpInfo.PerformCallback('refresh');
+            if (ccbNhaCungCap.GetSelectedIndex() == -1) {
+                alert('Vui lòng chọn khách hàng');
+                ccbBarcode.SetSelectedIndex(-1);
+                ccbNhaCungCap.Focus();
+            }
+            else {
+                cbpInfoImport.PerformCallback("import");
+                cbpInfo.PerformCallback('refresh');
+            }
+            
         }
 
         function LoadNhacCungCap() {
             ccbNhaCungCap.PerformCallback();
         }
         function onSaveClick() {
-            if (checkInput() && checkInputGiamGia()) {
+            if (checkInput() && checkInputGiamGia() && confirm('Xác nhận thao tác ?')) {
                 cbpInfoImport.PerformCallback('Save');
                 cbpInfo.PerformCallback('lammoi');
 
@@ -51,7 +59,7 @@
             if (ccbNhaCungCap.GetSelectedIndex() == -1) {
                 ccbBarcode.SetSelectedIndex(-1);
                 ccbNhaCungCap.Focus();
-                alert('Vui lòng chọn nhà cung cấp');
+                alert('Vui lòng chọn khách hàng');
                 return false;
             }
             if (spThanhToan.GetValue() == null) {
@@ -210,7 +218,7 @@
                                                                                                         <dx:ListBoxColumn FieldName="HoTen" Width="150px" Caption="Tên khách hàng" />
                                                                                                     </Columns>
                                                                                                 </dx:ASPxComboBox>
-                                                                                                <asp:SqlDataSource ID="dsNhaCungCap" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang],[MaKhachHang], [HoTen] FROM [khKhachHang] WHERE ([LoaiKhachHangID] <> @LoaiKhachHangID) ORDER BY IDKhachHang DESC">
+                                                                                                <asp:SqlDataSource ID="dsNhaCungCap" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang],[MaKhachHang], [HoTen] FROM [khKhachHang] WHERE ([LoaiKhachHangID] <> @LoaiKhachHangID) AND DaXoa = 0 ORDER BY IDKhachHang DESC">
                                                                                                     <SelectParameters>
                                                                                                         <asp:Parameter DefaultValue="2" Name="LoaiKhachHangID" Type="Int32" />
                                                                                                     </SelectParameters>

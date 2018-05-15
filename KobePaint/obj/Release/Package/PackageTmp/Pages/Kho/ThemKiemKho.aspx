@@ -11,7 +11,7 @@
              cbpInfo.PerformCallback("import");
          }
          function onSaveClick() {
-             if (checkInput()) {
+             if (checkInput() && confirm('Xác nhận thao tác ?')) {
                  cbpInfo.PerformCallback('Save');
                  cbpInfo.PerformCallback('redirect');
              }
@@ -295,7 +295,8 @@
                                             <td style="padding-left: 10px">
                                                 &nbsp;</td>
                                             <td style="padding-left: 10px;">
-                                                <dx:ASPxButton ID="btnRenew" runat="server" Text="Trở về" BackColor="#d9534f" AutoPostBack="true" PostBackUrl="~/Pages/Kho/DanhSachKiemKho.aspx" UseSubmitBehavior="false">
+                                                <dx:ASPxButton ID="btnTroVe" ClientInstanceName="btnTroVe" runat="server" Text="Trở về" BackColor="#d9534f" AutoPostBack="false" UseSubmitBehavior="false">
+                                                <ClientSideEvents Click="function(){ if(confirm('Xác nhận thao tác ?')) { cbpInfo.PerformCallback('redirect'); } }" />
                                                 </dx:ASPxButton>
                                             </td>
                                         </tr>

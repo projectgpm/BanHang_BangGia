@@ -495,10 +495,14 @@ namespace KobePaint.Pages.BanHang
             int tblHangHoa_Count = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == ID && x.DaXoa == 0).Count();
             if (tblHangHoa_Count > 0)
             {
+                int IDKhachHang = Convert.ToInt32(ccbNhaCungCap.Value.ToString());
+                var IDKhachHang_IDBangGia = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
                 var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == ID && x.DaXoa == 0).FirstOrDefault();
                 var exitProdInList = listReceiptProducts.SingleOrDefault(r => r.IDHangHoa == ID);
                 if (exitProdInList == null)
                 {
+                    var GiaBan_IDKhachHang = DBDataProvider.DB.bgChiTietBangGias.Where(x => x.BangGiaID == IDKhachHang_IDBangGia.IDBangGia && x.HangHoaID == tblHangHoa.IDHangHoa).FirstOrDefault();
+                    double GiaBan = GiaBan_IDKhachHang == null ? Convert.ToDouble(tblHangHoa.GiaBan) : Convert.ToDouble(GiaBan_IDKhachHang.GiaMoi);
                     oChiTietHoaDon cthd = new oChiTietHoaDon(
                         tblHangHoa.IDHangHoa,
                         tblHangHoa.MaHang,
@@ -506,9 +510,9 @@ namespace KobePaint.Pages.BanHang
                         tblHangHoa.hhDonViTinh.TenDonViTinh,
                         Convert.ToInt32(tblHangHoa.TonKho),
                         1,
-                        Convert.ToDouble(tblHangHoa.GiaBan),
+                        GiaBan,
                         Convert.ToDouble(tblHangHoa.GiaVon),
-                        Convert.ToDouble(tblHangHoa.GiaBan)
+                        GiaBan
                         );
                     listReceiptProducts.Add(cthd);
                 }

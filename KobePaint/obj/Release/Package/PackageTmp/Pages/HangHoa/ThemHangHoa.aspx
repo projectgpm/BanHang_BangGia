@@ -20,9 +20,11 @@
                 cbpThemHH.PerformCallback('Save');
             }
         }
-        function onRenewClick()
-        {
-            cbpThemHH.PerformCallback('Renew');
+        function onRenewClick() {
+
+            if (confirm('Xác nhận thao tác ?'))
+                cbpThemHH.PerformCallback('Renew');
+            ;
         }
         //popup
         function ShowDVT() {
@@ -48,6 +50,14 @@
                 ShowPopup(4000);
             }
         }
+        function onccbLoaiHangHoaChanged(s,e) {
+            if (s.GetSelectedIndex() == 1) {
+                spSoLuong.SetEnabled(false);
+            }
+            else {
+                spSoLuong.SetEnabled(true);
+            }
+        }
     </script>
  
     <dx:ASPxCallbackPanel ID="cbpThemHH" ClientInstanceName="cbpThemHH" runat="server" Width="100%" OnCallback="cbpThemHH_Callback">
@@ -57,7 +67,7 @@
                     <Items>
                         <dx:LayoutGroup Caption="Thêm hàng hóa" GroupBoxDecoration="HeadingLine" HorizontalAlign="Center" ColCount="2">
                             <Items>
-                                <dx:LayoutItem Caption="Tên hàng hóa" ColSpan="2">
+                                <dx:LayoutItem Caption="Tên hàng hóa">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
                                             <dx:ASPxTextBox ID="txtTenHH" runat="server" Width="100%">
@@ -65,6 +75,19 @@
                                                     <RequiredField ErrorText="Vui lòng nhập tên hàng hóa" IsRequired="True" />
                                                 </ValidationSettings>
                                             </dx:ASPxTextBox>
+                                        </dx:LayoutItemNestedControlContainer>
+                                    </LayoutItemNestedControlCollection>
+                                </dx:LayoutItem>
+                                <dx:LayoutItem Caption="Loại hàng hóa">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer runat="server">
+                                            <dx:ASPxComboBox ID="ccbLoaiHangHoa" ClientInstanceName="ccbLoaiHangHoa" runat="server" DataSourceID="dsLoaiHangHoa" SelectedIndex="0" TextField="TenLoai" ValueField="IDLoaiHangHoa" Width="100%">
+                                            <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="checkInput">
+                                                <RequiredField ErrorText="Vui lòng chọn loại hàng hóa" IsRequired="True" />
+                                            </ValidationSettings>
+                                                <ClientSideEvents SelectedIndexChanged="onccbLoaiHangHoaChanged" />
+                                            </dx:ASPxComboBox>
+                                            <asp:SqlDataSource ID="dsLoaiHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDLoaiHangHoa], [TenLoai] FROM [hhLoaiHangHoa]"></asp:SqlDataSource>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
@@ -79,7 +102,7 @@
                                 <dx:LayoutItem Caption="Số lượng">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                            <dx:ASPxSpinEdit ID="spSoLuong" runat="server" Number="0" Width="100%" >
+                                            <dx:ASPxSpinEdit ID="spSoLuong" ClientInstanceName="spSoLuong" runat="server" Number="0" Width="100%" >
                                                  <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="checkInput">
                                                     <RequiredField ErrorText="Vui lòng nhập số lượng" IsRequired="True" />
                                                 </ValidationSettings>
@@ -186,23 +209,23 @@
                                         <dx:LayoutItemNestedControlContainer runat="server">
                                             <table >
                                                 <tr>
-                                                    <td style="padding-right:10px;width:110px;">
+                                                    <td >
                                                         <dx:ASPxButton ID="btnSave" runat="server" Text="Lưu" ValidationGroup="checkInput" AutoPostBack="false">
                                                             <ClientSideEvents Click="onSaveClick" />
                                                         </dx:ASPxButton>
                                                     </td>
-                                                   <td style="padding-right:10px;width:110px;">
+                                                   <td style="padding-left:10px;">
                                                         <dx:ASPxButton ID="btnLuuTiepTuc" runat="server" Text="Lưu & tiếp tục" ValidationGroup="checkInput" AutoPostBack="false">
                                                             <ClientSideEvents Click="onLuuTiepTucClick" />
                                                         </dx:ASPxButton>
                                                     </td>
-                                                    <td style="padding-right:10px;width:110px;">
+                                                    <td style="padding-left:10px;">
                                                         <dx:ASPxButton ID="btnRenew" runat="server" Text="Lập mới" Width="100" BackColor="#d9534f" AutoPostBack="false">
-                                                            <ClientSideEvents Click="onRenewClick" />
+                                                            <ClientSideEvents   Click="onRenewClick"  />
                                                         </dx:ASPxButton>
                                                         
                                                     </td>
-                                                     <td style="padding-right:10px;width:110px;">
+                                                     <td style="padding-left:10px;">
                                                         <dx:ASPxButton ID="btnTroVe" runat="server" Text="Trở về" AutoPostBack="true" PostBackUrl="~/Pages/HangHoa/HangHoa.aspx" >
                                                         </dx:ASPxButton>
                                                     </td>

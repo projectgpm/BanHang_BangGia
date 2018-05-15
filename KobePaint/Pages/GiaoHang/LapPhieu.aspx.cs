@@ -94,7 +94,7 @@ namespace KobePaint.Pages.GiaoHang
                 case "refresh": LamMoi(); break;
                 case "giamgia": GiamGia(); break;
                 case "renew": spTienGiamGia.Number = 0; break;
-                case "khachhang": CongNo(); break;
+                case "khachhang": CongNo();  hiddenFields["IDKhachHang"] = ccbNhaCungCap.Value.ToString(); break;
                 case "khachthanhtoan": KhachThanhToan(); break;
                 case "lammoi": Reset(); break;
                 default: break;
@@ -354,8 +354,10 @@ namespace KobePaint.Pages.GiaoHang
             rdHinhThuc.SelectedIndex = 0;
 
         }
+        
         private void CongNo()
         {
+          
             var KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == Convert.ToInt32(ccbNhaCungCap.Value.ToString())).FirstOrDefault();
             if (KH != null)
             {
@@ -414,10 +416,14 @@ namespace KobePaint.Pages.GiaoHang
             int tblHangHoa_Count = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == ID && x.DaXoa == 0).Count();
             if (tblHangHoa_Count > 0)
             {
+                int IDKhachHang = Convert.ToInt32(ccbNhaCungCap.Value.ToString());
+                var IDKhachHang_IDBangGia = DBDataProvider.DB.khKhachHangs.Where(x=>x.IDKhachHang == IDKhachHang).FirstOrDefault();
                 var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == ID && x.DaXoa == 0).FirstOrDefault();
                 var exitProdInList = listReceiptProducts.SingleOrDefault(r => r.IDHangHoa == ID);
                 if (exitProdInList == null)
                 {
+                    var GiaBan_IDKhachHang = DBDataProvider.DB.bgChiTietBangGias.Where(x=>x.BangGiaID == IDKhachHang_IDBangGia.IDBangGia && x.HangHoaID == tblHangHoa.IDHangHoa ).FirstOrDefault();
+                    double GiaBan = GiaBan_IDKhachHang == null ?  Convert.ToDouble(tblHangHoa.GiaBan) :  Convert.ToDouble(GiaBan_IDKhachHang.GiaMoi);
                     oChiTietHoaDon cthd = new oChiTietHoaDon(
                         tblHangHoa.IDHangHoa,
                         tblHangHoa.MaHang,
@@ -425,9 +431,9 @@ namespace KobePaint.Pages.GiaoHang
                         tblHangHoa.hhDonViTinh.TenDonViTinh,
                         Convert.ToInt32(tblHangHoa.TonKho),
                         1,
-                        Convert.ToDouble(tblHangHoa.GiaBan),
+                        GiaBan,
                         Convert.ToDouble(tblHangHoa.GiaVon),
-                        Convert.ToDouble(tblHangHoa.GiaBan)
+                        GiaBan
                         );
                     listReceiptProducts.Add(cthd);
                 }

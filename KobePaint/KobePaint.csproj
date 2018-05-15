@@ -193,16 +193,6 @@
     <Content Include="BieuMau\xuatkho.xls" />
     <Content Include="BieuMau\banggia.xls" />
     <None Include="Properties\PublishProfiles\KobePaint.pubxml" />
-    <Content Include="Uploads\42018\0b40c227-2b49-43b3-9c58-3d3d0be2117d.xls" />
-    <Content Include="Uploads\42018\4af1af0d-7e6e-446d-9183-62ff69dbd0d2.xls" />
-    <Content Include="Uploads\42018\5458a80d-09e1-4226-9e39-e48a6d41cba7.xls" />
-    <Content Include="Uploads\42018\69c87484-0871-45a8-a54d-85ef6d4cc8ea.xls" />
-    <Content Include="Uploads\42018\8998659c-c2a2-44fe-ab7a-7cb66e7b5bf7.xls" />
-    <Content Include="Uploads\42018\8aa39827-a155-466f-a825-79937c6be770.xls" />
-    <Content Include="Uploads\42018\c0c7ec59-bc72-4c8b-8c11-98854140fb8f.xls" />
-    <Content Include="Uploads\42018\ced77cb0-4e07-41dd-9ed6-1569a093a4c7.xls" />
-    <Content Include="Uploads\42018\db610e12-cc3a-4095-a837-82e0ca3d8352.xls" />
-    <Content Include="Uploads\42018\f86ba7e7-a1e2-423d-9121-41ce931febe9.xls" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -701,6 +691,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\UploadTemp\" />
+    <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

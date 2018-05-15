@@ -199,7 +199,7 @@
                                     <div style="align-items: center; text-align: center; padding-top: 5px;">
                                     <table  style="margin: 0 auto;">
                                         <tr>
-                                            <td style="padding-right:10px;text-align:right;width:50%;">
+                                            <td >
                                                 <dx:ASPxButton ID="btnReview" runat="server" Text="Xem trước" Width="100" BackColor="#5cb85c" AutoPostBack="False">
                                                     <ClientSideEvents Click="onReviewClick" />
                                                 </dx:ASPxButton>
@@ -209,11 +209,7 @@
                                                     <ClientSideEvents Click="onSaveClick" />
                                                 </dx:ASPxButton>
                                             </td>
-                                           <%-- <td style="width:110px;">
-                                                <dx:ASPxButton ID="btnSavePrint" runat="server" Text="Thanh toán và In phiếu" Width="100" AutoPostBack="false" UseSubmitBehavior="true">
-                                                    <ClientSideEvents Click="onClickSavePrint" />
-                                                </dx:ASPxButton>
-                                            </td>--%>
+                                         
                                             <td style="padding-left:10px;">
                                                 <dx:ASPxButton ID="btnRenew" runat="server" Text="Lập mới" Width="100" BackColor="#d9534f" OnClick="btnRenew_Click" UseSubmitBehavior="false">
                                                 </dx:ASPxButton>

@@ -11,14 +11,14 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
-                    <dx:LayoutItem Caption="">
+                   <%-- <dx:LayoutItem Caption="">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
                                 <dx:ASPxButton ID="btnInMaVach" runat="server" Text="In mã vạch">
                                 </dx:ASPxButton>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>
+                    </dx:LayoutItem>--%>
                     <dx:LayoutItem ShowCaption="False">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
@@ -27,7 +27,7 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
-                    <dx:LayoutItem Caption="Loại hàng hóa" Width="100%">
+                    <dx:LayoutItem Caption="Tình trạng hàng hóa" Width="100%">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
                                 <dx:ASPxComboBox ID="ccbLoaiHangHoa" runat="server" SelectedIndex="0">
@@ -53,13 +53,16 @@
 
 
     <dx:ASPxGridView ID="gridHangHoa" runat="server" AutoGenerateColumns="False" ClientInstanceName="gridHangHoa" Width="100%" DataSourceID="dsHangHoa" KeyFieldName="IDHangHoa" OnCustomColumnDisplayText="grid_CustomColumnDisplayText">
+        
         <Settings VerticalScrollBarMode="Visible" VerticalScrollableHeight="0" ShowFilterRow="True"/>
         <SettingsDetail ShowDetailRow="True" AllowOnlyOneMasterRowExpanded="True" />
         <Templates>
             <DetailRow>
                 <div style="width: 100%; text-align:center;">
                     <div style="display:inline-block;">
-                        <dx:ASPxGridView ID="gridApGia" runat="server" AutoGenerateColumns="False" DataSourceID="dsTheKho" KeyFieldName="ID" Width="800px" OnBeforePerformDataSelect="gridApGia_BeforePerformDataSelect" OnRowValidating="gridApGia_RowValidating">
+                        <dx:ASPxGridView ID="gridApGia" runat="server" AutoGenerateColumns="False" DataSourceID="dsTheKho" KeyFieldName="IDTheKho" Width="800px" OnBeforePerformDataSelect="gridApGia_BeforePerformDataSelect" OnRowValidating="gridApGia_RowValidating">
+                            <SettingsPager Mode="EndlessPaging">
+                            </SettingsPager>
                             <Settings ShowTitlePanel="True" ShowFooter="True" />
                             <SettingsCommandButton>
                                 <ShowAdaptiveDetailButton ButtonType="Image">
@@ -75,37 +78,38 @@
                                     </Image>
                                 </EditButton>
                                 <DeleteButton ButtonType="Image" RenderMode="Image">
+
                                     <Image IconID="actions_close_16x16devav">
+                                     
                                     </Image>
                                 </DeleteButton>
                             </SettingsCommandButton>
                             <SettingsText Title="THẺ KHO" EmptyDataRow="không có dữ liệu" />
                             <Columns>
                               
-                                <dx:GridViewDataTextColumn Caption="Diễn giải" FieldName="DienGiai" VisibleIndex="2">
+                                <dx:GridViewDataTextColumn Caption="Diễn giải" FieldName="DienGiai" Width="100%" CellStyle-HorizontalAlign="Left" VisibleIndex="2">
                                 </dx:GridViewDataTextColumn>
-                                <dx:GridViewDataSpinEditColumn Caption="Tồn" FieldName="Ton" VisibleIndex="5">
+                                <dx:GridViewDataSpinEditColumn Caption="Tồn" FieldName="Ton" VisibleIndex="5" Width="80px">
                                     <PropertiesSpinEdit DisplayFormatString="g">
                                     </PropertiesSpinEdit>
                                 </dx:GridViewDataSpinEditColumn>
-                                <dx:GridViewDataSpinEditColumn Caption="Xuất" FieldName="Xuat" VisibleIndex="4">
+                                <dx:GridViewDataSpinEditColumn Caption="Xuất" FieldName="Xuat" VisibleIndex="4" Width="80px">
                                     <PropertiesSpinEdit DisplayFormatString="g">
                                     </PropertiesSpinEdit>
                                 </dx:GridViewDataSpinEditColumn>
-                                <dx:GridViewDataSpinEditColumn Caption="Nhập" FieldName="Nhap" VisibleIndex="3">
+                                <dx:GridViewDataSpinEditColumn Caption="Nhập" FieldName="Nhap" VisibleIndex="3" Width="80px">
                                     <PropertiesSpinEdit DisplayFormatString="g">
                                     </PropertiesSpinEdit>
                                 </dx:GridViewDataSpinEditColumn>
-                                <dx:GridViewDataDateColumn Caption="Ngày" FieldName="NgayNhap" VisibleIndex="1">
-                                    <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm:ss">
+                                <dx:GridViewDataDateColumn Caption="Ngày" Width="150px" FieldName="NgayNhap" VisibleIndex="1" CellStyle-HorizontalAlign="Left">
+                                    <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm">
                                     </PropertiesDateEdit>
                                 </dx:GridViewDataDateColumn>
                               
                             </Columns>
                             <TotalSummary>
                                 <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="Nhap" ShowInColumn="Nhập" ShowInGroupFooterColumn="Nhập" SummaryType="Sum" />
-                                <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="Xuat" ShowInColumn="Xuất" ShowInGroupFooterColumn="Xuất" SummaryType="Sum" />
-                                <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="Ton" ShowInColumn="Tồn" ShowInGroupFooterColumn="Tồn" SummaryType="Sum" />
+                                <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="Xuat" ShowInColumn="Xuất" ShowInGroupFooterColumn="Xuất" SummaryType="Sum" />
                             </TotalSummary>
                             <Styles>
                                 <Header HorizontalAlign="Center">
@@ -114,7 +118,7 @@
                                 </TitlePanel>
                             </Styles>
                         </dx:ASPxGridView>
-                        <asp:SqlDataSource ID="dsTheKho" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [NgayNhap], [DienGiai], [Nhap], [Xuat], [Ton] FROM [kTheKho] WHERE ([HangHoaID] = @HangHoaID) ORDER BY [IDTheKho] DESC">
+                        <asp:SqlDataSource ID="dsTheKho" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [NgayNhap], [DienGiai], [Nhap], [Xuat], [Ton],[IDTheKho] FROM [kTheKho] WHERE ([HangHoaID] = @HangHoaID) ORDER BY [IDTheKho] DESC">
                               <SelectParameters>
                                 <asp:SessionParameter Name="HangHoaID" SessionField="IDHangHoa" Type="Int32" />
                             </SelectParameters>
@@ -179,9 +183,10 @@
                 <Image IconID="edit_edit_16x16office2013" ToolTip="Cập nhật tên và giá">
                 </Image>
             </EditButton>
-            <DeleteButton ButtonType="Image" RenderMode="Image">
+            <DeleteButton ButtonType="Image"  RenderMode="Image">
                 <Image IconID="arrows_play_16x16" ToolTip="Ngừng kinh doanh">
                 </Image>
+                 <%--<Image ToolTip="Ngừng kinh doanh" Url="../../images/add.png" Width="16px" Height="16px" />--%>
             </DeleteButton>
         </SettingsCommandButton>
         <EditFormLayoutProperties ColCount="2">
@@ -209,7 +214,7 @@
                 <CellStyle HorizontalAlign="Center">
                 </CellStyle>
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataComboBoxColumn Caption="Nhóm hàng" FieldName="NhomHHID" VisibleIndex="6" Width="250px" ReadOnly="True">
+            <dx:GridViewDataComboBoxColumn Caption="Nhóm hàng" FieldName="NhomHHID" VisibleIndex="6" Width="150px" ReadOnly="True">
                
                 <PropertiesComboBox DataSourceID="dsNhomHang" TextField="TenNhom" ValueField="IDNhomHH">
                 </PropertiesComboBox>
@@ -239,8 +244,13 @@
                      <a target="_blank" href="CapNhat.aspx?id=<%# Container.KeyValue %>" > <%# Eval("TenHangHoa") %></a>
                 </DataItemTemplate>
             </dx:GridViewDataTextColumn>
+            <dx:GridViewDataComboBoxColumn Caption="Loại hàng hóa" FieldName="LoaiHHID" VisibleIndex="8" Width="150px">
+                <PropertiesComboBox DataSourceID="dsLoaiHangHoa" TextField="TenLoai" ValueField="IDLoaiHangHoa">
+                </PropertiesComboBox>
+            </dx:GridViewDataComboBoxColumn>
         </Columns>
     </dx:ASPxGridView>
+      <asp:SqlDataSource ID="dsLoaiHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDLoaiHangHoa], [TenLoai] FROM [hhLoaiHangHoa]"></asp:SqlDataSource>
       <asp:SqlDataSource ID="dsDVT" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDDonViTinh], [TenDonViTinh] FROM [hhDonViTinh] WHERE ([DaXoa] = @DaXoa)">
           <SelectParameters>
               <asp:Parameter DefaultValue="false" Name="DaXoa" Type="Boolean" />
@@ -252,7 +262,7 @@
           </SelectParameters>
       </asp:SqlDataSource>
     <asp:SqlDataSource ID="dsHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT [IDHangHoa], [MaHang], [TenHangHoa], [NhomHHID], [DonViTinhID], [TonKho], [GiaBan] FROM [hhHangHoa] WHERE ([DaXoa] = @DaXoa)"
+        SelectCommand="SELECT [IDHangHoa], [MaHang],[LoaiHHID], [TenHangHoa], [NhomHHID], [DonViTinhID], [TonKho], [GiaBan] FROM [hhHangHoa] WHERE ([DaXoa] = @DaXoa)"
         UpdateCommand="UPDATE [hhHangHoa] SET [TenHangHoa] = @TenHangHoa,[GiaBan] = @GiaBan WHERE  [IDHangHoa] = @IDHangHoa"
         DeleteCommand="UPDATE [hhHangHoa] SET [DaXoa] = 1 WHERE [IDHangHoa] = @IDHangHoa"
         >

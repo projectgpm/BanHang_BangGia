@@ -25,8 +25,10 @@
              }
          }
          function onRenewClick() {
-             cbpInfoImport.PerformCallback('Reset');
-             cbpInfo.PerformCallback('refresh');
+             if (confirm('Xác nhận thao tác ?')) {
+                 cbpInfoImport.PerformCallback('Reset');
+                 cbpInfo.PerformCallback('refresh');
+             }
          }
          function checkInput() {
              if (ccbNhaCungCap.GetSelectedIndex() == -1) {
@@ -39,7 +41,7 @@
              return true;
          }
          function onSaveClick() {
-             if (checkInput()) {
+             if (checkInput() && confirm('Xác nhận thao tác ?')) {
                  cbpInfoImport.PerformCallback('Save');
                  cbpInfoImport.PerformCallback('redirect');
              }

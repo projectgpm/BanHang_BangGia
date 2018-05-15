@@ -125,7 +125,7 @@
                     </CalendarProperties>                    
                 </PropertiesDateEdit>
             </dx:GridViewDataDateColumn>
-            <dx:GridViewDataTextColumn Caption="Mã phiếu" FieldName="MAPHIEU" VisibleIndex="4" ReadOnly="True" Width="90px">
+            <dx:GridViewDataTextColumn Caption="Mã phiếu" FieldName="MAPHIEU" VisibleIndex="4" ReadOnly="True" Width="110px">
                 <SettingsHeaderFilter Mode="CheckedList">
                 </SettingsHeaderFilter>
             </dx:GridViewDataTextColumn>
