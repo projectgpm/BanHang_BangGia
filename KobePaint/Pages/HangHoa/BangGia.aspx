@@ -8,7 +8,16 @@
         }
 
         function ImportProduct() {
-            cbpInfo.PerformCallback("import");
+            if (ccbBangGia.GetSelectedIndex() == -1) {
+                alert('Vui lòng chọn bảng giá');
+                ccbBarcode.SetSelectedIndex(-1);
+                ccbBangGia.Focus();
+            }
+            else {
+                if (ccbBarcode.GetSelectedIndex() != -1) {
+                    cbpInfo.PerformCallback("import");
+                }
+            }
         }
     
         function onExcelClick() {
@@ -24,8 +33,12 @@
             popupViewExcel.Hide();
         }
         function LoadBangGia() {
-            cbpInfo_left.PerformCallback('LoadBangGia');
+            ccbBangGia.PerformCallback();
            
+        }
+        function ccbBangGiaSelectChange() {
+            cbpInfo_left.PerformCallback('ccbBangGiaSelectChange');
+            cbpInfo.PerformCallback('ccbBangGiaSelectChange');
         }
         ///////////////////////////////////
         function onUnitReturnChanged(key) {
@@ -33,7 +46,7 @@
         }
         function endCallBackProduct(s, e) {
             if (s.cp_Reset) {
-                cbpInfo.PerformCallback('Reset');
+                //cbpInfo.PerformCallback('Reset');
                 delete (s.cp_Reset);
                 ShowPopup(4000);
             }
@@ -68,7 +81,7 @@
                                              <dx:ASPxCallbackPanel ID="cbpInfo_left" ClientInstanceName="cbpInfo_left" runat="server" Width="100%" OnCallback="cbpInfo_left_Callback">
                                                 <PanelCollection>
                                                     <dx:PanelContent ID="PanelContent2" runat="server">
-                                                <dx:ASPxFormLayout ID="flayoutInfoNCC" runat="server" Width="100%">
+                                                <dx:ASPxFormLayout ID="formThongTin" ClientInstanceName="formThongTin" runat="server" Width="100%">
                                             <Items>
                                                 <dx:LayoutGroup Caption="Thông tin bảng giá" GroupBoxDecoration="HeadingLine">
                                                     <CellStyle>
@@ -84,20 +97,18 @@
                                                                     <table>
                                                                         <tr>
                                                                             <td style="width: 90%">
-                                                                                <dx:ASPxComboBox ID="ccbBangGia" TextFormatString="{0}" ClientInstanceName="ccbBangGia" runat="server" NullText="Chọn bảng giá" Width="100%" DataSourceID="dsBangGia" TextField="TenBangGia" ValueField="IDBangGia" OnCallback="ccbBangGia_Callback">
+                                                                                <dx:ASPxComboBox ID="ccbBangGia" ClientInstanceName="ccbBangGia" runat="server" NullText="Chọn bảng giá" Width="100%" DataSourceID="dsBangGia" TextField="TenBangGia" ValueField="IDBangGia" EnableCallbackMode="True" OnCallback="ccbBangGia_Callback">
                                                                                     <ValidationSettings Display="Dynamic" ErrorTextPosition="Bottom" ValidationGroup="InfosInput">
                                                                                         <RequiredField ErrorText="Chọn bảng giá" IsRequired="True" />
                                                                                     </ValidationSettings>
-                                                                                    <ClientSideEvents DropDown="function(s,e){ LoadBangGia(); }" ></ClientSideEvents>
-                                                                                   
+                                                                                    <ClientSideEvents DropDown="function(s,e){ LoadBangGia() }" SelectedIndexChanged="ccbBangGiaSelectChange" ></ClientSideEvents>
                                                                                 </dx:ASPxComboBox>
                                                                                 <asp:SqlDataSource ID="dsBangGia" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDBangGia, TenBangGia FROM bgBangGia WHERE (DaXoa = 0)">
                                                                                 </asp:SqlDataSource>
                                                                             </td>
                                                                             <td style="width: 10%; padding-left: 10px;">
                                                                                 <dx:ASPxHyperLink ID="btnThemBangGia" ClientInstanceName="btnThemBangGia" Target="_blank" runat="server" Text="Thêm"  ImageHeight="30px" ImageUrl="~/images/add.png" ImageWidth="30px" ToolTip="Thêm mới">
-                                                                                    <ClientSideEvents Click="function(){popBangGia.Show()}" />
-                                                                                                        
+                                                                                    <ClientSideEvents Click="function(){popBangGia.Show()}" />           
                                                                                 </dx:ASPxHyperLink>
 
                                                                             </td>
@@ -109,7 +120,7 @@
                                                         <dx:LayoutItem Caption="Phạm vi áp dụng">
                                                             <LayoutItemNestedControlCollection>
                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                                                                     <dx:ASPxMemo ID="memoPhamViApDung" runat="server" Rows="3" Width="100%">
+                                                                     <dx:ASPxMemo ID="memoPhamViApDung" ReadOnly ="true" runat="server" Rows="5" Width="100%">
                                                                     </dx:ASPxMemo>
                                                                 </dx:LayoutItemNestedControlContainer>
                                                             </LayoutItemNestedControlCollection>
@@ -117,7 +128,7 @@
                                                         <dx:LayoutItem Caption="Ghi chú">
                                                             <LayoutItemNestedControlCollection>
                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer5" runat="server">
-                                                                    <dx:ASPxMemo ID="memoGhiChu" runat="server" Rows="3" Width="100%">
+                                                                    <dx:ASPxMemo ID="memoGhiChu" ReadOnly="true" runat="server" Rows="5" Width="100%">
                                                                     </dx:ASPxMemo>
                                                                 </dx:LayoutItemNestedControlContainer>
                                                             </LayoutItemNestedControlCollection>
@@ -195,7 +206,7 @@
                                                             </Items>
                                                             <SettingsItemCaptions Location="Top" />
                                                         </dx:ASPxFormLayout>
-                                                        <dx:ASPxGridView ID="gridImportPro" ClientInstanceName="gridImportPro" runat="server" Width="100%" AutoGenerateColumns="False" KeyFieldName="STT" OnRowDeleting="gridImportPro_RowDeleting">
+                                                        <dx:ASPxGridView ID="gridImportPro" ClientInstanceName="gridImportPro" runat="server" Width="100%" AutoGenerateColumns="False" KeyFieldName="ID" OnRowDeleting="gridImportPro_RowDeleting" DataSourceID="dsChiTietBangGia" OnCustomColumnDisplayText="gridImportPro_CustomColumnDisplayText" OnRowUpdating="gridImportPro_RowUpdating">
                                                             <SettingsEditing Mode="Batch">
                                                             </SettingsEditing>
                                                             <Settings VerticalScrollBarMode="Visible" VerticalScrollableHeight="0" />
@@ -226,38 +237,42 @@
                                                             </SettingsCommandButton>
                                                             <SettingsText EmptyDataRow="Chưa có dữ liệu" />
                                                             <Columns>
-                                                                <dx:GridViewDataTextColumn Caption="STT" FieldName="STT" ShowInCustomizationForm="True" VisibleIndex="0" Width="50px">
+                                                                <dx:GridViewDataTextColumn Caption="STT" ReadOnly="true" FieldName="ID" ShowInCustomizationForm="True" VisibleIndex="0" Width="50px">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataTextColumn Caption="Tên hàng hóa" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="2" Width="60%">
+                                                                <dx:GridViewDataTextColumn Caption="Tên hàng hóa" ReadOnly="true" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="2" Width="60%">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataTextColumn Caption="Mã HH" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="1" Width="100px">
+                                                                <dx:GridViewDataTextColumn Caption="Mã HH" ReadOnly="true" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="1" Width="100px">
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewCommandColumn Caption="Xóa" ShowDeleteButton="True" ShowInCustomizationForm="True" VisibleIndex="9" Width="50px">
                                                                 </dx:GridViewCommandColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá mới" ShowInCustomizationForm="True" VisibleIndex="5" Width="150px">
-                                                                    <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá mới"  FieldName="GiaMoi" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px">
+                                                                    <PropertiesSpinEdit DisplayFormatString="N0" Increment="500" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" ShowInCustomizationForm="True" VisibleIndex="3" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" ReadOnly="true" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="4" Width="150px">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom"></PropertiesSpinEdit>
                                                                                               
                                                                     <CellStyle>
                                                                         <Paddings Padding="2px" />
                                                                     </CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Đơn giá nhập cuối" ShowInCustomizationForm="True" VisibleIndex="4" Width="150px">
-                                                                    <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
-                                                                </dx:GridViewDataSpinEditColumn>
-                                                                                           
+                                                                <dx:GridViewDataSpinEditColumn  ReadOnly="true" Caption="Đơn giá nhập cuối" FieldName="DonGia" ShowInCustomizationForm="True" VisibleIndex="5" Width="150px">
+                                                                    <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
+                                                                </dx:GridViewDataSpinEditColumn>              
+                                                                <dx:GridViewDataTextColumn Caption="ĐVT" ReadOnly="true" FieldName="TenDonViTinh" ShowInCustomizationForm="True" VisibleIndex="3" Width="100px">
+                                                                </dx:GridViewDataTextColumn>                     
                                                             </Columns>
-                                                           <%-- <FormatConditions>
-                                                                <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] < 1" Format="LightRedFillWithDarkRedText" />
-                                                                <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] > 0" Format="GreenFillWithDarkGreenText" />
-                                                                <dx:GridViewFormatConditionTopBottom FieldName="TonKho" Rule="TopItems" Threshold="15" Format="BoldText" CellStyle-HorizontalAlign="Center">
-                                                                    <CellStyle HorizontalAlign="Center"></CellStyle>
-                                                                </dx:GridViewFormatConditionTopBottom>
-                                                            </FormatConditions>--%>
                                                         </dx:ASPxGridView>    
+                                                        <asp:SqlDataSource ID="dsChiTietBangGia" runat="server" 
+                                                            ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" DeleteCommand="DELETE FROM bgChiTietBangGia WHERE (ID = @ID)" UpdateCommand="UPDATE bgChiTietBangGia SET GiaMoi = @GiaMoi WHERE (ID = @ID)" >
+                                                            <DeleteParameters>
+                                                                <asp:Parameter  Name="ID"  Type="Int32"/>
+                                                            </DeleteParameters>
+                                                            <UpdateParameters>
+                                                                <asp:Parameter Name="GiaMoi" Type="Double"/>
+                                                                <asp:Parameter  Name="ID" Type="Int32"/>
+                                                            </UpdateParameters>
+                                                        </asp:SqlDataSource>
                                                         </dx:PanelContent>
                                                 </PanelCollection>
                                             <ClientSideEvents EndCallback="endCallBackProduct" />
@@ -426,7 +441,7 @@
                             <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="Tải file mẫu:"></dx:ASPxLabel>
                         </td>
                         <td style="float: left; padding-left: 3px;">
-                            <dx:ASPxHyperLink ID="linkNhapKho" runat="server" Text="xuatkho.xls" NavigateUrl="~/BieuMau/xuatkho.xls">
+                            <dx:ASPxHyperLink ID="linkNhapKho" runat="server" Text="xuatkho.xls" NavigateUrl="~/BieuMau/banggia.xls">
                             </dx:ASPxHyperLink>
                         </td>
                     </tr>
@@ -475,4 +490,5 @@
             </dx:PopupControlContentControl>
         </ContentCollection>
     </dx:ASPxPopupControl>
+
 </asp:Content>

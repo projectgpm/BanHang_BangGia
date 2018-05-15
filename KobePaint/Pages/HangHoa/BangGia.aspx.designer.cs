@@ -67,13 +67,13 @@ namespace KobePaint.Pages.HangHoa {
         protected global::DevExpress.Web.PanelContent PanelContent2;
         
         /// <summary>
-        /// flayoutInfoNCC control.
+        /// formThongTin control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxFormLayout flayoutInfoNCC;
+        protected global::DevExpress.Web.ASPxFormLayout formThongTin;
         
         /// <summary>
         /// LayoutItemNestedControlContainer3 control.
@@ -263,6 +263,15 @@ namespace KobePaint.Pages.HangHoa {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGridView gridImportPro;
+        
+        /// <summary>
+        /// dsChiTietBangGia control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.SqlDataSource dsChiTietBangGia;
         
         /// <summary>
         /// SplitterContentControl3 control.

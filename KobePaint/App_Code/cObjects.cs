@@ -302,5 +302,32 @@ namespace KobePaint.App_Code
         }
     }
     #endregion
+
+    #region bảng giá
+    [Serializable]
+    public class oBangGia
+    {
+        public int STT { get; set; }
+        public string MaHang { get; set; }
+        public int IDHangHoa { get; set; }
+        public string TenHangHoa { get; set; }
+        public string TenDonViTinh { get; set; }
+        public double GiaVon { get; set; }
+        public double DonGiaNhapCuoi { get; set; }
+        public double GiaMoi { get; set; }
+        public int BangGiaID { get; set; }
+        public oBangGia(int iDHangHoa, string maHang, string tenHangHoa, string tenDonViTinh, double giaVon, double donGiaNhapCuoi, double giaMoi, int bangGiaID)
+        {
+            this.MaHang = maHang;
+            this.IDHangHoa = iDHangHoa;
+            this.TenHangHoa = tenHangHoa;
+            this.TenDonViTinh = tenDonViTinh;
+            this.GiaMoi = giaMoi;
+            this.DonGiaNhapCuoi = donGiaNhapCuoi;
+            this.GiaVon = giaVon;
+            this.BangGiaID = bangGiaID;
+        }
+    }
+    #endregion
 }
  
