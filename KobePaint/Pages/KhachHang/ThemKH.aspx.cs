@@ -53,6 +53,7 @@ namespace KobePaint.Pages.KH_NCC
                 kh.TienTraHang = 0;
                 kh.CongNo = 0;
                 kh.DaXoa = 0;
+                kh.IDBangGia = 1;// bảng giá chung
                 kh.ThanhToan = 0;
                 DBDataProvider.DB.khKhachHangs.InsertOnSubmit(kh);
                 DBDataProvider.DB.SubmitChanges();

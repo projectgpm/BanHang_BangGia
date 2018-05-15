@@ -422,34 +422,6 @@
       <Association Name="khKhachHang_ghPhieuGiaoHang" Member="khKhachHang" ThisKey="KhachHangID" OtherKey="IDKhachHang" Type="khKhachHang" IsForeignKey="true" />
     </Type>
   </Table>
-  <Table Name="dbo.khKhachHang" Member="khKhachHangs">
-    <Type Name="khKhachHang">
-      <Column Name="IDKhachHang" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="LoaiKhachHangID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="MaKhachHang" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="HoTen" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="DienThoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
-      <Column Name="LanCuoiMuaHang" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
-      <Column Name="TongTienHang" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="MaSoThue" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="TienTraHang" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="CongNo" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="DaXoa" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="NgayTao" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
-      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Association Name="khKhachHang_ghPhieuDaiLyThanhToan" Member="ghPhieuDaiLyThanhToans" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="ghPhieuDaiLyThanhToan" />
-      <Association Name="khKhachHang_gPhieuThu" Member="gPhieuThus" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="gPhieuThu" />
-      <Association Name="khKhachHang_kNhapKho" Member="kNhapKhos" ThisKey="IDKhachHang" OtherKey="NCCID" Type="kNhapKho" />
-      <Association Name="khKhachHang_kPhieuThanhToanNCC" Member="kPhieuThanhToanNCCs" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="kPhieuThanhToanNCC" />
-      <Association Name="khKhachHang_kPhieuTraHangNCC" Member="kPhieuTraHangNCCs" ThisKey="IDKhachHang" OtherKey="NhaCungCapID" Type="kPhieuTraHangNCC" />
-      <Association Name="khKhachHang_kPhieuTraHang" Member="kPhieuTraHangs" ThisKey="IDKhachHang" OtherKey="DaiLyID" Type="kPhieuTraHang" />
-      <Association Name="khKhachHang_ghPhieuGiaoHang" Member="ghPhieuGiaoHangs" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="ghPhieuGiaoHang" />
-      <Association Name="khLoaiKhachHang_khKhachHang" Member="khLoaiKhachHang" ThisKey="LoaiKhachHangID" OtherKey="IDLoaiKhachHang" Type="khLoaiKhachHang" IsForeignKey="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.bgChiTietBangGia" Member="bgChiTietBangGias">
     <Type Name="bgChiTietBangGia">
       <Column Name="ID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -471,6 +443,35 @@
       <Column Name="DaXoa" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="PhamViApDung" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
       <Association Name="bgBangGia_bgChiTietBangGia" Member="bgChiTietBangGias" ThisKey="IDBangGia" OtherKey="BangGiaID" Type="bgChiTietBangGia" />
+    </Type>
+  </Table>
+  <Table Name="dbo.khKhachHang" Member="khKhachHangs">
+    <Type Name="khKhachHang">
+      <Column Name="IDKhachHang" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LoaiKhachHangID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaKhachHang" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="HoTen" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="DienThoai" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="DiaChi" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="GhiChu" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="LanCuoiMuaHang" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="TongTienHang" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="MaSoThue" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="TienTraHang" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="CongNo" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="DaXoa" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NgayTao" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="IDBangGia" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="khKhachHang_ghPhieuDaiLyThanhToan" Member="ghPhieuDaiLyThanhToans" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="ghPhieuDaiLyThanhToan" />
+      <Association Name="khKhachHang_gPhieuThu" Member="gPhieuThus" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="gPhieuThu" />
+      <Association Name="khKhachHang_kNhapKho" Member="kNhapKhos" ThisKey="IDKhachHang" OtherKey="NCCID" Type="kNhapKho" />
+      <Association Name="khKhachHang_kPhieuThanhToanNCC" Member="kPhieuThanhToanNCCs" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="kPhieuThanhToanNCC" />
+      <Association Name="khKhachHang_kPhieuTraHangNCC" Member="kPhieuTraHangNCCs" ThisKey="IDKhachHang" OtherKey="NhaCungCapID" Type="kPhieuTraHangNCC" />
+      <Association Name="khKhachHang_kPhieuTraHang" Member="kPhieuTraHangs" ThisKey="IDKhachHang" OtherKey="DaiLyID" Type="kPhieuTraHang" />
+      <Association Name="khKhachHang_ghPhieuGiaoHang" Member="ghPhieuGiaoHangs" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="ghPhieuGiaoHang" />
+      <Association Name="khLoaiKhachHang_khKhachHang" Member="khLoaiKhachHang" ThisKey="LoaiKhachHangID" OtherKey="IDLoaiKhachHang" Type="khLoaiKhachHang" IsForeignKey="true" />
     </Type>
   </Table>
   <Function Name="dbo.spAVG_IDHangHoa" Method="spAVG_IDHangHoa">

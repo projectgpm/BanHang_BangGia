@@ -13,103 +13,40 @@ namespace KobePaint.Pages.HangHoa {
     public partial class LienKetBangGia {
         
         /// <summary>
-        /// cbpTonKho control.
+        /// gridKhachHang control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxCallbackPanel cbpTonKho;
+        protected global::DevExpress.Web.ASPxGridView gridKhachHang;
         
         /// <summary>
-        /// PanelContent1 control.
+        /// dsLoaiKhachHang control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.PanelContent PanelContent1;
+        protected global::System.Web.UI.WebControls.SqlDataSource dsLoaiKhachHang;
         
         /// <summary>
-        /// formThongTin control.
+        /// dsKhachHang control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxFormLayout formThongTin;
+        protected global::System.Web.UI.WebControls.SqlDataSource dsKhachHang;
         
         /// <summary>
-        /// LayoutItemNestedControlContainer1 control.
+        /// dsBangGia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer1;
-        
-        /// <summary>
-        /// btnXuatExcel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxButton btnXuatExcel;
-        
-        /// <summary>
-        /// ccbLoaiTonKho control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxComboBox ccbLoaiTonKho;
-        
-        /// <summary>
-        /// LayoutItemNestedControlContainer3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer3;
-        
-        /// <summary>
-        /// exproter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxGridViewExporter exproter;
-        
-        /// <summary>
-        /// gridTonKho control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxGridView gridTonKho;
-        
-        /// <summary>
-        /// dsNhomHang control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource dsNhomHang;
-        
-        /// <summary>
-        /// dsTonKho control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource dsTonKho;
+        protected global::System.Web.UI.WebControls.SqlDataSource dsBangGia;
         
         /// <summary>
         /// globalEventGrid control.

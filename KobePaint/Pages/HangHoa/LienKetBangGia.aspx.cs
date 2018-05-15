@@ -21,10 +21,7 @@ namespace KobePaint.Pages.HangHoa
                 Response.Redirect("~/Pages/TaiKhoan/DangNhap.aspx");
             }
         }
-        protected void btnXuatExcel_Click(object sender, EventArgs e)
-        {
-            exproter.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
-        }
+       
 
         protected void gridTonKho_CustomColumnDisplayText(object sender, ASPxGridViewColumnDisplayTextEventArgs e)
         {

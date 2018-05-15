@@ -411,7 +411,7 @@
                                                 </Columns>
                                             </dx:ASPxGridView>
                                             <asp:SqlDataSource ID="dsachBangGia" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>"
-                                                 SelectCommand="SELECT IDBangGia, MaBangGia,TenBangGia, GhiChu, PhamViApDung FROM bgBangGia WHERE (DaXoa = 0)" 
+                                                 SelectCommand="SELECT IDBangGia, MaBangGia,TenBangGia, GhiChu, PhamViApDung FROM bgBangGia WHERE (DaXoa = 0) AND IDBangGia > 1" 
                                                  InsertCommand="INSERT INTO bgBangGia(MaBangGia,TenBangGia, GhiChu, PhamViApDung, DaXoa) VALUES (@MaBangGia,@TenBangGia, @GhiChu, @PhamViApDung, 0)"
                                                  UpdateCommand="UPDATE bgBangGia SET MaBangGia =@MaBangGia, TenBangGia = @TenBangGia, GhiChu = @GhiChu, PhamViApDung = @PhamViApDung WHERE (IDBangGia = @IDBangGia)"
                                                  DeleteCommand="UPDATE bgBangGia SET DaXoa = 1 WHERE (IDBangGia = @IDBangGia)" 
