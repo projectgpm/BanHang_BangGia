@@ -187,7 +187,7 @@
                 <PropertiesDateEdit DisplayFormatString="dd/MM/yyyy" DisplayFormatInEditMode="True">
                 </PropertiesDateEdit>
             </dx:GridViewDataDateColumn>
-            <dx:GridViewDataComboBoxColumn Caption="Người bán" FieldName="NhanVienID" VisibleIndex="5" Width="100px">
+            <dx:GridViewDataComboBoxColumn Caption="Người bán" FieldName="NhanVienID" VisibleIndex="5" Width="150px">
                 <PropertiesComboBox DataSourceID="dsNhanVien" TextField="HoTen" ValueField="IDNhanVien">
                 </PropertiesComboBox>
             </dx:GridViewDataComboBoxColumn>
@@ -262,8 +262,12 @@
 
      </asp:SqlDataSource>
      <asp:SqlDataSource ID="dsGiaohang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-         SelectCommand="SELECT * FROM [ghPhieuGiaoHang] ORDER BY [IDPhieuGiaoHang] DESC" 
+         SelectCommand="SELECT IDPhieuGiaoHang, NgayTao, MaPhieu, NhanVienID, GhiChuGiaoHang, KhachHangID, NgayGiao, NguoiGiao, DiaChiGiaoHang, DaXoa, TrangThai, TongSoLuong, TongTien, DienThoai, SoHoaDon, TTThanhToan, ThanhToan, ConLai, STTDonHang, SoDonHangTrongNam, CongNoHienTai, NgayDuyet, GiamGia FROM ghPhieuGiaoHang WHERE (@Quyen &lt;&gt; 3) OR (NhanVienID = @NhanVienID) ORDER BY IDPhieuGiaoHang DESC" 
          UpdateCommand="UPDATE ghPhieuGiaoHang SET   SoHoaDon = @SoHoaDon,DienThoai = @DienThoai,NgayGiao = @NgayGiao, DiaChiGiaoHang = @DiaChiGiaoHang, GhiChuGiaoHang = @GhiChuGiaoHang WHERE (IDPhieuGiaoHang = @IDPhieuGiaoHang)">
+         <SelectParameters>
+             <asp:Parameter DefaultValue="3" Name="Quyen" />
+             <asp:Parameter DefaultValue="1" Name="NhanVienID" />
+         </SelectParameters>
          <UpdateParameters>
              <asp:Parameter Name="DienThoai" />
              <asp:Parameter Name="SoHoaDon" />
@@ -273,7 +277,8 @@
              <asp:Parameter Name="IDPhieuGiaoHang" />
          </UpdateParameters>
      </asp:SqlDataSource>
-    <asp:SqlDataSource ID="dsNhanVien" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDNhanVien], [HoTen] FROM [nvNhanVien]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="dsNhanVien" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
+        SelectCommand="SELECT [IDNhanVien], [HoTen] FROM [nvNhanVien]  WHERE IDNhanVien > 1"></asp:SqlDataSource>
     <dx:ASPxGlobalEvents ID="globalEventGrid" runat="server">
         <ClientSideEvents BrowserWindowResized="function(s, e) {
 	        UpdateControlHeight(gridGiaoHang);

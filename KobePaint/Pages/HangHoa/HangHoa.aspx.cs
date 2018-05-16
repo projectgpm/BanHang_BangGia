@@ -19,6 +19,17 @@ namespace KobePaint.Pages.HangHoa
             {
                 Response.Redirect("~/Pages/TaiKhoan/DangNhap.aspx");
             }
+            if (!IsPostBack)
+            {
+                int Permiss = Formats.PermissionUser();
+                if (Permiss == 3)
+                {
+                    btnThemHangHoa.Enabled = false;
+                  
+                  
+                    gridHangHoa.Columns["chucnang"].Visible = false;
+                }
+            }
         }
 
         protected void grid_CustomColumnDisplayText(object sender, DevExpress.Web.ASPxGridViewColumnDisplayTextEventArgs e)

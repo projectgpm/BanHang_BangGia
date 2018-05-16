@@ -94,6 +94,9 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterSuccess.aspx" />
+    <Content Include="App_Data\MenuBanHang.xml" />
+    <Content Include="App_Data\MenuQuanTri.xml" />
+    <Content Include="App_Data\MenuVanPhong.xml" />
     <Content Include="App_Data\NWind.mdf" />
     <Content Include="App_Data\NWind_log.ldf">
       <DependentUpon>NWind.mdf</DependentUpon>

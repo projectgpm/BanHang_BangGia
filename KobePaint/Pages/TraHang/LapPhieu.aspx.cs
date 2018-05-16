@@ -37,6 +37,9 @@ namespace KobePaint.Pages.TraHang
                 txtTenNhanVien.Text = Formats.NameUser();
                 listReceiptProducts = new List<oImportProduct_TraHangNCC>();
                 hdfViewReport["view"] = 0;
+
+                if (Formats.PermissionUser() == 3)
+                    gridImportPro.Columns["giavon"].Visible = false;
             }
             if (hdfViewReport["view"].ToString() != "0")
             {

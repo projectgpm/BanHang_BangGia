@@ -65,7 +65,11 @@
                                                     }
                                                 }" />
                                             </dx:ASPxComboBox>
-                                            <asp:SqlDataSource ID="dsLoaiKH" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDLoaiKhachHang], [TenLoaiKhachHang] FROM [khLoaiKhachHang] WHERE DaXoa = 0"></asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="dsLoaiKH" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDLoaiKhachHang, TenLoaiKhachHang FROM khLoaiKhachHang WHERE (DaXoa = 0) AND (@Quyen &lt;&gt; 3) OR (DaXoa = 0) AND (IDLoaiKhachHang &lt;&gt; 2)">
+                                                <SelectParameters>
+                                                    <asp:Parameter DefaultValue="1" Name="Quyen" />
+                                                </SelectParameters>
+                                            </asp:SqlDataSource>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>

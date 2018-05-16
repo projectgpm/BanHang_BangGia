@@ -19,6 +19,23 @@ namespace KobePaint.Pages.HangHoa
             if (!IsPostBack)
             {
                 ResetAddProductPanel();
+                int Permiss = Formats.PermissionUser();
+                if (Permiss == 3)
+                {
+                    btnSave.Enabled = false;
+                    btnRenew.Enabled = false;
+                    txtTenHH.Enabled = false;
+                    ccbTinhTrang.Enabled = false;
+                    ccbNhomHH.Enabled = false;
+                    btn_ThemNhomHH.Enabled = false;
+                    ccbDVT.Enabled = false;
+                    btnPreview.Enabled = false;
+                    spGiaVon.Visible = false;
+                    spGiaBan.Enabled = false;
+                    ccbLoaiHangHoa.Enabled = false;
+                    tkBarcode.Enabled = false;
+                }
+                
             }
         }
 

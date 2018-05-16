@@ -135,7 +135,7 @@
             <CustomizationWindow HorizontalAlign="LeftSides" VerticalAlign="TopSides" />
         </SettingsPopup>
         <SettingsSearchPanel Visible="True" />
-        <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." PopupEditFormCaption="Nhập thông tin hàng hóa" ConfirmDelete="Ngừng kinh doanh mặt hàng này." />
+        <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." PopupEditFormCaption="Nhập thông tin hàng hóa" ConfirmDelete="Xác nhận thao tác" />
         <Styles>
             <Header HorizontalAlign="Center">
             </Header>
@@ -184,7 +184,7 @@
                 </Image>
             </EditButton>
             <DeleteButton ButtonType="Image"  RenderMode="Image">
-                <Image IconID="arrows_play_16x16" ToolTip="Ngừng kinh doanh">
+                <Image IconID="arrows_play_16x16" ToolTip="Ngừng/Đang kinh doanh">
                 </Image>
                  <%--<Image ToolTip="Ngừng kinh doanh" Url="../../images/add.png" Width="16px" Height="16px" />--%>
             </DeleteButton>
@@ -200,7 +200,7 @@
             </Items>
         </EditFormLayoutProperties>
         <Columns>
-            <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" VisibleIndex="9">
+            <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" VisibleIndex="9" Name="chucnang">
             </dx:GridViewCommandColumn>
             <dx:GridViewDataTextColumn Caption="STT" FieldName="IDHangHoa" ReadOnly="True" VisibleIndex="0" Width="50px">
                 <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
@@ -238,7 +238,7 @@
                 <CellStyle HorizontalAlign="Center">
                 </CellStyle>
             </dx:GridViewDataSpinEditColumn>
-            <dx:GridViewDataTextColumn Caption="Hàng hóa" FieldName="TenHangHoa" VisibleIndex="1" Width="200px">
+            <dx:GridViewDataTextColumn Caption="Hàng hóa" FieldName="TenHangHoa" VisibleIndex="1" Width="200px" Name="hanghoa">
                  <DataItemTemplate>
                     
                      <a target="_blank" href="CapNhat.aspx?id=<%# Container.KeyValue %>" > <%# Eval("TenHangHoa") %></a>
@@ -264,7 +264,7 @@
     <asp:SqlDataSource ID="dsHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
         SelectCommand="SELECT [IDHangHoa], [MaHang],[LoaiHHID], [TenHangHoa], [NhomHHID], [DonViTinhID], [TonKho], [GiaBan] FROM [hhHangHoa] WHERE ([DaXoa] = @DaXoa)"
         UpdateCommand="UPDATE [hhHangHoa] SET [TenHangHoa] = @TenHangHoa,[GiaBan] = @GiaBan WHERE  [IDHangHoa] = @IDHangHoa"
-        DeleteCommand="UPDATE [hhHangHoa] SET [DaXoa] = 1 WHERE [IDHangHoa] = @IDHangHoa"
+        DeleteCommand="UPDATE hhHangHoa SET DaXoa = CASE WHEN DaXoa = 1 THEN 0 ELSE 1 END WHERE (IDHangHoa = @IDHangHoa)"
         >
         <SelectParameters>
            <asp:ControlParameter ControlID="formThongTin$ccbLoaiHangHoa" Name="DaXoa" PropertyName="Value" Type="Int32" />

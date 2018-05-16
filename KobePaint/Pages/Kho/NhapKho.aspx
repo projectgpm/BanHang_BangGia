@@ -29,14 +29,14 @@
             ccbNhaCungCap.PerformCallback();
         }
         function onSaveClick() {
-            if (checkInput() && confirm('Xác nhận tao tác ?')) {
+            if (checkInput() && confirm('Xác nhận thao tác ?')) {
                 cbpInfoImport.PerformCallback('Save');
                 cbpInfoImport.PerformCallback('redirect');
                 cbpInfo.PerformCallback('resetinfo');
             }
         }
         function onSaveNextClick() {
-            if (checkInput() && confirm('Xác nhận tao tác ?')) {
+            if (checkInput() && confirm('Xác nhận thao tác ?')) {
                 cbpInfoImport.PerformCallback('Save');
                 cbpInfo.PerformCallback('resetinfo');
             }

@@ -17,6 +17,11 @@ namespace KobePaint.Pages.KH_NCC
             {
                 Response.Redirect("~/Pages/TaiKhoan/DangNhap.aspx");
             }
+            if (!IsPostBack)
+            {
+                if (Formats.PermissionUser() == 3)
+                    gridDanhSachKH.Columns["chucnang"].Visible = false;
+            }
         }
 
         protected void gridDanhSachKH_HtmlDataCellPrepared(object sender, DevExpress.Web.ASPxGridViewTableDataCellEventArgs e)

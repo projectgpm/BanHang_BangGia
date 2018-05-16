@@ -161,6 +161,12 @@
             }
             return true;
         }
+
+        function onXoaHangChanged(key) {
+            cbpInfoImport.PerformCallback('xoahang|' + key);
+            cbpInfo.PerformCallback('refresh');
+            //cbpInfo.PerformCallback('giamgia');
+        }
     </script>
 
     <style>
@@ -417,7 +423,7 @@
                                                             <SettingsItemCaptions Location="Top" />
                                                         </dx:ASPxFormLayout>
 
-                                                        <dx:ASPxGridView ID="gridImportPro" ClientInstanceName="gridImportPro" runat="server" Width="100%" AutoGenerateColumns="False" KeyFieldName="STT" OnRowDeleting="gridImportPro_RowDeleting">
+                                                        <dx:ASPxGridView ID="gridImportPro" ClientInstanceName="gridImportPro" runat="server" Width="100%" AutoGenerateColumns="False" KeyFieldName="STT">
                                                             <Settings VerticalScrollBarMode="Visible" VerticalScrollableHeight="0" ShowFooter="True" />
                                                             <SettingsPager Mode="ShowAllRecords">
                                                             </SettingsPager>
@@ -440,15 +446,13 @@
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Mã HH" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="1" Width="100px">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewCommandColumn Caption="Xóa" ShowDeleteButton="True" ShowInCustomizationForm="True" VisibleIndex="9" Width="50px">
-                                                                </dx:GridViewCommandColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Tồn" FieldName="TonKho" ShowInCustomizationForm="True" VisibleIndex="3" Width="50px">
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataSpinEditColumn Caption="Thành tiền" FieldName="ThanhTien" ShowInCustomizationForm="True" VisibleIndex="7" Width="150px">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="5" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="5" Width="150px" Name="giavon">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
                                                                 <dx:GridViewDataSpinEditColumn Caption="Số lượng" FieldName="SoLuong" ShowInCustomizationForm="True" VisibleIndex="4" Width="100px">
@@ -461,7 +465,7 @@
                                                                         <Paddings Padding="2px" />
                                                                     </CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px" Name="giaban">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
                                                                     <DataItemTemplate>
                                                                         <dx:ASPxSpinEdit ID="spGiaBanReturn" runat="server" Number='<%# Convert.ToDouble(Eval("GiaBan")) %>' DisplayFormatString="N0" Width="100%" NumberType="Integer" OnInit="spGiaBanReturn_Init" Increment="5000" HorizontalAlign="Right">
@@ -471,6 +475,18 @@
                                                                         <Paddings Padding="2px" />
                                                                     </CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
+                                                                <dx:GridViewDataButtonEditColumn Caption="Xóa" ShowInCustomizationForm="True" VisibleIndex="10" Width="50px">
+                                                                     <DataItemTemplate>
+                                                                        <dx:ASPxButton AutoPostBack="false" ID="BtnXoaHang" ClientInstanceName="BtnXoaHang" runat="server" 
+                                                                             RenderMode="Link" OnInit="btnXoaHang_Init">
+
+                                                                            <Image IconID="actions_cancel_16x16">
+                                                                            </Image>
+                                                                        </dx:ASPxButton>
+                                                                    </DataItemTemplate>
+                                                                    <CellStyle HorizontalAlign="Center">
+                                                                    </CellStyle>
+                                                                </dx:GridViewDataButtonEditColumn>
                                                             </Columns>
                                                             <FormatConditions>
                                                                 <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] < 1" Format="LightRedFillWithDarkRedText" />

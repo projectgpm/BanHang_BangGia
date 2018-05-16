@@ -303,7 +303,7 @@
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="5" Width="100px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="5" Width="100px" Name="giavon">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
                                                                     
                                                                     <CellStyle>

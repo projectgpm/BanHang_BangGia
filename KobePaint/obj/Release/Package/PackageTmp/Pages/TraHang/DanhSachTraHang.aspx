@@ -229,9 +229,15 @@
                 </dx:GridViewFormatConditionTopBottom>
         </FormatConditions>
     </dx:ASPxGridView>
-    <asp:SqlDataSource ID="dsTraHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT kPhieuTraHang.* FROM kPhieuTraHang ORDER BY IDPhieuTraHang DESC"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="dsTraHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDPhieuTraHang, MaPhieu, DaiLyID, SoPhieuTra, NgayTra, NgayNhap, NhanVienID, GhiChu, CongNoCu, TongSoLuong, HinhThucTT, ThanhToan, ConLai, TongTienHang, DuyetDonHang, STTDonHang, NgayDuyet FROM kPhieuTraHang WHERE (@Quyen &lt;&gt; 3) OR (NhanVienID = @NhanVienID) ORDER BY IDPhieuTraHang DESC">
+        <SelectParameters>
+            <asp:Parameter DefaultValue="1" Name="Quyen" />
+            <asp:Parameter DefaultValue="1" Name="NhanVienID" />
+        </SelectParameters>
+    </asp:SqlDataSource>
     <asp:SqlDataSource ID="dsNhaCC" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] WHERE [LoaiKhachHangID] = 3"></asp:SqlDataSource>
-    <asp:SqlDataSource ID="dsNhanVien" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDNhanVien], [HoTen] FROM [nvNhanVien]"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="dsNhanVien" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
+        SelectCommand="SELECT [IDNhanVien], [HoTen] FROM [nvNhanVien]  WHERE IDNhanVien > 1"></asp:SqlDataSource>
     <dx:ASPxGlobalEvents ID="globalEventGrid" runat="server">
         <ClientSideEvents BrowserWindowResized="function(s, e) {
 	        UpdateControlHeight(gridTraHang);

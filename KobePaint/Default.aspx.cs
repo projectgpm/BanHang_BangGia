@@ -16,9 +16,7 @@ namespace KobePaint {
             }
             // phân quyền
             int Permiss = Formats.PermissionUser();
-            //if (Permiss == 1) Response.Redirect("~/Pages/BaoCao/DoanhThu.aspx");
-            //if (Permiss > 2) Response.Redirect("~/Pages/HangHoa/HangHoa.aspx");
-
+            if (Permiss == 3) Response.Redirect("~/Pages/BanHang/LapPhieu.aspx");
 
             if (CountPhieuGiaoHang() > 0)
                 pageControl.TabPages[0].Text = string.Format("PHIẾU GIAO HÀNG ĐẠI LÝ CHỜ DUYỆT <span class=\"countGH\">{0}</span>", CountPhieuGiaoHang());

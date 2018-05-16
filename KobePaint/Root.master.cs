@@ -18,9 +18,9 @@ namespace KobePaint {
                 {
                     switch (infoUser[2])
                     {
-                        //case "1": XmlDataSourceHeader.DataFile = "~/App_Data/MeNuQuanLy.xml"; break;
-                        //case "2": XmlDataSourceHeader.DataFile = "~/App_Data/MenuToanQuyen.xml"; break;
-                        //case "3": XmlDataSourceHeader.DataFile = "~/App_Data/MenuBanHang.xml"; break;
+                        case "1": XmlDataSourceHeader.DataFile = "~/App_Data/MenuQuanTri.xml"; break;
+                        case "2": XmlDataSourceHeader.DataFile = "~/App_Data/MenuVanPhong.xml"; break;
+                        case "3": XmlDataSourceHeader.DataFile = "~/App_Data/MenuBanHang.xml"; break;
                         default: XmlDataSourceHeader.DataFile = "~/App_Data/MenuToanQuyen.xml"; break;
                     }
                 }

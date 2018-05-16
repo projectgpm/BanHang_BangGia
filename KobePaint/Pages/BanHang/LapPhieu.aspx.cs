@@ -40,7 +40,14 @@ namespace KobePaint.Pages.BanHang
                 hdfViewReport["view"] = 0;
                 txtNguoiNhap.Text = Formats.NameUser();
                 listReceiptProducts = new List<oChiTietHoaDon>();
-            } 
+
+                int Permiss = Formats.PermissionUser();
+                if (Permiss == 3)
+                {
+                    btnExcel.Enabled = false;
+                    gridImportPro.Columns["giavon"].Visible = false;
+                }
+            }
             if (hdfViewReport["view"].ToString() != "0")
             {
                 reportViewer.Report = CreatReport();
@@ -79,10 +86,13 @@ namespace KobePaint.Pages.BanHang
                 case "UnitChange": Unitchange(para[1]); BindGrid(); break;
                 case "Save": Save(); DeleteListProducts(); CreateReportReview_Save(Convert.ToInt32(hiddenFields["IDPhieuMoi"].ToString())); Reset(); break;
                 case "Review": CreateReportReview(); break;
-                case "importexcel": BindGrid(); break;
+                case "importexcel": BindGrid(); BindGrid(); break;
+                case "xoahang": XoaHangChange(para[1]); break;
                 default: InsertIntoGrid(); BindGrid(); break;
             }
         }
+
+       
 
        
         protected void cbpInfo_Callback(object sender, DevExpress.Web.CallbackEventArgsBase e)
@@ -519,7 +529,7 @@ namespace KobePaint.Pages.BanHang
                 else
                 {
                     exitProdInList.SoLuong += 1;
-                    exitProdInList.ThanhTien = exitProdInList.SoLuong * exitProdInList.GiaVon;
+                    exitProdInList.ThanhTien = exitProdInList.SoLuong * exitProdInList.GiaBan;
                 }
                 UpdateSTT();
             }
@@ -543,6 +553,30 @@ namespace KobePaint.Pages.BanHang
             }
 
         }
+
+        #region xóa hàng
+        protected void btnXoaHang_Init(object sender, EventArgs e)
+        {
+            ASPxButton btnButton = sender as ASPxButton;
+            GridViewDataRowTemplateContainer container = btnButton.NamingContainer as GridViewDataRowTemplateContainer;
+            btnButton.ClientSideEvents.Click = String.Format("function(s, e) {{ onXoaHangChanged({0}); }}", container.KeyValue);
+        }
+        private void XoaHangChange(string para)
+        {
+            int STT = Convert.ToInt32(para);
+            var itemToRemove = listReceiptProducts.SingleOrDefault(r => r.STT == STT);
+            if (itemToRemove != null)
+            {
+                listReceiptProducts.Remove(itemToRemove);
+                UpdateSTT();
+            }
+            BindGrid();
+        }
+        #endregion
+
+
+
+
         #region cập nhật SL + DG
         protected void spUnitReturn_Init(object sender, EventArgs e)
         {
@@ -550,11 +584,18 @@ namespace KobePaint.Pages.BanHang
             GridViewDataRowTemplateContainer container = SpinEdit.NamingContainer as GridViewDataRowTemplateContainer;
             SpinEdit.ClientSideEvents.NumberChanged = String.Format("function(s, e) {{ onUnitReturnChanged({0}); }}", container.KeyValue);
         }
+        
         protected void spGiaBanReturn_Init(object sender, EventArgs e)
         {
+            
             ASPxSpinEdit SpinEdit = sender as ASPxSpinEdit;
             GridViewDataRowTemplateContainer container = SpinEdit.NamingContainer as GridViewDataRowTemplateContainer;
             SpinEdit.ClientSideEvents.NumberChanged = String.Format("function(s, e) {{ onUnitReturnChanged({0}); }}", container.KeyValue);
+            int Permiss = Formats.PermissionUser();
+            if (Permiss == 3)
+            {
+                SpinEdit.ReadOnly = true;
+            }
         }
         private void Unitchange(string para)
         {
@@ -571,24 +612,24 @@ namespace KobePaint.Pages.BanHang
             var sourceRow = listReceiptProducts.Where(x => x.STT == IDProduct).SingleOrDefault();
             sourceRow.SoLuong = UnitProductNew;
             sourceRow.GiaBan = PriceProduct_GiaBan;
-            sourceRow.ThanhTien = UnitProductNew * PriceProduct_GiaBan;
+            sourceRow.ThanhTien = sourceRow.SoLuong * sourceRow.GiaBan;
 
             //BindGrid();
         }
         #endregion
 
-        protected void gridImportPro_RowDeleting(object sender, DevExpress.Web.Data.ASPxDataDeletingEventArgs e)
-        {
-            int stt = int.Parse(e.Keys["STT"].ToString());
-            var itemToRemove = listReceiptProducts.SingleOrDefault(r => r.STT == stt);
-            if (itemToRemove != null)
-            {
-                listReceiptProducts.Remove(itemToRemove);
-                UpdateSTT();
-            }
-            e.Cancel = true;
-            BindGrid();
-        }
+        //protected void gridImportPro_RowDeleting(object sender, DevExpress.Web.Data.ASPxDataDeletingEventArgs e)
+        //{
+        //    int stt = int.Parse(e.Keys["STT"].ToString());
+        //    var itemToRemove = listReceiptProducts.SingleOrDefault(r => r.STT == stt);
+        //    if (itemToRemove != null)
+        //    {
+        //        listReceiptProducts.Remove(itemToRemove);
+        //        UpdateSTT();
+        //    }
+        //    e.Cancel = true;
+        //    BindGrid();
+        //}
         #region nhập excel
         public string strFileExcel { get; set; }
         protected void UploadControl_FileUploadComplete(object sender, FileUploadCompleteEventArgs e)
@@ -686,5 +727,7 @@ namespace KobePaint.Pages.BanHang
         {
             Formats.InitDateEditControl(sender, e);
         }
+
+       
     }
 }

@@ -18,6 +18,7 @@ namespace KobePaint.Pages.KH_NCC
             }
             if (!IsPostBack)
             {
+                dsLoaiKH.SelectParameters["Quyen"].DefaultValue = Formats.PermissionUser().ToString();
                 txtTenKH.Focus();
                 txtMaKH.Text = "KH" + (DateTime.Now).ToString("MM") + BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 10).ToString().Substring(1, 4);
             }  

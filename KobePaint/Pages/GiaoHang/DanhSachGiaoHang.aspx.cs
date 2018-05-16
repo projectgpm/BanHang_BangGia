@@ -20,6 +20,8 @@ namespace KobePaint.Pages.GiaoHang
             }
             if (!IsPostBack)
             {
+                dsGiaohang.SelectParameters["Quyen"].DefaultValue = Formats.PermissionUser().ToString();
+                dsGiaohang.SelectParameters["NhanVienID"].DefaultValue = Formats.IDUser().ToString();
                 hdfViewReport["view"] = 0;
             }
             if (hdfViewReport["view"].ToString() != "0")
@@ -30,6 +32,7 @@ namespace KobePaint.Pages.GiaoHang
                     reportViewer.Report = CreatReportNoPrice();
                 hdfViewReport["view"] = 0;
             }
+            
         }
         rpPhieuGiaoHang CreatReport()
         {

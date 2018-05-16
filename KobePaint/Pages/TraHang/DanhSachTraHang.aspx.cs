@@ -21,6 +21,8 @@ namespace KobePaint.Pages.TraHang
             if (!IsPostBack)
             {
                 hdfViewReport["view"] = 0;
+                dsTraHang.SelectParameters["Quyen"].DefaultValue = Formats.PermissionUser().ToString();
+                dsTraHang.SelectParameters["NhanVienID"].DefaultValue = Formats.IDUser().ToString();
             }
             if (hdfViewReport["view"].ToString() != "0")
             {
