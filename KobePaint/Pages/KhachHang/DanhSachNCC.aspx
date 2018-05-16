@@ -73,7 +73,7 @@
             <dx:GridViewDataTextColumn Caption="Mã NCC" FieldName="MaKhachHang" VisibleIndex="1" Width="120px">
                 <EditFormSettings Visible="False" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Tên NCC" FieldName="HoTen" VisibleIndex="2">
+            <dx:GridViewDataTextColumn Caption="Tên NCC" FieldName="HoTen" VisibleIndex="2" CellStyle-Font-Bold="true">
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn FieldName="DiaChi" VisibleIndex="4" Caption="Địa chỉ">
             </dx:GridViewDataTextColumn>
@@ -96,7 +96,7 @@
                 </PropertiesSpinEdit>
                 <EditFormSettings Visible="False" />
             </dx:GridViewDataSpinEditColumn>
-            <dx:GridViewDataSpinEditColumn Caption="Nợ" FieldName="CongNo" VisibleIndex="11">
+            <dx:GridViewDataSpinEditColumn Caption="Nợ" FieldName="CongNo" VisibleIndex="11" CellStyle-Font-Bold="true">
                 <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <EditFormSettings Visible="False" />

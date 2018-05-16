@@ -350,7 +350,7 @@ namespace KobePaint.Pages.GiaoHang
             spTongTien.Text = TongTien.ToString();
             spThanhToan.Text = (TongTien - Convert.ToDouble(spGiamGia.Number)).ToString();
             spTienTraKhach.Text = ((-1) * (TongTien - Convert.ToDouble(spGiamGia.Number))).ToString();
-           // spKhachHangThoan.Text = TongTien.ToString();
+           // cbpInfo.JSProperties["cp_refresh"] = true;
         }
         private void BindGrid()
         {
@@ -395,6 +395,8 @@ namespace KobePaint.Pages.GiaoHang
             ccbBarcode.Text = "";
             ccbBarcode.Focus();
         }
+
+
         #region InsertHang
         protected void InsertIntoGrid()
         {
@@ -490,6 +492,8 @@ namespace KobePaint.Pages.GiaoHang
             }
 
         }
+
+
         #region cập nhật SL + DG
         protected void spUnitReturn_Init(object sender, EventArgs e)
         {
