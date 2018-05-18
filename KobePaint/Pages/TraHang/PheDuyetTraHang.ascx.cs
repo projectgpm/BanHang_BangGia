@@ -49,23 +49,24 @@ namespace KobePaint.Pages.TraHang
                         // hoàn tất
                         if (KH != null && PhieuTraHang != null)
                         {
+                            #region nhật ký công nợ
+                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                                nhatky.NgayNhap = DateTime.Now;
+                                nhatky.DienGiai = "Duyệt đại lý trả hàng ";
+                                nhatky.NoDau = KH.CongNo;
+                                nhatky.NhapHang = 0;
+                                nhatky.TraHang = PhieuTraHang.ConLai;
+                                nhatky.NoCuoi = KH.CongNo - PhieuTraHang.ConLai;
+                                nhatky.ThanhToan = 0;
+                                nhatky.NhanVienID = Formats.IDUser();
+                                nhatky.SoPhieu = PhieuTraHang.MaPhieu;
+                                nhatky.IDKhachHang = DaiLyID;
+                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                                DBDataProvider.DB.SubmitChanges();
+                            #endregion
+
                             if (PhieuTraHang.HinhThucTT == 1)
                             {
-                                #region nhật ký công nợ
-                                    khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                                    nhatky.NgayNhap = DateTime.Now;
-                                    nhatky.DienGiai = "Duyệt đại lý trả hàng ";
-                                    nhatky.NoDau = KH.CongNo;
-                                    nhatky.NhapHang = 0;
-                                    nhatky.TraHang = PhieuTraHang.ConLai;
-                                    nhatky.NoCuoi = KH.CongNo - PhieuTraHang.ConLai;
-                                    nhatky.ThanhToan = 0;
-                                    nhatky.NhanVienID = Formats.IDUser();
-                                    nhatky.SoPhieu = PhieuTraHang.MaPhieu;
-                                    nhatky.IDKhachHang = DaiLyID;
-                                    DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                                    DBDataProvider.DB.SubmitChanges();
-                                #endregion
                                 KH.CongNo -= PhieuTraHang.ConLai; // giảm công nợ
                                 KH.TienTraHang += PhieuTraHang.ConLai;
                                 KH.LanCuoiMuaHang = DateTime.Now;

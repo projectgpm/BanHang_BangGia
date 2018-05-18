@@ -21,11 +21,11 @@
                  gridChiTietCongNo.Refresh();
          }
          function checkInput() {
-             if (ccbKhachHang.GetSelectedIndex() == -1) {
-                 alert('Vui lòng chọn khách hàng!!');
-                 ccbKhachHang.Focus();
-                 return false;
-             }
+             //if (ccbKhachHang.GetSelectedIndex() == -1) {
+             //    alert('Vui lòng chọn khách hàng!!');
+             //    ccbKhachHang.Focus();
+             //    return false;
+             //}
              if (fromDay.GetValue() == null) {
                  alert('Vui lòng chọn ngày xem báo cáo');
                  fromDay.Focus();
@@ -53,13 +53,13 @@
                     <dx:LayoutItem Caption="Khách hàng">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                                <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%">
+                                <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%" DropDownStyle="DropDown">
                                     <Columns>
                                         <dx:ListBoxColumn Caption="Họ tên" FieldName="HoTen" />
                                         <dx:ListBoxColumn Caption="Điện thoại" FieldName="DienThoai" />
                                     </Columns>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen], [DienThoai] FROM [khKhachHang] WHERE [LoaiKhachHangID] = 3"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen], [DienThoai] FROM [khKhachHang] WHERE [LoaiKhachHangID] <> 2"></asp:SqlDataSource>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
@@ -170,12 +170,12 @@
     </dx:ASPxGridView>
      <asp:SqlDataSource ID="dsChiTiet" runat="server" 
         ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT ghPhieuDaiLyThanhToan.IDPhieuThu, ghPhieuDaiLyThanhToan.STTPhieuThu, ghPhieuDaiLyThanhToan.SoHoaDon, ghPhieuDaiLyThanhToan.KhachHangID, ghPhieuDaiLyThanhToan.SoTienThu, ghPhieuDaiLyThanhToan.NoiDung, ghPhieuDaiLyThanhToan.NgayThu, ghPhieuDaiLyThanhToan.NhanVienThuID, ghPhieuDaiLyThanhToan.HinhThucTTID, ghPhieuDaiLyThanhToan.CongNoCu, ghPhieuDaiLyThanhToan.NgayLap, nvNhanVien.HoTen AS HoTenNV, khKhachHang.MaKhachHang, khKhachHang.HoTen AS HoTenKH, khKhachHang.DienThoai FROM ghPhieuDaiLyThanhToan INNER JOIN khKhachHang ON ghPhieuDaiLyThanhToan.KhachHangID = khKhachHang.IDKhachHang INNER JOIN nvNhanVien ON ghPhieuDaiLyThanhToan.NhanVienThuID = nvNhanVien.IDNhanVien WHERE (ghPhieuDaiLyThanhToan.NgayThu &lt;= DATEADD(day, 1, @DenNgay)) AND (ghPhieuDaiLyThanhToan.NgayThu &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID = 3) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
+        SelectCommand="SELECT ghPhieuDaiLyThanhToan.IDPhieuThu, ghPhieuDaiLyThanhToan.STTPhieuThu, ghPhieuDaiLyThanhToan.SoHoaDon, ghPhieuDaiLyThanhToan.KhachHangID, ghPhieuDaiLyThanhToan.SoTienThu, ghPhieuDaiLyThanhToan.NoiDung, ghPhieuDaiLyThanhToan.NgayThu, ghPhieuDaiLyThanhToan.NhanVienThuID, ghPhieuDaiLyThanhToan.HinhThucTTID, ghPhieuDaiLyThanhToan.CongNoCu, ghPhieuDaiLyThanhToan.NgayLap, nvNhanVien.HoTen AS HoTenNV, khKhachHang.MaKhachHang, khKhachHang.HoTen AS HoTenKH, khKhachHang.DienThoai FROM ghPhieuDaiLyThanhToan INNER JOIN khKhachHang ON ghPhieuDaiLyThanhToan.KhachHangID = khKhachHang.IDKhachHang INNER JOIN nvNhanVien ON ghPhieuDaiLyThanhToan.NhanVienThuID = nvNhanVien.IDNhanVien WHERE (ghPhieuDaiLyThanhToan.NgayThu &lt;= DATEADD(day, 1, @DenNgay)) AND (ghPhieuDaiLyThanhToan.NgayThu &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (@IDKhachHang = 0) OR (ghPhieuDaiLyThanhToan.NgayThu &lt;= DATEADD(day, 1, @DenNgay)) AND (ghPhieuDaiLyThanhToan.NgayThu &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
         CancelSelectOnNullParameter="False">
         <SelectParameters>
             <asp:ControlParameter ControlID="formThongTin$fromDay" Name="TuNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue=""  />
             <asp:ControlParameter ControlID="formThongTin$toDay" Name="DenNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue="" />
-            <asp:ControlParameter ControlID="formThongTin$ccbKhachHang" Name="IDKhachHang" PropertyName="Value" Type="Int32" />
+            <asp:ControlParameter ControlID="formThongTin$ccbKhachHang" Name="IDKhachHang" PropertyName="Value" Type="Int32" DefaultValue="0" />
         </SelectParameters>
     </asp:SqlDataSource>
     <dx:ASPxGlobalEvents ID="globalEventGrid" runat="server">

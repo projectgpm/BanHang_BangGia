@@ -158,7 +158,7 @@
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsChiTietCongNo" runat="server" 
         ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT khNhatKyCongNo.IDCongNo, khNhatKyCongNo.NgayNhap, khNhatKyCongNo.DienGiai, khNhatKyCongNo.NoDau, khNhatKyCongNo.NhapHang, khNhatKyCongNo.TraHang, khNhatKyCongNo.NoCuoi, khNhatKyCongNo.ThanhToan, khNhatKyCongNo.NhanVienID, khNhatKyCongNo.SoPhieu, khNhatKyCongNo.IDKhachHang, khKhachHang.HoTen, khKhachHang.DienThoai FROM khNhatKyCongNo INNER JOIN khKhachHang ON khNhatKyCongNo.IDKhachHang = khKhachHang.IDKhachHang WHERE (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID = 3)" 
+        SelectCommand="SELECT khNhatKyCongNo.IDCongNo, khNhatKyCongNo.NgayNhap, khNhatKyCongNo.DienGiai, khNhatKyCongNo.NoDau, khNhatKyCongNo.NhapHang, khNhatKyCongNo.TraHang, khNhatKyCongNo.NoCuoi, khNhatKyCongNo.ThanhToan, khNhatKyCongNo.NhanVienID, khNhatKyCongNo.SoPhieu, khNhatKyCongNo.IDKhachHang, khKhachHang.HoTen, khKhachHang.DienThoai FROM khNhatKyCongNo INNER JOIN khKhachHang ON khNhatKyCongNo.IDKhachHang = khKhachHang.IDKhachHang WHERE (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2)" 
         CancelSelectOnNullParameter="False">
         <SelectParameters>
             <asp:ControlParameter ControlID="formThongTin$fromDay" Name="TuNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue=""  />

@@ -317,24 +317,27 @@ namespace KobePaint.Pages.BanHang
                                 #endregion
                             }
                         }
+
+                        #region nhật ký công nợ
+                        khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                        nhatky.NgayNhap = DateTime.Now;
+                        nhatky.DienGiai = "Bán hàng";
+                        nhatky.NoDau = KH.CongNo;
+                        nhatky.NhapHang = Convert.ToDouble(spTienTraKhach.Number);
+                        nhatky.TraHang = 0;
+                        nhatky.NoCuoi = KH.CongNo + Convert.ToDouble(spTienTraKhach.Number);
+                        nhatky.ThanhToan = 0;
+                        nhatky.NhanVienID = Formats.IDUser();
+                        nhatky.SoPhieu = giaohang.MaPhieu;
+                        nhatky.IDKhachHang = IDkhachHang;
+                        DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                        DBDataProvider.DB.SubmitChanges();
+                        #endregion
+
                         if (Convert.ToDouble(spTienTraKhach.Number) < 0)
                         {
                             // cập nhật công nợ
-                            #region nhật ký công nợ
-                            khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                            nhatky.NgayNhap = DateTime.Now;
-                            nhatky.DienGiai = "Bán hàng";
-                            nhatky.NoDau = KH.CongNo;
-                            nhatky.NhapHang = Convert.ToDouble(spTienTraKhach.Number);
-                            nhatky.TraHang = 0;
-                            nhatky.NoCuoi = KH.CongNo + Convert.ToDouble(spTienTraKhach.Number);
-                            nhatky.ThanhToan = 0;
-                            nhatky.NhanVienID = Formats.IDUser();
-                            nhatky.SoPhieu = giaohang.MaPhieu;
-                            nhatky.IDKhachHang = IDkhachHang;
-                            DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                            DBDataProvider.DB.SubmitChanges();
-                            #endregion
+                         
                             KH.CongNo += (-1) * Convert.ToDouble(spTienTraKhach.Number); // cộng công nợ
                         }
 

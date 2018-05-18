@@ -53,8 +53,7 @@
       <item Text="Báo cáo doanh thu" NavigateUrl="~/Pages/BaoCao/DoanhThuDaiLy.aspx" />
       <!--<item Text="Báo cáo doanh thu theo hàng hóa(chưa)" NavigateUrl="" />-->
       <item Text="Báo cáo công nợ" NavigateUrl="~/Pages/BaoCao/CongNo.aspx" />
-      <item Text="Báo cáo công nợ chi tiết theo ngày" NavigateUrl="~/Pages/BaoCao/CongNoDLTheoNgay.aspx" />
-      <item Text="Báo cáo công nợ chi tiết theo khách hàng" NavigateUrl="~/Pages/BaoCao/CongNoDLChiTiet.aspx" />
+      <item Text="Báo cáo chi tiết giao dịch" NavigateUrl="~/Pages/BaoCao/CongNoDLChiTiet.aspx" />
       <item Text="Báo cáo thanh toán" NavigateUrl="~/Pages/BaoCao/ThanhToanDaiLy.aspx" />
       <item Text="Báo cáo trả hàng" NavigateUrl="~/Pages/BaoCao/TraHangDaiLy.aspx" />
     </item>

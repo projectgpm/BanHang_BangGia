@@ -184,7 +184,9 @@
   <ItemGroup>
     <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="KobePaintDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>KobePaintDB.designer.cs</LastGenOutput>

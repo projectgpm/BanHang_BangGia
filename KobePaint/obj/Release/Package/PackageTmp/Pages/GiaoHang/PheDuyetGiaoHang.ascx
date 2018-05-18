@@ -4,7 +4,6 @@
 <dx:ASPxGridView ID="gridDonHang" ClientInstanceName="gridDonHang" runat="server" AutoGenerateColumns="False" DataSourceID="dsDonHang" KeyFieldName="IDPhieuGiaoHang" Width="100%" OnCustomColumnDisplayText="gridDonHang_CustomColumnDisplayText" OnRowUpdating="gridDonHang_RowUpdating">
         <SettingsEditing Mode="Batch">
         </SettingsEditing>
-        <Settings VerticalScrollBarMode="Visible"  ShowFilterRow="false"/>
         <SettingsCommandButton>
             <ShowAdaptiveDetailButton ButtonType="Image">
             </ShowAdaptiveDetailButton>
@@ -166,9 +165,8 @@
                         Value='<%# Eval("TrangThai")%>' ValueType="System.Int32" Width="100%">
                     </dx:ASPxComboBox >
                 </DataItemTemplate>--%>
-                 <CellStyle>
-                    <Paddings Padding="2px" />
-                </CellStyle>
+
+<CellStyle HorizontalAlign="Center" Font-Bold="True"></CellStyle>
                 <PropertiesComboBox EnableFocusedStyle="False">
                     <Items>
                         <dx:ListEditItem Text="Đã đặt" Value="0" />
@@ -178,7 +176,9 @@
                 </PropertiesComboBox>
             <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
 
-<CellStyle HorizontalAlign="Center" Font-Bold="True"></CellStyle>
+                 <CellStyle>
+                    <Paddings Padding="2px" />
+                </CellStyle>
             </dx:GridViewDataComboBoxColumn>
         </Columns>
     </dx:ASPxGridView>

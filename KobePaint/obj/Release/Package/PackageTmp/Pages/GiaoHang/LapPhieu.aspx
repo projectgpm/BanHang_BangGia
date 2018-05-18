@@ -110,7 +110,12 @@
                 ShowPopup(4000);
             }
         }
-
+        function endCallBackInfo(s, e) {
+            //if (s.cp_refresh) {
+            //    cbpInfo.PerformCallback('refresh');
+            //    delete (s.cp_refresh);
+            //}
+        }
         function btnApDungonClick() {
             if (checkInputGiamGia()) {
                 cbpInfo.PerformCallback('giamgia');
@@ -191,10 +196,12 @@
                     <Panes>
                         <dx:SplitterPane Name="splpInfo">
                             <Panes>
+
                                 <dx:SplitterPane MaxSize="350px" Name="splpInfoNCC"  >
                                     <ContentCollection>
                                         <dx:SplitterContentControl ID="SplitterContentControl1" runat="server">
-                                             <dx:ASPxCallbackPanel ID="cbpInfo" ClientInstanceName="cbpInfo" runat="server" Width="100%" OnCallback="cbpInfo_Callback">
+
+                                             <dx:ASPxCallbackPanel SettingsLoadingPanel-Enabled="False"  ID="cbpInfo" ClientInstanceName="cbpInfo" runat="server" Width="100%" OnCallback="cbpInfo_Callback" >
                                                 <PanelCollection>
                                                     <dx:PanelContent ID="PanelContent3" runat="server">
                                                         <dx:ASPxFormLayout ID="flayoutInfoNCC" runat="server" Width="100%">
@@ -357,7 +364,9 @@
                                                         </dx:ASPxFormLayout>
                                                     </dx:PanelContent>
                                                 </PanelCollection>
+                                                 <ClientSideEvents EndCallback="endCallBackInfo" />
                                                 </dx:ASPxCallbackPanel>
+
                                         </dx:SplitterContentControl>
                                     </ContentCollection>
                                 </dx:SplitterPane>
@@ -365,7 +374,7 @@
                                 <dx:SplitterPane Name="splpInfoImport">
                                     <ContentCollection>
                                         <dx:SplitterContentControl ID="SplitterContentControl2" runat="server">
-                                            <dx:ASPxCallbackPanel ID="cbpInfoImport" ClientInstanceName="cbpInfoImport" runat="server" Width="100%" OnCallback="cbpInfoImport_Callback">
+                                            <dx:ASPxCallbackPanel  SettingsLoadingPanel-Enabled="False" ID="cbpInfoImport" ClientInstanceName="cbpInfoImport" runat="server" Width="100%" OnCallback="cbpInfoImport_Callback">
                                                 <PanelCollection>
                                                     <dx:PanelContent ID="PanelContent2" runat="server">
                                                         <dx:ASPxFormLayout ID="flayoutInfosImport" ClientInstanceName="flayoutInfosImport" runat="server" Width="100%">

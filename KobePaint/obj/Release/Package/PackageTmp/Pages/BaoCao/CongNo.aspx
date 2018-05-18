@@ -71,6 +71,8 @@
                                             <PropertiesTextEdit DisplayFormatString="N0">
                                             </PropertiesTextEdit>
                                             <Settings AllowHeaderFilter="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
                                         </dx:GridViewDataTextColumn>
                                     </Columns>
                                     <TotalSummary>
@@ -83,10 +85,9 @@
                                         </Header>
                                     </Styles>
                                 </dx:ASPxGridView>
-                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT * FROM [khKhachHang] WHERE (([DaXoa] = @DaXoa) AND ([LoaiKhachHangID] = @LoaiKhachHangID)) ORDER BY [HoTen]">
+                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDKhachHang, LoaiKhachHangID, MaKhachHang, HoTen, DienThoai, DiaChi, GhiChu, Email, LanCuoiMuaHang, TongTienHang, MaSoThue, TienTraHang, CongNo, DaXoa, NgayTao, ThanhToan, IDBangGia FROM khKhachHang WHERE (DaXoa = @DaXoa) AND (LoaiKhachHangID &lt;&gt; 2) ORDER BY HoTen">
                                     <SelectParameters>
                                         <asp:Parameter DefaultValue="0" Name="DaXoa" Type="Int32" />
-                                        <asp:Parameter DefaultValue="3" Name="LoaiKhachHangID" Type="Int32" />
                                     </SelectParameters>
                                 </asp:SqlDataSource>
                             </dx:LayoutItemNestedControlContainer>

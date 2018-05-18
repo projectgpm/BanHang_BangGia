@@ -22,11 +22,11 @@
                  gridChiTietCongNo.Refresh();
          }
          function checkInput() {
-             if (ccbKhachHang.GetSelectedIndex() == -1) {
-                 alert('Vui lòng chọn khách hàng!!');
-                 ccbKhachHang.Focus();
-                 return false;
-             }
+             //if (ccbKhachHang.GetSelectedIndex() == -1) {
+             //    alert('Vui lòng chọn khách hàng!!');
+             //    ccbKhachHang.Focus();
+             //    return false;
+             //}
              if (fromDay.GetValue() == null) {
                  alert('Vui lòng chọn ngày xem báo cáo');
                  fromDay.Focus();
@@ -67,13 +67,13 @@
                     <dx:LayoutItem Caption="Khách hàng">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                                <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%">
+                                <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%" DropDownStyle="DropDown">
                                     <Columns>
                                         <dx:ListBoxColumn Caption="Họ tên" FieldName="HoTen" />
                                         <dx:ListBoxColumn Caption="Điện thoại" FieldName="DienThoai" />
                                     </Columns>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen], [DienThoai] FROM [khKhachHang] WHERE [LoaiKhachHangID] = 3"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen], [DienThoai] FROM [khKhachHang] WHERE [LoaiKhachHangID] <> 2"></asp:SqlDataSource>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
@@ -182,12 +182,12 @@
     </dx:ASPxGridView>
      <asp:SqlDataSource ID="dsChiTiet" runat="server" 
         ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT khKhachHang.HoTen AS HoTenKH, khKhachHang.DienThoai, kPhieuTraHang.IDPhieuTraHang, kPhieuTraHang.MaPhieu, kPhieuTraHang.STTDonHang, kPhieuTraHang.TongTienHang, kPhieuTraHang.ThanhToan, kPhieuTraHang.ConLai, kPhieuTraHang.NgayTra, nvNhanVien.HoTen AS HoTenNV FROM kPhieuTraHang INNER JOIN khKhachHang ON kPhieuTraHang.DaiLyID = khKhachHang.IDKhachHang INNER JOIN nvNhanVien ON kPhieuTraHang.NhanVienID = nvNhanVien.IDNhanVien WHERE (kPhieuTraHang.NgayTra &lt;= DATEADD(day, 1, @DenNgay)) AND (kPhieuTraHang.NgayTra &gt;= @TuNgay) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
+        SelectCommand="SELECT khKhachHang.HoTen AS HoTenKH, khKhachHang.DienThoai, kPhieuTraHang.IDPhieuTraHang, kPhieuTraHang.MaPhieu, kPhieuTraHang.STTDonHang, kPhieuTraHang.TongTienHang, kPhieuTraHang.ThanhToan, kPhieuTraHang.ConLai, kPhieuTraHang.NgayTra, nvNhanVien.HoTen AS HoTenNV FROM kPhieuTraHang INNER JOIN khKhachHang ON kPhieuTraHang.DaiLyID = khKhachHang.IDKhachHang INNER JOIN nvNhanVien ON kPhieuTraHang.NhanVienID = nvNhanVien.IDNhanVien WHERE (kPhieuTraHang.NgayTra &lt;= DATEADD(day, 1, @DenNgay)) AND (kPhieuTraHang.NgayTra &gt;= @TuNgay) AND (@IDKhachHang = 0) OR (kPhieuTraHang.NgayTra &lt;= DATEADD(day, 1, @DenNgay)) AND (kPhieuTraHang.NgayTra &gt;= @TuNgay) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
         CancelSelectOnNullParameter="False">
         <SelectParameters>
             <asp:ControlParameter ControlID="formThongTin$fromDay" Name="TuNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue=""  />
             <asp:ControlParameter ControlID="formThongTin$toDay" Name="DenNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue="" />
-            <asp:ControlParameter ControlID="formThongTin$ccbKhachHang" Name="IDKhachHang" PropertyName="Value" Type="Int32" />
+            <asp:ControlParameter ControlID="formThongTin$ccbKhachHang" Name="IDKhachHang" PropertyName="Value" Type="Int32" DefaultValue="0" />
         </SelectParameters>
     </asp:SqlDataSource>
     <dx:ASPxGlobalEvents ID="globalEventGrid" runat="server">

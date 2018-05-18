@@ -132,7 +132,7 @@ namespace KobePaint.Pages.HangHoa
                     BG.HangHoaID = tblHangHoa.IDHangHoa;
                     BG.BangGiaID = IDBangGia;
                     BG.GiaVon = Convert.ToDouble(tblHangHoa.GiaVon);
-                    BG.DonGia = GiaNhapCuoi.GiaVon;
+                    BG.DonGia = GiaNhapCuoi == null ? tblHangHoa.GiaVon : GiaNhapCuoi.GiaVon;
                     BG.GiaMoi = tblHangHoa.GiaBan;
                     DBDataProvider.DB.bgChiTietBangGias.InsertOnSubmit(BG);
                     DBDataProvider.DB.SubmitChanges();

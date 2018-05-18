@@ -21,7 +21,7 @@ namespace KobePaint.Pages.BaoCao
         }
         protected void dateEditControl_Init(object sender, EventArgs e)
         {
-            Formats.InitDateEditControlNoValue(sender, e);
+            Formats.InitDateEditControl(sender, e);
         }
         protected void grid_CustomColumnDisplayText(object sender, DevExpress.Web.ASPxGridViewColumnDisplayTextEventArgs e)
         {
