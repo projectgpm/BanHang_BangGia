@@ -82,6 +82,7 @@ D:\GPMVIETNAM\BanHang_ChiNhanh\KobePaint\obj\Debug\KobePaint.dll
 D:\GPMVIETNAM\BanHang_ChiNhanh\KobePaint\obj\Debug\KobePaint.pdb
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\bin\KobePaint.dll
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\bin\KobePaint.pdb
+D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.Reports.rpGiaoDich.resources
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.Reports.rpPhieuGiaoHang.resources
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.Reports.rpPhieuGiaoHangNoPrice.resources
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Debug\KobePaint.Reports.rpPhieuThanhToan.resources

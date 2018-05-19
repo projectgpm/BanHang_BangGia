@@ -1,4 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeBehind="CongNoDLChiTiet.aspx.cs" Inherits="KobePaint.Pages.BaoCao.CongNoDLChiTiet" %>
+<%@ Register Assembly="DevExpress.XtraReports.v16.1.Web, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" Namespace="DevExpress.XtraReports.Web" TagPrefix="dx" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
         <style>
 
@@ -37,10 +39,26 @@
              }
              return true;
          }
+         function btnInPhieuClick() {
+             if (checkInput()) {
+                 if (ccbKhachHang.GetSelectedIndex() == -1) {
+                     alert('Vui lòng chọn khách hàng!!');
+                     ccbKhachHang.Focus();
+                 }
+                 else {
+                     popupViewReport.Show();
+                     cbpViewReport.PerformCallback();
+                 }
+             }
+         }
+         function onEndCallBackViewRp() {
+             hdfViewReport.Set('View', '1');
+             reportViewer.GetViewer().Refresh();
+         }
     </script>
     <dx:ASPxFormLayout ID="formThongTin" ClientInstanceName="formThongTin" runat="server" Width="100%">
         <Items>
-            <dx:LayoutGroup Caption="Báo cáo công nợ chi tiết theo đại lý" ColCount="5" HorizontalAlign="Center" Width="100%">
+            <dx:LayoutGroup Caption="Báo cáo chi tiết giao dịch" ColCount="6" HorizontalAlign="Center" Width="100%">
                 <Items>
                     <dx:LayoutItem Caption="Khách hàng">
                         <LayoutItemNestedControlCollection>
@@ -89,6 +107,15 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
+                    <dx:LayoutItem ShowCaption="False">
+                        <LayoutItemNestedControlCollection>
+                            <dx:LayoutItemNestedControlContainer runat="server">
+                                <dx:ASPxButton ID="btnInPhieu" runat="server" ClientInstanceName="btnInPhieu" Text="In Phiếu" AutoPostBack="False">
+                                    <ClientSideEvents Click="btnInPhieuClick" />
+                                </dx:ASPxButton>
+                            </dx:LayoutItemNestedControlContainer>
+                        </LayoutItemNestedControlCollection>
+                    </dx:LayoutItem>
                 </Items>
                 <SettingsItemCaptions Location="Left" />
             </dx:LayoutGroup>
@@ -99,6 +126,7 @@
             </LayoutItem>
         </Styles>
     </dx:ASPxFormLayout>
+
    <dx:ASPxGridView ID="gridChiTietCongNo" ClientInstanceName="gridChiTietCongNo" runat="server" AutoGenerateColumns="False" DataSourceID="dsChiTietCongNo" Width="100%" OnCustomColumnDisplayText="grid_CustomColumnDisplayText">
         <Settings VerticalScrollBarMode="Auto" ShowFilterRow="True" ShowFilterRowMenu="True" ShowFooter="True" ShowHeaderFilterButton="true"/>
         <SettingsCommandButton>
@@ -165,6 +193,13 @@
             <dx:GridViewDataTextColumn Caption="Điện thoại" FieldName="DienThoai" VisibleIndex="2">
             </dx:GridViewDataTextColumn>
         </Columns>
+       <FormatConditions>
+            <dx:GridViewFormatConditionHighlight FieldName="NoCuoi" Expression="[NoCuoi] < 1" Format="LightRedFillWithDarkRedText" />
+            <dx:GridViewFormatConditionHighlight FieldName="NoCuoi" Expression="[NoCuoi] > 0" Format="GreenFillWithDarkGreenText" />
+            <dx:GridViewFormatConditionTopBottom FieldName="NoCuoi" Rule="TopItems" Threshold="15" Format="BoldText" CellStyle-HorizontalAlign="Center">
+                <CellStyle HorizontalAlign="Center"></CellStyle>
+            </dx:GridViewFormatConditionTopBottom>
+        </FormatConditions>
         <TotalSummary>
             <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="NoDau" ShowInColumn="Nợ đầu" SummaryType="Sum" />
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="NhapHang" ShowInColumn="Nhập hàng" SummaryType="Sum" />
@@ -172,10 +207,24 @@
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="ThanhToan" ShowInColumn="Thanh toán" SummaryType="Sum" />
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="NoCuoi" ShowInColumn="Nợ cuối" SummaryType="Sum" />
         </TotalSummary>
+
+
     </dx:ASPxGridView>
      <asp:SqlDataSource ID="dsChiTietCongNo" runat="server" 
         ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT khNhatKyCongNo.IDCongNo, khNhatKyCongNo.NgayNhap, khNhatKyCongNo.DienGiai, khNhatKyCongNo.NoDau, khNhatKyCongNo.NhapHang, khNhatKyCongNo.TraHang, khNhatKyCongNo.NoCuoi, khNhatKyCongNo.ThanhToan, khNhatKyCongNo.NhanVienID, khNhatKyCongNo.SoPhieu, khNhatKyCongNo.IDKhachHang, khKhachHang.HoTen, khKhachHang.DienThoai FROM khNhatKyCongNo INNER JOIN khKhachHang ON khNhatKyCongNo.IDKhachHang = khKhachHang.IDKhachHang WHERE (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (@IDKhachHang = 0) OR (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
+        SelectCommand="SELECT khNhatKyCongNo.IDCongNo, khNhatKyCongNo.NgayNhap,
+          khNhatKyCongNo.DienGiai, khNhatKyCongNo.NoDau,
+          khNhatKyCongNo.NhapHang, khNhatKyCongNo.TraHang,
+          khNhatKyCongNo.NoCuoi, khNhatKyCongNo.ThanhToan, khNhatKyCongNo.NhanVienID,
+          khNhatKyCongNo.SoPhieu, khNhatKyCongNo.IDKhachHang, khKhachHang.HoTen,
+          khKhachHang.DienThoai FROM khNhatKyCongNo INNER JOIN khKhachHang
+          ON khNhatKyCongNo.IDKhachHang = khKhachHang.IDKhachHang 
+         WHERE (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) 
+         AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) 
+         AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) 
+         AND (@IDKhachHang = 0) OR (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) 
+         AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) 
+         AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
         CancelSelectOnNullParameter="False">
         <SelectParameters>
             <asp:ControlParameter ControlID="formThongTin$fromDay" Name="TuNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue=""  />
@@ -188,4 +237,22 @@
     </dx:ASPxGlobalEvents>
     <dx:ASPxGridViewExporter ID="exporterGrid" runat="server" GridViewID="gridChiTietCongNo">
     </dx:ASPxGridViewExporter>
+
+      <dx:ASPxPopupControl ID="popupViewReport" ClientInstanceName="popupViewReport" runat="server" HeaderText="Đại lý thanh toán" Width="850px" ShowHeader="false" PopupVerticalAlign="WindowCenter" Height="600px" PopupHorizontalAlign="WindowCenter" ScrollBars="Auto" >
+        <ContentCollection>
+            <dx:PopupControlContentControl ID="PopupControlContentControl1" runat="server">
+                <dx:ASPxCallbackPanel ID="cbpViewReport" ClientInstanceName="cbpViewReport" runat="server" Width="100%" OnCallback="cbpViewReport_Callback">
+                    <PanelCollection>
+                        <dx:PanelContent>
+                            <dx:ASPxDocumentViewer ID="reportViewer" ClientInstanceName="reportViewer" runat="server" Width="100%">
+                            </dx:ASPxDocumentViewer>                
+                            <dx:ASPxHiddenField ID="hdfViewReport" ClientInstanceName="hdfViewReport" runat="server">
+                            </dx:ASPxHiddenField>
+                        </dx:PanelContent>
+                    </PanelCollection>
+                    <ClientSideEvents EndCallback="onEndCallBackViewRp" />
+                </dx:ASPxCallbackPanel>                
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
 </asp:Content>

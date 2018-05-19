@@ -54,12 +54,13 @@ namespace KobePaint.Pages.GiaoHang
                             #region nhật ký công nợ
                                 khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                 nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Duyệt phiếu giao hàng";
+                                nhatky.DienGiai = "Bán hàng";
                                 nhatky.NoDau = KH.CongNo;
                                 nhatky.NhapHang = PhieuGH.ConLai;
                                 nhatky.TraHang = 0;
                                 nhatky.NoCuoi = KH.CongNo + PhieuGH.ConLai;
                                 nhatky.ThanhToan = 0;
+                                nhatky.MaPhieu = DBDataProvider.STTPhieuGiaoHang_DaiLy(IDKhachHang);
                                 nhatky.NhanVienID = Formats.IDUser();
                                 nhatky.SoPhieu = PhieuGH.MaPhieu;
                                 nhatky.IDKhachHang = IDKhachHang;

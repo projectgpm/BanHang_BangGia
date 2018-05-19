@@ -75,13 +75,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2018 10:31:03</publishTime>
     </File>
     <File Include="bin/KobePaint.dll">
-      <publishTime>05/18/2018 10:38:08</publishTime>
+      <publishTime>05/18/2018 16:55:36</publishTime>
     </File>
     <File Include="bin/KobePaint.pdb">
       <publishTime>05/09/2018 14:44:06</publishTime>
     </File>
     <File Include="Content/DragAndDrop.css">
       <publishTime>05/14/2018 15:24:14</publishTime>
+    </File>
+    <File Include="Content/Images/0435_CH_full.png">
+      <publishTime>05/14/2018 16:35:51</publishTime>
     </File>
     <File Include="Content/Images/AquaHeader.jpg">
       <publishTime>04/13/2018 14:17:58</publishTime>
@@ -114,7 +117,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/13/2018 14:17:58</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>05/03/2018 14:24:16</publishTime>
+      <publishTime>05/18/2018 16:52:58</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>04/13/2018 14:17:58</publishTime>
@@ -123,7 +126,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/09/2018 11:43:26</publishTime>
     </File>
     <File Include="KobePaintDB.dbml">
-      <publishTime>05/15/2018 15:00:24</publishTime>
+      <publishTime>05/18/2018 16:10:15</publishTime>
     </File>
     <File Include="Light.master">
       <publishTime>04/13/2018 14:17:58</publishTime>
@@ -147,7 +150,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/04/2017 11:03:00</publishTime>
     </File>
     <File Include="Pages/BaoCao/CongNoDLChiTiet.aspx">
-      <publishTime>05/18/2018 09:36:46</publishTime>
+      <publishTime>05/18/2018 15:55:00</publishTime>
     </File>
     <File Include="Pages/BaoCao/CongNoDLTheoNgay.aspx">
       <publishTime>05/17/2018 16:13:27</publishTime>
@@ -318,7 +321,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/12/2018 09:01:51</publishTime>
     </File>
     <File Include="Pages/TraHang/DanhSachTraHang.aspx">
-      <publishTime>05/16/2018 11:23:52</publishTime>
+      <publishTime>05/18/2018 16:51:05</publishTime>
     </File>
     <File Include="Pages/TraHang/DanhSachTraHangNCC.aspx">
       <publishTime>05/16/2018 08:19:23</publishTime>
@@ -327,7 +330,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/16/2018 11:19:06</publishTime>
     </File>
     <File Include="Pages/TraHang/PheDuyetTraHang.ascx">
-      <publishTime>05/18/2018 10:36:24</publishTime>
+      <publishTime>05/18/2018 16:53:17</publishTime>
     </File>
     <File Include="Pages/TraHang/TraHangNCC.aspx">
       <publishTime>05/11/2018 16:30:49</publishTime>
@@ -372,7 +375,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/18/2018 10:38:08</publishTime>
+      <publishTime>05/18/2018 16:55:37</publishTime>
     </File>
   </ItemGroup>
 </Project>

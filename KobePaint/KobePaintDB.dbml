@@ -116,21 +116,6 @@
       <Association Name="khLoaiKhachHang_khKhachHang" Member="khKhachHangs" ThisKey="IDLoaiKhachHang" OtherKey="LoaiKhachHangID" Type="khKhachHang" />
     </Type>
   </Table>
-  <Table Name="dbo.khNhatKyCongNo" Member="khNhatKyCongNos">
-    <Type Name="khNhatKyCongNo">
-      <Column Name="IDCongNo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="NgayNhap" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
-      <Column Name="DienGiai" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
-      <Column Name="NoDau" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="NhapHang" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="TraHang" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="NoCuoi" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
-      <Column Name="NhanVienID" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="SoPhieu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="IDKhachHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.kKiemKe" Member="kKiemKes">
     <Type Name="kKiemKe">
       <Column Name="IDPhieuKiemKe" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -472,6 +457,22 @@
       <Association Name="khKhachHang_kPhieuTraHang" Member="kPhieuTraHangs" ThisKey="IDKhachHang" OtherKey="DaiLyID" Type="kPhieuTraHang" />
       <Association Name="khKhachHang_ghPhieuGiaoHang" Member="ghPhieuGiaoHangs" ThisKey="IDKhachHang" OtherKey="KhachHangID" Type="ghPhieuGiaoHang" />
       <Association Name="khLoaiKhachHang_khKhachHang" Member="khLoaiKhachHang" ThisKey="LoaiKhachHangID" OtherKey="IDLoaiKhachHang" Type="khLoaiKhachHang" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.khNhatKyCongNo" Member="khNhatKyCongNos">
+    <Type Name="khNhatKyCongNo">
+      <Column Name="IDCongNo" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="NgayNhap" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Column Name="DienGiai" Type="System.String" DbType="NVarChar(250)" CanBeNull="true" />
+      <Column Name="NoDau" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NhapHang" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="TraHang" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NoCuoi" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="ThanhToan" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="NhanVienID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="SoPhieu" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="IDKhachHang" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="MaPhieu" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Function Name="dbo.spAVG_IDHangHoa" Method="spAVG_IDHangHoa">

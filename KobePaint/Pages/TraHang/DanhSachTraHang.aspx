@@ -102,7 +102,7 @@
             <Summary EmptyText="Không có dữ liệu" Text="Trang {0}/{1}" />
         </SettingsPager>
         <SettingsSearchPanel Visible="True" />
-        <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xác nhận xóa !!" Title="DANH SÁCH ĐẠI LÝ TRẢ HÀNG" />
+        <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xác nhận xóa !!" Title="DANH SÁCH KHÁCH HÀNG TRẢ HÀNG" />
         <Styles>
             <Header HorizontalAlign="Center">
             </Header>
@@ -165,7 +165,7 @@
                 </DataItemTemplate>--%>
 <CellStyle HorizontalAlign="Center" Font-Bold="True"></CellStyle>
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataComboBoxColumn Caption="Đại lý" FieldName="DaiLyID" VisibleIndex="2">
+            <dx:GridViewDataComboBoxColumn Caption="Khách hàng" FieldName="DaiLyID" VisibleIndex="2">
                 <PropertiesComboBox DataSourceID="dsNhaCC" TextField="HoTen" ValueField="IDKhachHang">
                 </PropertiesComboBox>
             </dx:GridViewDataComboBoxColumn>
@@ -235,7 +235,7 @@
             <asp:Parameter DefaultValue="1" Name="NhanVienID" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="dsNhaCC" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] WHERE [LoaiKhachHangID] = 3"></asp:SqlDataSource>
+    <asp:SqlDataSource ID="dsNhaCC" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDKhachHang, HoTen FROM khKhachHang WHERE (LoaiKhachHangID &lt;&gt; 2)"></asp:SqlDataSource>
     <asp:SqlDataSource ID="dsNhanVien" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
         SelectCommand="SELECT [IDNhanVien], [HoTen] FROM [nvNhanVien]  WHERE IDNhanVien > 1"></asp:SqlDataSource>
     <dx:ASPxGlobalEvents ID="globalEventGrid" runat="server">

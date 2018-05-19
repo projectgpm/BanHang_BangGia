@@ -327,6 +327,7 @@ namespace KobePaint.Pages.BanHang
                         nhatky.TraHang = 0;
                         nhatky.NoCuoi = KH.CongNo + Convert.ToDouble(spTienTraKhach.Number);
                         nhatky.ThanhToan = 0;
+                        nhatky.MaPhieu = DBDataProvider.STTPhieuGiaoHang_DaiLy(IDkhachHang);
                         nhatky.NhanVienID = Formats.IDUser();
                         nhatky.SoPhieu = giaohang.MaPhieu;
                         nhatky.IDKhachHang = IDkhachHang;

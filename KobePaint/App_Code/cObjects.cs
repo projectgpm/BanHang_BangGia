@@ -329,5 +329,71 @@ namespace KobePaint.App_Code
         }
     }
     #endregion
+
+    #region report giao dịch
+    [Serializable]
+    public class oReportGiaoDich
+    {
+
+        public string TieuDe { get; set; }
+        public string MaKhachHang { get; set; }
+        public string TenKhachHang { get; set; }
+        public string DienThoai { get; set; }
+        public string DiaChi { get; set; }
+        public double TongPhatSinh { get; set; }
+        public double TongHangTra { get; set; }
+        public double TongThanhToan { get; set; }
+        public string NgayThangNam { get; set; }
+        public List<oChiTietGiaoDich> listProduct { get; set; }
+    }
+    [Serializable]
+    public class oChiTietGiaoDich
+    {
+        public int STT { get; set; }
+        public string Ngay { get; set; }
+        public string NoiDung { get; set; }
+        public string SoPhieu { get; set; }
+        public double NoDau { get; set; }
+        public double NhapHang { get; set; }
+        public double HangTra { get; set; }
+        public double ThanhToan { get; set; }
+        public double NoCuoi { get; set; }
+        public oChiTietGiaoDich(int sTT, string ngay, string noiDung, string soPhieu, double noDau, double phatSinh, double hangTra, double thanhToan, double noCuoi)
+        {
+            // TODO: Complete member initialization
+            this.STT = sTT;
+            this.Ngay = ngay;
+            this.NoiDung = noiDung;
+            this.SoPhieu = soPhieu;
+            this.NoDau = noDau;
+            this.NhapHang = phatSinh;
+            this.HangTra = hangTra;
+            this.ThanhToan = thanhToan;
+            this.NoCuoi = noCuoi;
+        }
+        public oChiTietGiaoDich()
+        {
+            // TODO: Complete member initialization
+        }
+
+        public oChiTietGiaoDich(oChiTietGiaoDich x)
+        {
+            // TODO: Complete member initialization
+            this.STT = x.STT;
+            this.Ngay = x.Ngay;
+            this.NoiDung = x.NoiDung;
+            this.SoPhieu = x.SoPhieu;
+            this.NoDau = x.NoDau;
+            this.NhapHang = x.NhapHang;
+            this.HangTra = x.HangTra;
+            this.ThanhToan = x.ThanhToan;
+            this.NoCuoi = x.NoCuoi;
+        }
+    }
+
+    #endregion
+
+
+
 }
- 
+   

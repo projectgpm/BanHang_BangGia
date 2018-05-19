@@ -125,6 +125,7 @@ namespace KobePaint.Pages.GiaoHang
             }
             oCusExport.TrangThaiPhieu = TrangThai;
             oCusExport.listProduct = new List<oProduct>();
+
             List<ghPhieuGiaoHangChiTiet> ListHang = DBDataProvider.ListChiTietGiaoHang(IDPhieuGiaoHang);
             int i = 1;
             foreach (var Hang in ListHang)

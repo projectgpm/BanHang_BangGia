@@ -180,10 +180,11 @@ namespace KobePaint.Pages.ThanhToan
                                         #region ghi nhật ký nhập kho để xem báo cáo
                                         khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                         nhatky.NgayNhap = DateTime.Now;
-                                        nhatky.DienGiai = "Đại lý thanh toán";
+                                        nhatky.DienGiai = "Thanh toán";
                                         nhatky.NoDau = KH.CongNo;
                                         nhatky.NhapHang = 0;
                                         nhatky.TraHang = 0;
+                                        nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
                                         nhatky.ThanhToan = TienNoDonHang;
                                         nhatky.NoCuoi = KH.CongNo - TienNoDonHang;
                                         nhatky.NhanVienID = Formats.IDUser();
@@ -209,13 +210,14 @@ namespace KobePaint.Pages.ThanhToan
                                         #region ghi nhật ký nhập kho để xem báo cáo
                                         khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                         nhatky.NgayNhap = DateTime.Now;
-                                        nhatky.DienGiai = "Đại lý thanh toán";
+                                        nhatky.DienGiai = "Thanh toán";
                                         nhatky.NoDau = KH.CongNo;
                                         nhatky.NhapHang = 0;
                                         nhatky.TraHang = 0;
                                         nhatky.ThanhToan = SoTienThu;
                                         nhatky.NoCuoi = KH.CongNo - SoTienThu;
                                         nhatky.NhanVienID = Formats.IDUser();
+                                        nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
                                         nhatky.SoPhieu = ListPhieuGiaoHang[i].MaPhieu;
                                         nhatky.IDKhachHang = IDKhachHang;
                                         DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
@@ -239,7 +241,7 @@ namespace KobePaint.Pages.ThanhToan
                                 #region ghi nhật ký nhập kho để xem báo cáo
                                 khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                 nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Đại lý thanh toán";
+                                nhatky.DienGiai = "Thanh toán";
                                 nhatky.NoDau = KH.CongNo;
                                 nhatky.NhapHang = 0;
                                 nhatky.TraHang = 0;
@@ -247,6 +249,7 @@ namespace KobePaint.Pages.ThanhToan
                                 nhatky.NoCuoi = KH.CongNo - SoTienThu;
                                 nhatky.NhanVienID = Formats.IDUser();
                                 nhatky.SoPhieu = "";
+                                nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
                                 nhatky.IDKhachHang = IDKhachHang;
                                 DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
                                 DBDataProvider.DB.SubmitChanges();
@@ -273,10 +276,11 @@ namespace KobePaint.Pages.ThanhToan
                                 #region ghi nhật ký nhập kho để xem báo cáo
                                 khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                 nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Đại lý thanh toán";
+                                nhatky.DienGiai = "Thanh toán";
                                 nhatky.NoDau = KH.CongNo;
                                 nhatky.NhapHang = 0;
                                 nhatky.TraHang = 0;
+                                nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
                                 nhatky.ThanhToan = SoTienThu;
                                 nhatky.NoCuoi = KH.CongNo - SoTienThu;
                                 nhatky.NhanVienID = Formats.IDUser();

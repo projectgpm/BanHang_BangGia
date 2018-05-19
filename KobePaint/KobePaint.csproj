@@ -94,6 +94,10 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterSuccess.aspx" />
+    <Content Include="App_Data\BanHang_BangGia.mdf" />
+    <Content Include="App_Data\BanHang_BangGia_log.ldf">
+      <DependentUpon>BanHang_BangGia.mdf</DependentUpon>
+    </Content>
     <Content Include="App_Data\MenuBanHang.xml" />
     <Content Include="App_Data\MenuQuanTri.xml" />
     <Content Include="App_Data\MenuVanPhong.xml" />
@@ -106,6 +110,7 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Content\DragAndDrop.css" />
+    <Content Include="Content\Images\0435_CH_full.png" />
     <Content Include="Content\Images\AquaHeader.jpg" />
     <Content Include="Content\Images\BlackGlassHeader.jpg" />
     <Content Include="Content\Images\GlassHeader.jpg" />
@@ -621,6 +626,12 @@
       <DependentUpon>TraHangNCC.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\rpGiaoDich.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\rpGiaoDich.Designer.cs">
+      <DependentUpon>rpGiaoDich.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reports\rpPhieuGiaoHang.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -675,6 +686,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Reports\rpGiaoDich.resx">
+      <DependentUpon>rpGiaoDich.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\rpPhieuGiaoHang.resx">
       <DependentUpon>rpPhieuGiaoHang.cs</DependentUpon>
     </EmbeddedResource>

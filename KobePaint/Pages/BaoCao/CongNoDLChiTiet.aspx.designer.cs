@@ -121,6 +121,15 @@ namespace KobePaint.Pages.BaoCao {
         protected global::DevExpress.Web.ASPxButton btnXuatExcel;
         
         /// <summary>
+        /// btnInPhieu control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton btnInPhieu;
+        
+        /// <summary>
         /// gridChiTietCongNo control.
         /// </summary>
         /// <remarks>
@@ -155,5 +164,50 @@ namespace KobePaint.Pages.BaoCao {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGridViewExporter exporterGrid;
+        
+        /// <summary>
+        /// popupViewReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl popupViewReport;
+        
+        /// <summary>
+        /// PopupControlContentControl1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.PopupControlContentControl PopupControlContentControl1;
+        
+        /// <summary>
+        /// cbpViewReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxCallbackPanel cbpViewReport;
+        
+        /// <summary>
+        /// reportViewer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.XtraReports.Web.ASPxDocumentViewer reportViewer;
+        
+        /// <summary>
+        /// hdfViewReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxHiddenField hdfViewReport;
     }
 }

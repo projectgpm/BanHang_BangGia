@@ -49,30 +49,50 @@ namespace KobePaint.Pages.TraHang
                         // hoàn tất
                         if (KH != null && PhieuTraHang != null)
                         {
-                            #region nhật ký công nợ
+
+
+                            if (PhieuTraHang.HinhThucTT == 1)
+                            {
+                                #region nhật ký công nợ
                                 khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                 nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Duyệt đại lý trả hàng ";
+                                nhatky.DienGiai = "Trả hàng ";
                                 nhatky.NoDau = KH.CongNo;
                                 nhatky.NhapHang = 0;
-                                nhatky.TraHang = PhieuTraHang.ConLai;
-                                nhatky.NoCuoi = KH.CongNo - PhieuTraHang.ConLai;
+                                nhatky.TraHang = PhieuTraHang.TongTienHang;
+                                nhatky.NoCuoi = KH.CongNo - PhieuTraHang.TongTienHang;
                                 nhatky.ThanhToan = 0;
+                                nhatky.MaPhieu = DBDataProvider.STTPhieuTraHang_DaiLy(DaiLyID);
                                 nhatky.NhanVienID = Formats.IDUser();
                                 nhatky.SoPhieu = PhieuTraHang.MaPhieu;
                                 nhatky.IDKhachHang = DaiLyID;
                                 DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
                                 DBDataProvider.DB.SubmitChanges();
-                            #endregion
-
-                            if (PhieuTraHang.HinhThucTT == 1)
-                            {
+                                #endregion
                                 KH.CongNo -= PhieuTraHang.ConLai; // giảm công nợ
-                                KH.TienTraHang += PhieuTraHang.ConLai;
-                                KH.LanCuoiMuaHang = DateTime.Now;
-                                //ghi nhật ký
 
                             }
+                            else
+                            {
+                                #region nhật ký công nợ
+                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                                nhatky.NgayNhap = DateTime.Now;
+                                nhatky.DienGiai = "Trả hàng ";
+                                nhatky.NoDau = KH.CongNo;
+                                nhatky.NhapHang = 0;
+                                nhatky.TraHang = PhieuTraHang.TongTienHang;
+                                nhatky.NoCuoi = KH.CongNo;
+                                nhatky.ThanhToan = 0;
+                                nhatky.MaPhieu = DBDataProvider.STTPhieuTraHang_DaiLy(DaiLyID);
+                                nhatky.NhanVienID = Formats.IDUser();
+                                nhatky.SoPhieu = PhieuTraHang.MaPhieu;
+                                nhatky.IDKhachHang = DaiLyID;
+                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                                DBDataProvider.DB.SubmitChanges();
+                                #endregion
+                            }
+                            KH.TienTraHang += PhieuTraHang.ConLai;
+                            KH.LanCuoiMuaHang = DateTime.Now;
                             PhieuTraHang.DuyetDonHang = 1;// duyệt thành công
                             PhieuTraHang.STTDonHang = DBDataProvider.STTPhieuTraHang_DaiLy(DaiLyID);
                             // + tồn kho

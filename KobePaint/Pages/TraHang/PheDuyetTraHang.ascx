@@ -95,7 +95,7 @@
                 </CellStyle>
                 <EditFormSettings Visible="False" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataComboBoxColumn FieldName="DaiLyID" VisibleIndex="2" Caption="Đại lý" ReadOnly="true">
+            <dx:GridViewDataComboBoxColumn FieldName="DaiLyID" VisibleIndex="2" Caption="Khách hàng" ReadOnly="true">
                 <PropertiesComboBox DataSourceID="dsKhachHang" TextField="HoTen" ValueField="IDKhachHang">
                 </PropertiesComboBox>
                 <EditFormSettings Visible="True" />

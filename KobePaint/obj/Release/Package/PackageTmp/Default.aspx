@@ -38,14 +38,14 @@
     </script>
     <dx:ASPxPageControl ID="pageControl" runat="server" Width="100%" ActiveTabIndex="0" TabAlign="Justify" EncodeHtml="False">
         <TabPages>
-            <dx:TabPage Text="Phiếu giao hàng đại lý chờ duyệt" Name="tGiaoHang">
+            <dx:TabPage Text="Phiếu giao hàng chờ duyệt" Name="tGiaoHang">
                 <ContentCollection>
                     <dx:ContentControl ID="ContentControl1" runat="server">
                         <uc1:PheDuyetGiaoHang ID="PheDuyetGiaoHang1" runat="server" />
                     </dx:ContentControl>
                 </ContentCollection>
             </dx:TabPage>
-            <dx:TabPage Text="Phiếu đại lý trả hàng chờ duyệt" Name="tTraHang">
+            <dx:TabPage Text="Phiếu trả hàng chờ duyệt" Name="tTraHang">
                 <ContentCollection>
                     <dx:ContentControl ID="ContentControl2" runat="server">
                         <uc2:PheDuyetTraHang ID="PheDuyetTraHang1" runat="server" />

@@ -52,3 +52,4 @@ D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Release\KobePaint.csproj.GenerateRes
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Release\KobePaint.dll.licenses
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Release\KobePaint.dll
 D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Release\KobePaint.pdb
+D:\GPMVIETNAM\BanHang_BangGia\KobePaint\obj\Release\KobePaint.Reports.rpGiaoDich.resources
