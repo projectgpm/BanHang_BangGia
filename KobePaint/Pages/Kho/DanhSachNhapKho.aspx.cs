@@ -96,6 +96,7 @@ namespace KobePaint.Pages.Kho
                                         thekho.NgayNhap = DateTime.Now;
                                         thekho.DienGiai = "Xóa phiếu nhập hàng #" + NhapKho.MaPhieu;
                                         thekho.Nhap = 0;
+                                        thekho.GiaThoiDiem = 0;// kiê
                                         thekho.Xuat = SoLuong;
                                         thekho.Ton = HangHoa.TonKho -= SoLuong; // trừ tồn kho luôn
                                         thekho.HangHoaID = IDHangHoa;

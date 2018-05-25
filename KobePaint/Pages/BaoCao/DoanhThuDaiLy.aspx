@@ -148,6 +148,10 @@
                 <PropertiesTextEdit DisplayFormatString="N0">
                 </PropertiesTextEdit>
             </dx:GridViewDataTextColumn>
+            <dx:GridViewDataSpinEditColumn Caption="Giảm giá" FieldName="GIAMGIA" VisibleIndex="8">
+                <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
+                </PropertiesSpinEdit>
+            </dx:GridViewDataSpinEditColumn>
         </Columns>
         <FormatConditions>
             <dx:GridViewFormatConditionHighlight FieldName="TONGTIEN" Expression="[TONGTIEN] < 1" Format="LightRedFillWithDarkRedText" />
@@ -158,6 +162,7 @@
         </FormatConditions>
         <TotalSummary>
             <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="TONGTIEN" ShowInColumn="Số tiền" SummaryType="Sum" />
+            <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="GIAMGIA" ShowInGroupFooterColumn="Giảm giá" SummaryType="Sum" />
         </TotalSummary>
     </dx:ASPxGridView>
 

@@ -49,50 +49,31 @@ namespace KobePaint.Pages.TraHang
                         // hoàn tất
                         if (KH != null && PhieuTraHang != null)
                         {
-
+                            #region nhật ký công nợ
+                            khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                            nhatky.NgayNhap = DateTime.Now;
+                            nhatky.DienGiai = "Khách trả hàng ";
+                            nhatky.NoDau = KH.CongNo;
+                            nhatky.NhapHang = 0;
+                            nhatky.TraHang = PhieuTraHang.TongTienHang;
+                            nhatky.GiamGia = 0;
+                            nhatky.NoCuoi = KH.CongNo - PhieuTraHang.ConLai;
+                            nhatky.ThanhToan = -PhieuTraHang.ThanhToan;
+                            nhatky.MaPhieu = DBDataProvider.STTPhieuTraHang_DaiLy(DaiLyID);
+                            nhatky.NhanVienID = Formats.IDUser();
+                            nhatky.SoPhieu = PhieuTraHang.MaPhieu;
+                            nhatky.IDKhachHang = DaiLyID;
+                            DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                            DBDataProvider.DB.SubmitChanges();
+                            #endregion
 
                             if (PhieuTraHang.HinhThucTT == 1)
                             {
-                                #region nhật ký công nợ
-                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                                nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Trả hàng ";
-                                nhatky.NoDau = KH.CongNo;
-                                nhatky.NhapHang = 0;
-                                nhatky.TraHang = PhieuTraHang.TongTienHang;
-                                nhatky.NoCuoi = KH.CongNo - PhieuTraHang.TongTienHang;
-                                nhatky.ThanhToan = 0;
-                                nhatky.MaPhieu = DBDataProvider.STTPhieuTraHang_DaiLy(DaiLyID);
-                                nhatky.NhanVienID = Formats.IDUser();
-                                nhatky.SoPhieu = PhieuTraHang.MaPhieu;
-                                nhatky.IDKhachHang = DaiLyID;
-                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                                DBDataProvider.DB.SubmitChanges();
-                                #endregion
                                 KH.CongNo -= PhieuTraHang.ConLai; // giảm công nợ
-
                             }
-                            else
-                            {
-                                #region nhật ký công nợ
-                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                                nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Trả hàng ";
-                                nhatky.NoDau = KH.CongNo;
-                                nhatky.NhapHang = 0;
-                                nhatky.TraHang = PhieuTraHang.TongTienHang;
-                                nhatky.NoCuoi = KH.CongNo;
-                                nhatky.ThanhToan = 0;
-                                nhatky.MaPhieu = DBDataProvider.STTPhieuTraHang_DaiLy(DaiLyID);
-                                nhatky.NhanVienID = Formats.IDUser();
-                                nhatky.SoPhieu = PhieuTraHang.MaPhieu;
-                                nhatky.IDKhachHang = DaiLyID;
-                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                                DBDataProvider.DB.SubmitChanges();
-                                #endregion
-                            }
-                            KH.TienTraHang += PhieuTraHang.ConLai;
+                            KH.TienTraHang += PhieuTraHang.TongTienHang;
                             KH.LanCuoiMuaHang = DateTime.Now;
+
                             PhieuTraHang.DuyetDonHang = 1;// duyệt thành công
                             PhieuTraHang.STTDonHang = DBDataProvider.STTPhieuTraHang_DaiLy(DaiLyID);
                             // + tồn kho
@@ -108,6 +89,7 @@ namespace KobePaint.Pages.TraHang
                                 thekho.DienGiai = "Trả hàng #" + PhieuTraHang.MaPhieu;
                                 thekho.Nhap = prod.SoLuong;
                                 thekho.Xuat = 0;
+                                thekho.GiaThoiDiem = prod.TienTra;
                                 thekho.Ton = prod.SoLuong + prod.TonKho;
                                 thekho.HangHoaID = HH.IDHangHoa;
                                 thekho.NhanVienID = Formats.IDUser();

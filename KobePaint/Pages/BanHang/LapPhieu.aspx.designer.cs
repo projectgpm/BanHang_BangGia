@@ -112,22 +112,22 @@ namespace KobePaint.Pages.BanHang {
         protected global::DevExpress.Web.ASPxHyperLink hpThemNCC;
         
         /// <summary>
-        /// spCongNoCu control.
+        /// txtNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxSpinEdit spCongNoCu;
+        protected global::DevExpress.Web.ASPxTextBox txtNo;
         
         /// <summary>
-        /// dateNgayLapPhieu control.
+        /// txtTenBangGia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxDateEdit dateNgayLapPhieu;
+        protected global::DevExpress.Web.ASPxTextBox txtTenBangGia;
         
         /// <summary>
         /// LayoutItemNestedControlContainer3 control.
@@ -146,24 +146,6 @@ namespace KobePaint.Pages.BanHang {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit dateNgayNhap;
-        
-        /// <summary>
-        /// LayoutItemNestedControlContainer4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer4;
-        
-        /// <summary>
-        /// txtNguoiNhap control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox txtNguoiNhap;
         
         /// <summary>
         /// LayoutItemNestedControlContainer13 control.

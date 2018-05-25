@@ -128,6 +128,9 @@
             </dx:GridViewDataComboBoxColumn>
             
         </Columns>
+         <GroupSummary>
+            <dx:ASPxSummaryItem DisplayFormat="Tổng = {0:N0}" FieldName="SoTienThu"   SummaryType="Sum" />
+        </GroupSummary>
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsPhieuThu" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDPhieuThu, STTPhieuThu, SoHoaDon, KhachHangID, SoTienThu, NoiDung, NgayThu, NhanVienThuID, HinhThucTTID, CongNoCu, NgayLap FROM kPhieuThanhToanNCC ORDER BY IDPhieuThu DESC"></asp:SqlDataSource>
     <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] WHERE LoaiKhachHangID =2"></asp:SqlDataSource>

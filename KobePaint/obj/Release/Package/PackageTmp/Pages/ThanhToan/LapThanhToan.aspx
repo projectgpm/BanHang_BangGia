@@ -8,6 +8,7 @@
         }
         function onCCBPhieuThanhToanChanged(s, e) {
             cbpThanhToan.PerformCallback('PhieuTT');
+       
         }
 
         // hình thức thanh toán
@@ -23,12 +24,19 @@
         function onCCBHinhThucChanged(s, e) {
             if (s.GetSelectedIndex() == 0) {
                 SetVisiblePhieuTT(false);
-                speSoTienTT.SetEnabled(true);
+                txtSoTienDaTT.SetText('0');
+                ccbPhieuThanhToan.SetText('');
+                speSoTienTT.SetNumber(0);
+                
             }
             else {
                 SetVisiblePhieuTT(true);
-                speSoTienTT.SetEnabled(false);
+                txtSoTienDaTT.SetText('0');
+                ccbPhieuThanhToan.SetText('');
+                speSoTienTT.SetNumber(0);
+               
             }
+           
         }
         function SetVisiblePhieuTT(bVisible) {
             formThanhToan.GetItemByName('itemPhieuTT').SetVisible(bVisible);
@@ -74,7 +82,7 @@
             if(checkInput() && confirm('Xác nhận thao tác?'))
                 cbpThanhToan.PerformCallback('ThanhToan');
         }
-       
+
         function onEndCallBack(s, e) {
             if (s.cp_rpView) {
                 hdfViewReport.Set('view', '1');
@@ -101,7 +109,9 @@
                                             <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" Width="100%" DataSourceID="dsKhachHang" NullText="--- Chọn khách hàng ---" ValueField="IDKhachHang" TextField="HoTen">
                                                 <ClientSideEvents SelectedIndexChanged="onCCBKhachHangChanged" />
                                             </dx:ASPxComboBox>
-                                            <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] Where LoaiKhachHangID &lt;&gt; 2"></asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="dsKhachHang" runat="server" 
+                                                ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
+                                                SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] Where LoaiKhachHangID &lt;&gt; 2 AND DaXoa = 0"></asp:SqlDataSource>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
@@ -136,6 +146,7 @@
                                                 <Columns>
                                                     <dx:ListBoxColumn Caption="Mã phiếu" FieldName="MaPhieu" />
                                                     <dx:ListBoxColumn Caption="Tổng tiền" FieldName="TongTien" />
+                                                    <dx:ListBoxColumn Caption="Đã thanh toán" FieldName="ThanhToan" />
                                                 </Columns>
                                                 <ClientSideEvents SelectedIndexChanged="onCCBPhieuThanhToanChanged" />
                                             </dx:ASPxComboBox>
@@ -146,7 +157,7 @@
                                 <dx:LayoutItem Caption="Số tiền đã thanh toán" HelpText="(Đvt: đồng)" Name="itemSoTienDaTT" ClientVisible="false">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                            <dx:ASPxTextBox ID="txtSoTienDaTT" runat="server" Width="100%"  Enabled="false" DisplayFormatString="N0">
+                                            <dx:ASPxTextBox ID="txtSoTienDaTT" runat="server" ClientInstanceName="txtSoTienDaTT"  Width="100%"  Enabled="false" DisplayFormatString="N0">
                                             </dx:ASPxTextBox>
                                             <dx:ASPxHiddenField ID="hiddenfield" ClientInstanceName="hiddenfield" runat="server"></dx:ASPxHiddenField>
                                         </dx:LayoutItemNestedControlContainer>
@@ -158,7 +169,7 @@
                                 <dx:LayoutItem Caption="Số tiền thanh toán" ColSpan="2" HelpText="(Đvt: đồng)" Name="itemSoTienTT" >
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                            <dx:ASPxSpinEdit ID="speSoTienTT" ClientInstanceName="speSoTienTT" runat="server" Number="0" DecimalPlaces="2" Increment="5000" Width="100%" DisplayFormatString="N0">
+                                            <dx:ASPxSpinEdit ID="speSoTienTT" ClientInstanceName="speSoTienTT" runat="server"  Number="0" DecimalPlaces="2" Increment="5000" Width="100%" DisplayFormatString="N0">
                                             </dx:ASPxSpinEdit>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>

@@ -1,5 +1,23 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeBehind="HangHoa.aspx.cs" Inherits="KobePaint.Pages.HangHoa.HangHoa" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
+    <script>
+        function onExcelClick() {
+            popupViewExcel.Show();
+        }
+        function onFileUploadComplete() {
+            popupViewExcel.Hide();
+            gridHangHoa.Refresh();
+        }
+    </script>
+    <style>
+        .dxflGroupCell_Material {
+            padding: 0 5px;
+        }
+
+        .dxflHeadingLineGroupBoxSys.dxflGroupBox_Material > .dxflGroup_Material > tbody > tr:first-child > .dxflGroupCell_Material > .dxflItem_Material, .dxflHeadingLineGroupBoxSys.dxflGroupBox_Material > .dxflGroup_Material > .dxflChildInFirstRowSys > .dxflGroupCell_Material > .dxflItem_Material {
+            padding-top: 1px;
+        }
+    </style>
       <dx:ASPxFormLayout ID="formThongTin" ClientInstanceName="formThongTin" runat="server" Width="100%" ColCount="4">
         <Items>
             
@@ -11,14 +29,15 @@
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
-                   <%-- <dx:LayoutItem Caption="">
+                    <dx:LayoutItem Caption="">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer runat="server">
-                                <dx:ASPxButton ID="btnInMaVach" runat="server" Text="In mã vạch">
+                                <dx:ASPxButton ID="btnNhapExcel" runat="server" AutoPostBack="false" Text="Nhập Excel" ClientInstanceName="btnNhapExcel">
+                                    <ClientSideEvents Click="onExcelClick" />
                                 </dx:ASPxButton>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
-                    </dx:LayoutItem>--%>
+                    </dx:LayoutItem>
                     <dx:LayoutItem ShowCaption="False">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
@@ -285,4 +304,64 @@
 	        UpdateControlHeight(gridHangHoa);
         }" />
     </dx:ASPxGlobalEvents>
+    <dx:ASPxPopupControl ID="popupViewExcel" runat="server" ClientInstanceName="popupViewExcel" HeaderText="Thêm hàng hóa từ Excel" Width="600px" Height="200px" PopupHorizontalAlign="WindowCenter">
+        <ContentCollection>
+            <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
+                <dx:ASPxHiddenField ID="hdfViewReport" ClientInstanceName="hdfViewReport" runat="server">
+                </dx:ASPxHiddenField>
+                <table>
+                    <tr>
+                        <td>
+                            <dx:ASPxLabel ID="ASPxLabel1" runat="server" Text="Tải file mẫu:"></dx:ASPxLabel>
+                        </td>
+                        <td style="float: left; padding-left: 3px;">
+                            <dx:ASPxHyperLink ID="linkNhapKho" runat="server" Text="ThemHangHoa.xls" NavigateUrl="~/BieuMau/them_hang_hoa.xls">
+                            </dx:ASPxHyperLink>
+                        </td>
+                    </tr>
+
+                </table>
+                <table>
+                    <tr style="padding-top: 20px">
+                        <td>
+                            <dx:ASPxLabel ID="ASPxLabel2" runat="server" Font-Italic="true" Text="Lưu ý: Hệ thống chỉ hỗ trợ tối đa 500 hàng hóa cho mỗi lần nhập dữ liệu từ file."></dx:ASPxLabel>
+                        </td>
+
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <dx:ASPxUploadControl ID="UploadControl" runat="server" ClientInstanceName="UploadControl" Width="500px"
+                                NullText="Chọn file excel thêm hàng hóa..." UploadMode="Advanced" ShowUploadButton="True" ShowProgressPanel="True"
+                                OnFileUploadComplete="UploadControl_FileUploadComplete">
+                                <BrowseButton Text="Chọn file excel...">
+                                    <Image IconID="actions_open_32x32office2013">
+                                    </Image>
+                                </BrowseButton>
+                                <RemoveButton Text="Xóa">
+                                    <Image IconID="actions_cancel_32x32office2013">
+                                    </Image>
+                                </RemoveButton>
+                                <UploadButton Text="Tải lên">
+                                    <Image IconID="miscellaneous_publish_32x32office2013">
+                                    </Image>
+                                </UploadButton>
+                                <CancelButton Text="Hủy">
+                                    <Image IconID="actions_cancel_32x32office2013">
+                                    </Image>
+                                </CancelButton>
+                                <AdvancedModeSettings EnableMultiSelect="True" EnableDragAndDrop="True" />
+                                <ValidationSettings MaxFileSize="4194304" AllowedFileExtensions=".xlt, .xls" NotAllowedFileExtensionErrorText="Vui lòng chọn đúng định dạng .xlt .xls">
+                                </ValidationSettings>
+                                <ClearFileSelectionImage IconID="actions_cancel_32x32office2013" ToolTip="Xóa file">
+                                </ClearFileSelectionImage>
+                                <ClientSideEvents FileUploadComplete="onFileUploadComplete" />
+                            </dx:ASPxUploadControl>
+                        </td>
+                    </tr>
+                </table>
+            </dx:PopupControlContentControl>
+        </ContentCollection>
+    </dx:ASPxPopupControl>
 </asp:Content>

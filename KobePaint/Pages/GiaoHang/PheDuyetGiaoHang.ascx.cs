@@ -56,10 +56,11 @@ namespace KobePaint.Pages.GiaoHang
                                 nhatky.NgayNhap = DateTime.Now;
                                 nhatky.DienGiai = "Bán hàng";
                                 nhatky.NoDau = KH.CongNo;
-                                nhatky.NhapHang = PhieuGH.ConLai;
+                                nhatky.NhapHang = PhieuGH.TongTien;
                                 nhatky.TraHang = 0;
                                 nhatky.NoCuoi = KH.CongNo + PhieuGH.ConLai;
-                                nhatky.ThanhToan = 0;
+                                nhatky.ThanhToan = PhieuGH.ThanhToan;
+                                nhatky.GiamGia = PhieuGH.GiamGia;
                                 nhatky.MaPhieu = DBDataProvider.STTPhieuGiaoHang_DaiLy(IDKhachHang);
                                 nhatky.NhanVienID = Formats.IDUser();
                                 nhatky.SoPhieu = PhieuGH.MaPhieu;
@@ -67,8 +68,8 @@ namespace KobePaint.Pages.GiaoHang
                                 DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
                                 DBDataProvider.DB.SubmitChanges();
                             #endregion
-                            KH.CongNo += PhieuGH.ConLai; // cộng công nợ
-                            KH.TongTienHang += PhieuGH.ConLai;
+                            KH.CongNo += PhieuGH.ConLai;
+                            KH.TongTienHang += PhieuGH.TongTien;
                             KH.LanCuoiMuaHang = DateTime.Now;
                             PhieuGH.TrangThai = 1;// duyệt thành công
                             PhieuGH.SoDonHangTrongNam = DBDataProvider.SoDonHangTrongNam_GiaoHang();

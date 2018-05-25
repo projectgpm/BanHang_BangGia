@@ -33,12 +33,15 @@
                 cbpInfoImport.PerformCallback('Save');
                 cbpInfoImport.PerformCallback('redirect');
                 cbpInfo.PerformCallback('resetinfo');
+                cbpInfoImport.PerformCallback('resetinfo_pro');
+                
             }
         }
         function onSaveNextClick() {
             if (checkInput() && confirm('Xác nhận thao tác ?')) {
                 cbpInfoImport.PerformCallback('Save');
                 cbpInfo.PerformCallback('resetinfo');
+                cbpInfoImport.PerformCallback('resetinfo_pro');
             }
         }
         function onSaveTempClick() {
@@ -452,7 +455,7 @@
     </dx:ASPxPopupControl>
 
 
-    <dx:ASPxPopupControl ID="popupViewExcel" runat="server" ClientInstanceName="popupViewExcel" HeaderText="Nhập hàng hóa từ Excel" Width="800px" Height="200px" PopupHorizontalAlign="WindowCenter">
+    <dx:ASPxPopupControl ID="popupViewExcel" runat="server" ClientInstanceName="popupViewExcel" HeaderText="Nhập hàng hóa từ Excel" Width="600px" Height="200px" PopupHorizontalAlign="WindowCenter">
         <ContentCollection>
             <dx:PopupControlContentControl ID="PopupControlContentControl2" runat="server">
                 <dx:ASPxHiddenField ID="hdfViewReport" ClientInstanceName="hdfViewReport" runat="server">

@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -134,6 +136,17 @@ namespace KobePaint.App_Code
         {
             return g.IsGroupRow(index - 1);
         }
+        /// <summary>
+        /// chuyển đổi không dấu In hoa
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public static string convert_KhongDau(string s)
+        {
+            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = s.Normalize(NormalizationForm.FormD);
+            return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D').ToUpper();
+        } 
         public static void InitDisplayIndexGroupColumn(object sender, ASPxGridViewColumnDisplayTextEventArgs e)
         {
             if (e.Column.Caption != "STT")

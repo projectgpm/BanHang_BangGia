@@ -121,13 +121,13 @@ namespace KobePaint.Pages.GiaoHang {
         protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer1;
         
         /// <summary>
-        /// spCongNoCu control.
+        /// txtNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxSpinEdit spCongNoCu;
+        protected global::DevExpress.Web.ASPxTextBox txtNo;
         
         /// <summary>
         /// LayoutItemNestedControlContainer3 control.
@@ -139,13 +139,13 @@ namespace KobePaint.Pages.GiaoHang {
         protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer3;
         
         /// <summary>
-        /// dateNgayLapPhieu control.
+        /// txtTenBangGia control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxDateEdit dateNgayLapPhieu;
+        protected global::DevExpress.Web.ASPxTextBox txtTenBangGia;
         
         /// <summary>
         /// LayoutItemNestedControlContainer4 control.
@@ -164,24 +164,6 @@ namespace KobePaint.Pages.GiaoHang {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxDateEdit dateNgayNhap;
-        
-        /// <summary>
-        /// LayoutItemNestedControlContainer5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.LayoutItemNestedControlContainer LayoutItemNestedControlContainer5;
-        
-        /// <summary>
-        /// txtNguoiNhap control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxTextBox txtNguoiNhap;
         
         /// <summary>
         /// LayoutItemNestedControlContainer13 control.

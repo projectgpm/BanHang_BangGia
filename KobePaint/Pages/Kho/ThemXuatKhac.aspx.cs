@@ -415,6 +415,7 @@ namespace KobePaint.Pages.Kho
                                 thekho.Nhap = 0;
                                 thekho.Xuat = prod.SoLuong;
                                 thekho.Ton = prod.TonKho - prod.SoLuong;
+                                thekho.GiaThoiDiem = 0;
                                 thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
                                 thekho.NhanVienID = Formats.IDUser();
                                 DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);

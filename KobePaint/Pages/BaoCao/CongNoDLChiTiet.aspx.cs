@@ -69,12 +69,13 @@ namespace KobePaint.Pages.BaoCao
                 string NgayKT = toDay.Date.AddDays(1).ToString("yyyy-MM-dd");
                 List<khNhatKyCongNo> nhatky = DBDataProvider.DB.khNhatKyCongNos.Where(x => x.NgayNhap <= DateTime.Parse(NgayKT) && x.NgayNhap >= DateTime.Parse(NgayBD) && x.IDKhachHang == IDKhachHang).ToList();
                 int stt = 1;
-                double TongHangTra = 0, TongPhatSinh = 0, TongThanhToan = 0;
+                double TongHangTra = 0, TongPhatSinh = 0, TongThanhToan = 0, TongGiamGia = 0;
                 foreach (var a in nhatky)
                 {
                     TongHangTra += Convert.ToDouble(a.TraHang);
                     TongPhatSinh += Convert.ToDouble(a.NhapHang);
                     TongThanhToan += Convert.ToDouble(a.ThanhToan);
+                    TongGiamGia += Convert.ToDouble(a.GiamGia);
                     oChiTietGiaoDich chitiet = new oChiTietGiaoDich();
                     chitiet.STT = stt++;
                     chitiet.Ngay = Formats.ConvertToVNDateString(a.NgayNhap.ToString());
@@ -85,11 +86,13 @@ namespace KobePaint.Pages.BaoCao
                     chitiet.HangTra = Convert.ToDouble(a.TraHang);
                     chitiet.ThanhToan = Convert.ToDouble(a.ThanhToan);
                     chitiet.NoCuoi = Convert.ToDouble(a.NoCuoi);
+                    chitiet.GiamGia = Convert.ToDouble(a.GiamGia);
                     oInGiaoDich.listProduct.Add(chitiet);
                 }
                 oInGiaoDich.TongHangTra = TongHangTra;
                 oInGiaoDich.TongPhatSinh = TongPhatSinh;
-                oInGiaoDich.TongThanhToan = TongThanhToan;   
+                oInGiaoDich.TongThanhToan = TongThanhToan;
+                oInGiaoDich.TongGiamGia = TongGiamGia;
             }
 
         }

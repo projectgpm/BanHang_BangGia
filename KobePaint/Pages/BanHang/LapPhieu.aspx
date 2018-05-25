@@ -34,7 +34,8 @@
                 }
                 else {
                     cbpInfoImport.PerformCallback("import");
-                    cbpInfo.PerformCallback('refresh');
+                    // cbpInfo.PerformCallback('refresh');
+                    cbpInfo.PerformCallback('giamgia');
                 }
             }
 
@@ -85,14 +86,16 @@
 
             function onFileUploadComplete() {
                 cbpInfoImport.PerformCallback('importexcel');
-                cbpInfo.PerformCallback('refresh');
+               // cbpInfo.PerformCallback('refresh');
+                cbpInfo.PerformCallback('giamgia');
                 popupViewExcel.Hide();
             }
 
             ///////////////////////////////////
             function onUnitReturnChanged(key) {
                 cbpInfoImport.PerformCallback('UnitChange|' + key);
-                cbpInfo.PerformCallback('refresh');
+                //cbpInfo.PerformCallback('refresh');
+                cbpInfo.PerformCallback('giamgia');
             }
 
             function endCallBackProduct(s, e) {
@@ -162,8 +165,8 @@
 
             function onXoaHangChanged(key) {
                 cbpInfoImport.PerformCallback('xoahang|' + key);
-                cbpInfo.PerformCallback('refresh');
-                //cbpInfo.PerformCallback('giamgia');
+                //cbpInfo.PerformCallback('refresh');
+                cbpInfo.PerformCallback('giamgia');
             }
     </script>
 
@@ -241,17 +244,18 @@
                                                                         <dx:LayoutItem Caption="Công nợ">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer runat="server">
-                                                                                    <dx:ASPxSpinEdit  Number="0" ID="spCongNoCu"  ReadOnly="true" ClientInstanceName="spCongNoCu" DisplayFormatString="N0" Increment="5000" HorizontalAlign="Right" Width="100%" runat="server" Font-Bold="true" ForeColor="Red">
-                                                                                    </dx:ASPxSpinEdit>
+                                                                                    
+                                                                                    <dx:ASPxTextBox ID="txtNo" NullText="0" ClientInstanceName="txtNo" DisplayFormatString="N0" Font-Bold="true" HorizontalAlign="Right"  Width="100%" ForeColor="Red" ReadOnly="true" runat="server">
+                                                                                    </dx:ASPxTextBox>
+                                                                                    
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
                                                                             <CaptionSettings Location="Left" />
                                                                         </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Ngày lập phiếu">
+                                                                        <dx:LayoutItem Caption="Bảng giá">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer runat="server">
-                                                                                    <dx:ASPxDateEdit ID="dateNgayLapPhieu" runat="server" Enabled="False" OnInit="dateNgayLapPhieu_Init" Width="100%">
-                                                                                    </dx:ASPxDateEdit>
+                                                                                    <dx:ASPxTextBox ID="txtTenBangGia" ClientInstanceName ="txtTenBangGia" Font-Bold="true" ForeColor="Red" runat="server" Width="100%" ReadOnly="true"></dx:ASPxTextBox>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
                                                                             <CaptionSettings Location="Left" />
@@ -268,15 +272,7 @@
                                                                             </LayoutItemNestedControlCollection>
                                                                             <CaptionSettings Location="Left" />
                                                                         </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Người bán">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer4" runat="server">
-                                                                                    <dx:ASPxTextBox ID="txtNguoiNhap" runat="server" Width="100%" Enabled="False">
-                                                                                    </dx:ASPxTextBox>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                            <CaptionSettings Location="Left" />
-                                                                        </dx:LayoutItem>
+                                                                        
                                                                         <dx:LayoutItem Caption="Tổng tiền" FieldName="TongTien">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer13" runat="server">
@@ -442,7 +438,7 @@
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Tên hàng hóa" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="2" Width="100%">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataTextColumn Caption="Mã HH" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="1" Width="100px">
+                                                                <dx:GridViewDataTextColumn Caption="Mã HH" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="1" Width="80px">
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Tồn" FieldName="TonKho" ShowInCustomizationForm="True" VisibleIndex="3" Width="50px">
                                                                 </dx:GridViewDataTextColumn>

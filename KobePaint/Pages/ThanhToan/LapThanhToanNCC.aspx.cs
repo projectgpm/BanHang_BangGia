@@ -78,7 +78,7 @@ namespace KobePaint.Pages.ThanhToan
                     var PhieuTT = DBDataProvider.DB.kNhapKhos.Where(x => x.IDNhapKho == IDNhapKho).FirstOrDefault();
                     txtSoTienDaTT.Text = PhieuTT.ThanhToan.ToString();
                     speSoTienTT.Text = PhieuTT.CongNo.ToString();
-                    speSoTienTT.Enabled = false;
+                    //speSoTienTT.Enabled = false;
                     ListPhieuThanhToan(Convert.ToInt32(ccbKhachHang.Value.ToString()));
                     memoNoiDungTT.Text += " " + PhieuTT.CongNo.ToString() + " ĐỒNG";
                     break;
@@ -192,7 +192,7 @@ namespace KobePaint.Pages.ThanhToan
                                         DBDataProvider.DB.SubmitChanges();
                                         #endregion
                                         KH.CongNo -= TienNoDonHang; // - công nợ
-                                        KH.ThanhToan += TienNoDonHang; 
+                                        KH.ThanhToan += TienNoDonHang;
                                     }
                                     SoTienThu -= TienNoDonHang;
 
@@ -221,7 +221,7 @@ namespace KobePaint.Pages.ThanhToan
                                         DBDataProvider.DB.SubmitChanges();
                                         #endregion
                                         KH.CongNo -= SoTienThu; // - công nợ
-                                        KH.ThanhToan += SoTienThu; 
+                                        KH.ThanhToan += SoTienThu;
                                     }
                                     SoTienThu -= SoTienThu;
                                 }
@@ -256,36 +256,34 @@ namespace KobePaint.Pages.ThanhToan
                     }
                     else
                     {
+                        // trừ theo phiếu
                         int IDNhapKho = int.Parse(ccbPhieuThanhToan.Value.ToString());
                         kNhapKho PhieuNK = DBDataProvider.DB.kNhapKhos.Single(x => x.IDNhapKho == IDNhapKho);
-                        double? TienNoDonHang = PhieuNK.CongNo;
-                        if (SoTienThu >= TienNoDonHang)
+                        
+                        khKhachHang KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
+                        if (KH != null)
                         {
-                            PhieuNK.ThanhToan = PhieuNK.TongTien;
-                            PhieuNK.CongNo = 0;
-                            PhieuNK.TTThanhToan = 1;// đã thanh toán
-                            khKhachHang KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
-                            if (KH != null)
-                            {
-                                #region ghi nhật ký nhập kho để xem báo cáo
-                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                                nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Thanh toán Nhà cung cấp";
-                                nhatky.NoDau = KH.CongNo;
-                                nhatky.NhapHang = 0;
-                                nhatky.TraHang = 0;
-                                nhatky.ThanhToan = SoTienThu;
-                                nhatky.NoCuoi = KH.CongNo - SoTienThu;
-                                nhatky.NhanVienID = Formats.IDUser();
-                                nhatky.SoPhieu = PhieuNK.MaPhieu;
-                                nhatky.IDKhachHang = IDKhachHang;
-                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                                DBDataProvider.DB.SubmitChanges();
-                                #endregion
-                                KH.CongNo -= SoTienThu;// - công nợ
-                                KH.ThanhToan += SoTienThu;
-                            }
+                            #region ghi nhật ký nhập kho để xem báo cáo
+                            khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                            nhatky.NgayNhap = DateTime.Now;
+                            nhatky.DienGiai = "Thanh toán Nhà cung cấp";
+                            nhatky.NoDau = KH.CongNo;
+                            nhatky.NhapHang = 0;
+                            nhatky.TraHang = 0;
+                            nhatky.ThanhToan = PhieuNK.CongNo;
+                            nhatky.NoCuoi = KH.CongNo - PhieuNK.CongNo;
+                            nhatky.NhanVienID = Formats.IDUser();
+                            nhatky.SoPhieu = PhieuNK.MaPhieu;
+                            nhatky.IDKhachHang = IDKhachHang;
+                            DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                            DBDataProvider.DB.SubmitChanges();
+                            #endregion
+                            KH.CongNo -= PhieuNK.CongNo;// - công nợ
+                            KH.ThanhToan += PhieuNK.CongNo;
                         }
+                        PhieuNK.ThanhToan = PhieuNK.TongTien;
+                        PhieuNK.CongNo = 0;
+                        PhieuNK.TTThanhToan = 1;// đã thanh toán
                     }
                     DBDataProvider.DB.SubmitChanges();
                     scope.Complete();

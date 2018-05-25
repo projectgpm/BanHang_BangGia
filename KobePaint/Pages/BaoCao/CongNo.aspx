@@ -57,7 +57,7 @@
                                         <dx:GridViewDataTextColumn FieldName="GhiChu" Caption="Ghi chú" VisibleIndex="11">
                                             <Settings AllowHeaderFilter="False" />
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="TongTienHang" Caption="Tổng công nợ" VisibleIndex="7">
+                                        <dx:GridViewDataTextColumn FieldName="TongTienHang" Caption="Tổng tiền hàng" VisibleIndex="7">
                                             <PropertiesTextEdit DisplayFormatString="N0">
                                             </PropertiesTextEdit>
                                             <Settings AllowHeaderFilter="False" />
@@ -67,25 +67,27 @@
                                             </PropertiesTextEdit>
                                             <Settings AllowHeaderFilter="False" />
                                         </dx:GridViewDataTextColumn>
-                                        <dx:GridViewDataTextColumn FieldName="CongNo" Caption="Công nợ hiện tại" VisibleIndex="9" CellStyle-Font-Bold="true">
+                                        <dx:GridViewDataTextColumn FieldName="CongNo" Caption="Công nợ" VisibleIndex="9" CellStyle-Font-Bold="true">
                                             <PropertiesTextEdit DisplayFormatString="N0">
                                             </PropertiesTextEdit>
                                             <Settings AllowHeaderFilter="False" />
 
-<CellStyle Font-Bold="True"></CellStyle>
+                                            <CellStyle Font-Bold="True"></CellStyle>
                                         </dx:GridViewDataTextColumn>
                                     </Columns>
                                     <TotalSummary>
-                                        <dx:ASPxSummaryItem DisplayFormat="N0" FieldName="TongTienHang" ShowInColumn="Tổng công nợ" SummaryType="Sum" />
+                                        <dx:ASPxSummaryItem DisplayFormat="N0" FieldName="TongTienHang" ShowInColumn="Tổng tiền hàng" SummaryType="Sum" />
                                         <dx:ASPxSummaryItem DisplayFormat="N0" FieldName="ThanhToan" ShowInColumn="Đã thanh toán" SummaryType="Sum" />
-                                        <dx:ASPxSummaryItem DisplayFormat="N0" FieldName="CongNo" ShowInColumn="Công nợ hiện tại" SummaryType="Sum" />
+                                        <dx:ASPxSummaryItem DisplayFormat="N0" FieldName="CongNo" ShowInColumn="Công nợ" SummaryType="Sum" />
                                     </TotalSummary>
                                     <Styles>
                                         <Header Wrap="True">
                                         </Header>
                                     </Styles>
                                 </dx:ASPxGridView>
-                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDKhachHang, LoaiKhachHangID, MaKhachHang, HoTen, DienThoai, DiaChi, GhiChu, Email, LanCuoiMuaHang, TongTienHang, MaSoThue, TienTraHang, CongNo, DaXoa, NgayTao, ThanhToan, IDBangGia FROM khKhachHang WHERE (DaXoa = @DaXoa) AND (LoaiKhachHangID &lt;&gt; 2) ORDER BY HoTen">
+                                <asp:SqlDataSource ID="dsKhachHang" runat="server" 
+                                    ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
+                                    SelectCommand="SELECT IDKhachHang, LoaiKhachHangID, MaKhachHang, HoTen, DienThoai, DiaChi, GhiChu, Email, LanCuoiMuaHang, TongTienHang, MaSoThue, TienTraHang, CongNo, DaXoa, NgayTao, ThanhToan, IDBangGia FROM khKhachHang WHERE (DaXoa = @DaXoa) AND (LoaiKhachHangID &lt;&gt; 2) ORDER BY HoTen">
                                     <SelectParameters>
                                         <asp:Parameter DefaultValue="0" Name="DaXoa" Type="Int32" />
                                     </SelectParameters>

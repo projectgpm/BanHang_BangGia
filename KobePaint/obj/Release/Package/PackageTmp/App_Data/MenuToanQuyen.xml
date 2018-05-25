@@ -11,7 +11,7 @@
     <item Text="Thêm khách hàng - NCC" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx" />
     <item Text="Danh sách khách hàng" NavigateUrl="~/Pages/KhachHang/DanhSachKH.aspx" />
     <item Text="Danh sách nhà cung cấp" NavigateUrl="~/Pages/KhachHang/DanhSachNCC.aspx" />
-   
+
   </item>
   <item Text="Kho">
     <item Text="Tồn kho" NavigateUrl="~/Pages/Kho/TonKho.aspx" />
@@ -31,42 +31,40 @@
     <item Text="Lập phiếu trả hàng NCC" NavigateUrl="~/Pages/TraHang/TraHangNCC.aspx" />
     <item Text="Danh sách trả hàng NCC" NavigateUrl="~/Pages/TraHang/DanhSachTraHangNCC.aspx" />
   </item>
-  
+
   <item Text="Thanh toán" >
     <item Text="Lập phiếu KH thanh toán" NavigateUrl="~/Pages/ThanhToan/LapThanhToan.aspx" />
     <item Text="Danh sách thanh toán" NavigateUrl="~/Pages/ThanhToan/DanhSachThanhToan.aspx" />
     <item Text="Lập phiếu thanh toán NCC" NavigateUrl="~/Pages/ThanhToan/LapThanhToanNCC.aspx" />
     <item Text="Danh sách thanh toán NCC" NavigateUrl="~/Pages/ThanhToan/DanhSachThanhToanNCC.aspx" />
   </item>
-  
+
   <!--<item Text="Thu chi" >
     <item Text="Lập phiếu thu chi" NavigateUrl="~/Pages/ThuChi/LapPhieuThuChi.aspx" />
     <item Text="Danh sách phiếu thu chi" NavigateUrl="~/Pages/ThuChi/DanhSachThuChi.aspx" />
-    --><!--<item Text="Lập phiếu tạm ứng" NavigateUrl="" />
-    <item Text="Danh sách tạm ứng" NavigateUrl="" />--><!--
+    -->
+  <!--<item Text="Lập phiếu tạm ứng" NavigateUrl="" />
+    <item Text="Danh sách tạm ứng" NavigateUrl="" />-->
+  <!--
   </item>-->
-  
+
   <item Text="Báo cáo" >
     <item Text="Báo cáo bán hàng" >
       <item Text="Báo cáo doanh thu" NavigateUrl="~/Pages/BaoCao/DoanhThuDaiLy.aspx" />
-      <!--<item Text="Báo cáo doanh thu theo hàng hóa(chưa)" NavigateUrl="" />-->
       <item Text="Báo cáo công nợ" NavigateUrl="~/Pages/BaoCao/CongNo.aspx" />
-      <item Text="Báo cáo công nợ chi tiết theo ngày" NavigateUrl="~/Pages/BaoCao/CongNoDLTheoNgay.aspx" />
-      <item Text="Báo cáo công nợ chi tiết theo khách hàng" NavigateUrl="~/Pages/BaoCao/CongNoDLChiTiet.aspx" />
+      <item Text="Báo cáo chi tiết giao dịch" NavigateUrl="~/Pages/BaoCao/CongNoDLChiTiet.aspx" />
+      <item Text="Báo cáo doanh thu theo hàng hóa" NavigateUrl="~/Pages/BaoCao/DoanhThuTheoHangHoa.aspx" />
       <item Text="Báo cáo thanh toán" NavigateUrl="~/Pages/BaoCao/ThanhToanDaiLy.aspx" />
       <item Text="Báo cáo trả hàng" NavigateUrl="~/Pages/BaoCao/TraHangDaiLy.aspx" />
     </item>
-   
+
 
     <item Text="Danh sách khách hàng" NavigateUrl="~/Pages/BaoCao/DanhSachKhachHang.aspx" />
     <item Text="Báo cáo công nợ NCC" NavigateUrl="~/Pages/BaoCao/CongNoNCC.aspx" />
     <item Text="Báo cáo thanh toán cho NCC" NavigateUrl="~/Pages/BaoCao/ThanhToanNCC.aspx" />
-    <!--<item Text="Báo cáo Nhập-Xuất-Tồn(chưa)" NavigateUrl="" />
-    <item Text="Báo cáo tồn kho(chưa)" NavigateUrl="" />
-    <item Text="Báo cáo nhập kho chi tiết(chưa)" NavigateUrl="" />
-    <item Text="Báo cáo xuất kho chi tiết(chưa)" NavigateUrl="" />
-    <item Text="Báo cáo doanh thu tổng hợp(chưa)" NavigateUrl="" />-->
-   
+    <item Text="Báo cáo Nhập-Xuất-Tồn" NavigateUrl="~/Pages/BaoCao/NhapXuatTon.aspx" />
+    <item Text="Báo cáo nhập kho chi tiết" NavigateUrl="~/Pages/BaoCao/ChiTietNhapKho.aspx" />
+    <item Text="Báo cáo xuất kho chi tiết" NavigateUrl="~/Pages/BaoCao/ChiTietXuatKho.aspx" />
   </item>
   <item Text="Hệ thống" >
     <item Text="Thông tin tài khoản" NavigateUrl="~/Pages/TaiKhoan/ThongTinTaiKhoan.aspx" />

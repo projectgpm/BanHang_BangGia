@@ -74,6 +74,7 @@
                 <EditFormSettings Visible="False" />
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn Caption="Tên NCC" FieldName="HoTen" VisibleIndex="2" CellStyle-Font-Bold="true">
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn FieldName="DiaChi" VisibleIndex="4" Caption="Địa chỉ">
             </dx:GridViewDataTextColumn>
@@ -91,7 +92,7 @@
                 </PropertiesSpinEdit>
                 <EditFormSettings Visible="False" />
             </dx:GridViewDataSpinEditColumn>
-            <dx:GridViewDataSpinEditColumn Caption="Tiền trả hàng" FieldName="TienTraHang" VisibleIndex="9">
+            <dx:GridViewDataSpinEditColumn Caption="Tiền trả hàng" FieldName="TienTraHang" VisibleIndex="7">
                 <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <EditFormSettings Visible="False" />
@@ -100,6 +101,8 @@
                 <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <EditFormSettings Visible="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataSpinEditColumn>
             <dx:GridViewDataTextColumn Caption="Ghi chú" FieldName="GhiChu" Visible="False" VisibleIndex="13">
                 <EditFormSettings Visible="True" />
@@ -110,11 +113,16 @@
             <dx:GridViewDataTextColumn Caption="Mã số thuế" FieldName="MaSoThue" Visible="False" VisibleIndex="14">
                 <EditFormSettings Visible="True" />
             </dx:GridViewDataTextColumn>
+            <dx:GridViewDataSpinEditColumn Caption="Tổng thanh toán" FieldName="ThanhToan" VisibleIndex="10">
+                <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
+                </PropertiesSpinEdit>
+                <EditFormSettings Visible="False" />
+            </dx:GridViewDataSpinEditColumn>
         </Columns>
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
         SelectCommand="SELECT * FROM [khKhachHang] WHERE [DaXoa] = 0 AND [LoaiKhachHangID] = 2" 
-        DeleteCommand ="UPDATE [khKhachHang] SET DAXOA = 1 WHERE [IDKhachHang] = @IDKhachHang" 
+        DeleteCommand ="DELETE FROM khKhachHang WHERE (IDKhachHang = @IDKhachHang)" 
         InsertCommand="INSERT INTO [khKhachHang] ([MaKhachHang], [LoaiKhachHangID], [HoTen], [DiaChi], [DienThoai], [MaSoThue], [GhiChu], [NhanVienPhuTrachID], [TongCongNo], [DaThanhToan], [TienTamUng], [TienTTConLai], [HanMucCongNo], [ThoiHanThanhToan], [DaXoa]) VALUES (@MaKhachHang, @LoaiKhachHangID, @HoTen, @DiaChi, @DienThoai, @MaSoThue, @GhiChu, @NhanVienPhuTrachID, @TongCongNo, @DaThanhToan, @TienTamUng, @TienTTConLai, @HanMucCongNo, @ThoiHanThanhToan, @DaXoa)" 
         UpdateCommand="UPDATE [khKhachHang] SET [HoTen] = @HoTen, [DiaChi] = @DiaChi,[Email] = @Email, [DienThoai] = @DienThoai, [MaSoThue] = @MaSoThue, [GhiChu] = @GhiChu WHERE [IDKhachHang] = @IDKhachHang">
         <SelectParameters>

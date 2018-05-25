@@ -214,6 +214,7 @@ namespace KobePaint.Pages.TraHang
                                 thekho.NgayNhap = DateTime.Now;
                                 thekho.DienGiai = "Trả hàng NCC #" + MaPhieu;
                                 thekho.Nhap = 0;
+                                thekho.GiaThoiDiem = prod.TienTra;
                                 thekho.Xuat = prod.SoLuong;
                                 thekho.Ton = prod.TonKho - prod.SoLuong;
                                 thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
@@ -228,24 +229,24 @@ namespace KobePaint.Pages.TraHang
                         {
 
                             #region ghi nhật ký nhập kho để xem báo cáo
-                            if (ckGiamCongNo.Checked == true)// giảm công nợ
-                            {
-                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                                nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Trả hàng NCC ";
-                                nhatky.NoDau = Supplier.CongNo;
-                                nhatky.NhapHang = 0;
-                                nhatky.TraHang = ckGiamCongNo.Checked == true ? TongTien : 0;
-                                nhatky.NoCuoi = Supplier.CongNo - (ckGiamCongNo.Checked == true ? TongTien : 0);
-                                nhatky.ThanhToan = 0;
-                                nhatky.NhanVienID = Formats.IDUser();
-                                nhatky.SoPhieu = MaPhieu;
-                                nhatky.IDKhachHang = IDNCC;
-                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                                DBDataProvider.DB.SubmitChanges();
-                                Supplier.CongNo -= ckGiamCongNo.Checked == true ? TongTien : 0;
-                                Supplier.LanCuoiMuaHang = DateTime.Now;
-                            }
+                           
+                            khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                            nhatky.NgayNhap = DateTime.Now;
+                            nhatky.DienGiai = "Trả hàng NCC ";
+                            nhatky.NoDau = Supplier.CongNo;
+                            nhatky.NhapHang = 0;
+                            nhatky.TraHang = TongTien;
+                            nhatky.NoCuoi = Supplier.CongNo - (ckGiamCongNo.Checked == true ? TongTien : 0);
+                            nhatky.ThanhToan = 0;
+                            nhatky.NhanVienID = Formats.IDUser();
+                            nhatky.SoPhieu = MaPhieu;
+                            nhatky.IDKhachHang = IDNCC;
+                            DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                            DBDataProvider.DB.SubmitChanges();
+
+                            Supplier.CongNo -= ckGiamCongNo.Checked == true ? TongTien : 0;
+                            Supplier.LanCuoiMuaHang = DateTime.Now;
+                            
                             Supplier.TienTraHang += TongTien;
                             #endregion
                             phieutra.CongNoCu = Supplier.CongNo;

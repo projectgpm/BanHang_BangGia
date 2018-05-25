@@ -39,7 +39,7 @@ namespace KobePaint.Pages.GiaoHang
             }
             if (!IsPostBack)
             {
-                txtNguoiNhap.Text = Formats.NameUser();
+                
                 listReceiptProducts = new List<oChiTietHoaDon>();
                 hdfViewReport["view"] = 0;
                 int Permiss = Formats.PermissionUser();
@@ -136,6 +136,7 @@ namespace KobePaint.Pages.GiaoHang
 
         private void GiamGia()
         {
+            LamMoi();
             spTienTraKhach.Number = 0;
             if (rdHinhThuc.SelectedIndex == 0)
             {
@@ -160,6 +161,7 @@ namespace KobePaint.Pages.GiaoHang
                 hiddenTienGiamGia["GiamGia"] = PhanTram.ToString();
             }
         }
+
         private void CreateReportReview()
         {
             hdfViewReport["view"] = 1;
@@ -172,7 +174,7 @@ namespace KobePaint.Pages.GiaoHang
             oCusExport.TenNhanVien = Formats.NameUser();
             oCusExport.GhiChuGiaoHang = memoGhiChu.Text;
             oCusExport.NgayGiao = Formats.ConvertToVNDateString(dateNgayNhap.Text);
-            oCusExport.NgayTao = Formats.ConvertToVNDateString(dateNgayLapPhieu.Text);
+            oCusExport.NgayTao = Formats.ConvertToVNDateString(DateTime.Now.ToString());
             oCusExport.GiamGia = Convert.ToDouble(spGiamGia.Number);
             oCusExport.CongNoHienTai = Convert.ToDouble(KH.CongNo);
             oCusExport.SoDonHangTrongNam = ".....";
@@ -199,6 +201,7 @@ namespace KobePaint.Pages.GiaoHang
             cbpInfoImport.JSProperties["cp_rpView"] = true;
         }
 
+        #region lưu lại
         protected void Save()
         {
              using (var scope = new TransactionScope())
@@ -272,6 +275,7 @@ namespace KobePaint.Pages.GiaoHang
                                 thekho.DienGiai = "Lập phiếu giao hàng#" + MaPhieu;
                                 thekho.Nhap = 0;
                                 thekho.Xuat = prod.SoLuong;
+                                thekho.GiaThoiDiem = prod.GiaBan;
                                 thekho.Ton = prod.TonKho - prod.SoLuong;
                                 thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
                                 thekho.NhanVienID = Formats.IDUser();
@@ -297,6 +301,7 @@ namespace KobePaint.Pages.GiaoHang
                 }
             }
         }
+        #endregion
 
         protected void ccbNhaCungCap_Callback(object sender, CallbackEventArgsBase e)
         {
@@ -340,6 +345,7 @@ namespace KobePaint.Pages.GiaoHang
             comboBox.DataBind();
         }
         #endregion
+
         private void LamMoi()
         {
             double TongTien = 0;
@@ -350,19 +356,21 @@ namespace KobePaint.Pages.GiaoHang
             spTongTien.Text = TongTien.ToString();
             spThanhToan.Text = (TongTien - Convert.ToDouble(spGiamGia.Number)).ToString();
             spTienTraKhach.Text = ((-1) * (TongTien - Convert.ToDouble(spGiamGia.Number))).ToString();
-           // cbpInfo.JSProperties["cp_refresh"] = true;
         }
+
         private void BindGrid()
         {
             gridImportPro.DataSource = listReceiptProducts;
             gridImportPro.DataBind();
         }
+
         private void DeleteListProducts()
         {
             listReceiptProducts = new List<oChiTietHoaDon>();
             gridImportPro.DataSource = listReceiptProducts;
             gridImportPro.DataBind();
         }
+
         protected void Reset()
         {
             ccbNhaCungCap.SelectedIndex = -1;
@@ -373,12 +381,13 @@ namespace KobePaint.Pages.GiaoHang
             spGiamGia.Number = 0;
             spKhachHangThoan.Number = 0;
             spTienGiamGia.Number = 0;
+            spTienGiamGia.Text = "0";
             spTienTraKhach.Number = 0;
             memoGhiChu.Text = "";
-            spCongNoCu.Number = 0;
+            txtNo.Text = "0";
             ccbBarcode.Text = "";
             rdHinhThuc.SelectedIndex = 0;
-
+            txtTenBangGia.Text = "";
         }
         
         private void CongNo()
@@ -387,9 +396,11 @@ namespace KobePaint.Pages.GiaoHang
             var KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == Convert.ToInt32(ccbNhaCungCap.Value.ToString())).FirstOrDefault();
             if (KH != null)
             {
-                spCongNoCu.Text = KH.CongNo.ToString();
+                txtNo.Text = KH.CongNo.ToString();
+                txtTenBangGia.Text = KH.bgBangGia.TenBangGia + (KH.bgBangGia.DaXoa == 1 ? "(Đã xóa)" : "");
             }
         }
+
         protected void GetPrice()
         {
             ccbBarcode.Text = "";
@@ -450,7 +461,7 @@ namespace KobePaint.Pages.GiaoHang
                 var exitProdInList = listReceiptProducts.SingleOrDefault(r => r.IDHangHoa == ID);
                 if (exitProdInList == null)
                 {
-                    var GiaBan_IDKhachHang = DBDataProvider.DB.bgChiTietBangGias.Where(x=>x.BangGiaID == IDKhachHang_IDBangGia.IDBangGia && x.HangHoaID == tblHangHoa.IDHangHoa ).FirstOrDefault();
+                    var GiaBan_IDKhachHang = DBDataProvider.DB.bgChiTietBangGias.Where(x=>x.BangGiaID == IDKhachHang_IDBangGia.IDBangGia && x.HangHoaID == tblHangHoa.IDHangHoa && x.bgBangGia.DaXoa == 0 ).FirstOrDefault();
                     double GiaBan = GiaBan_IDKhachHang == null ?  Convert.ToDouble(tblHangHoa.GiaBan) :  Convert.ToDouble(GiaBan_IDKhachHang.GiaMoi);
                     oChiTietHoaDon cthd = new oChiTietHoaDon(
                         tblHangHoa.IDHangHoa,
@@ -481,6 +492,7 @@ namespace KobePaint.Pages.GiaoHang
             }
         }
         #endregion
+
         protected void UpdateSTT()
         {
             ccbBarcode.Value = "";

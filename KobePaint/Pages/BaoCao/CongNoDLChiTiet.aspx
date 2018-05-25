@@ -156,17 +156,19 @@
                 <SettingsHeaderFilter Mode="CheckedList">
                 </SettingsHeaderFilter>
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Số phiếu" FieldName="SoPhieu" VisibleIndex="5" ReadOnly="True" Width="90px">
+            <dx:GridViewDataTextColumn Caption="Số phiếu" FieldName="MaPhieu" VisibleIndex="5" ReadOnly="True" Width="110px">
                 <SettingsHeaderFilter Mode="CheckedList">
                 </SettingsHeaderFilter>
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn Caption="STT" VisibleIndex="0" Width="50px" FieldName="IDCongNo">
                 <Settings AllowAutoFilter="False" />
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataSpinEditColumn Caption="Nợ cuối" FieldName="NoCuoi" ReadOnly="True" VisibleIndex="10" CellStyle-Font-Bold="true">
+            <dx:GridViewDataSpinEditColumn Caption="Nợ cuối" FieldName="NoCuoi" ReadOnly="True" VisibleIndex="11" CellStyle-Font-Bold="true">
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <Settings AllowHeaderFilter="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataSpinEditColumn>
             <dx:GridViewDataSpinEditColumn Caption="Thanh toán" FieldName="ThanhToan" ReadOnly="True" VisibleIndex="9">
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
@@ -178,7 +180,7 @@
                 </PropertiesSpinEdit>
                 <Settings AllowHeaderFilter="False" />
             </dx:GridViewDataSpinEditColumn>
-            <dx:GridViewDataSpinEditColumn Caption="Nhập hàng" FieldName="NhapHang" ReadOnly="True" VisibleIndex="7">
+            <dx:GridViewDataSpinEditColumn Caption="Phát sinh" FieldName="NhapHang" ReadOnly="True" VisibleIndex="7">
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <Settings AllowHeaderFilter="False" />
@@ -187,11 +189,17 @@
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <Settings AllowHeaderFilter="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataSpinEditColumn>
             <dx:GridViewDataTextColumn Caption="Khách hàng" FieldName="HoTen" VisibleIndex="1">
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataTextColumn Caption="Điện thoại" FieldName="DienThoai" VisibleIndex="2">
             </dx:GridViewDataTextColumn>
+            <dx:GridViewDataSpinEditColumn Caption="Giảm giá" FieldName="GiamGia" VisibleIndex="10">
+                <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
+                </PropertiesSpinEdit>
+            </dx:GridViewDataSpinEditColumn>
         </Columns>
        <FormatConditions>
             <dx:GridViewFormatConditionHighlight FieldName="NoCuoi" Expression="[NoCuoi] < 1" Format="LightRedFillWithDarkRedText" />
@@ -201,30 +209,19 @@
             </dx:GridViewFormatConditionTopBottom>
         </FormatConditions>
         <TotalSummary>
-            <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="NoDau" ShowInColumn="Nợ đầu" SummaryType="Sum" />
-            <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="NhapHang" ShowInColumn="Nhập hàng" SummaryType="Sum" />
+            <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="NoDau" ShowInColumn="Nợ đầu" SummaryType="Sum" Visible="False" />
+            <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="NhapHang" ShowInColumn="Phát sinh" SummaryType="Sum" />
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="TraHang" ShowInColumn="Trả hàng" SummaryType="Sum" />
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="ThanhToan" ShowInColumn="Thanh toán" SummaryType="Sum" />
-            <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="NoCuoi" ShowInColumn="Nợ cuối" SummaryType="Sum" />
+            <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="NoCuoi" ShowInColumn="Nợ cuối" SummaryType="Sum" Visible="False" />
+            <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="GiamGia" ShowInColumn="Giảm giá" SummaryType="Sum" />
         </TotalSummary>
 
 
     </dx:ASPxGridView>
      <asp:SqlDataSource ID="dsChiTietCongNo" runat="server" 
         ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT khNhatKyCongNo.IDCongNo, khNhatKyCongNo.NgayNhap,
-          khNhatKyCongNo.DienGiai, khNhatKyCongNo.NoDau,
-          khNhatKyCongNo.NhapHang, khNhatKyCongNo.TraHang,
-          khNhatKyCongNo.NoCuoi, khNhatKyCongNo.ThanhToan, khNhatKyCongNo.NhanVienID,
-          khNhatKyCongNo.SoPhieu, khNhatKyCongNo.IDKhachHang, khKhachHang.HoTen,
-          khKhachHang.DienThoai FROM khNhatKyCongNo INNER JOIN khKhachHang
-          ON khNhatKyCongNo.IDKhachHang = khKhachHang.IDKhachHang 
-         WHERE (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) 
-         AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) 
-         AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) 
-         AND (@IDKhachHang = 0) OR (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, @DenNgay)) 
-         AND (khNhatKyCongNo.NgayNhap &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) 
-         AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
+        SelectCommand="SELECT khNhatKyCongNo.IDCongNo, khNhatKyCongNo.NgayNhap, khNhatKyCongNo.DienGiai, khNhatKyCongNo.NoDau, khNhatKyCongNo.NhapHang, khNhatKyCongNo.TraHang, khNhatKyCongNo.NoCuoi, khNhatKyCongNo.ThanhToan, khNhatKyCongNo.NhanVienID, khNhatKyCongNo.SoPhieu, khNhatKyCongNo.IDKhachHang, khKhachHang.HoTen, khKhachHang.DienThoai, khNhatKyCongNo.GiamGia, khNhatKyCongNo.MaPhieu FROM khNhatKyCongNo INNER JOIN khKhachHang ON khNhatKyCongNo.IDKhachHang = khKhachHang.IDKhachHang WHERE (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, FORMAT(@DenNgay, 'yyyy-MM-dd'))) AND (khNhatKyCongNo.NgayNhap &gt;= FORMAT(@TuNgay, 'yyyy-MM-dd')) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (@IDKhachHang = 0) OR (khNhatKyCongNo.NgayNhap &lt;= DATEADD(day, 1, FORMAT(@DenNgay, 'yyyy-MM-dd'))) AND (khNhatKyCongNo.NgayNhap &gt;= FORMAT(@TuNgay, 'yyyy-MM-dd')) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
         CancelSelectOnNullParameter="False">
         <SelectParameters>
             <asp:ControlParameter ControlID="formThongTin$fromDay" Name="TuNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue=""  />

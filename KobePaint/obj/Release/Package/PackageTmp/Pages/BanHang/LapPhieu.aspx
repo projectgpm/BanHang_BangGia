@@ -247,11 +247,10 @@
                                                                             </LayoutItemNestedControlCollection>
                                                                             <CaptionSettings Location="Left" />
                                                                         </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Ngày lập phiếu">
+                                                                        <dx:LayoutItem Caption="Bảng giá">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer runat="server">
-                                                                                    <dx:ASPxDateEdit ID="dateNgayLapPhieu" runat="server" Enabled="False" OnInit="dateNgayLapPhieu_Init" Width="100%">
-                                                                                    </dx:ASPxDateEdit>
+                                                                                    <dx:ASPxTextBox ID="txtTenBangGia" ClientInstanceName ="txtTenBangGia" Font-Bold="true" ForeColor="Red" runat="server" Width="100%" ReadOnly="true"></dx:ASPxTextBox>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
                                                                             <CaptionSettings Location="Left" />
@@ -268,15 +267,7 @@
                                                                             </LayoutItemNestedControlCollection>
                                                                             <CaptionSettings Location="Left" />
                                                                         </dx:LayoutItem>
-                                                                        <dx:LayoutItem Caption="Người bán">
-                                                                            <LayoutItemNestedControlCollection>
-                                                                                <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer4" runat="server">
-                                                                                    <dx:ASPxTextBox ID="txtNguoiNhap" runat="server" Width="100%" Enabled="False">
-                                                                                    </dx:ASPxTextBox>
-                                                                                </dx:LayoutItemNestedControlContainer>
-                                                                            </LayoutItemNestedControlCollection>
-                                                                            <CaptionSettings Location="Left" />
-                                                                        </dx:LayoutItem>
+                                                                        
                                                                         <dx:LayoutItem Caption="Tổng tiền" FieldName="TongTien">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer13" runat="server">

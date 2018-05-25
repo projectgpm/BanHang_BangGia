@@ -31,6 +31,15 @@ namespace KobePaint.Pages.HangHoa {
         protected global::DevExpress.Web.ASPxButton btnThemHangHoa;
         
         /// <summary>
+        /// btnNhapExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton btnNhapExcel;
+        
+        /// <summary>
         /// LayoutItemNestedControlContainer1 control.
         /// </summary>
         /// <remarks>
@@ -128,5 +137,68 @@ namespace KobePaint.Pages.HangHoa {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGlobalEvents globalEventGrid;
+        
+        /// <summary>
+        /// popupViewExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxPopupControl popupViewExcel;
+        
+        /// <summary>
+        /// PopupControlContentControl2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.PopupControlContentControl PopupControlContentControl2;
+        
+        /// <summary>
+        /// hdfViewReport control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxHiddenField hdfViewReport;
+        
+        /// <summary>
+        /// ASPxLabel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel ASPxLabel1;
+        
+        /// <summary>
+        /// linkNhapKho control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxHyperLink linkNhapKho;
+        
+        /// <summary>
+        /// ASPxLabel2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxLabel ASPxLabel2;
+        
+        /// <summary>
+        /// UploadControl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxUploadControl UploadControl;
     }
 }

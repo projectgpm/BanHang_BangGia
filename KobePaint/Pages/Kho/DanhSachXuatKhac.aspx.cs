@@ -54,6 +54,7 @@ namespace KobePaint.Pages.Kho
                                         thekho.Xuat = 0;
                                         thekho.Ton = HangHoa.TonKho += SoLuong; // cộng tồn kho luôn
                                         thekho.HangHoaID = IDHangHoa;
+                                        thekho.GiaThoiDiem = 0;
                                         thekho.NhanVienID = Formats.IDUser();
                                         DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
                                     #endregion

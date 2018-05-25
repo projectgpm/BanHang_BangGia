@@ -59,6 +59,7 @@ namespace KobePaint.Pages.Kho
                 case "Save": Save(); BindGrid(); break;
                 case "Review": CreateReportReview(); break;
                 case "importexcel": BindGrid(); break;
+                case "resetinfo_pro": BindGrid(); break;
                 case "redirect": DevExpress.Web.ASPxWebControl.RedirectOnCallback("~/Pages/Kho/DanhSachNhapKho.aspx"); break;
                 default: InsertIntoGrid(); BindGrid(); break;
             }
@@ -321,6 +322,7 @@ namespace KobePaint.Pages.Kho
                                 thekho.DienGiai = "Nhập hàng #" + MaPhieu;
                                 thekho.Nhap = prod.SoLuong;
                                 thekho.Xuat = 0;
+                                thekho.GiaThoiDiem = prod.GiaVon;
                                 thekho.Ton = prod.SoLuong + prod.TonKho;
                                 thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
                                 thekho.NhanVienID = Formats.IDUser();
@@ -344,22 +346,20 @@ namespace KobePaint.Pages.Kho
                         if (Supplier != null)
                         {
                             #region ghi nhật ký nhập kho để xem báo cáo
-                            if (ConLai > 0)
-                            {
                                 khNhatKyCongNo nhatky = new khNhatKyCongNo();
                                 nhatky.NgayNhap = DateTime.Now;
                                 nhatky.DienGiai = "Nhập kho";
                                 nhatky.NoDau = Supplier.CongNo;
-                                nhatky.NhapHang = ConLai;
+                                nhatky.NhapHang = TongTien;
                                 nhatky.TraHang = 0;
                                 nhatky.NoCuoi = Supplier.CongNo + ConLai;
-                                nhatky.ThanhToan = 0;
+                                nhatky.ThanhToan = ThanhToan;
                                 nhatky.NhanVienID = Formats.IDUser();
+                                nhatky.GiamGia = 0;
                                 nhatky.SoPhieu = MaPhieu;
                                 nhatky.IDKhachHang = IDNCC;
                                 DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
                                 DBDataProvider.DB.SubmitChanges();
-                            }
                             #endregion
 
                             nhapKho.CongNoCu = Supplier.CongNo;

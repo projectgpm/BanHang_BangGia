@@ -166,7 +166,9 @@
                     </dx:ASPxComboBox >
                 </DataItemTemplate>--%>
 
-<CellStyle HorizontalAlign="Center" Font-Bold="True"></CellStyle>
+                 <CellStyle>
+                    <Paddings Padding="2px" />
+                </CellStyle>
                 <PropertiesComboBox EnableFocusedStyle="False">
                     <Items>
                         <dx:ListEditItem Text="Đã đặt" Value="0" />
@@ -176,14 +178,18 @@
                 </PropertiesComboBox>
             <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
 
-                 <CellStyle>
-                    <Paddings Padding="2px" />
+<CellStyle HorizontalAlign="Center" Font-Bold="True">
+<Paddings Padding="2px"></Paddings>
                 </CellStyle>
             </dx:GridViewDataComboBoxColumn>
+            <dx:GridViewDataSpinEditColumn Caption="Giảm giá" FieldName="GiamGia" ReadOnly="True" VisibleIndex="8">
+                <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
+                </PropertiesSpinEdit>
+            </dx:GridViewDataSpinEditColumn>
         </Columns>
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsDonHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT IDPhieuGiaoHang, NgayTao, MaPhieu, NhanVienID, GhiChuGiaoHang, KhachHangID, NgayGiao, NguoiGiao, DiaChiGiaoHang, DaXoa, TrangThai, TongSoLuong, TongTien, DienThoai, SoHoaDon, TTThanhToan, ThanhToan, ConLai FROM ghPhieuGiaoHang WHERE (TrangThai = 0)" 
+        SelectCommand="SELECT IDPhieuGiaoHang, NgayTao, MaPhieu, NhanVienID, GhiChuGiaoHang, KhachHangID, NgayGiao, NguoiGiao, DiaChiGiaoHang, DaXoa, TrangThai, TongSoLuong, TongTien, DienThoai, SoHoaDon, TTThanhToan, ThanhToan, ConLai, GiamGia FROM ghPhieuGiaoHang WHERE (TrangThai = 0)" 
         UpdateCommand="UPDATE gPhieuGiaoHang SET NgayDatHang = @NgayDatHang, NgayXuatHang = @NgayXuatHang, XeID = @XeID, TaiXeID = @TaiXeID, PheDuyet = @PheDuyet,  NgayDuyet = getdate() WHERE (IDPhieuGiaoHang = @IDPhieuGiaoHang)">
         <UpdateParameters>
             <asp:Parameter Name="NgayDatHang" Type="DateTime" />

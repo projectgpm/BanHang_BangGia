@@ -117,7 +117,7 @@
                                                                                 <dx:ASPxHiddenField ID="hiddenfile" ClientInstanceName="hiddenfile" runat="server"></dx:ASPxHiddenField>
                                                                                 <asp:SqlDataSource ID="dsBangGia" runat="server" 
                                                                                     ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>"
-                                                                                     SelectCommand="SELECT IDBangGia,MaBangGia, TenBangGia FROM bgBangGia WHERE (DaXoa = 0)">
+                                                                                     SelectCommand="SELECT IDBangGia,MaBangGia, TenBangGia FROM bgBangGia WHERE (DaXoa = 0) AND IDBangGia > 1">
                                                                                 </asp:SqlDataSource>
                                                                             </td>
                                                                             <td style="width: 10%; padding-left: 10px;">
@@ -329,13 +329,16 @@
                     <PanelCollection>
                         <dx:PanelContent ID="PanelContent4" runat="server">
                                <dx:ASPxGridView ID="gridBangGia" runat="server" AutoGenerateColumns="False" ClientInstanceName="gridBangGia" Width="100%" DataSourceID="dsachBangGia" KeyFieldName="IDBangGia" OnCustomColumnDisplayText="gridBangGia_CustomColumnDisplayText">
-                                                <SettingsEditing Mode="Inline">
+                                                <SettingsEditing Mode="PopupEditForm">
                                                 </SettingsEditing>
-                                                <Settings VerticalScrollableHeight="0" ShowFilterRow="True"/>
+                                                <Settings VerticalScrollableHeight="0"/>
                                                 <SettingsPager AlwaysShowPager="True" >
                                                     <Summary EmptyText="Không có dữ liệu" Text="Trang {0}/{1}" />
                                                 </SettingsPager>
-                                                <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xóa dữ liệu ??" />
+                                                <SettingsPopup>
+                                                    <EditForm HorizontalAlign="Center" VerticalAlign="WindowCenter" />
+                                                </SettingsPopup>
+                                                <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xóa dữ liệu ??" PopupEditFormCaption="Thông tin" />
                                                 <Styles>
                                                     <Header HorizontalAlign="Center">                
                                                     </Header>
@@ -384,8 +387,22 @@
                                                         </Image>
                                                     </DeleteButton>
                                                 </SettingsCommandButton>
+                                                <EditFormLayoutProperties>
+                                                    <Items>
+                                                        <dx:GridViewColumnLayoutItem ColumnName="Mã bảng giá">
+                                                        </dx:GridViewColumnLayoutItem>
+                                                        <dx:GridViewColumnLayoutItem ColumnName="Tên bảng giá">
+                                                        </dx:GridViewColumnLayoutItem>
+                                                        <dx:GridViewColumnLayoutItem ColumnName="Phạm vi áp dụng">
+                                                        </dx:GridViewColumnLayoutItem>
+                                                        <dx:GridViewColumnLayoutItem ColumnName="Ghi chú">
+                                                        </dx:GridViewColumnLayoutItem>
+                                                        <dx:EditModeCommandLayoutItem HorizontalAlign="Right">
+                                                        </dx:EditModeCommandLayoutItem>
+                                                    </Items>
+                                                </EditFormLayoutProperties>
                                                 <Columns>
-                                                    <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="5" Width="200px" ShowClearFilterButton="True">
+                                                    <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="5" Width="200px">
                                                     </dx:GridViewCommandColumn>
                                                     <dx:GridViewDataTextColumn FieldName="IDBangGia" ReadOnly="True" VisibleIndex="0" Caption="STT" Width="60px">
                                                         <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />

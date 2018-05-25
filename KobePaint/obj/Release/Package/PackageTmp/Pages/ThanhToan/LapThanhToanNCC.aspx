@@ -21,12 +21,16 @@
 
         function onCCBHinhThucChanged(s, e) {
             if (s.GetSelectedIndex() == 0) {
-                SetVisiblePhieuTT(false);
-                speSoTienTT.SetEnabled(true);
+                SetVisiblePhieuTT(true);
+                txtSoTienDaTT.SetText('0');
+                ccbPhieuThanhToan.SetText('');
+                speSoTienTT.SetNumber(0);
             }
             else {
                 SetVisiblePhieuTT(true);
-                speSoTienTT.SetEnabled(false);
+                txtSoTienDaTT.SetText('0');
+                ccbPhieuThanhToan.SetText('');
+                speSoTienTT.SetNumber(0);
             }
         }
         function SetVisiblePhieuTT(bVisible) {
@@ -102,7 +106,7 @@
                                                 <ClientSideEvents SelectedIndexChanged="onCCBKhachHangChanged" />
                                             </dx:ASPxComboBox>
                                             <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>"
-                                                 SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] Where LoaiKhachHangID = 2"></asp:SqlDataSource>
+                                                 SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] Where LoaiKhachHangID = 2 AND DaXoa = 0"></asp:SqlDataSource>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
@@ -137,6 +141,7 @@
                                                 <Columns>
                                                     <dx:ListBoxColumn Caption="Mã phiếu" FieldName="MaPhieu" />
                                                     <dx:ListBoxColumn Caption="Tổng tiền" FieldName="TongTien" />
+                                                    <dx:ListBoxColumn Caption="Đã thanh toán" FieldName="ThanhToan" />
                                                 </Columns>
                                                 <ClientSideEvents SelectedIndexChanged="onCCBPhieuThanhToanChanged" />
                                             </dx:ASPxComboBox>
@@ -147,10 +152,9 @@
                                 <dx:LayoutItem Caption="Số tiền đã thanh toán" HelpText="(Đvt: đồng)" Name="itemSoTienDaTT" ClientVisible="false">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer5" runat="server">
-                                                        <dx:ASPxTextBox ID="txtSoTienDaTT" ClientInstanceName="txtSoTienDaTT" runat="server" Width="100%"  Enabled="false" DisplayFormatString="N0">
-                                                        </dx:ASPxTextBox>
-                                                        <dx:ASPxHiddenField ID="hiddenfield" ClientInstanceName="hiddenfield" runat="server"></dx:ASPxHiddenField>
-     
+                                            <dx:ASPxTextBox ID="txtSoTienDaTT" ClientInstanceName="txtSoTienDaTT" runat="server" Width="100%"  Enabled="false" DisplayFormatString="N0">
+                                            </dx:ASPxTextBox>
+                                            <dx:ASPxHiddenField ID="hiddenfield" ClientInstanceName="hiddenfield" runat="server"></dx:ASPxHiddenField>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                     <HelpTextSettings Position="Right" VerticalAlign="Middle" />

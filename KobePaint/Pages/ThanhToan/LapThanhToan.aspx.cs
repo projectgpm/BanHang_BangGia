@@ -78,7 +78,6 @@ namespace KobePaint.Pages.ThanhToan
                     var PhieuTT = DBDataProvider.DB.ghPhieuGiaoHangs.Where(x => x.IDPhieuGiaoHang == IDPhieuThanhToan).FirstOrDefault();
                     txtSoTienDaTT.Text = PhieuTT.ThanhToan.ToString();
                     speSoTienTT.Text = PhieuTT.ConLai.ToString();
-                    speSoTienTT.Enabled = false;
                     ListPhieuThanhToan(Convert.ToInt32(ccbKhachHang.Value.ToString()));
                     memoNoiDungTT.Text += PhieuTT.ConLai.ToString() + " ĐỒNG";
                     break;
@@ -92,6 +91,7 @@ namespace KobePaint.Pages.ThanhToan
                     ListPhieuThanhToan(IDKhachHang);
                     break;
                 case "Review": CreateReportReview(); break;
+              
                 case "redirect": DevExpress.Web.ASPxWebControl.RedirectOnCallback("~/Pages/ThanhToan/LapThanhToan.aspx"); break;
                 default:
                     LuuThanhToan();
@@ -159,6 +159,8 @@ namespace KobePaint.Pages.ThanhToan
                     DBDataProvider.DB.ghPhieuDaiLyThanhToans.InsertOnSubmit(thanhtoan);
                     DBDataProvider.DB.SubmitChanges();
                     int IDPhieuThu = thanhtoan.IDPhieuThu;
+                    khKhachHang KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
+                    KH.LanCuoiMuaHang = DateTime.Now;
                     if (rdlHinhThuc.SelectedIndex == 0)
                     {
                         //Cap nhat thanh toan phieu giao hang
@@ -174,7 +176,6 @@ namespace KobePaint.Pages.ThanhToan
                                     ListPhieuGiaoHang[i].ThanhToan = ListPhieuGiaoHang[i].TongTien; //cập nhật lại thanh toán = tổng tiền
                                     ListPhieuGiaoHang[i].ConLai = 0;// cập nhật còn lại  = 0;
                                     ListPhieuGiaoHang[i].TTThanhToan = 1;// đã thanh toán
-                                    khKhachHang KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
                                     if (KH != null)
                                     {
                                         #region ghi nhật ký nhập kho để xem báo cáo
@@ -183,6 +184,7 @@ namespace KobePaint.Pages.ThanhToan
                                         nhatky.DienGiai = "Thanh toán";
                                         nhatky.NoDau = KH.CongNo;
                                         nhatky.NhapHang = 0;
+                                        nhatky.GiamGia = 0;
                                         nhatky.TraHang = 0;
                                         nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
                                         nhatky.ThanhToan = TienNoDonHang;
@@ -204,7 +206,7 @@ namespace KobePaint.Pages.ThanhToan
                                     ListPhieuGiaoHang[i].ThanhToan += SoTienThu; // cộng phần còn lại vào thanh toán.
                                     ListPhieuGiaoHang[i].ConLai = ListPhieuGiaoHang[i].TongTien - ListPhieuGiaoHang[i].ThanhToan; // cập nhật phần còn lại
                                     //ListPhieuGiaoHang[i].TTThanhToan = 1;// đã thanh toán
-                                    khKhachHang KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
+
                                     if (KH != null)
                                     {
                                         #region ghi nhật ký nhập kho để xem báo cáo
@@ -215,6 +217,7 @@ namespace KobePaint.Pages.ThanhToan
                                         nhatky.NhapHang = 0;
                                         nhatky.TraHang = 0;
                                         nhatky.ThanhToan = SoTienThu;
+                                        nhatky.GiamGia = 0;
                                         nhatky.NoCuoi = KH.CongNo - SoTienThu;
                                         nhatky.NhanVienID = Formats.IDUser();
                                         nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
@@ -235,7 +238,7 @@ namespace KobePaint.Pages.ThanhToan
                         else
                         {
                             // trừ công nợ thẳng.
-                            khKhachHang KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
+
                             if (KH != null)
                             {
                                 #region ghi nhật ký nhập kho để xem báo cáo
@@ -245,6 +248,7 @@ namespace KobePaint.Pages.ThanhToan
                                 nhatky.NoDau = KH.CongNo;
                                 nhatky.NhapHang = 0;
                                 nhatky.TraHang = 0;
+                                nhatky.GiamGia = 0;
                                 nhatky.ThanhToan = SoTienThu;
                                 nhatky.NoCuoi = KH.CongNo - SoTienThu;
                                 nhatky.NhanVienID = Formats.IDUser();
@@ -261,40 +265,37 @@ namespace KobePaint.Pages.ThanhToan
                     }
                     else
                     {
+                        // trừ theo phiếu
                         int IDPhieuGiaoHang = int.Parse(ccbPhieuThanhToan.Value.ToString());
                         ghPhieuGiaoHang PhieuGH = DBDataProvider.DB.ghPhieuGiaoHangs.Single(x => x.IDPhieuGiaoHang == IDPhieuGiaoHang);
-                        double? TienNoDonHang = PhieuGH.ConLai;
-                        if (SoTienThu >= TienNoDonHang)
-                        {
-                            PhieuGH.ThanhToan = PhieuGH.TongTien;
-                            PhieuGH.ConLai = 0;
-                            PhieuGH.TTThanhToan = 1;
-                            khKhachHang KH = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDKhachHang).FirstOrDefault();
-                            if (KH != null)
-                            {
 
-                                #region ghi nhật ký nhập kho để xem báo cáo
-                                khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                                nhatky.NgayNhap = DateTime.Now;
-                                nhatky.DienGiai = "Thanh toán";
-                                nhatky.NoDau = KH.CongNo;
-                                nhatky.NhapHang = 0;
-                                nhatky.TraHang = 0;
-                                nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
-                                nhatky.ThanhToan = SoTienThu;
-                                nhatky.NoCuoi = KH.CongNo - SoTienThu;
-                                nhatky.NhanVienID = Formats.IDUser();
-                                nhatky.SoPhieu = PhieuGH.MaPhieu;
-                                nhatky.IDKhachHang = IDKhachHang;
-                                DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                                DBDataProvider.DB.SubmitChanges();
-                                #endregion
-                                KH.CongNo -= SoTienThu;// - công nợ
-                                KH.ThanhToan += SoTienThu;
-                            }
+                        if (KH != null)
+                        {
+                            #region ghi nhật ký nhập kho để xem báo cáo
+                            khNhatKyCongNo nhatky = new khNhatKyCongNo();
+                            nhatky.NgayNhap = DateTime.Now;
+                            nhatky.DienGiai = "Thanh toán";
+                            nhatky.NoDau = KH.CongNo;
+                            nhatky.NhapHang = 0;
+                            nhatky.TraHang = 0;
+                            nhatky.GiamGia = 0;
+                            nhatky.MaPhieu = DBDataProvider.STTPhieuThanhToan_DaiLy(IDKhachHang);
+                            nhatky.ThanhToan = PhieuGH.ConLai;
+                            nhatky.NoCuoi = KH.CongNo - PhieuGH.ConLai;
+                            nhatky.NhanVienID = Formats.IDUser();
+                            nhatky.SoPhieu = PhieuGH.MaPhieu;
+                            nhatky.IDKhachHang = IDKhachHang;
+                            DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
+                            DBDataProvider.DB.SubmitChanges();
+                            #endregion
+                            KH.CongNo -= PhieuGH.ConLai;// - công nợ
+                            KH.ThanhToan += PhieuGH.TongTien;
                         }
+                        PhieuGH.ThanhToan = PhieuGH.TongTien;
+                        PhieuGH.ConLai = 0;
+                        PhieuGH.TTThanhToan = 1;
                     }
-                  
+                 
                     DBDataProvider.DB.SubmitChanges();
                     scope.Complete();
                    // Reset();

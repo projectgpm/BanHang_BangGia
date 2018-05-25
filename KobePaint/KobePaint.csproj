@@ -99,7 +99,9 @@
       <DependentUpon>BanHang_BangGia.mdf</DependentUpon>
     </Content>
     <Content Include="App_Data\MenuBanHang.xml" />
-    <Content Include="App_Data\MenuQuanTri.xml" />
+    <Content Include="App_Data\MenuQuanTri.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="App_Data\MenuVanPhong.xml" />
     <Content Include="App_Data\NWind.mdf" />
     <Content Include="App_Data\NWind_log.ldf">
@@ -122,6 +124,7 @@
     <Content Include="Content\Images\success.gif" />
     <Content Include="Content\Site.css" />
     <Content Include="Default.aspx" />
+    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
   </ItemGroup>
   <ItemGroup>
@@ -136,12 +139,16 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Pages\BanHang\LapPhieu.aspx" />
+    <Content Include="Pages\BaoCao\ChiTietNhapKho.aspx" />
+    <Content Include="Pages\BaoCao\ChiTietXuatKho.aspx" />
     <Content Include="Pages\BaoCao\CongNo.aspx" />
     <Content Include="Pages\BaoCao\CongNoDLChiTiet.aspx" />
     <Content Include="Pages\BaoCao\CongNoDLTheoNgay.aspx" />
     <Content Include="Pages\BaoCao\CongNoNCC.aspx" />
     <Content Include="Pages\BaoCao\DanhSachKhachHang.aspx" />
     <Content Include="Pages\BaoCao\DoanhThuDaiLy.aspx" />
+    <Content Include="Pages\BaoCao\DoanhThuTheoHangHoa.aspx" />
+    <Content Include="Pages\BaoCao\NhapXuatTon.aspx" />
     <Content Include="Pages\BaoCao\ThanhToanDaiLy.aspx" />
     <Content Include="Pages\BaoCao\ThanhToanNCC.aspx" />
     <Content Include="Pages\BaoCao\TraHangDaiLy.aspx" />
@@ -202,6 +209,7 @@
     <Content Include="BieuMau\phieugiaohang.xls" />
     <Content Include="BieuMau\xuatkho.xls" />
     <Content Include="BieuMau\banggia.xls" />
+    <Content Include="BieuMau\them_hang_hoa.xls" />
     <None Include="Properties\PublishProfiles\KobePaint.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -289,6 +297,20 @@
     <Compile Include="Pages\BanHang\LapPhieu.aspx.designer.cs">
       <DependentUpon>LapPhieu.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BaoCao\ChiTietNhapKho.aspx.cs">
+      <DependentUpon>ChiTietNhapKho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BaoCao\ChiTietNhapKho.aspx.designer.cs">
+      <DependentUpon>ChiTietNhapKho.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BaoCao\ChiTietXuatKho.aspx.cs">
+      <DependentUpon>ChiTietXuatKho.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BaoCao\ChiTietXuatKho.aspx.designer.cs">
+      <DependentUpon>ChiTietXuatKho.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BaoCao\CongNo.aspx.cs">
       <DependentUpon>CongNo.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -330,6 +352,20 @@
     </Compile>
     <Compile Include="Pages\BaoCao\DoanhThuDaiLy.aspx.designer.cs">
       <DependentUpon>DoanhThuDaiLy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BaoCao\DoanhThuTheoHangHoa.aspx.cs">
+      <DependentUpon>DoanhThuTheoHangHoa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BaoCao\DoanhThuTheoHangHoa.aspx.designer.cs">
+      <DependentUpon>DoanhThuTheoHangHoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\BaoCao\NhapXuatTon.aspx.cs">
+      <DependentUpon>NhapXuatTon.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BaoCao\NhapXuatTon.aspx.designer.cs">
+      <DependentUpon>NhapXuatTon.aspx</DependentUpon>
     </Compile>
     <Compile Include="Pages\BaoCao\ThanhToanDaiLy.aspx.cs">
       <DependentUpon>ThanhToanDaiLy.aspx</DependentUpon>

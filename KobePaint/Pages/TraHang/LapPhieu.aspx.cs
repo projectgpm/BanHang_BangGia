@@ -211,51 +211,11 @@ namespace KobePaint.Pages.TraHang
                             chitiet.TonKho = prod.TonKho;
                             chitiet.TienTra = prod.TienTra;
                             DBDataProvider.DB.kPhieuTraHangChiTiets.InsertOnSubmit(chitiet);
-                            ////Cập nhật || trừ tồn kho
-                            //var TonKhoBanDau = DBDataProvider.DB.hhHangHoas.Where(x => x.IDHangHoa == prod.IDHangHoa).FirstOrDefault();
-                            //if (TonKhoBanDau != null)
-                            //{
-                            //    TonKhoBanDau.TonKho += prod.SoLuong;
-                            //    #region ghi thẻ kho
-                            //    kTheKho thekho = new kTheKho();
-                            //    thekho.NgayNhap = DateTime.Now;
-                            //    thekho.DienGiai = "Đại lý trả hàng #" + MaPhieu;
-                            //    thekho.Nhap = prod.SoLuong;
-                            //    thekho.Xuat = 0;
-                            //    thekho.Ton = prod.TonKho +  prod.SoLuong;
-                            //    thekho.HangHoaID = TonKhoBanDau.IDHangHoa;
-                            //    thekho.NhanVienID = Formats.IDUser();
-                            //    DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
-                            //    #endregion
-                            //}
                         }
                         //update công nợ
                         khKhachHang Supplier = DBDataProvider.DB.khKhachHangs.Where(x => x.IDKhachHang == IDDaiLy).FirstOrDefault();
                         if (Supplier != null)
                         {
-
-                            //    #region ghi nhật ký nhập kho để xem báo cáo
-                            //    if (ckGiamCongNo.Checked == true)// giảm công nợ
-                            //    {
-                            //        khNhatKyCongNo nhatky = new khNhatKyCongNo();
-                            //        nhatky.NgayNhap = DateTime.Now;
-                            //        nhatky.DienGiai = "Đại lý trả hàng ";
-                            //        nhatky.NoDau = Supplier.CongNo;
-                            //        nhatky.NhapHang = 0;
-                            //        nhatky.TraHang = ConLai;
-                            //        nhatky.NoCuoi = Supplier.CongNo - ConLai;
-                            //        nhatky.ThanhToan = 0;
-                            //        nhatky.NhanVienID = Formats.IDUser();
-                            //        nhatky.SoPhieu = MaPhieu;
-                            //        nhatky.IDKhachHang = IDDaiLy;
-                            //        DBDataProvider.DB.khNhatKyCongNos.InsertOnSubmit(nhatky);
-                            //        DBDataProvider.DB.SubmitChanges();
-
-                            //        Supplier.CongNo -= ConLai;
-                            //        Supplier.LanCuoiMuaHang = DateTime.Now;
-                            //    }
-                            //    #endregion
-                            //    Supplier.TienTraHang += TongTien;
                             phieutra.CongNoCu = Supplier.CongNo;
                         }
 
@@ -331,6 +291,7 @@ namespace KobePaint.Pages.TraHang
                 var exitProdInList = listReceiptProducts.SingleOrDefault(r => r.IDHangHoa == ID);
                 if (exitProdInList == null)
                 {
+                    // kiểm tra lấy bảng giá chưa
 
                     oImportProduct_TraHangNCC newRecpPro = new oImportProduct_TraHangNCC(
                          tblHangHoa.IDHangHoa,
@@ -338,7 +299,7 @@ namespace KobePaint.Pages.TraHang
                          tblHangHoa.TenHangHoa,
                          Convert.ToDouble(tblHangHoa.GiaVon),
                          Convert.ToInt32(tblHangHoa.TonKho),
-                         SoLuong, SoLuong * Convert.ToDouble(tblHangHoa.GiaVon), Convert.ToDouble(tblHangHoa.GiaVon),
+                         SoLuong, SoLuong * Convert.ToDouble(tblHangHoa.GiaBan), Convert.ToDouble(tblHangHoa.GiaBan),
                          tblHangHoa.hhDonViTinh.TenDonViTinh
                          );
                     listReceiptProducts.Add(newRecpPro);

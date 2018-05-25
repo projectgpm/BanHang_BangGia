@@ -66,12 +66,22 @@ namespace KobePaint.Pages.HangHoa
         private void ChiTietBangGia()
         {
             int IDBangGia = Convert.ToInt32(hiddenfile["IDBangGia"].ToString());
-            dsChiTietBangGia.SelectCommand = "SELECT hhHangHoa.MaHang, hhHangHoa.TenHangHoa, hhDonViTinh.TenDonViTinh, bgChiTietBangGia.ID, " +
-                                                           " bgChiTietBangGia.GiaVon, bgChiTietBangGia.DonGia, bgChiTietBangGia.GiaMoi " +
-                                                           " FROM bgChiTietBangGia INNER JOIN hhHangHoa ON bgChiTietBangGia.HangHoaID = hhHangHoa.IDHangHoa " +
-                                                            "INNER JOIN hhDonViTinh ON hhHangHoa.DonViTinhID = hhDonViTinh.IDDonViTinh " +
-                                                           " WHERE (bgChiTietBangGia.BangGiaID = " + IDBangGia + ")";
-            gridBangGia.DataBind();
+            if (IDBangGia != 1)
+            {
+                gridImportPro.Columns["chucnang"].Visible = true;
+                dsChiTietBangGia.SelectCommand = "SELECT hhHangHoa.MaHang, hhHangHoa.TenHangHoa, hhDonViTinh.TenDonViTinh, bgChiTietBangGia.ID, " +
+                                                               " bgChiTietBangGia.GiaVon, bgChiTietBangGia.DonGia, bgChiTietBangGia.GiaMoi " +
+                                                               " FROM bgChiTietBangGia INNER JOIN hhHangHoa ON bgChiTietBangGia.HangHoaID = hhHangHoa.IDHangHoa " +
+                                                                "INNER JOIN hhDonViTinh ON hhHangHoa.DonViTinhID = hhDonViTinh.IDDonViTinh " +
+                                                               " WHERE (bgChiTietBangGia.BangGiaID = " + IDBangGia + ")";
+                gridBangGia.DataBind();
+            }
+            else
+            {
+                gridImportPro.Columns["chucnang"].Visible = false;
+                dsChiTietBangGia.SelectCommand = "SELECT hhHangHoa.MaHang, hhHangHoa.TenHangHoa, hhDonViTinh.TenDonViTinh, hhHangHoa.IDHangHoa AS ID, hhHangHoa.GiaVon,hhHangHoa.GiaBan as DonGia,hhHangHoa.GiaBan as GiaMoi FROM hhHangHoa INNER JOIN hhDonViTinh ON hhHangHoa.DonViTinhID = hhDonViTinh.IDDonViTinh WHERE hhHangHoa.DaXoa = 0";
+                gridBangGia.DataBind();
+            }
         }
 
         #region InsertHang done
@@ -302,11 +312,16 @@ namespace KobePaint.Pages.HangHoa
         {
             LamMoi();
             ChiTietBangGia();
-            //cbpInfo.JSProperties["cp_Reset"] = true;
         }
 
         protected void gridImportPro_RowUpdating(object sender, DevExpress.Web.Data.ASPxDataUpdatingEventArgs e)
         {
+            int ID = Convert.ToInt32(e.Keys[0].ToString());
+            double GiaMoi = Double.Parse(e.NewValues["GiaMoi"].ToString());
+            int IDBangGia = Convert.ToInt32(ccbBangGia.Value.ToString());
+            DBDataProvider.DB.spCapNhatBangGia(ID, GiaMoi, IDBangGia);
+            gridImportPro.CancelEdit();
+            e.Cancel = true;
             LamMoi();
             ChiTietBangGia();
             //cbpInfo.JSProperties["cp_Reset"] = true;

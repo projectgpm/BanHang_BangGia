@@ -342,6 +342,7 @@ namespace KobePaint.App_Code
         public string DiaChi { get; set; }
         public double TongPhatSinh { get; set; }
         public double TongHangTra { get; set; }
+        public double TongGiamGia { get; set; }
         public double TongThanhToan { get; set; }
         public string NgayThangNam { get; set; }
         public List<oChiTietGiaoDich> listProduct { get; set; }
@@ -358,7 +359,8 @@ namespace KobePaint.App_Code
         public double HangTra { get; set; }
         public double ThanhToan { get; set; }
         public double NoCuoi { get; set; }
-        public oChiTietGiaoDich(int sTT, string ngay, string noiDung, string soPhieu, double noDau, double phatSinh, double hangTra, double thanhToan, double noCuoi)
+        public double GiamGia { get; set; }
+        public oChiTietGiaoDich(int sTT, string ngay, string noiDung, string soPhieu, double noDau, double phatSinh, double hangTra, double thanhToan, double noCuoi,double giamGia)
         {
             // TODO: Complete member initialization
             this.STT = sTT;
@@ -370,6 +372,7 @@ namespace KobePaint.App_Code
             this.HangTra = hangTra;
             this.ThanhToan = thanhToan;
             this.NoCuoi = noCuoi;
+            this.GiamGia = giamGia;
         }
         public oChiTietGiaoDich()
         {
@@ -388,6 +391,7 @@ namespace KobePaint.App_Code
             this.HangTra = x.HangTra;
             this.ThanhToan = x.ThanhToan;
             this.NoCuoi = x.NoCuoi;
+            this.GiamGia = x.GiamGia;
         }
     }
 

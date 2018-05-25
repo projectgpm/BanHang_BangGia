@@ -89,6 +89,7 @@ namespace KobePaint.Pages.HangHoa
                             thekho.Nhap = SL;
                             thekho.Xuat = 0;
                             thekho.Ton = SL;
+                            thekho.GiaThoiDiem = Convert.ToDouble(spGiaVon.Number);
                             thekho.NhanVienID = Formats.IDUser();
                             thekho.HangHoaID = IDHangHoa;
                             DBDataProvider.DB.kTheKhos.InsertOnSubmit(thekho);
