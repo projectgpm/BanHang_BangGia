@@ -170,7 +170,7 @@
                                                             <Items>
                                                                 <dx:LayoutGroup Caption="Thông tin hàng hóa" ColCount="6" GroupBoxDecoration="HeadingLine">
                                                                     <Items>
-                                                                        <dx:LayoutItem Caption="" ColSpan="4" ShowCaption="False" Width="100%">
+                                                                        <dx:LayoutItem Caption="" ColSpan="3" ShowCaption="False" Width="100%">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer8" runat="server">
                                                                                     <dx:ASPxComboBox ID="ccbBarcode" runat="server" ValueType="System.String"
@@ -216,11 +216,21 @@
                                                                             </LayoutItemNestedControlCollection>
                                                                         </dx:LayoutItem>
                                                                             
+                                                                        <dx:LayoutItem ShowCaption="False">
+                                                                            <LayoutItemNestedControlCollection>
+                                                                                <dx:LayoutItemNestedControlContainer runat="server">
+                                                                                    <dx:ASPxButton ID="btnXuatExcel" runat="server" AutoPostBack="False" ClientInstanceName="btnXuatExcel" Text="Xuất excel" OnClick="btnXuatExcel_Click" Visible="False">
+                                                                                    </dx:ASPxButton>
+                                                                                </dx:LayoutItemNestedControlContainer>
+                                                                            </LayoutItemNestedControlCollection>
+                                                                        </dx:LayoutItem>
+                                                                            
                                                                     </Items>
                                                                 </dx:LayoutGroup>
                                                             </Items>
                                                             <SettingsItemCaptions Location="Top" />
                                                         </dx:ASPxFormLayout>
+
                                                         <dx:ASPxGridView ID="gridImportPro" ClientInstanceName="gridImportPro" runat="server" Width="100%" AutoGenerateColumns="False" KeyFieldName="ID" OnRowDeleting="gridImportPro_RowDeleting" DataSourceID="dsChiTietBangGia" OnCustomColumnDisplayText="gridImportPro_CustomColumnDisplayText" OnRowUpdating="gridImportPro_RowUpdating">
                                                             <SettingsEditing Mode="Batch">
                                                             </SettingsEditing>
@@ -281,7 +291,9 @@
                                                                 <dx:GridViewFormatConditionHighlight FieldName="DonGia" Expression="[GiaMoi] < [DonGia]" Format="LightRedFillWithDarkRedText" />
                                                                 <dx:GridViewFormatConditionHighlight FieldName="DonGia" Expression="[GiaMoi] > [DonGia]" Format="GreenFillWithDarkGreenText" />
                                                             </FormatConditions>--%>
-                                                        </dx:ASPxGridView>    
+                                                        </dx:ASPxGridView>  
+                                                         <dx:ASPxGridViewExporter ID="exproter" runat="server" ExportedRowType="All" GridViewID="gridImportPro" >
+                                                        </dx:ASPxGridViewExporter>  
                                                         <asp:SqlDataSource ID="dsChiTietBangGia" runat="server" 
                                                             ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
                                                             DeleteCommand="DELETE FROM bgChiTietBangGia WHERE (ID = @ID)" >

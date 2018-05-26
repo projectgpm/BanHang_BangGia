@@ -288,7 +288,9 @@ namespace KobePaint.App_Code
         public double GiaBan { get; set; }
         public double GiaVon { get; set; }
         public double ThanhTien { get; set; }
-        public oChiTietHoaDon(int iDHangHoa, string maHang, string tenHangHoa, string tenDonViTinh, int tonKho, int soLuong, double giaBan, double giaVon, double thanhTien)
+        public double GiamGia { get; set; }
+        public double GiaBanCu { get; set; }
+        public oChiTietHoaDon(int iDHangHoa, string maHang, string tenHangHoa, string tenDonViTinh, int tonKho, int soLuong, double giaBan, double giaVon, double thanhTien, double giamGia, double giaBanCu)
         {
             this.MaHang = maHang;
             this.IDHangHoa = iDHangHoa;
@@ -299,6 +301,8 @@ namespace KobePaint.App_Code
             this.GiaVon = giaVon;
             this.GiaBan = giaBan;
             this.ThanhTien = thanhTien;
+            this.GiamGia = giamGia;
+            this.GiaBanCu = giaBanCu;
         }
     }
     #endregion

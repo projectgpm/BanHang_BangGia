@@ -1,4 +1,6 @@
-﻿using DevExpress.Web;
+﻿using DevExpress.Export;
+using DevExpress.Web;
+using DevExpress.XtraPrinting;
 using KobePaint.App_Code;
 using System;
 using System.Collections.Generic;
@@ -325,6 +327,11 @@ namespace KobePaint.Pages.HangHoa
             LamMoi();
             ChiTietBangGia();
             //cbpInfo.JSProperties["cp_Reset"] = true;
+        }
+
+        protected void btnXuatExcel_Click(object sender, EventArgs e)
+        {
+            exproter.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
         
     }

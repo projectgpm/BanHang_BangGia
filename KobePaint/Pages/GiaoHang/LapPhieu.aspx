@@ -26,6 +26,10 @@
                 }
             }
         }
+        function onUnitReturnChanged_GiamGia(key) {
+            cbpInfoImport.PerformCallback('UnitChange_GiamGia|' + key);
+            cbpInfo.PerformCallback('giamgia');
+        }
         function ImportProduct() {
             if (ccbNhaCungCap.GetSelectedIndex() == -1) {
                 alert('Vui lòng chọn khách hàng');
@@ -358,6 +362,8 @@
                                                         </dx:ASPxFormLayout>
                                                     </dx:PanelContent>
                                                 </PanelCollection>
+<SettingsLoadingPanel Enabled="False"></SettingsLoadingPanel>
+
                                                  <ClientSideEvents EndCallback="endCallBackInfo" />
                                                 </dx:ASPxCallbackPanel>
 
@@ -451,11 +457,11 @@
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Tồn" FieldName="TonKho" ShowInCustomizationForm="True" VisibleIndex="3" Width="50px">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Thành tiền" FieldName="ThanhTien" ShowInCustomizationForm="True" VisibleIndex="7" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Thành tiền" FieldName="ThanhTien" ShowInCustomizationForm="True" VisibleIndex="8" Width="100px">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="5" Width="150px" Name="giavon">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px" Name="giavon">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
                                                                 <dx:GridViewDataSpinEditColumn Caption="Số lượng" FieldName="SoLuong" ShowInCustomizationForm="True" VisibleIndex="4" Width="100px">
@@ -468,7 +474,7 @@
                                                                         <Paddings Padding="2px" />
                                                                     </CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px" Name="giaban">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" ShowInCustomizationForm="True" VisibleIndex="7" Width="150px" Name="giaban">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
                                                                     <DataItemTemplate>
                                                                         <dx:ASPxSpinEdit ID="spGiaBanReturn" runat="server" Number='<%# Convert.ToDouble(Eval("GiaBan")) %>' DisplayFormatString="N0" Width="100%" NumberType="Integer" OnInit="spGiaBanReturn_Init" Increment="5000" HorizontalAlign="Right">
@@ -490,6 +496,17 @@
                                                                     <CellStyle HorizontalAlign="Center">
                                                                     </CellStyle>
                                                                 </dx:GridViewDataButtonEditColumn>
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giảm giá" FieldName="GiamGia" ShowInCustomizationForm="True" VisibleIndex="5" Width="100px">
+                                                                    <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
+                                                                    </PropertiesSpinEdit>
+                                                                    <DataItemTemplate>
+                                                                        <dx:ASPxSpinEdit ID="spGiamGiaReturn" ClientInstanceName="spGiamGiaReturn" runat="server" Number='<%# Convert.ToDouble(Eval("GiamGia")) %>' DisplayFormatString="N0" Width="100%" NumberType="Integer" OnInit="spGiamGiaReturn_Init" Increment="1" HorizontalAlign="Right">
+                                                                        </dx:ASPxSpinEdit>
+                                                                    </DataItemTemplate>
+                                                                    <CellStyle>
+                                                                        <Paddings Padding="0px" />
+                                                                    </CellStyle>
+                                                                </dx:GridViewDataSpinEditColumn>
                                                             </Columns>
                                                             <FormatConditions>
                                                                 <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] < 1" Format="LightRedFillWithDarkRedText" />
@@ -506,6 +523,8 @@
                                                         </dx:ASPxGridView>
                                                     </dx:PanelContent>
                                                 </PanelCollection>
+<SettingsLoadingPanel Enabled="False"></SettingsLoadingPanel>
+
                                                 <ClientSideEvents EndCallback="endCallBackProduct" />
                                             </dx:ASPxCallbackPanel>
                                         </dx:SplitterContentControl>

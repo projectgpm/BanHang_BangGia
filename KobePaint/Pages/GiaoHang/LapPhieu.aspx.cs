@@ -89,6 +89,7 @@ namespace KobePaint.Pages.GiaoHang
                 case "Review": CreateReportReview(); break;
                 case "xoahang": XoaHangChange(para[1]); break;
                 case "importexcel": BindGrid(); break;
+                case "UnitChange_GiamGia": Unitchange_GiamGia(para[1]); BindGrid(); break;
                 default: InsertIntoGrid(); BindGrid(); break;
             }
         }
@@ -472,7 +473,7 @@ namespace KobePaint.Pages.GiaoHang
                         1,
                         GiaBan,
                         Convert.ToDouble(tblHangHoa.GiaVon),
-                        GiaBan
+                        GiaBan, 0, GiaBan
                         );
                     listReceiptProducts.Add(cthd);
                 }
@@ -513,6 +514,12 @@ namespace KobePaint.Pages.GiaoHang
             GridViewDataRowTemplateContainer container = SpinEdit.NamingContainer as GridViewDataRowTemplateContainer;
             SpinEdit.ClientSideEvents.NumberChanged = String.Format("function(s, e) {{ onUnitReturnChanged({0}); }}", container.KeyValue);
         }
+        protected void spGiamGiaReturn_Init(object sender, EventArgs e)
+        {
+            ASPxSpinEdit SpinEdit = sender as ASPxSpinEdit;
+            GridViewDataRowTemplateContainer container = SpinEdit.NamingContainer as GridViewDataRowTemplateContainer;
+            SpinEdit.ClientSideEvents.NumberChanged = String.Format("function(s, e) {{ onUnitReturnChanged_GiamGia({0}); }}", container.KeyValue);
+        }
         protected void spGiaBanReturn_Init(object sender, EventArgs e)
         {
             ASPxSpinEdit SpinEdit = sender as ASPxSpinEdit;
@@ -537,11 +544,42 @@ namespace KobePaint.Pages.GiaoHang
 
             // cập nhật
             var sourceRow = listReceiptProducts.Where(x => x.STT == IDProduct).SingleOrDefault();
-            sourceRow.SoLuong = UnitProductNew;
-            sourceRow.GiaBan = PriceProduct_GiaBan;
-            sourceRow.ThanhTien = sourceRow.SoLuong * sourceRow.GiaBan;
 
-            //BindGrid();
+            sourceRow.GiaBan = PriceProduct_GiaBan;
+            if (sourceRow.SoLuong != UnitProductNew)
+                sourceRow.GiaBan = sourceRow.GiaBanCu;
+
+            sourceRow.SoLuong = UnitProductNew;
+
+            if (sourceRow.GiaBan != sourceRow.GiaBanCu)
+                sourceRow.GiaBanCu = sourceRow.GiaBan;
+
+            sourceRow.ThanhTien = sourceRow.SoLuong * sourceRow.GiaBan;
+            sourceRow.GiamGia = 0;
+        }
+        private void Unitchange_GiamGia(string para)
+        {
+            int IDProduct = Convert.ToInt32(para);
+            ASPxSpinEdit SpinEdit_GiamGia = gridImportPro.FindRowCellTemplateControlByKey(IDProduct, (GridViewDataColumn)gridImportPro.Columns["Giảm giá"], "spGiamGiaReturn") as ASPxSpinEdit;
+            double GiamGia = Convert.ToDouble(SpinEdit_GiamGia.Number);
+            var sourceRow = listReceiptProducts.Where(x => x.STT == IDProduct).SingleOrDefault();
+            double DonGiaHienTai = sourceRow.GiaBanCu;
+            if (GiamGia >= 0 && GiamGia <= 100)
+            {
+                //giảm %
+                double GiamGiaTien = (DonGiaHienTai * (double)(GiamGia / 100));
+                if (GiamGia == 0)
+                    sourceRow.GiaBan = DonGiaHienTai;
+                else
+                    sourceRow.GiaBan -= GiamGiaTien;
+            }
+            else
+            {
+                //giảm tiền
+                sourceRow.GiaBan -= GiamGia;
+            }
+            sourceRow.GiamGia = GiamGia;
+            sourceRow.ThanhTien = sourceRow.SoLuong * sourceRow.GiaBan;
         }
         #endregion
 
@@ -619,7 +657,7 @@ namespace KobePaint.Pages.GiaoHang
                                         SoLuong,
                                        GiaBan,
                                        Convert.ToDouble(tblHangHoa.GiaVon),
-                                       SoLuong * GiaBan
+                                       SoLuong * GiaBan, 0, GiaBan
                                         );
 
                                     listReceiptProducts.Add(cthd);

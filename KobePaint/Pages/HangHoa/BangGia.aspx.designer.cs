@@ -265,6 +265,15 @@ namespace KobePaint.Pages.HangHoa {
         protected global::DevExpress.Web.ASPxButton btnExcel;
         
         /// <summary>
+        /// btnXuatExcel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxButton btnXuatExcel;
+        
+        /// <summary>
         /// gridImportPro control.
         /// </summary>
         /// <remarks>
@@ -272,6 +281,15 @@ namespace KobePaint.Pages.HangHoa {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::DevExpress.Web.ASPxGridView gridImportPro;
+        
+        /// <summary>
+        /// exproter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ASPxGridViewExporter exproter;
         
         /// <summary>
         /// dsChiTietBangGia control.
