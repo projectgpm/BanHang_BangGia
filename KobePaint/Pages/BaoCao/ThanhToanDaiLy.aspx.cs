@@ -55,6 +55,7 @@ namespace KobePaint.Pages.BaoCao
 
         protected void btnXuatExcel_Click(object sender, EventArgs e)
         {
+            exporterGrid.FileName = "Bao_Cao_KH_Thanh_Toan" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exporterGrid.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
         protected void cbpViewReport_Callback(object sender, CallbackEventArgsBase e)

@@ -26,6 +26,7 @@ namespace KobePaint.Pages.BaoCao
 
         protected void btnXuatExcel_Click(object sender, EventArgs e)
         {
+            exproter.FileName = "Cong_No_Khach_Hang" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exproter.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
     }

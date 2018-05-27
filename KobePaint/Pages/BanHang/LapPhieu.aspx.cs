@@ -654,9 +654,6 @@ namespace KobePaint.Pages.BanHang
             var sourceRow = listReceiptProducts.Where(x => x.STT == IDProduct).SingleOrDefault();
 
            
-            
-
-           
             sourceRow.GiaBan = PriceProduct_GiaBan;
             if (sourceRow.SoLuong != UnitProductNew)
                 sourceRow.GiaBan = sourceRow.GiaBanCu;
@@ -668,9 +665,6 @@ namespace KobePaint.Pages.BanHang
 
             sourceRow.ThanhTien = sourceRow.SoLuong * sourceRow.GiaBan;
             sourceRow.GiamGia = 0;
-           
-
-           
         }
         private void Unitchange_GiamGia(string para)
         {
@@ -686,12 +680,12 @@ namespace KobePaint.Pages.BanHang
                 if (GiamGia == 0)
                     sourceRow.GiaBan = DonGiaHienTai;
                 else
-                    sourceRow.GiaBan -= GiamGiaTien;
+                    sourceRow.GiaBan = DonGiaHienTai - GiamGiaTien;
             }
             else
             {
                 //giảm tiền
-                sourceRow.GiaBan -= GiamGia;
+                sourceRow.GiaBan = DonGiaHienTai - GiamGia;
             }
             sourceRow.GiamGia = GiamGia;
             sourceRow.ThanhTien = sourceRow.SoLuong * sourceRow.GiaBan;

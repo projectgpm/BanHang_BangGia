@@ -36,7 +36,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/22/2018 09:30:00</publishTime>
     </File>
     <File Include="App_Data/MenuBanHang.xml">
-      <publishTime>05/16/2018 09:42:52</publishTime>
+      <publishTime>05/24/2018 17:21:06</publishTime>
     </File>
     <File Include="App_Data/MenuKhongQuyen.xml">
       <publishTime>11/08/2017 08:24:27</publishTime>
@@ -45,13 +45,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/07/2017 16:50:20</publishTime>
     </File>
     <File Include="App_Data/MenuQuanTri.xml">
-      <publishTime>05/24/2018 13:37:16</publishTime>
+      <publishTime>05/24/2018 17:22:01</publishTime>
     </File>
     <File Include="App_Data/MenuToanQuyen.xml">
       <publishTime>05/24/2018 13:37:27</publishTime>
     </File>
     <File Include="App_Data/MenuVanPhong.xml">
-      <publishTime>05/24/2018 13:37:24</publishTime>
+      <publishTime>05/24/2018 17:22:10</publishTime>
     </File>
     <File Include="App_Data/NWind.mdf">
       <publishTime>05/21/2018 08:05:48</publishTime>
@@ -66,7 +66,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>11/06/2017 14:18:27</publishTime>
     </File>
     <File Include="BieuMau/banggia.xls">
-      <publishTime>05/15/2018 11:17:20</publishTime>
+      <publishTime>05/27/2018 16:15:12</publishTime>
     </File>
     <File Include="BieuMau/kiemke.xls">
       <publishTime>04/27/2018 09:10:19</publishTime>
@@ -84,7 +84,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/26/2018 10:31:03</publishTime>
     </File>
     <File Include="bin/KobePaint.dll">
-      <publishTime>05/24/2018 14:40:18</publishTime>
+      <publishTime>05/27/2018 16:48:15</publishTime>
     </File>
     <File Include="bin/KobePaint.pdb">
       <publishTime>05/09/2018 14:44:06</publishTime>
@@ -128,6 +128,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Default.aspx">
       <publishTime>05/18/2018 16:52:58</publishTime>
     </File>
+    <File Include="favicon.ico">
+      <publishTime>10/11/2017 11:17:07</publishTime>
+    </File>
     <File Include="Global.asax">
       <publishTime>04/13/2018 14:17:58</publishTime>
     </File>
@@ -135,7 +138,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/09/2018 11:43:26</publishTime>
     </File>
     <File Include="KobePaintDB.dbml">
-      <publishTime>05/24/2018 09:49:47</publishTime>
+      <publishTime>05/27/2018 15:27:53</publishTime>
     </File>
     <File Include="Light.master">
       <publishTime>04/13/2018 14:17:58</publishTime>
@@ -144,7 +147,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/13/2018 14:17:58</publishTime>
     </File>
     <File Include="Pages/BanHang/LapPhieu.aspx">
-      <publishTime>05/21/2018 08:19:57</publishTime>
+      <publishTime>05/25/2018 13:48:05</publishTime>
     </File>
     <File Include="Pages/BaoCao/ChiTietNhapKho.aspx">
       <publishTime>05/22/2018 10:37:39</publishTime>
@@ -153,7 +156,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/22/2018 12:17:35</publishTime>
     </File>
     <File Include="Pages/BaoCao/CongNo.aspx">
-      <publishTime>05/17/2018 16:12:19</publishTime>
+      <publishTime>05/27/2018 16:41:28</publishTime>
     </File>
     <File Include="Pages/BaoCao/CongNoChiTiet.aspx">
       <publishTime>11/04/2017 11:03:00</publishTime>
@@ -204,7 +207,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/16/2018 10:24:46</publishTime>
     </File>
     <File Include="Pages/GiaoHang/LapPhieu.aspx">
-      <publishTime>05/21/2018 08:52:39</publishTime>
+      <publishTime>05/25/2018 15:17:27</publishTime>
     </File>
     <File Include="Pages/GiaoHang/PheDuyetGiaoHang.ascx">
       <publishTime>05/21/2018 08:08:57</publishTime>
@@ -213,7 +216,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Pages/HangHoa/BangGia.aspx">
-      <publishTime>05/22/2018 11:23:37</publishTime>
+      <publishTime>05/27/2018 16:22:18</publishTime>
     </File>
     <File Include="Pages/HangHoa/CapNhat.aspx">
       <publishTime>05/12/2018 10:37:30</publishTime>
@@ -234,7 +237,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/13/2018 14:17:58</publishTime>
     </File>
     <File Include="Pages/HangHoa/ThemHangHoa.aspx">
-      <publishTime>05/15/2018 08:11:49</publishTime>
+      <publishTime>05/25/2018 08:56:58</publishTime>
     </File>
     <File Include="Pages/HeThong/LyDoXuat.aspx">
       <publishTime>05/14/2018 11:04:05</publishTime>
@@ -384,7 +387,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>01/01/0001 00:00:00</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>05/24/2018 14:40:19</publishTime>
+      <publishTime>05/27/2018 16:48:15</publishTime>
     </File>
   </ItemGroup>
 </Project>

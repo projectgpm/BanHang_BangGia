@@ -29,6 +29,7 @@ namespace KobePaint.Pages.BaoCao
 
         protected void btnXuatExcel_Click(object sender, EventArgs e)
         {
+            exporterGrid.FileName = "Bao_Cao_Xuat_Kho" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exporterGrid.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
 

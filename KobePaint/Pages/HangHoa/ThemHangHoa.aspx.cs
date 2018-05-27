@@ -180,6 +180,7 @@ namespace KobePaint.Pages.HangHoa
 
         protected void btnXuatExcel_NhomHang_Click(object sender, EventArgs e)
         {
+            exproter_NhomHang.FileName = "Danh_Sach_Nhom_Hang" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exproter_NhomHang.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
 
@@ -190,6 +191,7 @@ namespace KobePaint.Pages.HangHoa
 
         protected void btnXuatExcel_DVT_Click(object sender, EventArgs e)
         {
+            exproter_DVT.FileName = "Danh_Sach_DVT" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exproter_DVT.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
 

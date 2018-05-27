@@ -534,7 +534,6 @@ namespace KobePaint.Pages.GiaoHang
         private void Unitchange(string para)
         {
             int IDProduct = Convert.ToInt32(para);
-
             //sL
             ASPxSpinEdit SpinEdit = gridImportPro.FindRowCellTemplateControlByKey(IDProduct, (GridViewDataColumn)gridImportPro.Columns["Số lượng"], "spUnitReturn") as ASPxSpinEdit;
             int UnitProductNew = Convert.ToInt32(SpinEdit.Number);
@@ -544,6 +543,7 @@ namespace KobePaint.Pages.GiaoHang
 
             // cập nhật
             var sourceRow = listReceiptProducts.Where(x => x.STT == IDProduct).SingleOrDefault();
+
 
             sourceRow.GiaBan = PriceProduct_GiaBan;
             if (sourceRow.SoLuong != UnitProductNew)
@@ -571,12 +571,12 @@ namespace KobePaint.Pages.GiaoHang
                 if (GiamGia == 0)
                     sourceRow.GiaBan = DonGiaHienTai;
                 else
-                    sourceRow.GiaBan -= GiamGiaTien;
+                    sourceRow.GiaBan = DonGiaHienTai - GiamGiaTien;
             }
             else
             {
                 //giảm tiền
-                sourceRow.GiaBan -= GiamGia;
+                sourceRow.GiaBan = DonGiaHienTai - GiamGia;
             }
             sourceRow.GiamGia = GiamGia;
             sourceRow.ThanhTien = sourceRow.SoLuong * sourceRow.GiaBan;

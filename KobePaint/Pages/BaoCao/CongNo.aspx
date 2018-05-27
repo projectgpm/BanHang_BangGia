@@ -2,7 +2,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
      <dx:ASPxFormLayout ID="formThongTin" ClientInstanceName="formThongTin" runat="server" Width="100%">
         <Items>
-            <dx:LayoutGroup Caption="Công nợ đại lý" Width="100%">
+            <dx:LayoutGroup Caption="Công nợ khách hàng" Width="100%">
                 <Items>
                     <dx:LayoutItem HorizontalAlign="Right" ShowCaption="False" Width="100%">
                         <LayoutItemNestedControlCollection>

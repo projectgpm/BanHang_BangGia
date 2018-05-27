@@ -81,6 +81,7 @@ namespace KobePaint.Pages.ThanhToan
 
         protected void btnXuatExcel_Click(object sender, EventArgs e)
         {
+            exporterGrid.FileName = "Danh_Sach_KH_Thanh_Toan" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exporterGrid.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
     }

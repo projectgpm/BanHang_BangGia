@@ -219,7 +219,7 @@
                                                                         <dx:LayoutItem ShowCaption="False">
                                                                             <LayoutItemNestedControlCollection>
                                                                                 <dx:LayoutItemNestedControlContainer runat="server">
-                                                                                    <dx:ASPxButton ID="btnXuatExcel" runat="server" AutoPostBack="False" ClientInstanceName="btnXuatExcel" Text="Xuất excel" OnClick="btnXuatExcel_Click" Visible="False">
+                                                                                    <dx:ASPxButton ID="btnXuatExcel" runat="server" AutoPostBack="False" ClientInstanceName="btnXuatExcel" Text="Xuất excel" OnClick="btnXuatExcel_Click">
                                                                                     </dx:ASPxButton>
                                                                                 </dx:LayoutItemNestedControlContainer>
                                                                             </LayoutItemNestedControlCollection>
@@ -264,15 +264,18 @@
                                                             <Columns>
                                                                 <dx:GridViewDataTextColumn Caption="STT" ReadOnly="true" FieldName="ID" ShowInCustomizationForm="True" VisibleIndex="0" Width="50px">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataTextColumn Caption="Tên hàng hóa" ReadOnly="true" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="2" Width="60%">
+                                                                <dx:GridViewDataTextColumn Caption="Tên hàng hóa" CellStyle-Font-Bold="true" ReadOnly="true" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="2" Width="60%">
+<CellStyle Font-Bold="True"></CellStyle>
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Mã HH" ReadOnly="true" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="1" Width="100px">
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewCommandColumn Caption="Xóa" ShowDeleteButton="True" ShowInCustomizationForm="True" VisibleIndex="9" Width="50px" Name="chucnang">
                                                                 </dx:GridViewCommandColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá mới"  FieldName="GiaMoi" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá mới" CellStyle-Font-Bold="true"  FieldName="GiaMoi" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" Increment="500" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
+
+<CellStyle Font-Bold="True"></CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
                                                                 <dx:GridViewDataSpinEditColumn Caption="Giá vốn" ReadOnly="true" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="4" Width="150px">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom"></PropertiesSpinEdit>
@@ -347,6 +350,7 @@
                                                 <SettingsPopup>
                                                     <EditForm HorizontalAlign="Center" VerticalAlign="WindowCenter" />
                                                 </SettingsPopup>
+                                                <SettingsSearchPanel Visible="True" />
                                                 <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xóa dữ liệu ??" PopupEditFormCaption="Thông tin" />
                                                 <Styles>
                                                     <Header HorizontalAlign="Center">                

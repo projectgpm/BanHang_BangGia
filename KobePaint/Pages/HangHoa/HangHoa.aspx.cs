@@ -60,6 +60,7 @@ namespace KobePaint.Pages.HangHoa
 
         protected void btnXuatExcel_Click(object sender, EventArgs e)
         {
+            exproter.FileName = "Danh_Sach_Hang_Hoa" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exproter.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
 

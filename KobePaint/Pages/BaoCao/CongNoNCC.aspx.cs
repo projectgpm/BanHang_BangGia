@@ -27,6 +27,7 @@ namespace KobePaint.Pages.BaoCao
 
         protected void btnXuatExcel_Click(object sender, EventArgs e)
         {
+            exproter.FileName = "Bao_Cao_Cong_No_NCC" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exproter.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
     }

@@ -257,10 +257,11 @@
                  <dx:ASPxGridView ID="gridDVT" runat="server" AutoGenerateColumns="False" ClientInstanceName="gridDVT" Width="100%" DataSourceID="dsDonVT" KeyFieldName="IDDonViTinh" OnCustomColumnDisplayText="gridDVT_CustomColumnDisplayText">
                     <SettingsEditing Mode="Inline">
                     </SettingsEditing>
-                    <Settings VerticalScrollableHeight="0" ShowFilterRow="True"/>
+                    <Settings VerticalScrollableHeight="0"/>
                     <SettingsPager AlwaysShowPager="True" >
                         <Summary EmptyText="Không có dữ liệu" Text="Trang {0}/{1}" />
                     </SettingsPager>
+                     <SettingsSearchPanel Visible="True" />
                     <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xóa dữ liệu ??" />
                     <Styles>
                         <Header HorizontalAlign="Center">                
@@ -311,7 +312,7 @@
                         </DeleteButton>
                     </SettingsCommandButton>
                     <Columns>
-                        <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="2" Width="200px" ShowClearFilterButton="True">
+                        <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="2" Width="200px">
                         </dx:GridViewCommandColumn>
                         <dx:GridViewDataTextColumn FieldName="IDDonViTinh" ReadOnly="True" VisibleIndex="0" Caption="STT" Width="60px">
                             <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
@@ -371,10 +372,11 @@
                 <dx:ASPxGridView ID="gridNhomHang" runat="server" AutoGenerateColumns="False" ClientInstanceName="gridNhomHang" Width="100%" DataSourceID="dsNhomHang" KeyFieldName="IDNhomHH" OnCustomColumnDisplayText="gridNhomHang_CustomColumnDisplayText">
                     <SettingsEditing Mode="Inline">
                     </SettingsEditing>
-                    <Settings VerticalScrollableHeight="0" ShowFilterRow="True"/>
+                    <Settings VerticalScrollableHeight="0"/>
                     <SettingsPager AlwaysShowPager="True" >
                         <Summary EmptyText="Không có dữ liệu" Text="Trang {0}/{1}" />
                     </SettingsPager>
+                    <SettingsSearchPanel Visible="True" />
                     <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xóa dữ liệu ??" />
                     <Styles>
                         <Header HorizontalAlign="Center">                
@@ -425,7 +427,7 @@
                         </DeleteButton>
                     </SettingsCommandButton>
                     <Columns>
-                        <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="2" Width="200px" ShowClearFilterButton="True">
+                        <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="2" Width="200px">
                         </dx:GridViewCommandColumn>
                         <dx:GridViewDataTextColumn FieldName="IDNhomHH" ReadOnly="True" VisibleIndex="0" Caption="STT" Width="60px">
                             <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
