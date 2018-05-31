@@ -122,6 +122,8 @@
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <Settings AllowHeaderFilter="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataSpinEditColumn>
             <dx:GridViewDataSpinEditColumn Caption="Thanh toán" FieldName="ThanhToan" ReadOnly="True" VisibleIndex="9">
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
@@ -142,6 +144,8 @@
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <Settings AllowHeaderFilter="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataSpinEditColumn>
             <dx:GridViewDataTextColumn Caption="Khách hàng" FieldName="HoTen" VisibleIndex="1">
             </dx:GridViewDataTextColumn>
@@ -155,6 +159,10 @@
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="ThanhToan" ShowInColumn="Thanh toán" SummaryType="Sum" />
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="NoCuoi" ShowInColumn="Nợ cuối" SummaryType="Sum" />
         </TotalSummary>
+        <Styles>
+            <Footer Font-Bold="True">
+            </Footer>
+        </Styles>
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsChiTietCongNo" runat="server" 
         ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 

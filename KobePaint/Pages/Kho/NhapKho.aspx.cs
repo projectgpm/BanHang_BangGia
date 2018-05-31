@@ -34,6 +34,7 @@ namespace KobePaint.Pages.Kho
             {
                 if (!IsPostBack)
                 {
+                    ccbNhaCungCap.Focus();
                     string[] infoUser = Context.User.Identity.Name.Split('-');
                     txtNguoiNhap.Text = infoUser[1];
                     listReceiptProducts = new List<oImportProduct_ChiTietNhapHang>();
@@ -58,8 +59,9 @@ namespace KobePaint.Pages.Kho
                 case "SaveTemp": SaveTemp(); break;
                 case "Save": Save(); BindGrid(); break;
                 case "Review": CreateReportReview(); break;
+                case "xoahang": XoaHangChange(para[1]); break;
                 case "importexcel": BindGrid(); break;
-                case "resetinfo_pro": BindGrid(); break;
+                case "resetinfo_pro": Reset();break;
                 case "redirect": DevExpress.Web.ASPxWebControl.RedirectOnCallback("~/Pages/Kho/DanhSachNhapKho.aspx"); break;
                 default: InsertIntoGrid(); BindGrid(); break;
             }
@@ -216,7 +218,25 @@ namespace KobePaint.Pages.Kho
         }
         #endregion
 
-
+        #region xóa hàng
+        protected void btnXoaHang_Init(object sender, EventArgs e)
+        {
+            ASPxButton btnButton = sender as ASPxButton;
+            GridViewDataRowTemplateContainer container = btnButton.NamingContainer as GridViewDataRowTemplateContainer;
+            btnButton.ClientSideEvents.Click = String.Format("function(s, e) {{ onXoaHangChanged({0}); }}", container.KeyValue);
+        }
+        private void XoaHangChange(string para)
+        {
+            int STT = Convert.ToInt32(para);
+            var itemToRemove = listReceiptProducts.SingleOrDefault(r => r.STT == STT);
+            if (itemToRemove != null)
+            {
+                listReceiptProducts.Remove(itemToRemove);
+                UpdateSTT();
+            }
+            BindGrid();
+        }
+        #endregion
 
         protected void Reset()
         {
@@ -231,6 +251,7 @@ namespace KobePaint.Pages.Kho
             txtSoHoaDon.Text = "";
             memoGhiChu.Text = "";
             ccbBarcode.Text = "";
+            ccbNhaCungCap.Focus();
         }
 
         protected void UpdateSTT()
@@ -499,7 +520,6 @@ namespace KobePaint.Pages.Kho
                 TongTien += prod.ThanhTien;
             }
             spTongTien.Text = TongTien.ToString();
-            //spThanhToan.Text = TongTien.ToString();
             gridImportPro.DataSource = listReceiptProducts;
             gridImportPro.DataBind();
         }

@@ -9,7 +9,7 @@
         }
         function onKhachHangSelect() {
             cbpInfo.PerformCallback('khachhang');
-           
+            cbpInfoImport.PerformCallback('price');
         }
         function onGiamGiaClick() {
             popGiamGia.Show();
@@ -245,7 +245,7 @@
                                                                                                 </asp:SqlDataSource>
                                                                                             </td>
                                                                                             <td style="width: 10%; padding-left: 10px;">
-                                                                                                <dx:ASPxHyperLink ID="hpThemNCC" Target="_blank" runat="server" Text="Thêm" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx" ImageHeight="30px" ImageUrl="~/images/add.png" ImageWidth="30px" ToolTip="Thêm mới">
+                                                                                                <dx:ASPxHyperLink ID="hpThemNCC" Target="_blank" runat="server" Text="Thêm" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx" ImageUrl="~/images/plus.png"  ToolTip="Thêm mới">
                                                                                                 </dx:ASPxHyperLink>
                                                                                             </td>
                                                                                         </tr>
@@ -306,7 +306,7 @@
                                                                                             <td style="width: 10%; padding-left: 10px;">
                                                                                                 <dx:ASPxButton ID="btnGiamGia" runat="server" ClientInstanceName="btnGiamGia" AutoPostBack="false" RenderMode="Link">
                                                                                                     <ClientSideEvents Click="onGiamGiaClick" />
-                                                                                                    <Image IconID="view_sales_16x16devav" ToolTip="Áp giảm giá">
+                                                                                                    <Image ToolTip="Áp giảm giá" Url="~/images/saleof.png">
                                                                                                     </Image>
                                                                                                 </dx:ASPxButton>
                                                                                             </td>
@@ -362,8 +362,7 @@
                                                         </dx:ASPxFormLayout>
                                                     </dx:PanelContent>
                                                 </PanelCollection>
-<SettingsLoadingPanel Enabled="False"></SettingsLoadingPanel>
-
+                                                <SettingsLoadingPanel Enabled="False"></SettingsLoadingPanel>
                                                  <ClientSideEvents EndCallback="endCallBackInfo" />
                                                 </dx:ASPxCallbackPanel>
 
@@ -449,7 +448,7 @@
                                                             </SettingsCommandButton>
                                                             <SettingsText EmptyDataRow="Chưa có dữ liệu" />
                                                             <Columns>
-                                                                <dx:GridViewDataTextColumn Caption="STT" FieldName="STT" ShowInCustomizationForm="True" VisibleIndex="0" Width="50px">
+                                                                <dx:GridViewDataTextColumn Caption="STT" FieldName="STT" ShowInCustomizationForm="True" VisibleIndex="0" Width="40px">
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Tên hàng hóa" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="2" Width="100%">
                                                                 </dx:GridViewDataTextColumn>
@@ -461,7 +460,7 @@
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px" Name="giavon">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá vốn" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="6" Width="100px" Name="giavon">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
                                                                 <dx:GridViewDataSpinEditColumn Caption="Số lượng" FieldName="SoLuong" ShowInCustomizationForm="True" VisibleIndex="4" Width="100px">
@@ -474,11 +473,12 @@
                                                                         <Paddings Padding="2px" />
                                                                     </CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" ShowInCustomizationForm="True" VisibleIndex="7" Width="150px" Name="giaban">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" ShowInCustomizationForm="True" VisibleIndex="7" Width="100px" Name="giaban">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0"></PropertiesSpinEdit>
                                                                     <DataItemTemplate>
                                                                         <dx:ASPxSpinEdit ID="spGiaBanReturn" runat="server" Number='<%# Convert.ToDouble(Eval("GiaBan")) %>' DisplayFormatString="N0" Width="100%" NumberType="Integer" OnInit="spGiaBanReturn_Init" Increment="5000" HorizontalAlign="Right">
-                                                                        </dx:ASPxSpinEdit>
+                                                                            <SpinButtons ShowIncrementButtons="false"></SpinButtons>
+                                                                         </dx:ASPxSpinEdit>
                                                                     </DataItemTemplate>
                                                                     <CellStyle>
                                                                         <Paddings Padding="2px" />
@@ -501,6 +501,8 @@
                                                                     </PropertiesSpinEdit>
                                                                     <DataItemTemplate>
                                                                         <dx:ASPxSpinEdit ID="spGiamGiaReturn" ClientInstanceName="spGiamGiaReturn" runat="server" Number='<%# Convert.ToDouble(Eval("GiamGia")) %>' DisplayFormatString="N0" Width="100%" NumberType="Integer" OnInit="spGiamGiaReturn_Init" Increment="1" HorizontalAlign="Right">
+                                                                        
+                                                                         <SpinButtons ShowIncrementButtons="false"></SpinButtons>
                                                                         </dx:ASPxSpinEdit>
                                                                     </DataItemTemplate>
                                                                     <CellStyle>
@@ -520,11 +522,14 @@
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng tiền: {0:N0}" FieldName="ThanhTien" ShowInColumn="Thành tiền" SummaryType="Sum" />
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="SoLuong" ShowInColumn="Số lượng" SummaryType="Sum" />
                                                             </TotalSummary>
+                                                            <Styles>
+                                                                <Footer Font-Bold="True">
+                                                                </Footer>
+                                                            </Styles>
                                                         </dx:ASPxGridView>
                                                     </dx:PanelContent>
                                                 </PanelCollection>
-<SettingsLoadingPanel Enabled="False"></SettingsLoadingPanel>
-
+                                                <SettingsLoadingPanel Enabled="False"></SettingsLoadingPanel>
                                                 <ClientSideEvents EndCallback="endCallBackProduct" />
                                             </dx:ASPxCallbackPanel>
                                         </dx:SplitterContentControl>
@@ -548,7 +553,7 @@
                                                     </dx:ASPxButton>
                                                    </td>
                                                 <td style="padding-left: 10px">
-                                                    <dx:ASPxButton ID="btnLuuTiepTuc" runat="server" Text="Thanh toán" AutoPostBack="false" UseSubmitBehavior="false">
+                                                    <dx:ASPxButton ID="btnLuuTiepTuc" runat="server" Text="Đặt hàng" AutoPostBack="false" UseSubmitBehavior="false">
                                                         <ClientSideEvents Click="onSaveClick" />
                                                     </dx:ASPxButton>
                                                 </td>

@@ -53,9 +53,9 @@
                                 <dx:LayoutItem Caption="Loại khách hàng">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer runat="server">
-                                            <dx:ASPxComboBox ID="ccbLoaiKH" runat="server" Width="100%" DataSourceID="dsLoaiKH" TextField="TenLoaiKhachHang" ValueField="IDLoaiKhachHang" SelectedIndex="0">
+                                            <dx:ASPxComboBox ID="ccbLoaiKH" runat="server" Width="100%" DataSourceID="dsLoaiKH" TextField="TenLoaiKhachHang" ValueField="IDLoaiKhachHang" SelectedIndex="1">
                                                 <ClientSideEvents SelectedIndexChanged="function(s, e) {
-	                                                if(s.GetSelectedIndex() == 0)
+	                                                if(s.GetSelectedIndex() == 1)
                                                     {                                        
                                                         formThemKH.GetItemByName('layoutitemMaST').SetVisible(false);
                                                     }
@@ -65,7 +65,7 @@
                                                     }
                                                 }" />
                                             </dx:ASPxComboBox>
-                                            <asp:SqlDataSource ID="dsLoaiKH" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDLoaiKhachHang, TenLoaiKhachHang FROM khLoaiKhachHang WHERE (DaXoa = 0) AND (@Quyen &lt;&gt; 3) OR (DaXoa = 0) AND (IDLoaiKhachHang &lt;&gt; 2)">
+                                            <asp:SqlDataSource ID="dsLoaiKH" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDLoaiKhachHang, TenLoaiKhachHang FROM khLoaiKhachHang WHERE (DaXoa = 0) AND (@Quyen &lt;&gt; 3) OR (DaXoa = 0) AND (IDLoaiKhachHang &lt;&gt; 2) ORDER BY TenLoaiKhachHang">
                                                 <SelectParameters>
                                                     <asp:Parameter DefaultValue="1" Name="Quyen" />
                                                 </SelectParameters>

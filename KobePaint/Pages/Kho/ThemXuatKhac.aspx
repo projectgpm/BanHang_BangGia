@@ -271,6 +271,10 @@
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng tiền: {0:N0}" FieldName="ThanhTien" ShowInColumn="Thành tiền" SummaryType="Sum" />
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="SoLuong" ShowInColumn="Số lượng" SummaryType="Sum" />
                                                             </TotalSummary>
+                                                            <Styles>
+                                                                <Footer Font-Bold="True">
+                                                                </Footer>
+                                                            </Styles>
                                                         </dx:ASPxGridView>    
                                                         <asp:SqlDataSource ID="dsLyDoXuat" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDPhieuXuatKhac], [LyDoXuat] FROM [kLyDoXuatKhac] WHERE ([DaXoa] = @DaXoa)">
                                                             <SelectParameters>

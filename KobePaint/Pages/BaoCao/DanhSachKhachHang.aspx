@@ -31,6 +31,8 @@
             <Cell>
                 <Paddings PaddingBottom="3px" PaddingTop="3px" />
             </Cell>
+            <Footer Font-Bold="True">
+            </Footer>
             <GroupPanel>
                 <Paddings Padding="0px" />
             </GroupPanel>

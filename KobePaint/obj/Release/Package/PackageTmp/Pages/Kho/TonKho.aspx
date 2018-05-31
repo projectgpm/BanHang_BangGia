@@ -105,6 +105,8 @@
                                                                 <Styles>
                                                                     <Header HorizontalAlign="Center">
                                                                     </Header>
+                                                                    <Footer Font-Bold="True">
+                                                                    </Footer>
                                                                     <TitlePanel ForeColor="#00CC00" Font-Bold="True" Font-Size="14px">
                                                                     </TitlePanel>
                                                                 </Styles>
@@ -165,22 +167,22 @@
                                                 </dx:GridViewDataTextColumn>
                                                 <dx:GridViewDataTextColumn Caption="Mã hàng hóa" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="2"  Width="100px">
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataTextColumn Caption="Tên hàng hóa" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="3">
+                                                <dx:GridViewDataTextColumn Caption="Tên hàng hóa" FieldName="TenHangHoa" ShowInCustomizationForm="True" VisibleIndex="3" Width="100%">
                                                 </dx:GridViewDataTextColumn>
-                                                <dx:GridViewDataSpinEditColumn Caption="Đơn giá" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="6" Width="200px">
+                                                <dx:GridViewDataSpinEditColumn Caption="Đơn giá" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="6" Width="120px">
                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                     </PropertiesSpinEdit>
                                                 </dx:GridViewDataSpinEditColumn>
-                                                <dx:GridViewDataSpinEditColumn Settings-FilterMode="Value" Caption="SL" CellStyle-HorizontalAlign="Center" FieldName="TonKho" ShowInCustomizationForm="True" VisibleIndex="5" Width="100px">
+                                                <dx:GridViewDataSpinEditColumn Settings-FilterMode="Value" Caption="SL" CellStyle-Font-Bold="true" CellStyle-HorizontalAlign="Center" FieldName="TonKho" ShowInCustomizationForm="True" VisibleIndex="5" Width="100px">
                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                     </PropertiesSpinEdit>
                                                     <CellStyle HorizontalAlign="Center"></CellStyle>
                                                 </dx:GridViewDataSpinEditColumn>
-                                                <dx:GridViewDataSpinEditColumn Caption="Giá trị tồn kho" FieldName="GiaTriTonKho" ShowInCustomizationForm="True" VisibleIndex="7" Width="200px">
+                                                <dx:GridViewDataSpinEditColumn Caption="Giá trị tồn kho" FieldName="GiaTriTonKho" ShowInCustomizationForm="True" VisibleIndex="7" Width="120px">
                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                     </PropertiesSpinEdit>
                                                 </dx:GridViewDataSpinEditColumn>
-                                                <dx:GridViewDataComboBoxColumn Caption="Nhóm hàng" FieldName="NhomHHID" ShowInCustomizationForm="True" VisibleIndex="4" Width="250px">
+                                                <dx:GridViewDataComboBoxColumn Caption="Nhóm hàng" FieldName="NhomHHID" ShowInCustomizationForm="True" VisibleIndex="4" Width="150px">
                                                     <PropertiesComboBox DataSourceID="dsNhomHang" TextField="TenNhom" ValueField="IDNhomHH">
                                                     </PropertiesComboBox>
                                                 </dx:GridViewDataComboBoxColumn>
@@ -188,7 +190,7 @@
                                             <FormatConditions>
                                                 <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] < 1" Format="LightRedFillWithDarkRedText" />
                                                 <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] > 0" Format="GreenFillWithDarkGreenText" />
-                                                <dx:GridViewFormatConditionTopBottom FieldName="TonKho" Rule="TopItems" Threshold="15" Format="BoldText" />
+                                                
                                             </FormatConditions>
                                             <Styles>
                                                 <Header HorizontalAlign="Center">

@@ -122,7 +122,7 @@
                                                                                     </asp:SqlDataSource>
                                                                                 </td>
                                                                                 <td style="width: 10%; padding-left: 10px;">
-                                                                                    <dx:ASPxHyperLink ID="btnThemBangGia" ClientInstanceName="btnThemBangGia" Target="_blank" runat="server" Text="Thêm"  ImageHeight="30px" ImageUrl="~/images/add.png" ImageWidth="30px" ToolTip="Thêm mới">
+                                                                                    <dx:ASPxHyperLink ID="btnThemBangGia" ClientInstanceName="btnThemBangGia" Target="_blank" runat="server" Text="Thêm" ImageUrl="~/images/plus.png" ToolTip="Thêm mới">
                                                                                         <ClientSideEvents Click="function(){popBangGia.Show()}" />           
                                                                                     </dx:ASPxHyperLink>
 

@@ -19,9 +19,9 @@ namespace KobePaint {
             if (Permiss == 3) Response.Redirect("~/Pages/BanHang/LapPhieu.aspx");
 
             if (CountPhieuGiaoHang() > 0)
-                pageControl.TabPages[0].Text = string.Format("PHIẾU GIAO HÀNG ĐẠI LÝ CHỜ DUYỆT <span class=\"countGH\">{0}</span>", CountPhieuGiaoHang());
+                pageControl.TabPages[0].Text = string.Format("PHIẾU GIAO HÀNG CHỜ DUYỆT <span class=\"countGH\">{0}</span>", CountPhieuGiaoHang());
             if (CountPhieuTraHang() > 0)
-                pageControl.TabPages[1].Text = string.Format("PHIẾU ĐẠI LÝ TRẢ HÀNG CHỜ DUYỆT <span class=\"countTH\">{0}</span>", CountPhieuTraHang());
+                pageControl.TabPages[1].Text = string.Format("PHIẾU TRẢ HÀNG CHỜ DUYỆT <span class=\"countTH\">{0}</span>", CountPhieuTraHang());
           
         }
 

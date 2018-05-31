@@ -108,11 +108,15 @@
                 <PropertiesTextEdit DisplayFormatString="N0">
                 </PropertiesTextEdit>
                 <Settings AllowHeaderFilter="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataTextColumn>
             <dx:GridViewDataSpinEditColumn Caption="Doanh thu" FieldName="DOANHTHU" ReadOnly="True" VisibleIndex="4" Width="200px" CellStyle-Font-Bold="true">
                 <PropertiesSpinEdit DisplayFormatString="N0" Increment="100000" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <Settings AllowHeaderFilter="False" />
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataSpinEditColumn>
             <dx:GridViewDataTextColumn Caption="Mã hàng" FieldName="MaHang" VisibleIndex="1" Width="150px">
                 <SettingsHeaderFilter Mode="CheckedList"></SettingsHeaderFilter>
@@ -127,6 +131,8 @@
             </Header>
             <GroupRow Font-Bold="True" ForeColor="#009933">
             </GroupRow>
+            <Footer Font-Bold="True">
+            </Footer>
         </Styles>
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsDoanhThuHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="spDoanhThuTheoHangHoa" SelectCommandType="StoredProcedure" CancelSelectOnNullParameter="false">

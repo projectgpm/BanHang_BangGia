@@ -181,6 +181,25 @@
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>
+                                 <dx:LayoutItem HorizontalAlign="Center" ShowCaption="False" ColSpan="2">
+                                    <LayoutItemNestedControlCollection>
+                                        <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer7" runat="server">
+                                             <table >
+                                                <tr>
+                                                     <td style="padding-right:10px;">
+                                                        <dx:ASPxCheckBox Text="Hạch toán vào kết quả hoạt động kinh doanh"  ID="cckCheckKinhDoanh" ClientInstanceName="cckCheckKinhDoanh" runat="server" CheckState="Unchecked">
+                                                            <CheckedImage IconID="actions_apply_16x16"></CheckedImage>
+                                                            <UncheckedImage IconID="actions_close_16x16office2013"></UncheckedImage>
+                                                        </dx:ASPxCheckBox>
+                                                      </td>
+                                                    <td>
+                                                        <dx:ASPxButton ID="ASPxButton1" AutoPostBack="false" runat="server" Text="ASPxButton"></dx:ASPxButton>
+                                                    </td>
+                                                  </tr>
+                                               </table>
+                                            </dx:LayoutItemNestedControlContainer>
+                                        </LayoutItemNestedControlCollection>
+                                     </dx:LayoutItem>
                                 <dx:LayoutItem HorizontalAlign="Center" ShowCaption="False" ColSpan="2">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer9" runat="server">
@@ -226,19 +245,19 @@
         <ClientSideEvents EndCallback="endCallBack" />
     </dx:ASPxCallbackPanel>
 
-    <dx:ASPxPopupControl ID="popLoaiThuChi" ClientInstanceName="popLoaiThuChi" runat="server" HeaderText="Loại thu chi" Width="500px" Height="600px" ScrollBars="Auto" PopupHorizontalAlign="WindowCenter"
+    <dx:ASPxPopupControl ID="popLoaiThuChi" ClientInstanceName="popLoaiThuChi" runat="server" HeaderText="Loại thu chi" Width="800px" Height="200px"  PopupHorizontalAlign="WindowCenter"
         CloseAction="CloseButton" CloseOnEscape="True" PopupVerticalAlign="WindowCenter"  
-         
          ><ClientSideEvents PopUp="function(s, e) { gridLoaiThuChi.Refresh() }"/>
         <ContentCollection>
             <dx:PopupControlContentControl ID="PopupControlContentControl1" runat="server">
                  <dx:ASPxGridView ID="gridLoaiThuChi" runat="server" AutoGenerateColumns="False" ClientInstanceName="gridLoaiThuChi" Width="100%" DataSourceID="dsLThuChu" KeyFieldName="ID" OnCustomColumnDisplayText="gridLoaiThuChi_CustomColumnDisplayText">
                     <SettingsEditing Mode="Inline">
                     </SettingsEditing>
-                    <Settings VerticalScrollableHeight="0" ShowFilterRow="True"/>
+                    <Settings VerticalScrollableHeight="50"/>
                     <SettingsPager AlwaysShowPager="True" >
                         <Summary EmptyText="Không có dữ liệu" Text="Trang {0}/{1}" />
                     </SettingsPager>
+                     <SettingsSearchPanel Visible="True" />
                     <SettingsText EmptyDataRow="Không có dữ liệu !!" HeaderFilterCancelButton="Hủy" HeaderFilterFrom="Từ" HeaderFilterOkButton="Lọc" HeaderFilterTo="Đến" SearchPanelEditorNullText="Nhập thông tin cần tìm..." ConfirmDelete="Xóa dữ liệu ??" />
                     <Styles>
                         <Header HorizontalAlign="Center">                
@@ -292,12 +311,14 @@
                          <Items>
                              <dx:GridViewColumnLayoutItem ColumnName="Tên loại thu chi">
                              </dx:GridViewColumnLayoutItem>
+                             <dx:GridViewColumnLayoutItem ColumnName="Tính vào kinh doanh">
+                             </dx:GridViewColumnLayoutItem>
                              <dx:EditModeCommandLayoutItem HorizontalAlign="Right">
                              </dx:EditModeCommandLayoutItem>
                          </Items>
                      </EditFormLayoutProperties>
                     <Columns>
-                        <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="2" Width="200px" ShowClearFilterButton="True">
+                        <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" ShowNewButtonInHeader="True" VisibleIndex="3" Width="200px">
                         </dx:GridViewCommandColumn>
                         <dx:GridViewDataTextColumn FieldName="ID" ReadOnly="True" VisibleIndex="0" Caption="STT" Width="60px">
                             <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
@@ -314,23 +335,36 @@
                             </PropertiesTextEdit>
                             <Settings AutoFilterCondition="Contains" />
                         </dx:GridViewDataTextColumn>
+                        <dx:GridViewDataCheckColumn Caption="Tính vào kinh doanh" FieldName="TrangThaiKinhDoanh" ShowInCustomizationForm="True" VisibleIndex="2">
+                            <PropertiesCheckEdit>
+                                <DisplayImageChecked IconID="actions_apply_16x16">
+                                </DisplayImageChecked>
+                                <DisplayImageUnchecked IconID="actions_close_16x16office2013">
+                                </DisplayImageUnchecked>
+                                <ValidationSettings SetFocusOnError="True">
+                                    <RequiredField IsRequired="True" />
+                                </ValidationSettings>
+                            </PropertiesCheckEdit>
+                        </dx:GridViewDataCheckColumn>
                     </Columns>
                 </dx:ASPxGridView>
                  <asp:SqlDataSource ID="dsLThuChu" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
                      DeleteCommand="UPDATE [pLoaiThuChi] SET [DaXoa] = 1 WHERE [ID] = @ID" 
-                     InsertCommand="INSERT INTO [pLoaiThuChi] ([TenPhieu]) VALUES (@TenPhieu)" 
-                     SelectCommand="SELECT [ID], [TenPhieu] FROM [pLoaiThuChi] WHERE ([DaXoa] = @DaXoa)"
-                     UpdateCommand="UPDATE [pLoaiThuChi] SET [TenPhieu] = @TenPhieu WHERE [ID] = @ID">
+                     InsertCommand="INSERT INTO [pLoaiThuChi] ([TenPhieu],[TrangThaiKinhDoanh]) VALUES (@TenPhieu,@TrangThaiKinhDoanh)" 
+                     SelectCommand="SELECT [ID], [TenPhieu],[TrangThaiKinhDoanh] FROM [pLoaiThuChi] WHERE ([DaXoa] = @DaXoa)"
+                     UpdateCommand="UPDATE [pLoaiThuChi] SET [TenPhieu] = @TenPhieu,[TrangThaiKinhDoanh]= @TrangThaiKinhDoanh WHERE [ID] = @ID">
                      <DeleteParameters>
                          <asp:Parameter Name="ID" Type="Int32" />
                      </DeleteParameters>
                      <InsertParameters>
                          <asp:Parameter Name="TenPhieu" Type="String" />
+                          <asp:Parameter Name="TrangThaiKinhDoanh" Type="Int32" />
                      </InsertParameters>
                      <SelectParameters>
                          <asp:Parameter DefaultValue="0" Name="DaXoa" Type="Int32" />
                      </SelectParameters>
                      <UpdateParameters>
+                         <asp:Parameter Name="TrangThaiKinhDoanh" Type="Int32" />
                          <asp:Parameter Name="TenPhieu" Type="String" />
                          <asp:Parameter Name="ID" Type="Int32" />
                      </UpdateParameters>

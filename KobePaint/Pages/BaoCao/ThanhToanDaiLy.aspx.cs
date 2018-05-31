@@ -90,5 +90,10 @@ namespace KobePaint.Pages.BaoCao
                 Session["oPhieuTT"] = value;
             }
         }
+
+        protected void fromDay_Init(object sender, EventArgs e)
+        {
+            Formats.InitDateEditControl_AddDay(sender, e,-1);
+        }
     }
 }

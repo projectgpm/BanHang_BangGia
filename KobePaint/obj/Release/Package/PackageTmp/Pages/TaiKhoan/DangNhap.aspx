@@ -17,8 +17,8 @@
     <dx:ASPxPopupControl ID="pcLogin" ClientInstanceName="pcLogin" runat="server"
         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" 
         ShowOnPageLoad="true" ShowCloseButton="False" CloseAction="None" PopupAction="None" FooterText="&copy; 2017" Width="250px" HeaderText="HỆ THỐNG BÁN HÀNG" ShowFooter="False">
-        <%--<HeaderImage Url="~/Content/Images/logo.png" Width="100px">
-        </HeaderImage>--%>
+        <HeaderImage Url="~/images/gpmvn.png" Width="100px">
+        </HeaderImage>
         <ClientSideEvents PopUp="function(s, e) { ASPxClientEdit.ClearGroup('entryGroup'); tbLogin.Focus(); s.UpdatePosition(); }" />
         <FooterStyle HorizontalAlign="Center" BackColor="#2196F3" Font-Names="&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif" ForeColor="White" />
         <HeaderStyle BackColor="#2196F3" Font-Bold="True" ForeColor="White" Font-Names="&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif" Font-Size="Large" />

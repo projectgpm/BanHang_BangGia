@@ -1,9 +1,30 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PheDuyetTraHang.ascx.cs" Inherits="KobePaint.Pages.TraHang.PheDuyetTraHang" %>
 <%@ Register assembly="DevExpress.XtraReports.v16.1.Web, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.XtraReports.Web" tagprefix="dx" %>
+<script type="text/javascript">
+    var timeout;
+    function scheduleGridUpdate(grid) {
+        window.clearTimeout(timeout);
+        timeout = window.setTimeout(
+            function () { gridTraHang.Refresh(); },
+            300000
+        );
+    }
+    function gridTraHang_Init(s, e) {
+        scheduleGridUpdate(s);
+    }
+    function gridTraHang_BeginCallback(s, e) {
+        window.clearTimeout(timeout);
+    }
+    function gridTraHang_EndCallback(s, e) {
+        scheduleGridUpdate(s);
+    }
+    </script>
 <dx:ASPxGridView ID="gridTraHang" ClientInstanceName="gridTraHang" Width="100%" runat="server" AutoGenerateColumns="False" DataSourceID="dsTraHang" KeyFieldName="IDPhieuTraHang" OnCustomColumnDisplayText="gridTraHang_CustomColumnDisplayText" OnRowUpdating="gridTraHang_RowUpdating">
-        <ClientSideEvents endcallback="onEndCallBackReturn" />    
+      <%--  <ClientSideEvents endcallback="onEndCallBackReturn" />    --%>
+       <ClientSideEvents Init="gridTraHang_Init" BeginCallback="gridTraHang_BeginCallback" EndCallback="gridTraHang_EndCallback" />  
         <SettingsEditing Mode="Batch">
         </SettingsEditing>
+    <Settings VerticalScrollBarMode="Visible" VerticalScrollableHeight="0" ShowFilterRow="True" ShowTitlePanel="True"/>
         <SettingsDetail ShowDetailRow="True" AllowOnlyOneMasterRowExpanded="True" />
         <SettingsCommandButton>
             <ShowAdaptiveDetailButton ButtonType="Image">
@@ -146,6 +167,9 @@
 <CellStyle HorizontalAlign="Center" Font-Bold="True"></CellStyle>
             </dx:GridViewDataComboBoxColumn>
         </Columns>
+        <FormatConditions>
+            <dx:GridViewFormatConditionTopBottom FieldName="DuyetDonHang" Rule="TopPercent" Threshold="20" Format="YellowFillWithDarkYellowText" />
+        </FormatConditions>
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsTraHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT IDPhieuTraHang, MaPhieu, DaiLyID, SoPhieuTra, NgayTra, NgayNhap, NhanVienID, GhiChu, CongNoCu, TongSoLuong, HinhThucTT, ThanhToan, ConLai, TongTienHang, DuyetDonHang FROM kPhieuTraHang WHERE (DuyetDonHang = 0)" 
         UpdateCommand="UPDATE gPhieuTraHang SET NgayLuuKho = @NgayLuuKho, GhiChu = @GhiChu, PheDuyet = @PheDuyet, NhanVienLapID = @NhanVienLapID WHERE IDPhieuTraHang = @IDPhieuTraHang">

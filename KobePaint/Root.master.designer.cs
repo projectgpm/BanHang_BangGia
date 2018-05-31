@@ -40,6 +40,15 @@ namespace KobePaint {
         protected global::DevExpress.Web.ASPxPanel HeaderPane;
         
         /// <summary>
+        /// imgLogo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgLogo;
+        
+        /// <summary>
         /// TitleLink control.
         /// </summary>
         /// <remarks>
@@ -58,13 +67,13 @@ namespace KobePaint {
         protected global::DevExpress.Web.ASPxMenu HeaderMenu;
         
         /// <summary>
-        /// btnThongTin control.
+        /// btnDangXuat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::DevExpress.Web.ASPxButton btnThongTin;
+        protected global::DevExpress.Web.ASPxButton btnDangXuat;
         
         /// <summary>
         /// MainPane control.

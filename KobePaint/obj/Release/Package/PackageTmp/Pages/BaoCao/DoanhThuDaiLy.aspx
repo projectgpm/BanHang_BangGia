@@ -164,6 +164,10 @@
             <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="TONGTIEN" ShowInColumn="Số tiền" SummaryType="Sum" />
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="GIAMGIA" ShowInGroupFooterColumn="Giảm giá" SummaryType="Sum" />
         </TotalSummary>
+        <Styles>
+            <Footer Font-Bold="True">
+            </Footer>
+        </Styles>
     </dx:ASPxGridView>
 
     <asp:SqlDataSource ID="dsChiTiet" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 

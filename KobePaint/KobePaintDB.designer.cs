@@ -938,6 +938,8 @@ namespace KobePaint
 		
 		private string _DiaChi;
 		
+		private System.Nullable<int> _TrangThaiKinhDoanh;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -970,6 +972,8 @@ namespace KobePaint
     partial void OnDienThoaiChanged();
     partial void OnDiaChiChanging(string value);
     partial void OnDiaChiChanged();
+    partial void OnTrangThaiKinhDoanhChanging(System.Nullable<int> value);
+    partial void OnTrangThaiKinhDoanhChanged();
     #endregion
 		
 		public pPhieuThuChi()
@@ -1253,6 +1257,26 @@ namespace KobePaint
 					this._DiaChi = value;
 					this.SendPropertyChanged("DiaChi");
 					this.OnDiaChiChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrangThaiKinhDoanh", DbType="Int")]
+		public System.Nullable<int> TrangThaiKinhDoanh
+		{
+			get
+			{
+				return this._TrangThaiKinhDoanh;
+			}
+			set
+			{
+				if ((this._TrangThaiKinhDoanh != value))
+				{
+					this.OnTrangThaiKinhDoanhChanging(value);
+					this.SendPropertyChanging();
+					this._TrangThaiKinhDoanh = value;
+					this.SendPropertyChanged("TrangThaiKinhDoanh");
+					this.OnTrangThaiKinhDoanhChanged();
 				}
 			}
 		}
@@ -5046,6 +5070,10 @@ namespace KobePaint
 		
 		private System.Nullable<int> _IDBangGia;
 		
+		private System.Nullable<double> _HanMucCongNo;
+		
+		private System.Nullable<int> _ThoiHanThanhToan;
+		
 		private EntitySet<ghPhieuDaiLyThanhToan> _ghPhieuDaiLyThanhToans;
 		
 		private EntitySet<ghPhieuGiaoHang> _ghPhieuGiaoHangs;
@@ -5102,6 +5130,10 @@ namespace KobePaint
     partial void OnThanhToanChanged();
     partial void OnIDBangGiaChanging(System.Nullable<int> value);
     partial void OnIDBangGiaChanged();
+    partial void OnHanMucCongNoChanging(System.Nullable<double> value);
+    partial void OnHanMucCongNoChanged();
+    partial void OnThoiHanThanhToanChanging(System.Nullable<int> value);
+    partial void OnThoiHanThanhToanChanged();
     #endregion
 		
 		public khKhachHang()
@@ -5462,6 +5494,46 @@ namespace KobePaint
 					this._IDBangGia = value;
 					this.SendPropertyChanged("IDBangGia");
 					this.OnIDBangGiaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_HanMucCongNo", DbType="Float")]
+		public System.Nullable<double> HanMucCongNo
+		{
+			get
+			{
+				return this._HanMucCongNo;
+			}
+			set
+			{
+				if ((this._HanMucCongNo != value))
+				{
+					this.OnHanMucCongNoChanging(value);
+					this.SendPropertyChanging();
+					this._HanMucCongNo = value;
+					this.SendPropertyChanged("HanMucCongNo");
+					this.OnHanMucCongNoChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ThoiHanThanhToan", DbType="Int")]
+		public System.Nullable<int> ThoiHanThanhToan
+		{
+			get
+			{
+				return this._ThoiHanThanhToan;
+			}
+			set
+			{
+				if ((this._ThoiHanThanhToan != value))
+				{
+					this.OnThoiHanThanhToanChanging(value);
+					this.SendPropertyChanging();
+					this._ThoiHanThanhToan = value;
+					this.SendPropertyChanged("ThoiHanThanhToan");
+					this.OnThoiHanThanhToanChanged();
 				}
 			}
 		}
@@ -11285,6 +11357,8 @@ namespace KobePaint
 		
 		private System.Nullable<int> _DaXoa;
 		
+		private System.Nullable<int> _TrangThaiKinhDoanh;
+		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -11295,6 +11369,8 @@ namespace KobePaint
     partial void OnTenPhieuChanged();
     partial void OnDaXoaChanging(System.Nullable<int> value);
     partial void OnDaXoaChanged();
+    partial void OnTrangThaiKinhDoanhChanging(System.Nullable<int> value);
+    partial void OnTrangThaiKinhDoanhChanged();
     #endregion
 		
 		public pLoaiThuChi()
@@ -11358,6 +11434,26 @@ namespace KobePaint
 					this._DaXoa = value;
 					this.SendPropertyChanged("DaXoa");
 					this.OnDaXoaChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TrangThaiKinhDoanh", DbType="Int")]
+		public System.Nullable<int> TrangThaiKinhDoanh
+		{
+			get
+			{
+				return this._TrangThaiKinhDoanh;
+			}
+			set
+			{
+				if ((this._TrangThaiKinhDoanh != value))
+				{
+					this.OnTrangThaiKinhDoanhChanging(value);
+					this.SendPropertyChanging();
+					this._TrangThaiKinhDoanh = value;
+					this.SendPropertyChanged("TrangThaiKinhDoanh");
+					this.OnTrangThaiKinhDoanhChanged();
 				}
 			}
 		}

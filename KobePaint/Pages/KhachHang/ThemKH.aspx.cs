@@ -52,8 +52,10 @@ namespace KobePaint.Pages.KH_NCC
                 kh.LanCuoiMuaHang = DateTime.Now;
                 kh.TongTienHang = 0;
                 kh.TienTraHang = 0;
-                kh.CongNo = 0;
+                kh.CongNo = Convert.ToDouble(speCongNoBanDau.Number);
                 kh.DaXoa = 0;
+                kh.HanMucCongNo = Convert.ToDouble(speHanMucCongNo.Number);
+                kh.ThoiHanThanhToan = Convert.ToInt32(speThoiHanThanhToan.Number);
                 kh.IDBangGia = 1;// bảng giá chung
                 kh.ThanhToan = 0;
                 DBDataProvider.DB.khKhachHangs.InsertOnSubmit(kh);
@@ -66,7 +68,7 @@ namespace KobePaint.Pages.KH_NCC
         private void Reset()
         {
             txtMaKH.Text = "KH" + (DateTime.Now).ToString("MM") + BitConverter.ToInt32(Guid.NewGuid().ToByteArray(), 10).ToString().Substring(1, 4);
-            ccbLoaiKH.SelectedIndex = 0;
+            ccbLoaiKH.SelectedIndex = 1;
             txtTenKH.Text = "";
             txtTenKH.Focus();
             txtMaSoThue.Text = "";
@@ -74,6 +76,9 @@ namespace KobePaint.Pages.KH_NCC
             txtDiaChi.Text = "";
             txtEmail.Text = "";
             txtGhiChu.Text = "";
+            speThoiHanThanhToan.Text = "0";
+            speHanMucCongNo.Text = "0";
+            speCongNoBanDau.Text = "0";
         }
         protected void LuuLai()
         {

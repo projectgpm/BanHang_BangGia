@@ -271,7 +271,7 @@ namespace KobePaint.Pages.HangHoa
                             double DonGia = Convert.ToDouble(dr["Đơn giá nhập cuối"].ToString() == "" ? "0" : dr["Đơn giá nhập cuối"].ToString().Trim());
                             double GiaMoi = Convert.ToDouble(dr["Giá mới"].ToString() == "" ? "0" : dr["Giá mới"].ToString().Trim());
                             int IDBangGia = Convert.ToInt32(hiddenfile["IDBangGia"].ToString());
-                            var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang == MaHang && x.DaXoa == 0 && x.LoaiHHID == 1).FirstOrDefault();
+                            var tblHangHoa = DBDataProvider.DB.hhHangHoas.Where(x => x.MaHang.Trim() == MaHang && x.DaXoa == 0 && x.LoaiHHID == 1).FirstOrDefault();
                             if (tblHangHoa != null)
                             {
                                 var exitProdInList = DBDataProvider.DB.bgChiTietBangGias.Where(x => x.HangHoaID == tblHangHoa.IDHangHoa && x.BangGiaID == IDBangGia).SingleOrDefault();

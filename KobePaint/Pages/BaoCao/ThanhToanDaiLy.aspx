@@ -53,20 +53,22 @@
                     <dx:LayoutItem Caption="Khách hàng">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                                <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%" DropDownStyle="DropDown">
+                                <dx:ASPxComboBox ID="ccbKhachHang" TextFormatString="{0};{1}" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%" DropDownStyle="DropDown">
                                     <Columns>
+                                       <dx:ListBoxColumn Caption="Mã khách hàng" FieldName="MaKhachHang" />
                                         <dx:ListBoxColumn Caption="Họ tên" FieldName="HoTen" />
-                                        <dx:ListBoxColumn Caption="Điện thoại" FieldName="DienThoai" />
                                     </Columns>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen], [DienThoai] FROM [khKhachHang] WHERE [LoaiKhachHangID] <> 2"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="dsKhachHang" runat="server" 
+                                    ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>"
+                                     SelectCommand="SELECT [IDKhachHang], [HoTen], [MaKhachHang] FROM [khKhachHang] WHERE [LoaiKhachHangID] <> 2"></asp:SqlDataSource>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
                     <dx:LayoutItem Caption="Từ ngày">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer2" runat="server">
-                                <dx:ASPxDateEdit ID="fromDay" ClientInstanceName="fromDay" runat="server" OnInit="dateEditControl_Init" Width="100%">
+                                <dx:ASPxDateEdit ID="fromDay" ClientInstanceName="fromDay" runat="server" OnInit="fromDay_Init" Width="100%">
                                 </dx:ASPxDateEdit>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
@@ -162,15 +164,21 @@
             <dx:GridViewDataSpinEditColumn Caption="Số tiền" FieldName="SoTienThu" VisibleIndex="5" CellStyle-Font-Bold="true">
                 <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                 </PropertiesSpinEdit>
+
+<CellStyle Font-Bold="True"></CellStyle>
             </dx:GridViewDataSpinEditColumn>
         </Columns>
         <TotalSummary>
             <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="SoTienThu" ShowInColumn="Số tiền" SummaryType="Sum" />
         </TotalSummary>
+        <Styles>
+            <Footer Font-Bold="True">
+            </Footer>
+        </Styles>
     </dx:ASPxGridView>
      <asp:SqlDataSource ID="dsChiTiet" runat="server" 
         ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT ghPhieuDaiLyThanhToan.IDPhieuThu, ghPhieuDaiLyThanhToan.STTPhieuThu, ghPhieuDaiLyThanhToan.SoHoaDon, ghPhieuDaiLyThanhToan.KhachHangID, ghPhieuDaiLyThanhToan.SoTienThu, ghPhieuDaiLyThanhToan.NoiDung, ghPhieuDaiLyThanhToan.NgayThu, ghPhieuDaiLyThanhToan.NhanVienThuID, ghPhieuDaiLyThanhToan.HinhThucTTID, ghPhieuDaiLyThanhToan.CongNoCu, ghPhieuDaiLyThanhToan.NgayLap, nvNhanVien.HoTen AS HoTenNV, khKhachHang.MaKhachHang, khKhachHang.HoTen AS HoTenKH, khKhachHang.DienThoai FROM ghPhieuDaiLyThanhToan INNER JOIN khKhachHang ON ghPhieuDaiLyThanhToan.KhachHangID = khKhachHang.IDKhachHang INNER JOIN nvNhanVien ON ghPhieuDaiLyThanhToan.NhanVienThuID = nvNhanVien.IDNhanVien WHERE (ghPhieuDaiLyThanhToan.NgayThu &lt;= DATEADD(day, 1, @DenNgay)) AND (ghPhieuDaiLyThanhToan.NgayThu &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (@IDKhachHang = 0) OR (ghPhieuDaiLyThanhToan.NgayThu &lt;= DATEADD(day, 1, @DenNgay)) AND (ghPhieuDaiLyThanhToan.NgayThu &gt;= @TuNgay) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
+        SelectCommand="SELECT ghPhieuDaiLyThanhToan.IDPhieuThu, ghPhieuDaiLyThanhToan.STTPhieuThu, ghPhieuDaiLyThanhToan.SoHoaDon, ghPhieuDaiLyThanhToan.KhachHangID, ghPhieuDaiLyThanhToan.SoTienThu, ghPhieuDaiLyThanhToan.NoiDung, ghPhieuDaiLyThanhToan.NgayThu, ghPhieuDaiLyThanhToan.NhanVienThuID, ghPhieuDaiLyThanhToan.HinhThucTTID, ghPhieuDaiLyThanhToan.CongNoCu, ghPhieuDaiLyThanhToan.NgayLap, nvNhanVien.HoTen AS HoTenNV, khKhachHang.MaKhachHang, khKhachHang.HoTen AS HoTenKH, khKhachHang.DienThoai FROM ghPhieuDaiLyThanhToan INNER JOIN khKhachHang ON ghPhieuDaiLyThanhToan.KhachHangID = khKhachHang.IDKhachHang INNER JOIN nvNhanVien ON ghPhieuDaiLyThanhToan.NhanVienThuID = nvNhanVien.IDNhanVien WHERE (ghPhieuDaiLyThanhToan.NgayThu BETWEEN @TuNgay AND DATEADD(day, 1, @DenNgay)) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (@IDKhachHang = 0) OR (ghPhieuDaiLyThanhToan.NgayThu BETWEEN @TuNgay AND DATEADD(day, 1, @DenNgay)) AND (khKhachHang.LoaiKhachHangID &lt;&gt; 2) AND (khKhachHang.IDKhachHang = @IDKhachHang)" 
         CancelSelectOnNullParameter="False">
         <SelectParameters>
             <asp:ControlParameter ControlID="formThongTin$fromDay" Name="TuNgay" PropertyName="Value" ConvertEmptyStringToNull="true" DefaultValue=""  />

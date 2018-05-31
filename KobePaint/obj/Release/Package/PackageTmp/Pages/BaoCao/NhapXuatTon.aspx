@@ -173,6 +173,8 @@
                         </dx:GridViewDataTextColumn>
                     </Columns>
                     <Styles>
+                        <Footer Font-Bold="True">
+                        </Footer>
                         <FixedColumn BackColor="LightYellow" />
                     </Styles>
                     <TotalSummary>

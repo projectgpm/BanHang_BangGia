@@ -15,9 +15,10 @@
                 ccbNhaCungCap.Focus();
             }
             else {
-                if (ccbBarcode.GetSelectedIndex() != -1) {
-                    cbpInfoImport.PerformCallback('price');
-                }
+                cbpInfoImport.PerformCallback('price');
+                //if (ccbBarcode.GetSelectedIndex() != -1) {
+                //    cbpInfoImport.PerformCallback('price');
+                //}
             }
         }
         function ImportProduct() {
@@ -52,7 +53,11 @@
         function onExcelClick() {
             popupViewExcel.Show();
         }
-
+        function onXoaHangChanged(key) {
+            cbpInfoImport.PerformCallback('xoahang|' + key);
+            cbpInfo.PerformCallback('refresh');
+            //cbpInfo.PerformCallback('giamgia');
+        }
         function checkInput() {
             if (ccbNhaCungCap.GetSelectedIndex() == -1) {
                 ccbBarcode.SetSelectedIndex(-1);
@@ -181,7 +186,7 @@
                                                                                                 </asp:SqlDataSource>
                                                                                             </td>
                                                                                             <td style="width: 10%; padding-left: 10px;">
-                                                                                                <dx:ASPxHyperLink ID="hpThemNCC" Target="_blank" runat="server" Text="Thêm" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx" ImageHeight="30px" ImageUrl="~/images/add.png" ImageWidth="30px" ToolTip="Thêm mới">
+                                                                                                <dx:ASPxHyperLink ID="hpThemNCC" Target="_blank" runat="server" Text="Thêm" NavigateUrl="~/Pages/KhachHang/ThemKH.aspx" ImageUrl="~/images/plus.png" ToolTip="Thêm mới">
                                                                                                 </dx:ASPxHyperLink>
 
                                                                                             </td>
@@ -345,18 +350,28 @@
                                                                 </dx:GridViewDataTextColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Mã HH" FieldName="MaHang" ShowInCustomizationForm="True" VisibleIndex="1" Width="100px">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewCommandColumn Caption="Xóa" ShowDeleteButton="True" ShowInCustomizationForm="True" VisibleIndex="9" Width="50px">
-                                                                </dx:GridViewCommandColumn>
+                                                                <dx:GridViewDataButtonEditColumn Caption="Xóa" ShowInCustomizationForm="True" VisibleIndex="9" Width="50px">
+                                                                     <DataItemTemplate>
+                                                                        <dx:ASPxButton AutoPostBack="false" ID="BtnXoaHang" ClientInstanceName="BtnXoaHang" runat="server" 
+                                                                             RenderMode="Link" OnInit="btnXoaHang_Init">
+                                                                            <Image IconID="actions_cancel_16x16">
+                                                                            </Image>
+                                                                        </dx:ASPxButton>
+                                                                    </DataItemTemplate>
+                                                                    <CellStyle HorizontalAlign="Center">
+                                                                    </CellStyle>
+                                                                </dx:GridViewDataButtonEditColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Tồn" FieldName="TonKho" ShowInCustomizationForm="True" VisibleIndex="3" Width="50px">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Thành tiền" FieldName="ThanhTien" ShowInCustomizationForm="True" VisibleIndex="6" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Thành tiền" FieldName="ThanhTien" ShowInCustomizationForm="True" VisibleIndex="6" Width="100px">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá nhập" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="5" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá nhập" FieldName="GiaVon" ShowInCustomizationForm="True" VisibleIndex="5" Width="100px">
                                                                     <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
                                                                     <DataItemTemplate>
                                                                         <dx:ASPxSpinEdit ID="spGiaVonReturn" runat="server" Number='<%# Convert.ToDouble(Eval("GiaVon")) %>' Width="100%" DisplayFormatString="N0" NumberType="Integer" OnInit="spGiaVonReturn_Init" Increment="5000" HorizontalAlign="Right">
+                                                                         <SpinButtons ShowIncrementButtons="false"></SpinButtons>
                                                                         </dx:ASPxSpinEdit>
                                                                     </DataItemTemplate>
                                                                     <CellStyle>
@@ -373,10 +388,11 @@
                                                                         <Paddings Padding="2px" />
                                                                     </CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBanMoi" ShowInCustomizationForm="True" VisibleIndex="8" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBanMoi" ShowInCustomizationForm="True" VisibleIndex="8" Width="100px">
                                                                     <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
                                                                     <DataItemTemplate>
                                                                         <dx:ASPxSpinEdit ID="spGiaBanReturn" runat="server" Number='<%# Convert.ToDouble(Eval("GiaBanMoi")) %>' DisplayFormatString="N0" Width="100%" NumberType="Integer" OnInit="spGiaBanReturn_Init" Increment="5000" HorizontalAlign="Right">
+                                                                         <SpinButtons ShowIncrementButtons="false"></SpinButtons>
                                                                         </dx:ASPxSpinEdit>
                                                                     </DataItemTemplate>
                                                                     <CellStyle>
@@ -396,6 +412,10 @@
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng tiền: {0:N0}" FieldName="ThanhTien" ShowInColumn="Thành tiền" SummaryType="Sum" />
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="SoLuong" ShowInColumn="Số lượng" SummaryType="Sum" />
                                                             </TotalSummary>
+                                                            <Styles>
+                                                                <Footer Font-Bold="True">
+                                                                </Footer>
+                                                            </Styles>
                                                         </dx:ASPxGridView>
                                                     </dx:PanelContent>
                                                 </PanelCollection>

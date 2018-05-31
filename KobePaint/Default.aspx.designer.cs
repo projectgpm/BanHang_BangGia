@@ -56,5 +56,23 @@ namespace KobePaint {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::KobePaint.Pages.TraHang.PheDuyetTraHang PheDuyetTraHang1;
+        
+        /// <summary>
+        /// ContentControl3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::DevExpress.Web.ContentControl ContentControl3;
+        
+        /// <summary>
+        /// CanhBaoCongNo1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::KobePaint.Pages.HeThong.CanhBaoCongNo CanhBaoCongNo1;
     }
 }

@@ -268,6 +268,10 @@
                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng = {0:N0}" FieldName="TonKhoHeThong" ShowInColumn="Tồn hệ thống" SummaryType="Sum" />
                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng = {0:N0}" FieldName="ChenhLech" ShowInColumn="Chênh lệch" SummaryType="Sum" />
                                             </TotalSummary>
+                                            <Styles>
+                                                <Footer Font-Bold="True">
+                                                </Footer>
+                                            </Styles>
                                         </dx:ASPxGridView>
                                                             </dx:PanelContent>
                                             </PanelCollection>

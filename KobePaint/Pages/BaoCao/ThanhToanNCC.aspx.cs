@@ -89,5 +89,10 @@ namespace KobePaint.Pages.BaoCao
             exporterGrid.FileName = "Bao_Cao_Thanh_Toan_NCC" + "_" + DateTime.Now.ToString("yy-MM-dd");
             exporterGrid.WriteXlsxToResponse(new XlsxExportOptionsEx { ExportType = ExportType.WYSIWYG });
         }
+
+        protected void fromDay_Init(object sender, EventArgs e)
+        {
+            Formats.InitDateEditControl_AddDay(sender, e,-1);
+        }
     }
 }

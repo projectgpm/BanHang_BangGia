@@ -102,11 +102,15 @@
                                 <dx:LayoutItem Caption="Khách hàng">
                                     <LayoutItemNestedControlCollection>
                                         <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                                            <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" Width="100%" DataSourceID="dsKhachHang" NullText="--- Chọn khách hàng ---" ValueField="IDKhachHang" TextField="HoTen">
+                                            <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" Width="100%" DataSourceID="dsKhachHang" NullText="--- Chọn khách hàng ---" ValueField="IDKhachHang" TextField="HoTen" TextFormatString="{0};{1}">
                                                 <ClientSideEvents SelectedIndexChanged="onCCBKhachHangChanged" />
+                                                 <Columns>
+                                                    <dx:ListBoxColumn FieldName="MaKhachHang" Width="90px" Caption="Mã khách hàng" />
+                                                    <dx:ListBoxColumn FieldName="HoTen" Width="150px" Caption="Tên khách hàng" />
+                                                </Columns>
                                             </dx:ASPxComboBox>
                                             <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>"
-                                                 SelectCommand="SELECT [IDKhachHang], [HoTen] FROM [khKhachHang] Where LoaiKhachHangID = 2 AND DaXoa = 0"></asp:SqlDataSource>
+                                                 SelectCommand="SELECT [IDKhachHang], [MaKhachHang],[HoTen] FROM [khKhachHang] Where LoaiKhachHangID = 2 AND DaXoa = 0"></asp:SqlDataSource>
                                         </dx:LayoutItemNestedControlContainer>
                                     </LayoutItemNestedControlCollection>
                                 </dx:LayoutItem>

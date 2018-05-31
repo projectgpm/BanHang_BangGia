@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, maximum-scale=1.0, minimum-scale=1.0" />
-    <title></title>
+    <title>GPM.VN - Hệ thống quản lý bán hàng</title>
     <link rel="stylesheet" type="text/css" href="Content/Site.css" />
     <script type="text/javascript"  src="/Scripts/jquery.min.js"></script>
     <script type="text/javascript" src="/Scripts/jquery-ui.min.js"></script>
@@ -31,6 +31,7 @@
                 popupThongBao.Hide();
             }, mi);
         }
+       
     </script>
     <style>
         .dxgvGroupRow_Material td.dxgv{
@@ -93,20 +94,27 @@
             <PanelCollection>
                 <dx:PanelContent runat="server" SupportsDisabledAttribute="True">
                         <div class="headerTop">
-                            <div class="logo">
-                               <%-- <asp:Image ID="imgLogo" runat="server" ImageUrl="~/Content/Images/logo.png" CssClass="imglogo" />--%>
+                            <div class="logo" style="margin-top:10px;">
+                                <asp:Image ID="imgLogo" runat="server" ImageUrl="~/Content/Images/logo.png" CssClass="imglogo" />
                             </div>
-                            <div class="templateTitle">
+                            <div class="templateTitle" style="margin-top:15px;">
                                 <a id="TitleLink" href="~/" runat="server">QUẢN LÝ BÁN HÀNG</a>
                             </div>                           
                         </div>
-                        <div class="headerMenu">
+                        <div class="headerMenu" >
                             <%-- DXCOMMENT: Configure the header menu --%>
 
                             <table style="width:99%; margin-right:14px;">
                                 <tr style="width:100%; ">
                                     <td>
                                         <dx:ASPxMenu ID="HeaderMenu" runat="server" CssClass="headerMenu" ClientInstanceName="headerMenu" ItemAutoWidth="False" Width="100%" DataSourceID="XmlDataSourceHeader" SeparatorHeight="0px" SeparatorWidth="0px" BackColor="#1F77C0" SeparatorColor="#1F77C0">
+                                            <Items >
+                                                <dx:MenuItem>
+                                                    <Image Url="~/App_Data/menu/barcode.png">
+                                                    </Image>
+                                                </dx:MenuItem>
+                                               
+                                            </Items>
                                             <ItemStyle BackColor="#1F77C0" ForeColor="White" Font-Names="&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif">
                                             <SelectedStyle BackColor="#FF9906" Font-Bold="True">
                                             </SelectedStyle>
@@ -123,9 +131,10 @@
                                         </dx:ASPxMenu>
                                     </td>
                                     <td style="width:90px;text-align:right;background-color:#1F77C0;">
-                                        <dx:ASPxButton ID="btnThongTin" runat="server" Text="Chào bạn"  Width="80px" BackColor="#FF9906" UseSubmitBehavior="false">
+                                        <dx:ASPxButton ID="btnDangXuat" runat="server" Text="Thoát"  Width="80px" BackColor="#FF9906" UseSubmitBehavior="false" ClientInstanceName="btnDangXuat" OnClick="btnDangXuat_Click1">
                                             <HoverStyle BackColor="#F0A000">
                                             </HoverStyle>
+                                           
                                         </dx:ASPxButton>                                        
                                     </td>
                                 </tr>

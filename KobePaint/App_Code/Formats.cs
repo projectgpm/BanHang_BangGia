@@ -1,11 +1,13 @@
 ﻿using DevExpress.Web;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
+using System.Web.UI;
 using System.Web.UI.WebControls;
 
 namespace KobePaint.App_Code
@@ -73,6 +75,21 @@ namespace KobePaint.App_Code
             dateEdit.PopupHorizontalAlign = PopupHorizontalAlign.NotSet;
             dateEdit.PopupVerticalAlign = PopupVerticalAlign.NotSet;
             dateEdit.Date = DateTime.Now;
+        }
+        public static void InitDateEditControl_AddDay(object sender, EventArgs e,int Ngay)
+        {
+            ASPxDateEdit dateEdit = sender as ASPxDateEdit;
+            dateEdit.CalendarProperties.FirstDayOfWeek = FirstDayOfWeek.Monday;
+            dateEdit.CalendarProperties.ShowClearButton = false;
+            dateEdit.CalendarProperties.ShowTodayButton = false;
+            dateEdit.CalendarProperties.ShowWeekNumbers = false;
+            dateEdit.CalendarProperties.FastNavProperties.Enabled = false;
+            dateEdit.EditFormat = EditFormat.Custom;
+            dateEdit.DisplayFormatString = "dd/MM/yyyy";
+            dateEdit.EditFormatString = "dd/MM/yyyy";
+            dateEdit.PopupHorizontalAlign = PopupHorizontalAlign.NotSet;
+            dateEdit.PopupVerticalAlign = PopupVerticalAlign.NotSet;
+            dateEdit.Date = DateTime.Now.AddDays(Ngay);
         }
         public static void InitDateEditControlNoValue(object sender, EventArgs e)
         {
@@ -203,5 +220,19 @@ namespace KobePaint.App_Code
         {
             return Convert.ToInt32(HttpContext.Current.User.Identity.Name.Split('-')[3]);
         }
+
+        //Thông báo mess
+      
+        public static void Show_ThongBao(string Message)
+        {
+            string cleanMessage = Message.Replace("'", "\'");
+            Page page = HttpContext.Current.CurrentHandler as Page;
+            string script = string.Format("alert('{0}');", cleanMessage);
+            if (page != null && !page.ClientScript.IsClientScriptBlockRegistered("alert"))
+            {
+                page.ClientScript.RegisterClientScriptBlock(page.GetType(), "alert", script, true /* addScriptTags */);
+            } 
+        }
+        
     }
 }

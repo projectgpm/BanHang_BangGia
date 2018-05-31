@@ -38,7 +38,7 @@ namespace KobePaint.Pages.BanHang
             if (!IsPostBack)
             {
                 hdfViewReport["view"] = 0;
-                
+                ccbNhaCungCap.Focus();
                 listReceiptProducts = new List<oChiTietHoaDon>();
 
                 int Permiss = Formats.PermissionUser();
@@ -467,6 +467,7 @@ namespace KobePaint.Pages.BanHang
         {
             ccbNhaCungCap.SelectedIndex = -1;
             ccbNhaCungCap.Text = "";
+            ccbNhaCungCap.Focus();
             spThanhToan.Number = 0;
             spTongTien.Number = 0;
             dateNgayNhap.Date = DateTime.Now;

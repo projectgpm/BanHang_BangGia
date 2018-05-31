@@ -88,6 +88,8 @@
                                     <Styles>
                                         <Header Wrap="True">
                                         </Header>
+                                        <Footer Font-Bold="True">
+                                        </Footer>
                                     </Styles>
                                 </dx:ASPxGridView>
                                 <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT * FROM [khKhachHang] WHERE (([DaXoa] = @DaXoa) AND ([LoaiKhachHangID] = @LoaiKhachHangID)) ORDER BY [HoTen]">

@@ -37,7 +37,7 @@ namespace KobePaint.Pages.TraHang
                 txtTenNhanVien.Text = Formats.NameUser();
                 listReceiptProducts = new List<oImportProduct_TraHangNCC>();
                 hdfViewReport["view"] = 0;
-
+                ccbNhaCungCap.Focus();
                 if (Formats.PermissionUser() == 3)
                     gridImportPro.Columns["giavon"].Visible = false;
             }
@@ -403,7 +403,7 @@ namespace KobePaint.Pages.TraHang
             ccbNhaCungCap.Text = "";
             ckGiamCongNo.Checked = false;
             memoGhiChu.Text = "";
-
+            ccbNhaCungCap.Focus();
             dateNgayTra.Date = DateTime.Now;
             ccbBarcode.Text = "";
         }

@@ -24,7 +24,8 @@ namespace KobePaint.Pages.TaiKhoan
                 _user.MatKhau = tbPass1.Text;
                 _user.DienThoai = tbPhone.Text;
             }
-            DBDataProvider.DB.SubmitChanges();            
+            DBDataProvider.DB.SubmitChanges();
+            pcLogin.ShowOnPageLoad = false;
         }
     }
 }

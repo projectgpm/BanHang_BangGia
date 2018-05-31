@@ -39,7 +39,7 @@ namespace KobePaint.Pages.GiaoHang
             }
             if (!IsPostBack)
             {
-                
+                ccbNhaCungCap.Focus();
                 listReceiptProducts = new List<oChiTietHoaDon>();
                 hdfViewReport["view"] = 0;
                 int Permiss = Formats.PermissionUser();
@@ -376,6 +376,7 @@ namespace KobePaint.Pages.GiaoHang
         {
             ccbNhaCungCap.SelectedIndex = -1;
             ccbNhaCungCap.Text = "";
+            ccbNhaCungCap.Focus();
             spThanhToan.Number = 0;
             spTongTien.Number = 0;
             dateNgayNhap.Date = DateTime.Now;

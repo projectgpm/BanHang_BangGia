@@ -301,7 +301,7 @@
                                                                 </dx:GridViewCommandColumn>
                                                                 <dx:GridViewDataTextColumn Caption="Tồn" FieldName="TonKho" ShowInCustomizationForm="True" VisibleIndex="3" Width="50px">
                                                                 </dx:GridViewDataTextColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Thành tiền" FieldName="ThanhTien" ShowInCustomizationForm="True" VisibleIndex="6" Width="100px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Thành tiền" FieldName="ThanhTien" ShowInCustomizationForm="True" VisibleIndex="7" Width="100px">
                                                                     <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                                                                     </PropertiesSpinEdit>
                                                                 </dx:GridViewDataSpinEditColumn>
@@ -322,10 +322,11 @@
                                                                         <Paddings Padding="2px" />
                                                                     </CellStyle>
                                                                 </dx:GridViewDataSpinEditColumn>
-                                                                <dx:GridViewDataSpinEditColumn Caption="Tiền trả" FieldName="TienTra" ShowInCustomizationForm="True" VisibleIndex="8" Width="150px">
+                                                                <dx:GridViewDataSpinEditColumn Caption="Tiền trả" FieldName="TienTra" ShowInCustomizationForm="True" VisibleIndex="6" Width="100px">
                                                                     <PropertiesSpinEdit DisplayFormatString="g"></PropertiesSpinEdit>
                                                                     <DataItemTemplate>
                                                                         <dx:ASPxSpinEdit ID="spTienTraReturn" runat="server" Number='<%# Convert.ToDouble(Eval("TienTra")) %>' DisplayFormatString="N0" Width="100%" NumberType="Integer" OnInit="spTienTraReturn_Init" Increment="5000" HorizontalAlign="Right">
+                                                                             <SpinButtons ShowIncrementButtons="false"></SpinButtons>
                                                                         </dx:ASPxSpinEdit>
                                                                     </DataItemTemplate>
                                                                     <CellStyle>
@@ -345,6 +346,10 @@
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng tiền: {0:N0}" FieldName="ThanhTien" ShowInColumn="Thành tiền" SummaryType="Sum" />
                                                                 <dx:ASPxSummaryItem DisplayFormat="Tổng: {0:N0}" FieldName="SoLuong" ShowInColumn="Số lượng" SummaryType="Sum" />
                                                             </TotalSummary>
+                                                            <Styles>
+                                                                <Footer Font-Bold="True">
+                                                                </Footer>
+                                                            </Styles>
                                                         </dx:ASPxGridView>
                                         </dx:PanelContent>
                                     </PanelCollection>

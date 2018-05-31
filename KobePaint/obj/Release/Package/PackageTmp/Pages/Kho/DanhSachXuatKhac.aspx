@@ -3,7 +3,7 @@
      <dx:ASPxGridView ID="gridXuathang" runat="server" AutoGenerateColumns="False" ClientInstanceName="gridXuathang" Width="100%" DataSourceID="dsXuatKho" KeyFieldName="IDPhieuXuat" OnCustomColumnDisplayText="gridXuathang_CustomColumnDisplayText" OnRowDeleting="gridXuathang_RowDeleting">
         <SettingsEditing EditFormColumnCount="3">
         </SettingsEditing>
-        <Settings VerticalScrollableHeight="600" ShowFilterRow="True" ShowTitlePanel="True"/>
+        <Settings VerticalScrollBarMode="Visible" ShowFilterRow="True" ShowTitlePanel="True"/>
         <SettingsDetail ShowDetailRow="True" AllowOnlyOneMasterRowExpanded="True" />
         <Templates>
             <DetailRow>

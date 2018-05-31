@@ -63,13 +63,15 @@
                     <dx:LayoutItem Caption="Khách hàng">
                         <LayoutItemNestedControlCollection>
                             <dx:LayoutItemNestedControlContainer ID="LayoutItemNestedControlContainer1" runat="server">
-                                <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%" DropDownStyle="DropDown">
+                                <dx:ASPxComboBox ID="ccbKhachHang" ClientInstanceName="ccbKhachHang" runat="server" DataSourceID="dsKhachHang" DisplayFormatString="{0}" TextField="HoTen" ValueField="IDKhachHang" NullText="---Chọn khách hàng---" Width="100%" DropDownStyle="DropDown" TextFormatString="{0};{1}">
                                     <Columns>
+                                        <dx:ListBoxColumn Caption="Mã khách hàng" FieldName="MaKhachHang" />
                                         <dx:ListBoxColumn Caption="Họ tên" FieldName="HoTen" />
-                                        <dx:ListBoxColumn Caption="Điện thoại" FieldName="DienThoai" />
                                     </Columns>
                                 </dx:ASPxComboBox>
-                                <asp:SqlDataSource ID="dsKhachHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDKhachHang], [HoTen], [DienThoai] FROM [khKhachHang] WHERE [LoaiKhachHangID] <> 2"></asp:SqlDataSource>
+                                <asp:SqlDataSource ID="dsKhachHang" runat="server" 
+                                    ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
+                                    SelectCommand="SELECT [IDKhachHang], [HoTen], [MaKhachHang] FROM [khKhachHang] WHERE [LoaiKhachHangID] <> 2"></asp:SqlDataSource>
                             </dx:LayoutItemNestedControlContainer>
                         </LayoutItemNestedControlCollection>
                     </dx:LayoutItem>
@@ -216,6 +218,12 @@
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="NoCuoi" ShowInColumn="Nợ cuối" SummaryType="Sum" Visible="False" />
             <dx:ASPxSummaryItem DisplayFormat="{0:N0}" FieldName="GiamGia" ShowInColumn="Giảm giá" SummaryType="Sum" />
         </TotalSummary>
+
+
+        <Styles>
+            <Footer Font-Bold="True">
+            </Footer>
+        </Styles>
 
 
     </dx:ASPxGridView>

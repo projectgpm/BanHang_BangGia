@@ -67,6 +67,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Data.SqlServerCe, Version=4.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
@@ -94,23 +95,16 @@
     <Content Include="Account\Login.aspx" />
     <Content Include="Account\Register.aspx" />
     <Content Include="Account\RegisterSuccess.aspx" />
-    <Content Include="App_Data\BanHang_BangGia.mdf" />
-    <Content Include="App_Data\BanHang_BangGia_log.ldf">
-      <DependentUpon>BanHang_BangGia.mdf</DependentUpon>
-    </Content>
     <Content Include="App_Data\MenuBanHang.xml" />
     <Content Include="App_Data\MenuQuanTri.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Data\MenuVanPhong.xml" />
-    <Content Include="App_Data\NWind.mdf" />
-    <Content Include="App_Data\NWind_log.ldf">
-      <DependentUpon>NWind.mdf</DependentUpon>
-    </Content>
     <Content Include="App_Data\SideMenu.xml" />
     <Content Include="App_Data\MenuToanQuyen.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="App_Data\UploadTemp\TextFile1.txt" />
     <Content Include="Content\DragAndDrop.css" />
     <Content Include="Content\Images\0435_CH_full.png" />
     <Content Include="Content\Images\AquaHeader.jpg" />
@@ -131,13 +125,22 @@
     <Content Include="Account\Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="images\add.png" />
+    <Content Include="images\gpmvn.png" />
+    <Content Include="images\plus.png" />
+    <Content Include="images\saleof.png" />
     <Content Include="Light.master" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Main.master" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Menu\barcode.png" />
+    <Content Include="Menu\box.png" />
+    <Content Include="Menu\cart.png" />
+    <Content Include="Menu\customer.png" />
+    <Content Include="Menu\graph.png" />
+    <Content Include="Menu\receipt.png" />
+    <Content Include="Menu\safebox.png" />
     <Content Include="Pages\BanHang\LapPhieu.aspx" />
     <Content Include="Pages\BaoCao\ChiTietNhapKho.aspx" />
     <Content Include="Pages\BaoCao\ChiTietXuatKho.aspx" />
@@ -148,6 +151,7 @@
     <Content Include="Pages\BaoCao\DanhSachKhachHang.aspx" />
     <Content Include="Pages\BaoCao\DoanhThuDaiLy.aspx" />
     <Content Include="Pages\BaoCao\DoanhThuTheoHangHoa.aspx" />
+    <Content Include="Pages\BaoCao\LoiNhuanBanHang.aspx" />
     <Content Include="Pages\BaoCao\NhapXuatTon.aspx" />
     <Content Include="Pages\BaoCao\ThanhToanDaiLy.aspx" />
     <Content Include="Pages\BaoCao\ThanhToanNCC.aspx" />
@@ -161,6 +165,7 @@
     <Content Include="Pages\HangHoa\LienKetBangGia.aspx" />
     <Content Include="Pages\HangHoa\NhomHang.aspx" />
     <Content Include="Pages\HangHoa\ThemHangHoa.aspx" />
+    <Content Include="Pages\HeThong\CanhBaoCongNo.ascx" />
     <Content Include="Pages\HeThong\LyDoXuat.aspx" />
     <Content Include="Pages\HeThong\ThongTinCuaHang.aspx" />
     <Content Include="Pages\KhachHang\DanhSachDaiLy.aspx" />
@@ -360,6 +365,13 @@
     <Compile Include="Pages\BaoCao\DoanhThuTheoHangHoa.aspx.designer.cs">
       <DependentUpon>DoanhThuTheoHangHoa.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Pages\BaoCao\LoiNhuanBanHang.aspx.cs">
+      <DependentUpon>LoiNhuanBanHang.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\BaoCao\LoiNhuanBanHang.aspx.designer.cs">
+      <DependentUpon>LoiNhuanBanHang.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Pages\BaoCao\NhapXuatTon.aspx.cs">
       <DependentUpon>NhapXuatTon.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -450,6 +462,13 @@
     </Compile>
     <Compile Include="Pages\HangHoa\ThemHangHoa.aspx.designer.cs">
       <DependentUpon>ThemHangHoa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\HeThong\CanhBaoCongNo.ascx.cs">
+      <DependentUpon>CanhBaoCongNo.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Pages\HeThong\CanhBaoCongNo.ascx.designer.cs">
+      <DependentUpon>CanhBaoCongNo.ascx</DependentUpon>
     </Compile>
     <Compile Include="Pages\HeThong\LyDoXuat.aspx.cs">
       <DependentUpon>LyDoXuat.aspx</DependentUpon>
@@ -745,7 +764,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\UploadTemp\" />
     <Folder Include="Uploads\" />
   </ItemGroup>
   <PropertyGroup>

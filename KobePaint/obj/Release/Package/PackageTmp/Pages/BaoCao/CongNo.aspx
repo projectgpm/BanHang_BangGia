@@ -83,6 +83,8 @@
                                     <Styles>
                                         <Header Wrap="True">
                                         </Header>
+                                        <Footer Font-Bold="True">
+                                        </Footer>
                                     </Styles>
                                 </dx:ASPxGridView>
                                 <asp:SqlDataSource ID="dsKhachHang" runat="server" 

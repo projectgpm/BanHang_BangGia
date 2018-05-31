@@ -1,9 +1,29 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PheDuyetGiaoHang.ascx.cs" Inherits="KobePaint.Pages.GiaoHang.PheDuyetGiaoHang" %>
-
+<script type="text/javascript">
+    var timeout;
+    function scheduleGridUpdate(grid) {
+        window.clearTimeout(timeout);
+        timeout = window.setTimeout(
+            function () { gridDonHang.Refresh(); },
+            300000
+        );
+    }
+    function gridDonHang_Init(s, e) {
+        scheduleGridUpdate(s);
+    }
+    function gridDonHang_BeginCallback(s, e) {
+        window.clearTimeout(timeout);
+    }
+    function gridDonHang_EndCallback(s, e) {
+        scheduleGridUpdate(s);
+    }
+    </script>
 <%@ Register assembly="DevExpress.XtraReports.v16.1.Web, Version=16.1.2.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.XtraReports.Web" tagprefix="dx" %>
 <dx:ASPxGridView ID="gridDonHang" ClientInstanceName="gridDonHang" runat="server" AutoGenerateColumns="False" DataSourceID="dsDonHang" KeyFieldName="IDPhieuGiaoHang" Width="100%" OnCustomColumnDisplayText="gridDonHang_CustomColumnDisplayText" OnRowUpdating="gridDonHang_RowUpdating">
-        <SettingsEditing Mode="Batch">
+    <ClientSideEvents Init="gridDonHang_Init" BeginCallback="gridDonHang_BeginCallback" EndCallback="gridDonHang_EndCallback" />  
+      <SettingsEditing Mode="Batch">
         </SettingsEditing>
+     <Settings VerticalScrollBarMode="Visible" VerticalScrollableHeight="0" ShowFilterRow="True" ShowTitlePanel="True"/>
         <SettingsCommandButton>
             <ShowAdaptiveDetailButton ButtonType="Image">
             </ShowAdaptiveDetailButton>
@@ -18,7 +38,7 @@
                 </Image>
             </CancelButton>
         </SettingsCommandButton>
-        <ClientSideEvents endcallback="onEndCallBack" />
+        <%--<ClientSideEvents endcallback="onEndCallBack" />--%>
         <SettingsDetail ShowDetailRow="True" AllowOnlyOneMasterRowExpanded="True" />
         <Templates>
             <DetailRow>
@@ -64,6 +84,7 @@
                             </PropertiesTextEdit>
                         </dx:GridViewDataTextColumn>
                     </Columns>
+
                     <Styles>
                         <Header HorizontalAlign="Center" forecolor="#009933">
                             <Border BorderStyle="Dashed" />
@@ -187,6 +208,9 @@
                 </PropertiesSpinEdit>
             </dx:GridViewDataSpinEditColumn>
         </Columns>
+    <FormatConditions>
+            <dx:GridViewFormatConditionTopBottom FieldName="TrangThai" Rule="TopPercent" Threshold="20" Format="YellowFillWithDarkYellowText" />
+        </FormatConditions>
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsDonHang" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
         SelectCommand="SELECT IDPhieuGiaoHang, NgayTao, MaPhieu, NhanVienID, GhiChuGiaoHang, KhachHangID, NgayGiao, NguoiGiao, DiaChiGiaoHang, DaXoa, TrangThai, TongSoLuong, TongTien, DienThoai, SoHoaDon, TTThanhToan, ThanhToan, ConLai, GiamGia FROM ghPhieuGiaoHang WHERE (TrangThai = 0)" 

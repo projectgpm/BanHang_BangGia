@@ -1,15 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeBehind="ThongTinCuaHang.aspx.cs" Inherits="KobePaint.Pages.HeThong.ThongTinCuaHang" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-      <%--  <script type="text/javascript">
-            function OnSubmitClick(s, e) {
-                console.log()
-                if (!ASPxClientEdit.ValidateGroup('entryGroup')) e.processOnServer = false;
-            }
-    </script>--%>
-   
     <dx:ASPxPopupControl ID="pcLogin" ClientInstanceName="pcLogin" runat="server"
         PopupHorizontalAlign="WindowCenter" PopupVerticalAlign="WindowCenter" 
-        HeaderText="THÔNG TIN CỬA HÀNG" ShowOnPageLoad="true" ShowCloseButton="False" CloseAction="None" PopupAction="None" FooterText="Quản lý dự án bồi thường - giải phóng mặt bằng" Width="500px">
+        HeaderText="THÔNG TIN CỬA HÀNG" ShowOnPageLoad="true" Modal="true" CloseAction="CloseButton"  PopupAction="None" Width="500px">
         <ClientSideEvents PopUp="function(s, e) { s.UpdatePosition(); }" />
         <HeaderStyle BackColor="#2196F3" Font-Bold="True" ForeColor="White" Font-Names="&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif" Font-Size="Large" />
         <FooterStyle HorizontalAlign="Center" />

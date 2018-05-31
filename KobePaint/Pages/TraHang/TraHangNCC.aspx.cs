@@ -34,6 +34,7 @@ namespace KobePaint.Pages.TraHang
             }
             if (!IsPostBack)
             {
+                ccbNhaCungCap.Focus();
                 hdfViewReport["view"] = 0;
                 txtTenNhanVien.Text = Formats.NameUser();
                 listReceiptProducts = new List<oImportProduct_TraHangNCC>();
@@ -434,7 +435,7 @@ namespace KobePaint.Pages.TraHang
             ccbNhaCungCap.Text = "";
             ckGiamCongNo.Checked = false;
             memoGhiChu.Text = "";
-           
+            ccbNhaCungCap.Focus();
             
             dateNgayTra.Date = DateTime.Now;
             ccbBarcode.Text = "";

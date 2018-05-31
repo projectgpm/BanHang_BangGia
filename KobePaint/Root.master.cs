@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using DevExpress.Web;
 using System.Web.Security;
+using KobePaint.App_Code;
 
 namespace KobePaint {
     public partial class RootMaster : System.Web.UI.MasterPage {
@@ -13,7 +14,7 @@ namespace KobePaint {
             if (Context.User.Identity.IsAuthenticated)
             {
                 string[] infoUser = Context.User.Identity.Name.Split('-');
-                btnThongTin.Text = infoUser[1];
+               
                 if (!IsPostBack)
                 {
                     switch (infoUser[2])
@@ -23,6 +24,9 @@ namespace KobePaint {
                         case "3": XmlDataSourceHeader.DataFile = "~/App_Data/MenuBanHang.xml"; break;
                         default: XmlDataSourceHeader.DataFile = "~/App_Data/MenuToanQuyen.xml"; break;
                     }
+                    var thongtin = DBDataProvider.DB.chChiNhanhs.Where(x => x.IDChiNhanh == Formats.IDChiNhanh()).FirstOrDefault();
+                    if (thongtin != null)
+                        imgLogo.ImageUrl = thongtin.Logo.ToString();
                 }
             }
             else
@@ -30,7 +34,9 @@ namespace KobePaint {
                 Response.Redirect("~/Pages/TaiKhoan/DangNhap.aspx");
             }
         }
-        protected void btnDangXuat_Click(object sender, EventArgs e)
+
+
+        protected void btnDangXuat_Click1(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();
             Response.Redirect("~/Pages/TaiKhoan/DangNhap.aspx");

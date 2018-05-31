@@ -382,15 +382,6 @@ namespace KobePaint.Pages.Kho {
         protected global::DevExpress.Web.ASPxButton btnLuuVaIn;
         
         /// <summary>
-        /// btnLuuTiepTuc control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::DevExpress.Web.ASPxButton btnLuuTiepTuc;
-        
-        /// <summary>
         /// btnTroVe control.
         /// </summary>
         /// <remarks>

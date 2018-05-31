@@ -172,6 +172,11 @@
             <dx:ASPxSummaryItem DisplayFormat="Tổng : {0:N0}" FieldName="SOLUONG" ShowInColumn="SL" SummaryType="Sum" />
         </TotalSummary>
 
+        <Styles>
+            <Footer Font-Bold="True">
+            </Footer>
+        </Styles>
+
     </dx:ASPxGridView>
     <asp:SqlDataSource ID="dsChiTietNhapKho" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
          SelectCommand="spXuatKhoChitiet" SelectCommandType="StoredProcedure">

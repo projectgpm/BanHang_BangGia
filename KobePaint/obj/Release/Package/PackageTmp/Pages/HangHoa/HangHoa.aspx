@@ -107,6 +107,8 @@
                             <Columns>
                               
                                 <dx:GridViewDataTextColumn Caption="Diễn giải" FieldName="DienGiai" Width="100%" CellStyle-HorizontalAlign="Left" VisibleIndex="2">
+                                    <CellStyle HorizontalAlign="Left">
+                                    </CellStyle>
                                 </dx:GridViewDataTextColumn>
                                 <dx:GridViewDataSpinEditColumn Caption="Tồn" FieldName="Ton" VisibleIndex="5" Width="80px">
                                     <PropertiesSpinEdit DisplayFormatString="g">
@@ -123,6 +125,8 @@
                                 <dx:GridViewDataDateColumn Caption="Ngày" Width="150px" FieldName="NgayNhap" VisibleIndex="1" CellStyle-HorizontalAlign="Left">
                                     <PropertiesDateEdit DisplayFormatString="dd/MM/yy H:mm">
                                     </PropertiesDateEdit>
+                                    <CellStyle HorizontalAlign="Left">
+                                    </CellStyle>
                                 </dx:GridViewDataDateColumn>
                               
                             </Columns>
@@ -133,6 +137,8 @@
                             <Styles>
                                 <Header HorizontalAlign="Center">
                                 </Header>
+                                <Footer Font-Bold="True">
+                                </Footer>
                                 <TitlePanel ForeColor="#00CC00" Font-Bold="True" Font-Size="14px">
                                 </TitlePanel>
                             </Styles>
@@ -219,7 +225,7 @@
             </Items>
         </EditFormLayoutProperties>
         <Columns>
-            <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" VisibleIndex="9" Name="chucnang">
+            <dx:GridViewCommandColumn ShowDeleteButton="True" ShowEditButton="True" VisibleIndex="9" Name="chucnang" Width="100px">
             </dx:GridViewCommandColumn>
             <dx:GridViewDataTextColumn Caption="STT" FieldName="IDHangHoa" ReadOnly="True" VisibleIndex="0" Width="50px">
                 <Settings AllowAutoFilter="False" AllowHeaderFilter="False" />
@@ -228,7 +234,7 @@
                 <CellStyle HorizontalAlign="Center">
                 </CellStyle>
             </dx:GridViewDataTextColumn>
-            <dx:GridViewDataTextColumn Caption="Mã hàng" FieldName="MaHang" VisibleIndex="2" ReadOnly="True">
+            <dx:GridViewDataTextColumn Caption="Mã hàng" FieldName="MaHang" VisibleIndex="2" ReadOnly="True" Width="80px">
                 <EditFormSettings Visible="False" />
                 <CellStyle HorizontalAlign="Center">
                 </CellStyle>
@@ -241,25 +247,24 @@
                 <EditFormSettings Visible="False" />
                
             </dx:GridViewDataComboBoxColumn>
-            <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" VisibleIndex="5">
+            <dx:GridViewDataSpinEditColumn Caption="Giá bán" FieldName="GiaBan" VisibleIndex="5" Width="100px">
                 <PropertiesSpinEdit DecimalPlaces="2" DisplayFormatString="N0" NumberFormat="Custom" DisplayFormatInEditMode="True" Increment="5000">
                 </PropertiesSpinEdit>
             </dx:GridViewDataSpinEditColumn>
-            <dx:GridViewDataComboBoxColumn Caption="ĐVT" FieldName="DonViTinhID" VisibleIndex="3" ReadOnly="True">
+            <dx:GridViewDataComboBoxColumn Caption="ĐVT" FieldName="DonViTinhID" VisibleIndex="3" ReadOnly="True" Width="50px">
                 <PropertiesComboBox DataSourceID="dsDVT" DisplayFormatString="g" TextField="TenDonViTinh" ValueField="IDDonViTinh">
                 </PropertiesComboBox>
                 <EditFormSettings Visible="False" />
             </dx:GridViewDataComboBoxColumn>
-            <dx:GridViewDataSpinEditColumn Caption="SL" FieldName="TonKho" VisibleIndex="4" ReadOnly="True">
-                <PropertiesSpinEdit DisplayFormatString="g">
+            <dx:GridViewDataSpinEditColumn Caption="SL" FieldName="TonKho" VisibleIndex="4" ReadOnly="True" Width="80px">
+                <PropertiesSpinEdit DisplayFormatString="N0" NumberFormat="Custom">
                 </PropertiesSpinEdit>
                 <EditFormSettings Visible="False" />
                 <CellStyle HorizontalAlign="Center">
                 </CellStyle>
             </dx:GridViewDataSpinEditColumn>
-            <dx:GridViewDataTextColumn Caption="Hàng hóa" FieldName="TenHangHoa" VisibleIndex="1" Width="200px" Name="hanghoa">
+            <dx:GridViewDataTextColumn Caption="Hàng hóa" FieldName="TenHangHoa" VisibleIndex="1" Width="100%" Name="hanghoa">
                  <DataItemTemplate>
-                    
                      <a target="_blank" href="CapNhat.aspx?id=<%# Container.KeyValue %>" > <%# Eval("TenHangHoa") %></a>
                 </DataItemTemplate>
             </dx:GridViewDataTextColumn>
@@ -268,6 +273,10 @@
                 </PropertiesComboBox>
             </dx:GridViewDataComboBoxColumn>
         </Columns>
+        <FormatConditions>
+            <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] < 1" Format="LightRedFillWithDarkRedText" />
+            <dx:GridViewFormatConditionHighlight FieldName="TonKho" Expression="[TonKho] > 0" Format="GreenFillWithDarkGreenText" />                                
+        </FormatConditions>
     </dx:ASPxGridView>
       <asp:SqlDataSource ID="dsLoaiHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDLoaiHangHoa], [TenLoai] FROM [hhLoaiHangHoa]"></asp:SqlDataSource>
       <asp:SqlDataSource ID="dsDVT" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" SelectCommand="SELECT [IDDonViTinh], [TenDonViTinh] FROM [hhDonViTinh] WHERE ([DaXoa] = @DaXoa)">
@@ -281,7 +290,8 @@
           </SelectParameters>
       </asp:SqlDataSource>
     <asp:SqlDataSource ID="dsHangHoa" runat="server" ConnectionString="<%$ ConnectionStrings:KobePaintConnectionString %>" 
-        SelectCommand="SELECT [IDHangHoa], [MaHang],[LoaiHHID], [TenHangHoa], [NhomHHID], [DonViTinhID], [TonKho], [GiaBan] FROM [hhHangHoa] WHERE ([DaXoa] = @DaXoa)"
+        SelectCommand="SELECT [IDHangHoa], [MaHang],[LoaiHHID], [TenHangHoa], [NhomHHID], [DonViTinhID], [TonKho], [GiaBan] FROM [hhHangHoa] WHERE ([DaXoa] = @DaXoa)
+ORDER BY [NhomHHID], [IDHangHoa] ASC"
         UpdateCommand="UPDATE [hhHangHoa] SET [TenHangHoa] = @TenHangHoa,[GiaBan] = @GiaBan WHERE  [IDHangHoa] = @IDHangHoa"
         DeleteCommand="UPDATE hhHangHoa SET DaXoa = CASE WHEN DaXoa = 1 THEN 0 ELSE 1 END WHERE (IDHangHoa = @IDHangHoa)"
         >
